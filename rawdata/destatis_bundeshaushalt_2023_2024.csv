@@ -1,0 +1,61 @@
+jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle
+2023,Bund,Einnahmen_Gesamt,Gesamteinnahmen_Bund,392.20,BMF,Abschluss des Bundeshaushalts 2023 Tabelle 1
+2023,Bund,Ausgaben_Gesamt,Gesamtausgaben_Bund,457.10,BMF,Abschluss des Bundeshaushalts 2023 Tabelle 1
+2023,Bund,Finanzierungssaldo,Nettokreditaufnahme,27.20,BMF,Abschluss des Bundeshaushalts 2023 Tabelle 1
+2023,Bund,Finanzierungssaldo,Ruecklagenentnahme,37.50,BMF,Abschluss des Bundeshaushalts 2023 Tabelle 1
+2023,Bund,Steuereinnahmen_Gesamt,Steuereinnahmen_Bundesanteil,356.10,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2
+2023,Bund,Gemeinschaftsteuer_Bundesanteil,Lohnsteuer_Bundesanteil,96.40,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2
+2023,Bund,Gemeinschaftsteuer_Bundesanteil,Veranlagte_Einkommensteuer_Bundesanteil,14.80,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2
+2023,Bund,Gemeinschaftsteuer_Bundesanteil,Koerperschaftsteuer_Bundesanteil,19.30,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2
+2023,Bund,Gemeinschaftsteuer_Bundesanteil,Abgeltungsteuer_Bundesanteil,4.60,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2
+2023,Bund,Gemeinschaftsteuer_Bundesanteil,Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil,128.50,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2
+2023,Bund,Bundessteuer,Energiesteuer,33.70,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3
+2023,Bund,Bundessteuer,Tabaksteuer,14.30,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3
+2023,Bund,Bundessteuer,Solidaritaetszuschlag,12.10,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3
+2023,Bund,Bundessteuer,Versicherungssteuer,15.10,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3
+2023,Bund,Bundessteuer,Kraftfahrzeugsteuer,9.50,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3
+2023,Bund,Bundessteuer,Stromsteuer,6.80,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3
+2023,Bund,Bundessteuer,Sonstige_Bundessteuern,1.00,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3
+2023,Bund,Funktionale_Ausgaben,Epl_11_Arbeit_und_Soziales,166.20,BMF,Haushaltsrechnung des Bundes 2023 Epl 11
+2023,Bund,Funktionale_Ausgaben_Sub,Epl_11_Bundeszuschuss_Rentenversicherung,112.40,BMF,Haushaltsrechnung des Bundes 2023 Epl 11
+2023,Bund,Funktionale_Ausgaben_Sub,Epl_11_Buergergeld_Grundsicherung,44.80,BMF,Haushaltsrechnung des Bundes 2023 Epl 11
+2023,Bund,Funktionale_Ausgaben,Epl_14_Verteidigung_Kern,50.10,BMF,Haushaltsrechnung des Bundes 2023 Epl 14
+2023,Bund,Funktionale_Ausgaben,Sondervermoegen_Bundeswehr_Ist,8.40,BMF,Abschluss Sondervermoegen Bundeswehr 2023
+2023,Bund,Funktionale_Ausgaben,Epl_12_Verkehr_und_digitale_Infrastruktur,38.60,BMF,Haushaltsrechnung des Bundes 2023 Epl 12
+2023,Bund,Funktionale_Ausgaben,Epl_30_Bildung_und_Forschung,21.50,BMF,Haushaltsrechnung des Bundes 2023 Epl 30
+2023,Bund,Funktionale_Ausgaben,Epl_32_Bundesschuld_Zinsen,39.50,BMF,Haushaltsrechnung des Bundes 2023 Epl 32
+2023,Bund,Funktionale_Ausgaben,Epl_15_Gesundheit_Bundeszuschuss_GKV,16.80,BMF,Haushaltsrechnung des Bundes 2023 Epl 15
+2023,Bund,Funktionale_Ausgaben,Epl_06_Inneres_und_Heimat_Bundespolizei,13.20,BMF,Haushaltsrechnung des Bundes 2023 Epl 06
+2023,Bund,Funktionale_Ausgaben,Epl_09_Wirtschaft_und_Klima,11.40,BMF,Haushaltsrechnung des Bundes 2023 Epl 09
+2023,Bund,Funktionale_Ausgaben,Epl_23_Entwicklung_und_Auswaertiges,11.50,BMF,Haushaltsrechnung des Bundes 2023 Epl 23
+2023,Bund,Funktionale_Ausgaben,Sonstige_Ressorts_und_Verwaltung,79.90,BMF,Haushaltsrechnung des Bundes 2023 Uebersicht
+2024,Bund,Einnahmen_Gesamt,Gesamteinnahmen_Bund,474.80,BMF,Vorlaeufiger Abschluss Bundeshaushalt 2024
+2024,Bund,Ausgaben_Gesamt,Gesamtausgaben_Bund,474.80,BMF,Vorlaeufiger Abschluss Bundeshaushalt 2024
+2024,Bund,Finanzierungssaldo,Nettokreditaufnahme,33.30,BMF,Vorlaeufiger Abschluss Bundeshaushalt 2024
+2024,Bund,Steuereinnahmen_Gesamt,Steuereinnahmen_Bundesanteil,372.40,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Lohnsteuer_Bundesanteil,102.50,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Veranlagte_Einkommensteuer_Bundesanteil,15.20,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Koerperschaftsteuer_Bundesanteil,18.90,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Abgeltungsteuer_Bundesanteil,4.80,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil,134.20,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Bundessteuer,Energiesteuer,34.10,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Bundessteuer,Tabaksteuer,14.10,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Bundessteuer,Solidaritaetszuschlag,12.40,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Bundessteuer,Versicherungssteuer,15.80,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Bundessteuer,Kraftfahrzeugsteuer,9.60,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Bundessteuer,Stromsteuer,6.90,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Bundessteuer,Sonstige_Bundessteuern,3.90,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
+2024,Bund,Funktionale_Ausgaben,Epl_11_Arbeit_und_Soziales,175.70,BMF,Vorlaeufiger Abschluss 2024 Epl 11
+2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Bundeszuschuss_Rentenversicherung,117.00,BMF,Vorlaeufiger Abschluss 2024 Epl 11
+2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Buergergeld_Grundsicherung,47.20,BMF,Vorlaeufiger Abschluss 2024 Epl 11
+2024,Bund,Funktionale_Ausgaben,Epl_14_Verteidigung_Kern,52.00,BMF,Vorlaeufiger Abschluss 2024 Epl 14
+2024,Bund,Funktionale_Ausgaben,Sondervermoegen_Bundeswehr_Ist,19.80,BMF,Sondervermoegen Bundeswehr Abschluss 2024
+2024,Bund,Funktionale_Ausgaben,Epl_12_Verkehr_und_digitale_Infrastruktur,44.20,BMF,Vorlaeufiger Abschluss 2024 Epl 12
+2024,Bund,Funktionale_Ausgaben,Epl_30_Bildung_und_Forschung,21.50,BMF,Vorlaeufiger Abschluss 2024 Epl 30
+2024,Bund,Funktionale_Ausgaben,Epl_32_Bundesschuld_Zinsen,37.40,BMF,Vorlaeufiger Abschluss 2024 Epl 32
+2024,Bund,Funktionale_Ausgaben,Epl_15_Gesundheit_Bundeszuschuss_GKV,16.70,BMF,Vorlaeufiger Abschluss 2024 Epl 15
+2024,Bund,Funktionale_Ausgaben,Epl_06_Inneres_und_Heimat_Bundespolizei,13.80,BMF,Vorlaeufiger Abschluss 2024 Epl 06
+2024,Bund,Funktionale_Ausgaben,Epl_09_Wirtschaft_und_Klima,11.20,BMF,Vorlaeufiger Abschluss 2024 Epl 09
+2024,Bund,Funktionale_Ausgaben,Epl_23_Entwicklung_und_Auswaertiges,11.20,BMF,Vorlaeufiger Abschluss 2024 Epl 23
+2024,Bund,Funktionale_Ausgaben,Sonstige_Ressorts_und_Verwaltung,71.30,BMF,Vorlaeufiger Abschluss 2024 Uebersicht
+

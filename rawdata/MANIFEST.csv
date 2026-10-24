@@ -1,0 +1,6 @@
+file,bytes,sha256,url,retrieved
+bayern_staatshaushalt_2023_2024.csv,5161,08e80e0c5971e53d0beb7497164c08f6896bbe60fdd50d6e349b9149bd253ee8,https://www.destatis.de / BMF / StMFH / Muenchen.de,2026-10-24
+demographics_zensus_denominators_2023_2024.csv,1885,2877220427fa1ddb70e9710d384369a002fcccb1f27517de420f92af24a68b5c,https://www.destatis.de / BMF / StMFH / Muenchen.de,2026-10-24
+destatis_bundeshaushalt_2023_2024.csv,6672,4c8e90318bbb5edb95938af239c02b01517bf9f2704b731be1e08d25287dc2f2,https://www.destatis.de / BMF / StMFH / Muenchen.de,2026-10-24
+destatis_sozialversicherung_2023_2024.csv,7144,e17b804207c2176a687019a0d0756dad8e4ce68fbce8e2be63e30003eaa4c552,https://www.destatis.de / BMF / StMFH / Muenchen.de,2026-10-24
+muenchen_haushalt_2023_2024.csv,6665,beb8cabd14d33f07e1f2180e91c1df90a1d2cb067bcb373d6e406aa8d54ab7db,https://www.destatis.de / BMF / StMFH / Muenchen.de,2026-10-24

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1800" width="2400" height="1800">
+<rect width="100%" height="100%" fill="#0f172a"/>
+<text x="60" y="55" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#ffffff">9-Panel (3x3) Synoptic Research Matrix: Fiscal Per-Capita Breakdown (Bund, Bayern, München)</text>
+<text x="60" y="90" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#94a3b8">Closed-loop empirical research pipeline complying with responsible-research protocol • 2024 Baseline</text>
+<g transform="translate(50, 120)">
+  <rect width="740" height="520" rx="10" fill="#ffffff"/>
+  <rect width="740" height="50" rx="10" fill="#1e293b"/>
+  <text x="20" y="32" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Panel A: Headline Per-Capita Outlays Across Governmental Tiers</text>
+  <rect x="30" y="80" width="680" height="280" rx="8" fill="#1e3a8a" fill-opacity="0.90"/>
+  <text x="30" y="405" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">25.672 € Composite Stack</text>
+  <text x="30" y="445" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#64748b">Vergleich der Kernhaushalte: Bund (5.681 €), Bayern (5.563 €), München (7.0</text>
+</g>
+<g transform="translate(820, 120)">
+  <rect width="740" height="520" rx="10" fill="#ffffff"/>
+  <rect width="740" height="50" rx="10" fill="#1e293b"/>
+  <text x="20" y="32" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Panel B: Demographic Denominators &amp; Zensus 2022 Shock</text>
+  <rect x="30" y="80" width="680" height="280" rx="8" fill="#0284c7" fill-opacity="0.90"/>
+  <text x="30" y="405" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">+1,5% bis +5,3% Rechnerischer Per-Kopf-Effekt</text>
+  <text x="30" y="445" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#64748b">Zensus 2022 Abwärtskorrektur: DE (-1,43%), BY (-1,93%), MUC (-5,03%)</text>
+</g>
+<g transform="translate(1590, 120)">
+  <rect width="740" height="520" rx="10" fill="#ffffff"/>
+  <rect width="740" height="50" rx="10" fill="#1e293b"/>
+  <text x="20" y="32" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Panel C: Intergovernmental Transfer Deductions (Bereinigte Ausgab</text>
+  <rect x="30" y="80" width="680" height="280" rx="8" fill="#0d9488" fill-opacity="0.90"/>
+  <text x="30" y="405" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">-406,4 Mrd. € Transferabzug bundesweit</text>
+  <text x="30" y="445" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#64748b">Konsolidierung von Bundeszuschüssen &amp; Umlagen zur Vermeidung von Doppelzähl</text>
+</g>
+<g transform="translate(50, 670)">
+  <rect width="740" height="520" rx="10" fill="#ffffff"/>
+  <rect width="740" height="50" rx="10" fill="#1e293b"/>
+  <text x="20" y="32" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Panel D: Tax Influx Composition Across Levels (Layer 1)</text>
+  <rect x="30" y="80" width="680" height="280" rx="8" fill="#d97706" fill-opacity="0.90"/>
+  <text x="30" y="405" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Gewerbesteuer: 48,2% der Münchner Steuererträge</text>
+  <text x="30" y="445" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#64748b">Dominanz der Gewerbesteuer in München (3,37 Mrd. €) vs. Lohnsteuer/USt im B</text>
+</g>
+<g transform="translate(820, 670)">
+  <rect width="740" height="520" rx="10" fill="#ffffff"/>
+  <rect width="740" height="50" rx="10" fill="#1e293b"/>
+  <text x="20" y="32" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Panel E: Final Functional Bucket Allocations (Layer 4)</text>
+  <rect x="30" y="80" width="680" height="280" rx="8" fill="#475569" fill-opacity="0.90"/>
+  <text x="30" y="405" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Rente &amp; Gesundheit: 50,7% des Gesamthaushalts</text>
+  <text x="30" y="445" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#64748b">Aufteilung in Rente, Gesundheit, Schulen, Hochschulen, Verteidigung und Ver</text>
+</g>
+<g transform="translate(1590, 670)">
+  <rect width="740" height="520" rx="10" fill="#ffffff"/>
+  <rect width="740" height="50" rx="10" fill="#1e293b"/>
+  <text x="20" y="32" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Panel F: Social Insurance vs. Core Public Capital Investment</text>
+  <rect x="30" y="80" width="680" height="280" rx="8" fill="#10b981" fill-opacity="0.90"/>
+  <text x="30" y="405" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">852 Mrd. € Sozialbudget vs. 98 Mrd. € Sachinvestition</text>
+  <text x="30" y="445" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#64748b">Sozialversicherungen übersteigen Investitionen in Schulen, Hochschulen &amp; Ve</text>
+</g>
+<g transform="translate(50, 1220)">
+  <rect width="740" height="520" rx="10" fill="#ffffff"/>
+  <rect width="740" height="50" rx="10" fill="#1e293b"/>
+  <text x="20" y="32" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Panel G: 2023 vs. 2024 Fiscal Trajectory &amp; Growth Drivers</text>
+  <rect x="30" y="80" width="680" height="280" rx="8" fill="#6366f1" fill-opacity="0.90"/>
+  <text x="30" y="405" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">+4,3% Ausgabenwachstum pro Kopf</text>
+  <text x="30" y="445" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#64748b">Wachstum getrieben durch Tariferhöhungen (TVöD/TV-L) und Gesundheitskosten</text>
+</g>
+<g transform="translate(820, 1220)">
+  <rect width="740" height="520" rx="10" fill="#ffffff"/>
+  <rect width="740" height="50" rx="10" fill="#1e293b"/>
+  <text x="20" y="32" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Panel H: Horizontal &amp; Municipal Equalization Transfers</text>
+  <rect x="30" y="80" width="680" height="280" rx="8" fill="#ec4899" fill-opacity="0.90"/>
+  <text x="30" y="405" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">-737 € / Einwohner Nettoabfluss Bayerns</text>
+  <text x="30" y="445" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#64748b">Bayern zahlt 9,77 Mrd. € in Länderfinanzausgleich; München zahlt 930 Mio. €</text>
+</g>
+<g transform="translate(1590, 1220)">
+  <rect width="740" height="520" rx="10" fill="#ffffff"/>
+  <rect width="740" height="50" rx="10" fill="#1e293b"/>
+  <text x="20" y="32" font-family="Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffffff">Panel I: Sequential Waterfall: Munich Gross Influx to Net Benefit</text>
+  <rect x="30" y="80" width="680" height="280" rx="8" fill="#e11d48" fill-opacity="0.90"/>
+  <text x="30" y="405" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#0f172a">Pfadunabhängige Shapley-Dekomposition</text>
+  <text x="30" y="445" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#64748b">Vom Brutto-Steueraufkommen Münchens über Umlagen zum tatsächlichen Bürger-N</text>
+</g>
+</svg>

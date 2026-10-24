@@ -1,0 +1,72 @@
+jahr,zweig,art,indikator,wert_mrd_eur,quelle,tabelle_fundstelle
+2023,GRV,Beitrag,Beitragseinnahmen_GRV_rein,289.60,Deutsche Rentenversicherung,Finanzbericht 2023 Tabelle 1
+2023,GRV,Bundeszuschuss,Bundeszuschuss_und_Erstattungen_GRV,91.60,Deutsche Rentenversicherung,Finanzbericht 2023 Tabelle 1
+2023,GRV,Einnahmen_Gesamt,Gesamteinnahmen_GRV,381.20,Deutsche Rentenversicherung,Finanzbericht 2023 Tabelle 1
+2023,GRV,Ausgaben_Gesamt,Gesamtausgaben_GRV,379.80,Deutsche Rentenversicherung,Finanzbericht 2023 Tabelle 2
+2023,GRV,Leistung,Rentenzahlungen_und_KVdR,340.40,Deutsche Rentenversicherung,Finanzbericht 2023 Tabelle 2
+2023,GRV,Leistung,Rehabilitation_und_Teilhabe,7.50,Deutsche Rentenversicherung,Finanzbericht 2023 Tabelle 2
+2023,GRV,Verwaltung,Verwaltungs_und_Verfahrenskosten,31.90,Deutsche Rentenversicherung,Finanzbericht 2023 Tabelle 2
+2023,GKV,Beitrag,Beitragseinnahmen_GKV_rein,289.90,BMG,GKV-Finanzergebnisse 2023 KJ 1
+2023,GKV,Bundeszuschuss,Bundeszuschuss_Gesundheitsfonds,14.50,BMG,GKV-Finanzergebnisse 2023 KJ 1
+2023,GKV,Einnahmen_Gesamt,Gesamteinnahmen_GKV,304.40,BMG,GKV-Finanzergebnisse 2023 KJ 1
+2023,GKV,Ausgaben_Gesamt,Gesamtausgaben_GKV,306.20,BMG,GKV-Finanzergebnisse 2023 KJ 1
+2023,GKV,Leistung,Krankenhausbehandlung,93.95,BMG,GKV-Finanzergebnisse 2023 KJ 1
+2023,GKV,Leistung,Arzneimittel,50.17,BMG,GKV-Finanzergebnisse 2023 KJ 1
+2023,GKV,Leistung,Aerztliche_Behandlung,47.12,BMG,GKV-Finanzergebnisse 2023 KJ 1
+2023,GKV,Leistung,Krankengeld,18.80,BMG,GKV-Finanzergebnisse 2023 KJ 1
+2023,GKV,Leistung,Zahnaerzte_Heil_Hilfsmittel_Verwaltung,96.16,BMG,GKV-Finanzergebnisse 2023 KJ 1
+2023,SPV,Beitrag,Beitragseinnahmen_SPV_rein,60.51,BMG,Zahlen und Fakten zur Pflegeversicherung 2023
+2023,SPV,Bundeszuschuss,Bundeszuschuss_SPV,0.50,BMG,Zahlen und Fakten zur Pflegeversicherung 2023
+2023,SPV,Einnahmen_Gesamt,Gesamteinnahmen_SPV,61.01,BMG,Zahlen und Fakten zur Pflegeversicherung 2023
+2023,SPV,Ausgaben_Gesamt,Gesamtausgaben_SPV,59.23,BMG,Zahlen und Fakten zur Pflegeversicherung 2023
+2023,SPV,Leistung,Pflegeleistungen_ambulant_stationaer,57.40,BMG,Zahlen und Fakten zur Pflegeversicherung 2023
+2023,SPV,Verwaltung,Verwaltungsausgaben_SPV,1.83,BMG,Zahlen und Fakten zur Pflegeversicherung 2023
+2023,BA,Beitrag,Beitragseinnahmen_und_Umlagen_BA,38.34,Bundesagentur fuer Arbeit,Geschaeftsbericht 2023 S. 48
+2023,BA,Bundeszuschuss,Bundeserstattung_SGB_II_Verwaltung,3.90,Bundesagentur fuer Arbeit,Geschaeftsbericht 2023 S. 48
+2023,BA,Einnahmen_Gesamt,Gesamteinnahmen_BA,42.24,Bundesagentur fuer Arbeit,Geschaeftsbericht 2023 S. 48
+2023,BA,Ausgaben_Gesamt,Gesamtausgaben_BA,39.23,Bundesagentur fuer Arbeit,Geschaeftsbericht 2023 S. 49
+2023,BA,Leistung,Arbeitslosengeld_I,18.76,Bundesagentur fuer Arbeit,Geschaeftsbericht 2023 S. 49
+2023,BA,Leistung,Aktive_Arbeitsfoerderung,9.80,Bundesagentur fuer Arbeit,Geschaeftsbericht 2023 S. 49
+2023,BA,Leistung,Insolvenzgeld_Kurzarbeit_uebrige,1.85,Bundesagentur fuer Arbeit,Geschaeftsbericht 2023 S. 49
+2023,BA,Verwaltung,Verwaltung_und_SGB_II_Vollzug,8.82,Bundesagentur fuer Arbeit,Geschaeftsbericht 2023 S. 49
+2023,DGUV,Beitrag,Umlagesoll_Arbeitgeber_DGUV,13.97,DGUV,Geschaeftsbericht 2023
+2023,DGUV,Ausgaben_Gesamt,Gesamtausgaben_DGUV,13.97,DGUV,Geschaeftsbericht 2023
+2023,DGUV,Leistung,Renten_und_Abfindungen_DGUV,6.26,DGUV,Geschaeftsbericht 2023
+2023,DGUV,Leistung,Heilbehandlung_und_Reha_DGUV,5.69,DGUV,Geschaeftsbericht 2023
+2023,DGUV,Verwaltung,Praevention_und_Verwaltung_DGUV,2.02,DGUV,Geschaeftsbericht 2023
+2024,GRV,Beitrag,Beitragseinnahmen_GRV_rein,305.80,Deutsche Rentenversicherung,Geschaeftsbericht 2024 Tabelle 1
+2024,GRV,Bundeszuschuss,Bundeszuschuss_und_Erstattungen_GRV,96.10,Deutsche Rentenversicherung,Geschaeftsbericht 2024 Tabelle 1
+2024,GRV,Einnahmen_Gesamt,Gesamteinnahmen_GRV,402.00,Deutsche Rentenversicherung,Geschaeftsbericht 2024 Tabelle 1
+2024,GRV,Ausgaben_Gesamt,Gesamtausgaben_GRV,397.40,Deutsche Rentenversicherung,Geschaeftsbericht 2024 Tabelle 2
+2024,GRV,Leistung,Rentenzahlungen_und_KVdR,356.00,Deutsche Rentenversicherung,Geschaeftsbericht 2024 Tabelle 2
+2024,GRV,Leistung,Rehabilitation_und_Teilhabe,8.30,Deutsche Rentenversicherung,Geschaeftsbericht 2024 Tabelle 2
+2024,GRV,Verwaltung,Verwaltungs_und_Verfahrenskosten,33.10,Deutsche Rentenversicherung,Geschaeftsbericht 2024 Tabelle 2
+2024,GKV,Beitrag,Beitragseinnahmen_GKV_rein,306.10,BMG,GKV-Finanzergebnisse 2024 Pressemitteilung
+2024,GKV,Bundeszuschuss,Bundeszuschuss_Gesundheitsfonds,14.50,BMG,GKV-Finanzergebnisse 2024 Pressemitteilung
+2024,GKV,Einnahmen_Gesamt,Gesamteinnahmen_GKV,320.60,BMG,GKV-Finanzergebnisse 2024 Pressemitteilung
+2024,GKV,Ausgaben_Gesamt,Gesamtausgaben_GKV,326.90,BMG,GKV-Finanzergebnisse 2024 Pressemitteilung
+2024,GKV,Leistung,Krankenhausbehandlung,102.21,BMG,GKV-Finanzergebnisse 2024 Tabelle Leistungsausgaben
+2024,GKV,Leistung,Arzneimittel,55.16,BMG,GKV-Finanzergebnisse 2024 Tabelle Leistungsausgaben
+2024,GKV,Leistung,Aerztliche_Behandlung,50.26,BMG,GKV-Finanzergebnisse 2024 Tabelle Leistungsausgaben
+2024,GKV,Leistung,Krankengeld,20.60,BMG,GKV-Finanzergebnisse 2024 Tabelle Leistungsausgaben
+2024,GKV,Leistung,Zahnaerzte_Heil_Hilfsmittel_Verwaltung,98.67,BMG,GKV-Finanzergebnisse 2024 Tabelle Leistungsausgaben
+2024,SPV,Beitrag,Beitragseinnahmen_SPV_rein,66.16,BMG,Pflegeversicherung Finanzergebnisse 2024
+2024,SPV,Bundeszuschuss,Bundeszuschuss_SPV,0.50,BMG,Pflegeversicherung Finanzergebnisse 2024
+2024,SPV,Einnahmen_Gesamt,Gesamteinnahmen_SPV,66.66,BMG,Pflegeversicherung Finanzergebnisse 2024
+2024,SPV,Ausgaben_Gesamt,Gesamtausgaben_SPV,68.20,BMG,Pflegeversicherung Finanzergebnisse 2024
+2024,SPV,Leistung,Pflegeleistungen_ambulant_stationaer,66.20,BMG,Pflegeversicherung Finanzergebnisse 2024
+2024,SPV,Verwaltung,Verwaltungsausgaben_SPV,2.00,BMG,Pflegeversicherung Finanzergebnisse 2024
+2024,BA,Beitrag,Beitragseinnahmen_und_Umlagen_BA,40.58,Bundesagentur fuer Arbeit,Geschaeftsbericht 2024 Finanzergebnisse
+2024,BA,Bundeszuschuss,Bundeserstattung_SGB_II_Verwaltung,4.03,Bundesagentur fuer Arbeit,Geschaeftsbericht 2024 Finanzergebnisse
+2024,BA,Einnahmen_Gesamt,Gesamteinnahmen_BA,44.61,Bundesagentur fuer Arbeit,Geschaeftsbericht 2024 Finanzergebnisse
+2024,BA,Ausgaben_Gesamt,Gesamtausgaben_BA,45.21,Bundesagentur fuer Arbeit,Geschaeftsbericht 2024 Finanzergebnisse
+2024,BA,Leistung,Arbeitslosengeld_I,22.16,Bundesagentur fuer Arbeit,Geschaeftsbericht 2024 Finanzergebnisse
+2024,BA,Leistung,Aktive_Arbeitsfoerderung,10.36,Bundesagentur fuer Arbeit,Geschaeftsbericht 2024 Finanzergebnisse
+2024,BA,Leistung,Insolvenzgeld_Kurzarbeit_uebrige,1.61,Bundesagentur fuer Arbeit,Geschaeftsbericht 2024 Finanzergebnisse
+2024,BA,Verwaltung,Verwaltung_und_SGB_II_Vollzug,11.08,Bundesagentur fuer Arbeit,Geschaeftsbericht 2024 Finanzergebnisse
+2024,DGUV,Beitrag,Umlagesoll_Arbeitgeber_DGUV,14.33,DGUV,Geschaeftsergebnisse 2024
+2024,DGUV,Ausgaben_Gesamt,Gesamtausgaben_DGUV,14.33,DGUV,Geschaeftsergebnisse 2024
+2024,DGUV,Leistung,Renten_und_Abfindungen_DGUV,6.40,DGUV,Geschaeftsergebnisse 2024
+2024,DGUV,Leistung,Heilbehandlung_und_Reha_DGUV,5.90,DGUV,Geschaeftsergebnisse 2024
+2024,DGUV,Verwaltung,Praevention_und_Verwaltung_DGUV,2.03,DGUV,Geschaeftsergebnisse 2024
+

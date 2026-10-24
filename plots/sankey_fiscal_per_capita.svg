@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 1450" width="2400" height="1450">
+<defs>
+  <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.12"/></filter>
+  <linearGradient id="pensionGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#1e3a8a" stop-opacity="0.55"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.65"/></linearGradient>
+</defs>
+<rect width="100%" height="100%" fill="#f8fafc"/>
+<rect width="100%" height="150" fill="#0f172a"/>
+<text x="80" y="55" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700" fill="#ffffff">3-Layer Fiscal Per-Capita Breakdown: Bund, Freistaat Bayern &amp; Landeshauptstadt München (2024)</text>
+<text x="80" y="92" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#94a3b8">Verifizierte Haushaltsdaten (BMF, Destatis, StMFH, Stadtkämmerei) • Normiert pro Einwohner Münchens (€/Kopf) Basis Zensus 2022</text>
+<rect x="1200" y="25" width="250" height="95" rx="8" fill="#1e293b"/>
+<text x="1216" y="52" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">Bund Kernhaushalt</text>
+<text x="1216" y="88" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#38bdf8">5.681 €</text>
+<rect x="1480" y="25" width="250" height="95" rx="8" fill="#1e293b"/>
+<text x="1496" y="52" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">Sozialversicherung (Beiträge)</text>
+<text x="1496" y="88" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#2dd4bf">7.422 €</text>
+<rect x="1760" y="25" width="250" height="95" rx="8" fill="#1e293b"/>
+<text x="1776" y="52" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">Freistaat Bayern</text>
+<text x="1776" y="88" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#60a5fa">5.563 €</text>
+<rect x="2040" y="25" width="250" height="95" rx="8" fill="#1e293b"/>
+<text x="2056" y="52" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">Stadt München</text>
+<text x="2056" y="88" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="700" fill="#fbbf24">7.006 €</text>
+<text x="120" y="200" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#1e293b">LAYER 1: STEUER- &amp; BEITRAGSINFLUX</text>
+<text x="960" y="200" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#1e293b">LAYER 2: GEBIETSKÖRPERSCHAFTEN &amp; SOZIALVERSICHERUNG</text>
+<text x="1800" y="200" font-family="Helvetica, Arial, sans-serif" font-size="18" font-weight="700" fill="#1e293b">LAYER 3: FINALE FUNKTIONALE BEREICHE</text>
+<path d="M 168.0 1031.6 C 564.0 1031.6, 564.0 240.0, 960.0 240.0 L 960.0 292.8 C 564.0 292.8, 564.0 1084.4, 168.0 1084.4 Z" fill="#1e3a8a" fill-opacity="0.30"/>
+<path d="M 168.0 957.4 C 564.0 957.4, 564.0 292.8, 960.0 292.8 L 960.0 353.0 C 564.0 353.0, 564.0 1017.6, 168.0 1017.6 Z" fill="#1e3a8a" fill-opacity="0.30"/>
+<path d="M 168.0 1423.1 C 564.0 1423.1, 564.0 353.0, 960.0 353.0 L 960.0 363.7 C 564.0 363.7, 564.0 1433.7, 168.0 1433.7 Z" fill="#1e3a8a" fill-opacity="0.30"/>
+<path d="M 168.0 1317.4 C 564.0 1317.4, 564.0 363.7, 960.0 363.7 L 960.0 390.8 C 564.0 390.8, 564.0 1344.6, 168.0 1344.6 Z" fill="#1e3a8a" fill-opacity="0.30"/>
+<path d="M 168.0 881.2 C 564.0 881.2, 564.0 390.8, 960.0 390.8 L 960.0 453.0 C 564.0 453.0, 564.0 943.4, 168.0 943.4 Z" fill="#1e3a8a" fill-opacity="0.30"/>
+<path d="M 168.0 549.5 C 564.0 549.5, 564.0 495.0, 960.0 495.0 L 960.0 632.2 C 564.0 632.2, 564.0 686.7, 168.0 686.7 Z" fill="#0d9488" fill-opacity="0.30"/>
+<path d="M 168.0 398.2 C 564.0 398.2, 564.0 632.2, 960.0 632.2 L 960.0 769.6 C 564.0 769.6, 564.0 535.5, 168.0 535.5 Z" fill="#0d9488" fill-opacity="0.30"/>
+<path d="M 168.0 1273.8 C 564.0 1273.8, 564.0 769.6, 960.0 769.6 L 960.0 799.3 C 564.0 799.3, 564.0 1303.4, 168.0 1303.4 Z" fill="#0d9488" fill-opacity="0.30"/>
+<path d="M 168.0 1390.9 C 564.0 1390.9, 564.0 799.3, 960.0 799.3 L 960.0 817.5 C 564.0 817.5, 564.0 1409.1, 168.0 1409.1 Z" fill="#0d9488" fill-opacity="0.30"/>
+<path d="M 168.0 1479.1 C 564.0 1479.1, 564.0 817.5, 960.0 817.5 L 960.0 823.9 C 564.0 823.9, 564.0 1485.5, 168.0 1485.5 Z" fill="#0d9488" fill-opacity="0.30"/>
+<path d="M 168.0 240.0 C 564.0 240.0, 564.0 865.9, 960.0 865.9 L 960.0 1010.1 C 564.0 1010.1, 564.0 384.2, 168.0 384.2 Z" fill="#0284c7" fill-opacity="0.30"/>
+<path d="M 168.0 1358.6 C 564.0 1358.6, 564.0 1010.1, 960.0 1010.1 L 960.0 1028.4 C 564.0 1028.4, 564.0 1376.9, 168.0 1376.9 Z" fill="#0284c7" fill-opacity="0.30"/>
+<path d="M 168.0 1098.4 C 564.0 1098.4, 564.0 1028.4, 960.0 1028.4 L 960.0 1074.5 C 564.0 1074.5, 564.0 1144.6, 168.0 1144.6 Z" fill="#1e3a8a" fill-opacity="0.30"/>
+<path d="M 168.0 700.7 C 564.0 700.7, 564.0 1116.5, 960.0 1116.5 L 960.0 1200.6 C 564.0 1200.6, 564.0 784.8, 168.0 784.8 Z" fill="#d97706" fill-opacity="0.30"/>
+<path d="M 168.0 1158.6 C 564.0 1158.6, 564.0 1200.6, 960.0 1200.6 L 960.0 1245.7 C 564.0 1245.7, 564.0 1203.7, 168.0 1203.7 Z" fill="#d97706" fill-opacity="0.30"/>
+<path d="M 168.0 1451.1 C 564.0 1451.1, 564.0 1245.7, 960.0 1245.7 L 960.0 1255.5 C 564.0 1255.5, 564.0 1460.9, 168.0 1460.9 Z" fill="#d97706" fill-opacity="0.30"/>
+<path d="M 168.0 1217.7 C 564.0 1217.7, 564.0 1255.5, 960.0 1255.5 L 960.0 1297.6 C 564.0 1297.6, 564.0 1259.8, 168.0 1259.8 Z" fill="#0284c7" fill-opacity="0.30"/>
+<path d="M 168.0 798.8 C 564.0 798.8, 564.0 1297.6, 960.0 1297.6 L 960.0 1366.0 C 564.0 1366.0, 564.0 867.2, 168.0 867.2 Z" fill="#d97706" fill-opacity="0.30"/>
+<path d="M 1008.0 240.0 C 1404.0 240.0, 1404.0 450.8, 1800.0 450.8 L 1800.0 503.3 C 1404.0 503.3, 1404.0 292.5, 1008.0 292.5 Z" fill="url(#pensionGrad)" fill-opacity="0.75" stroke="#8b5cf6" stroke-width="1.5"/>
+<path d="M 1008.0 292.5 C 1404.0 292.5, 1404.0 240.0, 1800.0 240.0 L 1800.0 247.5 C 1404.0 247.5, 1404.0 300.0, 1008.0 300.0 Z" fill="#1e3a8a" fill-opacity="0.35"/>
+<path d="M 1008.0 300.0 C 1404.0 300.0, 1404.0 1164.1, 1800.0 1164.1 L 1800.0 1201.3 C 1404.0 1201.3, 1404.0 337.2, 1008.0 337.2 Z" fill="#1e3a8a" fill-opacity="0.35"/>
+<path d="M 1008.0 337.2 C 1404.0 337.2, 1404.0 1005.5, 1800.0 1005.5 L 1800.0 1025.3 C 1404.0 1025.3, 1404.0 357.1, 1008.0 357.1 Z" fill="#1e3a8a" fill-opacity="0.35"/>
+<path d="M 1008.0 357.1 C 1404.0 357.1, 1404.0 1217.3, 1800.0 1217.3 L 1800.0 1227.0 C 1404.0 1227.0, 1404.0 366.7, 1008.0 366.7 Z" fill="#1e3a8a" fill-opacity="0.35"/>
+<path d="M 1008.0 366.7 C 1404.0 366.7, 1404.0 1396.8, 1800.0 1396.8 L 1800.0 1413.6 C 1404.0 1413.6, 1404.0 383.5, 1008.0 383.5 Z" fill="#1e3a8a" fill-opacity="0.35"/>
+<path d="M 1008.0 383.5 C 1404.0 383.5, 1404.0 771.1, 1800.0 771.1 L 1800.0 792.3 C 1404.0 792.3, 1404.0 404.7, 1008.0 404.7 Z" fill="#1e3a8a" fill-opacity="0.35"/>
+<path d="M 1008.0 404.7 C 1404.0 404.7, 1404.0 1096.3, 1800.0 1096.3 L 1800.0 1102.5 C 1404.0 1102.5, 1404.0 410.9, 1008.0 410.9 Z" fill="#1e3a8a" fill-opacity="0.35"/>
+<path d="M 1008.0 410.9 C 1404.0 410.9, 1404.0 893.8, 1800.0 893.8 L 1800.0 936.0 C 1404.0 936.0, 1404.0 453.0, 1008.0 453.0 Z" fill="#1e3a8a" fill-opacity="0.35"/>
+<path d="M 1008.0 495.0 C 1404.0 495.0, 1404.0 503.3, 1800.0 503.3 L 1800.0 629.1 C 1404.0 629.1, 1404.0 620.8, 1008.0 620.8 Z" fill="#0d9488" fill-opacity="0.35"/>
+<path d="M 1008.0 620.8 C 1404.0 620.8, 1404.0 247.5, 1800.0 247.5 L 1800.0 419.9 C 1404.0 419.9, 1404.0 793.3, 1008.0 793.3 Z" fill="#0d9488" fill-opacity="0.35"/>
+<path d="M 1008.0 793.3 C 1404.0 793.3, 1404.0 1317.5, 1800.0 1317.5 L 1800.0 1341.6 C 1404.0 1341.6, 1404.0 817.3, 1008.0 817.3 Z" fill="#0d9488" fill-opacity="0.35"/>
+<path d="M 1008.0 865.9 C 1404.0 865.9, 1404.0 645.1, 1800.0 645.1 L 1800.0 690.0 C 1404.0 690.0, 1404.0 910.8, 1008.0 910.8 Z" fill="#0284c7" fill-opacity="0.35"/>
+<path d="M 1008.0 910.8 C 1404.0 910.8, 1404.0 1227.0, 1800.0 1227.0 L 1800.0 1253.3 C 1404.0 1253.3, 1404.0 937.1, 1008.0 937.1 Z" fill="#0284c7" fill-opacity="0.35"/>
+<path d="M 1008.0 937.1 C 1404.0 937.1, 1404.0 1102.5, 1800.0 1102.5 L 1800.0 1135.1 C 1404.0 1135.1, 1404.0 969.7, 1008.0 969.7 Z" fill="#0284c7" fill-opacity="0.35"/>
+<path d="M 1008.0 969.7 C 1404.0 969.7, 1404.0 792.3, 1800.0 792.3 L 1800.0 816.0 C 1404.0 816.0, 1404.0 993.5, 1008.0 993.5 Z" fill="#0284c7" fill-opacity="0.35"/>
+<path d="M 1008.0 993.5 C 1404.0 993.5, 1404.0 1025.3, 1800.0 1025.3 L 1800.0 1043.2 C 1404.0 1043.2, 1404.0 1011.4, 1008.0 1011.4 Z" fill="#0284c7" fill-opacity="0.35"/>
+<path d="M 1008.0 1011.4 C 1404.0 1011.4, 1404.0 419.9, 1800.0 419.9 L 1800.0 422.6 C 1404.0 422.6, 1404.0 1014.0, 1008.0 1014.0 Z" fill="#0284c7" fill-opacity="0.35"/>
+<path d="M 1008.0 1014.0 C 1404.0 1014.0, 1404.0 936.0, 1800.0 936.0 L 1800.0 963.9 C 1404.0 963.9, 1404.0 1041.9, 1008.0 1041.9 Z" fill="#0284c7" fill-opacity="0.35"/>
+<path d="M 1008.0 1041.9 C 1404.0 1041.9, 1404.0 1269.3, 1800.0 1269.3 L 1800.0 1301.5 C 1404.0 1301.5, 1404.0 1074.2, 1008.0 1074.2 Z" fill="#0284c7" fill-opacity="0.35"/>
+<path d="M 1008.0 1116.5 C 1404.0 1116.5, 1404.0 690.0, 1800.0 690.0 L 1800.0 755.1 C 1404.0 755.1, 1404.0 1181.6, 1008.0 1181.6 Z" fill="#d97706" fill-opacity="0.35"/>
+<path d="M 1008.0 1181.6 C 1404.0 1181.6, 1404.0 816.0, 1800.0 816.0 L 1800.0 877.8 C 1404.0 877.8, 1404.0 1243.4, 1008.0 1243.4 Z" fill="#d97706" fill-opacity="0.35"/>
+<path d="M 1008.0 1243.4 C 1404.0 1243.4, 1404.0 1043.2, 1800.0 1043.2 L 1800.0 1080.3 C 1404.0 1080.3, 1404.0 1280.5, 1008.0 1280.5 Z" fill="#d97706" fill-opacity="0.35"/>
+<path d="M 1008.0 1280.5 C 1404.0 1280.5, 1404.0 422.6, 1800.0 422.6 L 1800.0 434.8 C 1404.0 434.8, 1404.0 1292.7, 1008.0 1292.7 Z" fill="#d97706" fill-opacity="0.35"/>
+<path d="M 1008.0 1292.7 C 1404.0 1292.7, 1404.0 1429.6, 1800.0 1429.6 L 1800.0 1439.8 C 1404.0 1439.8, 1404.0 1302.9, 1008.0 1302.9 Z" fill="#d97706" fill-opacity="0.35"/>
+<path d="M 1008.0 1302.9 C 1404.0 1302.9, 1404.0 1135.1, 1800.0 1135.1 L 1800.0 1148.1 C 1404.0 1148.1, 1404.0 1315.9, 1008.0 1315.9 Z" fill="#d97706" fill-opacity="0.35"/>
+<path d="M 1008.0 1315.9 C 1404.0 1315.9, 1404.0 1461.6, 1800.0 1461.6 L 1800.0 1468.4 C 1404.0 1468.4, 1404.0 1322.7, 1008.0 1322.7 Z" fill="#d97706" fill-opacity="0.35"/>
+<path d="M 1008.0 1322.7 C 1404.0 1322.7, 1404.0 963.9, 1800.0 963.9 L 1800.0 989.5 C 1404.0 989.5, 1404.0 1348.3, 1008.0 1348.3 Z" fill="#d97706" fill-opacity="0.35"/>
+<path d="M 1008.0 1348.3 C 1404.0 1348.3, 1404.0 1357.6, 1800.0 1357.6 L 1800.0 1380.8 C 1404.0 1380.8, 1404.0 1371.5, 1008.0 1371.5 Z" fill="#d97706" fill-opacity="0.35"/>
+<g transform="translate(1320, 270)">
+  <rect x="0" y="0" width="340" height="48" rx="6" fill="#8b5cf6" filter="url(#shadow)"/>
+  <text x="14" y="22" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff">&#x27A4; BUNDESZUSCHUSS AN RENTEN (AUS LAYER 2):</text>
+  <text x="14" y="38" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="700" fill="#fef08a">1.400 € / Kopf (117,0 Mrd. € Steuermittel)</text>
+</g>
+<rect x="120" y="240.0" width="48" height="144.2" rx="4" fill="#0284c7" filter="url(#shadow)"/>
+<text x="108" y="316.1" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Gemeinschaftsteuern Bayern: <tspan fill="#0284c7" font-weight="700">3,846 €</tspan></text>
+<rect x="120" y="398.2" width="48" height="137.3" rx="4" fill="#0d9488" filter="url(#shadow)"/>
+<text x="108" y="470.9" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Krankenbeitraege AG AN: <tspan fill="#0d9488" font-weight="700">3,662 €</tspan></text>
+<rect x="120" y="549.5" width="48" height="137.2" rx="4" fill="#0d9488" filter="url(#shadow)"/>
+<text x="108" y="622.1" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Rentenbeitraege AG AN: <tspan fill="#0d9488" font-weight="700">3,659 €</tspan></text>
+<rect x="120" y="700.7" width="48" height="84.1" rx="4" fill="#d97706" filter="url(#shadow)"/>
+<text x="108" y="746.8" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Gewerbesteuer Muenchen: <tspan fill="#d97706" font-weight="700">2,242 €</tspan></text>
+<rect x="120" y="798.8" width="48" height="68.4" rx="4" fill="#d97706" filter="url(#shadow)"/>
+<text x="108" y="837.0" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Gebuehren Mieten Entgelte Muenchen: <tspan fill="#d97706" font-weight="700">1,824 €</tspan></text>
+<rect x="120" y="881.2" width="48" height="62.2" rx="4" fill="#1e3a8a" filter="url(#shadow)"/>
+<text x="108" y="916.3" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Sonstige Bundessteuern und Kredite: <tspan fill="#1e3a8a" font-weight="700">1,658 €</tspan></text>
+<rect x="120" y="957.4" width="48" height="60.2" rx="4" fill="#1e3a8a" filter="url(#shadow)"/>
+<text x="108" y="991.5" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Umsatzsteuer Bund: <tspan fill="#1e3a8a" font-weight="700">1,606 €</tspan></text>
+<rect x="120" y="1031.6" width="48" height="52.8" rx="4" fill="#1e3a8a" filter="url(#shadow)"/>
+<text x="108" y="1062.0" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Lohn Einkommensteuer Bund: <tspan fill="#1e3a8a" font-weight="700">1,408 €</tspan></text>
+<rect x="120" y="1098.4" width="48" height="46.1" rx="4" fill="#1e3a8a" filter="url(#shadow)"/>
+<text x="108" y="1125.5" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Verwaltung und Bundesmittel Bayern: <tspan fill="#1e3a8a" font-weight="700">1,230 €</tspan></text>
+<rect x="120" y="1158.6" width="48" height="45.1" rx="4" fill="#d97706" filter="url(#shadow)"/>
+<text x="108" y="1185.1" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Einkommensteuer USt Anteil Muenchen: <tspan fill="#d97706" font-weight="700">1,203 €</tspan></text>
+<rect x="120" y="1217.7" width="48" height="42.1" rx="4" fill="#0284c7" filter="url(#shadow)"/>
+<text x="108" y="1242.7" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Zuweisungen Land Bayern an Muenchen: <tspan fill="#0284c7" font-weight="700">1,123 €</tspan></text>
+<rect x="120" y="1273.8" width="48" height="29.7" rx="4" fill="#0d9488" filter="url(#shadow)"/>
+<text x="108" y="1292.6" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Pflegebeitraege AG AN: <tspan fill="#0d9488" font-weight="700">792 €</tspan></text>
+<rect x="120" y="1317.4" width="48" height="27.2" rx="4" fill="#1e3a8a" filter="url(#shadow)"/>
+<text x="108" y="1335.0" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Energiesteuer Tabaksteuer Soli Bund: <tspan fill="#1e3a8a" font-weight="700">725 €</tspan></text>
+<rect x="120" y="1358.6" width="48" height="18.3" rx="4" fill="#0284c7" filter="url(#shadow)"/>
+<text x="108" y="1371.8" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Landessteuern Bayern: <tspan fill="#0284c7" font-weight="700">487 €</tspan></text>
+<rect x="120" y="1390.9" width="48" height="18.2" rx="4" fill="#0d9488" filter="url(#shadow)"/>
+<text x="108" y="1404.0" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Arbeitslosenbeitraege BA: <tspan fill="#0d9488" font-weight="700">486 €</tspan></text>
+<rect x="120" y="1423.1" width="48" height="14.0" rx="4" fill="#1e3a8a" filter="url(#shadow)"/>
+<text x="108" y="1434.1" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Unternehmenssteuern Bund: <tspan fill="#1e3a8a" font-weight="700">284 €</tspan></text>
+<rect x="120" y="1451.1" width="48" height="14.0" rx="4" fill="#d97706" filter="url(#shadow)"/>
+<text x="108" y="1462.1" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Grundsteuer und Lokalsteuern Muenchen: <tspan fill="#d97706" font-weight="700">262 €</tspan></text>
+<rect x="120" y="1479.1" width="48" height="14.0" rx="4" fill="#0d9488" filter="url(#shadow)"/>
+<text x="108" y="1490.1" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Unfallbeitraege DGUV: <tspan fill="#0d9488" font-weight="700">171 €</tspan></text>
+<rect x="120" y="1507.1" width="48" height="14.0" rx="4" fill="#0284c7" filter="url(#shadow)"/>
+<text x="108" y="1518.1" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="600" fill="#1e293b">Finanzkraftausgleich Abzug Bayern: <tspan fill="#0284c7" font-weight="700">0 €</tspan></text>
+<rect x="960" y="240.0" width="58" height="213.0" rx="6" fill="#1e3a8a" filter="url(#shadow)"/>
+<text x="1030" y="260.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#1e3a8a">Bundeshaushalt</text>
+<text x="1030" y="280.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#334155">5,681 € pro Kopf</text>
+<rect x="960" y="495.0" width="58" height="328.9" rx="6" fill="#0d9488" filter="url(#shadow)"/>
+<text x="1030" y="515.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#0d9488">Sozialversicherung (Beiträge)</text>
+<text x="1030" y="535.0" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#334155">8,770 € pro Kopf</text>
+<rect x="960" y="865.9" width="58" height="208.6" rx="6" fill="#0284c7" filter="url(#shadow)"/>
+<text x="1030" y="885.9" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#0284c7">Staatshaushalt Bayern</text>
+<text x="1030" y="905.9" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#334155">5,563 € pro Kopf</text>
+<rect x="960" y="1116.5" width="58" height="249.5" rx="6" fill="#d97706" filter="url(#shadow)"/>
+<text x="1030" y="1136.5" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#d97706">Landeshauptstadt München</text>
+<text x="1030" y="1156.5" font-family="Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#334155">6,654 € pro Kopf</text>
+<rect x="1800" y="240.0" width="48" height="194.8" rx="4" fill="#10b981" filter="url(#shadow)"/>
+<text x="1862" y="341.4" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Gesundheit und Pflege: <tspan fill="#10b981" font-weight="700">5,194 €</tspan></text>
+<rect x="1800" y="450.8" width="48" height="178.3" rx="4" fill="#8b5cf6" filter="url(#shadow)"/>
+<text x="1862" y="543.9" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Rente und Alterssicherung: <tspan fill="#8b5cf6" font-weight="700">4,755 €</tspan></text>
+<rect x="1800" y="645.1" width="48" height="110.0" rx="4" fill="#3b82f6" filter="url(#shadow)"/>
+<text x="1862" y="704.1" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Schulen und Kitas: <tspan fill="#3b82f6" font-weight="700">2,933 €</tspan></text>
+<rect x="1800" y="771.1" width="48" height="106.7" rx="4" fill="#ec4899" filter="url(#shadow)"/>
+<text x="1862" y="828.5" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Arbeit Buergergeld Soziales: <tspan fill="#ec4899" font-weight="700">2,847 €</tspan></text>
+<rect x="1800" y="893.8" width="48" height="95.6" rx="4" fill="#64748b" filter="url(#shadow)"/>
+<text x="1862" y="945.7" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Verwaltung Wirtschaft Sonstiges: <tspan fill="#64748b" font-weight="700">2,551 €</tspan></text>
+<rect x="1800" y="1005.5" width="48" height="74.8" rx="4" fill="#f59e0b" filter="url(#shadow)"/>
+<text x="1862" y="1046.9" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Verkehr und Infrastruktur: <tspan fill="#f59e0b" font-weight="700">1,995 €</tspan></text>
+<rect x="1800" y="1096.3" width="48" height="51.8" rx="4" fill="#0284c7" filter="url(#shadow)"/>
+<text x="1862" y="1126.2" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Sicherheit und Justiz: <tspan fill="#0284c7" font-weight="700">1,381 €</tspan></text>
+<rect x="1800" y="1164.1" width="48" height="37.2" rx="4" fill="#ef4444" filter="url(#shadow)"/>
+<text x="1862" y="1186.7" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Verteidigung und Aeusseres: <tspan fill="#ef4444" font-weight="700">993 €</tspan></text>
+<rect x="1800" y="1217.3" width="48" height="36.0" rx="4" fill="#6366f1" filter="url(#shadow)"/>
+<text x="1862" y="1239.3" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Hochschulen und Forschung: <tspan fill="#6366f1" font-weight="700">959 €</tspan></text>
+<rect x="1800" y="1269.3" width="48" height="32.3" rx="4" fill="#64748b" filter="url(#shadow)"/>
+<text x="1862" y="1289.4" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Kommunaler Finanzausgleich KFA: <tspan fill="#64748b" font-weight="700">860 €</tspan></text>
+<rect x="1800" y="1317.5" width="48" height="24.1" rx="4" fill="#059669" filter="url(#shadow)"/>
+<text x="1862" y="1333.6" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Arbeitsfoerderung und Reha: <tspan fill="#059669" font-weight="700">642 €</tspan></text>
+<rect x="1800" y="1357.6" width="48" height="23.2" rx="4" fill="#64748b" filter="url(#shadow)"/>
+<text x="1862" y="1373.2" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Bezirksumlage Oberbayern: <tspan fill="#64748b" font-weight="700">618 €</tspan></text>
+<rect x="1800" y="1396.8" width="48" height="16.8" rx="4" fill="#94a3b8" filter="url(#shadow)"/>
+<text x="1862" y="1409.2" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Schuldendienst und Zinsen: <tspan fill="#94a3b8" font-weight="700">447 €</tspan></text>
+<rect x="1800" y="1429.6" width="48" height="16.0" rx="4" fill="#d97706" filter="url(#shadow)"/>
+<text x="1862" y="1441.6" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Wohnungsbau und Stadtplanung: <tspan fill="#d97706" font-weight="700">272 €</tspan></text>
+<rect x="1800" y="1461.6" width="48" height="16.0" rx="4" fill="#14b8a6" filter="url(#shadow)"/>
+<text x="1862" y="1473.6" font-family="Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#1e293b">Kultur und Freizeit: <tspan fill="#14b8a6" font-weight="700">183 €</tspan></text>
+<rect x="0" y="1390" width="100%" height="60" fill="#f1f5f9"/>
+<text x="80" y="1425" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#64748b">Quellen: BMF (Vorläufiger Abschluss Bundeshaushalt 2024), Destatis (Sozialversicherungsrechnung 2024), StMFH Bayern (HG 2024/2025), Stadtkämmerei München (Haushaltsplan 2024). Steuerfinanzierter Bundeszuschuss zur Gesetzlichen Rentenversicherung fließt transparent aus Layer 2 (Bundeshaushalt) in die Altersversorgung.</text>
+</svg>
