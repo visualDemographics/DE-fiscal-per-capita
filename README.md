@@ -244,11 +244,11 @@ DE-fiscal-per-capita/
 
 ---
 
-## 6. License & Citation
+## 6. Citation & Legal Notice
 
-This project is licensed under the MIT License. Primary administrative data are public sector information (*Amtliche Werke*) under § 5 UrhG (Germany).
+Primary administrative data are public sector information (*Amtliche Werke*) under § 5 UrhG (Germany). All rights reserved for repository synthesis, modeling architectures, and visualization assets.
 
-If you use this model or visualization in academic research, policy analysis, or journalism, please cite:
+If you reference this model or visualization in research, policy analysis, or journalism, please cite:
 
 ```bibtex
 @misc{fiscal_per_capita_munich_2024,
