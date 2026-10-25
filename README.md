@@ -1,8 +1,8 @@
 # Fiscal Per-Capita Breakdown: Bund, Freistaat Bayern & Landeshauptstadt München
 
 [![Pipeline Audit](https://img.shields.io/badge/Audit-5%2F5%20Passed-emerald.svg)](.agents/skills/responsible-research/scripts/audit_research_pipeline.py)
-[![Data Quality](https://img.shields.io/badge/Kirchhoff%20Conservation-%CE%94%20%3C%200.01%20%E2%82%AC-blue.svg)](datasets/fiscal_sankey_flows_per_capita.csv)
-[![Resolution](https://img.shields.io/badge/PNG%20Resolution-4800%20%C3%97%202700-purple.svg)](plots/sankey_fiscal_per_capita.png)
+[![Data Quality](https://img.shields.io/badge/Kirchhoff%20Conservation-%CE%94%20%3D%200.000%20Mrd.%20%E2%82%AC-blue.svg)](datasets/fiscal_sankey_flows_per_capita.csv)
+[![Resolution](https://img.shields.io/badge/PNG%20Resolution-5200%20%C3%97%203100-purple.svg)](plots/sankey_fiscal_per_capita.png)
 [![Interactive HTML](https://img.shields.io/badge/Widget-Plotly%20Sankey%20HTML-amber.svg)](plots/sankey_fiscal_interactive.html)
 
 This repository provides an empirical, publication-grade fiscal analysis decomposing public money in Germany for an individual resident of the **City of Munich (*Landeshauptstadt München*)** in 2024 (with longitudinal comparison to 2023). Every resident of Munich simultaneously receives public goods and services financed across four distinct public tiers:
@@ -11,7 +11,7 @@ This repository provides an empirical, publication-grade fiscal analysis decompo
 3. **Free State of Bavaria (*Freistaat Bayern*)**
 4. **City of Munich (*Landeshauptstadt München*)**
 
-The flagship analytical visualization is a **4-Layer High-Resolution Sankey Diagram** ([plots/sankey_fiscal_per_capita.png](plots/sankey_fiscal_per_capita.png) and [plots/sankey_fiscal_interactive.html](plots/sankey_fiscal_interactive.html)), built using official audited administrative budget records from the Federal Ministry of Finance (BMF), the Federal Statistical Office (Destatis), the Bavarian State Ministry of Finance and Homeland (StMFH), and the Munich Municipal Treasury (*Stadtkämmerei München*).
+The flagship analytical visualization is a **4-Layer High-Resolution Sankey Diagram** ([plots/sankey_fiscal_per_capita.png](plots/sankey_fiscal_per_capita.png) and [plots/sankey_fiscal_interactive.html](plots/sankey_fiscal_interactive.html)), built using verified primary source documents from the Federal Ministry of Finance (BMF), the Federal Statistical Office (Destatis), the Bavarian State Ministry of Finance and Homeland (StMFH), and the Munich Municipal Treasury (*Stadtkämmerei München*).
 
 ---
 
@@ -23,38 +23,38 @@ The Sankey diagram tracks the complete lifecycle of public funds—from primary 
 flowchart LR
     subgraph L1["Layer 1: Steuer- & Beitragsinflux"]
         direction TB
-        F_Tax["Bundessteuern (ESt, USt, KSt, Soli)"]
+        F_Tax["Bundessteuern (ESt, USt, KSt, Soli, NKA)"]
         S_Tax["Sozialversicherungsbeiträge (AG & AN)"]
-        B_Tax["Bayerische Landessteuern & Eigene Einnahmen"]
-        M_Tax["Münchner Kommunalsteuern & Gebühren"]
+        B_Tax["Bayerische Gemeinschaft- & Landessteuern"]
+        M_Tax["Münchner Gewerbesteuer, Gebühren & SWM"]
     end
 
     subgraph L2["Layer 2: Nominale Gebietskörperschaften"]
         direction TB
-        N_Fed["Nominaler Bund<br/><b>5.681 € / Kopf</b>"]
-        N_Soz["Nominale Sozialversicherung<br/><b>8.770 € / Kopf</b>"]
-        N_BY["Nominaler Freistaat Bayern<br/><b>4.899 € / Kopf</b>"]
-        N_MUC["Nominale Stadt München<br/><b>7.006 € / Kopf</b>"]
+        N_Fed["Nominaler Bund<br/><b>5.572 € / dt. Kopf</b> (83,6M EW)"]
+        N_Soz["Nominale Sozialversicherung<br/><b>8.652 € / dt. Kopf</b> (83,6M EW)"]
+        N_BY["Nominaler Freistaat Bayern<br/><b>4.899 € / by. Kopf</b> (13,2M EW)"]
+        N_MUC["Nominale Stadt München<br/><b>6.276 € / muc. Kopf</b> (1,51M EW)"]
     end
 
     subgraph L3["Layer 3: Effektive Haushalte (Transfers)"]
         direction TB
-        E_Fed["Effektiver Bund (Kern)<br/><b>3.417 € / Kopf</b>"]
-        E_Soz["Effektive Sozialversicherung<br/><b>10.370 € / Kopf</b>"]
-        E_BY["Effektiver Freistaat Bayern<br/><b>5.330 € / Kopf</b>"]
-        E_MUC["Effektive Stadt München<br/><b>7.239 € / Kopf</b>"]
+        E_Fed["Effektiver Bund (Kern)<br/><b>3.905 € / dt. Kopf</b> (326,4 Mrd. €)"]
+        E_Soz["Effektive Sozialversicherung<br/><b>10.213 € / dt. Kopf</b> (853,6 Mrd. €)"]
+        E_BY["Effektiver Freistaat Bayern<br/><b>5.563 € / by. Kopf</b> (73,7 Mrd. €)"]
+        E_MUC["Effektive Stadt München<br/><b>7.006 € / muc. Kopf</b> (10,5 Mrd. €)"]
     end
 
     subgraph L4["Layer 4: Finale Funktionale End-Buckets"]
         direction TB
         B_Rent["Rente & Alterssicherung (4.755 €)"]
-        B_Ges["Gesundheit & Pflege (4.798 €)"]
+        B_Ges["Gesundheit & Pflege (5.194 €)"]
         B_Schul["Schulen & Kitas (2.933 €)"]
-        B_Hoch["Hochschulen & Wissenschaft (959 €)"]
-        B_Vert["Verteidigung & Äußeres (861 €)"]
-        B_Verk["Verkehr & Infrastruktur (1.999 €)"]
-        B_Sich["Sicherheit & Justiz (1.376 €)"]
-        B_LFA["Länderfinanzausgleich Abfluss (737 €)"]
+        B_Hoch["Hochschulen & Spitzenforschung (959 €)"]
+        B_Vert["Verteidigung & Äußeres (993 €)"]
+        B_Verk["Verkehr & Infrastruktur (1.995 €)"]
+        B_Sich["Innere Sicherheit & Justiz (1.381 €)"]
+        B_LFA["Länderfinanzausgleich Abfluss (-737 €)"]
         B_Rest["Soziales, Wohnen, Zinsen & Verwaltung"]
     end
 
@@ -63,17 +63,17 @@ flowchart LR
     B_Tax --> N_BY
     M_Tax --> N_MUC
 
-    N_Fed -- "Bundeszuschuss GRV/GKV (1.600 €)" --> E_Soz
-    N_Fed -- "Bundesmittel an BY (664 €)" --> E_BY
-    N_Fed -- "Kernhaushalt (3.417 €)" --> E_Fed
+    N_Fed -- "Bundeszuschuss GRV/GKV (130,5 Mrd. €)" --> E_Soz
+    N_Fed -- "Bundesmittel an BY (8,8 Mrd. €)" --> E_BY
+    N_Fed -- "Kernhaushalt (326,4 Mrd. €)" --> E_Fed
 
-    N_Soz -- "Beiträge (8.770 €)" --> E_Soz
+    N_Soz -- "Beiträge (723,1 Mrd. €)" --> E_Soz
 
-    N_BY -- "FAG & BayKiBiG Zuweisungen (1.123 €)" --> E_MUC
-    N_BY -- "Landesmittel inkl. LFA (3.776 €)" --> E_BY
+    N_BY -- "FAG & BayKiBiG Zuweisungen (1,69 Mrd. €)" --> E_MUC
+    N_BY -- "Landesmittel inkl. LFA (63,2 Mrd. €)" --> E_BY
 
-    N_MUC -- "Gewerbe- & Bezirksumlagen (890 €)" --> E_BY
-    N_MUC -- "Kommunale Eigenmittel (6.116 €)" --> E_MUC
+    N_MUC -- "Gewerbe- & Bezirksumlagen (1,34 Mrd. €)" --> E_BY
+    N_MUC -- "Kommunale Eigenmittel (8,11 Mrd. €)" --> E_MUC
 
     E_Fed --> B_Vert & B_Verk & B_Hoch & B_Rest
     E_Soz --> B_Rent & B_Ges & B_Rest
@@ -87,17 +87,17 @@ flowchart LR
 
 ### Layer 1: Steuer- & Beitragsinflux (Revenue Stream Influx)
 Every influx node shares the color of its respective Layer 2 nominal entity and is vertically clustered directly adjacent to it:
-- **Federal Taxes (Navy `#1e3a8a`)**: Lohn- und Einkommensteuer, Umsatz- & Einfuhrumsatzsteuer, Körperschaftsteuer, Energiesteuer, Tabaksteuer, Solidaritätszuschlag und Bundeskredite.
+- **Federal Taxes (Navy `#1e3a8a`)**: Lohn- und Einkommensteuer, Umsatzsteuer, Körperschaftsteuer, Verbrauchssteuern (Energie, Tabak, Kfz), Solidaritätszuschlag und Nettokreditaufnahme.
 - **Social Insurance Contributions (Teal `#0d9488`)**: Pure employer and employee payroll contributions to Pension (GRV), Health (GKV), Long-Term Care (SPV), Unemployment (BA), and Occupational Accident (DGUV) insurance.
-- **Bavarian Own Revenues (Bavarian Sky Blue `#0284c7`)**: Share of shared joint taxes (*Gemeinschaftsteuern*), dedicated state taxes (inheritance, real estate transfer, beer tax), and administrative revenues. Federal grants (*Bundesmittel*) are routed via the Federal tier.
-- **Munich Municipal Revenues (Munich Amber `#d97706`)**: Trade tax (*Gewerbesteuer netto*), municipal share of income and VAT, property tax (*Grundsteuer A/B*), and municipal fees/tariffs.
+- **Bavarian Own Revenues (Bavarian Sky Blue `#0284c7`)**: Share of shared joint taxes (*Gemeinschaftsteuern*), dedicated state taxes (inheritance, real estate transfer), and administrative revenues. Federal grants (*Bundesmittel*) are routed via the Federal tier.
+- **Munich Municipal Revenues (Munich Amber `#d97706`)**: Trade tax (*Gewerbesteuer netto*), municipal share of income and VAT, property tax (*Grundsteuer*), municipal fees/tariffs, and SWM public utility profit distribution.
 
 ### Layer 2: Nominale Gebietskörperschaften (Gross Inflow Entities)
 Represents the gross budgetary volume appropriated by each tier prior to intergovernmental equalizations:
-- **Nominaler Bund**: **5.680,98 € / resident** (€474,80 bn)
-- **Nominale Sozialversicherung**: **8.769,98 € / resident** (€732,97 bn pure contributions)
-- **Nominaler Freistaat Bayern**: **4.898,51 € / resident** (€64,90 bn own revenues)
-- **Nominale Stadt München**: **7.005,95 € / resident** (€10,544 bn)
+- **Nominaler Bund**: **5.572 € / resident** (€465,67 bn · Basis: 83,6M EW)
+- **Nominale Sozialversicherung**: **8.652 € / resident** (€723,08 bn pure contributions · Basis: 83,6M EW)
+- **Nominaler Freistaat Bayern**: **4.899 € / resident** (€64,90 bn own revenues · Basis: 13,2M EW)
+- **Nominale Stadt München**: **6.276 € / resident** (€9,45 bn ordentliche Erträge · Basis: 1,51M EW)
 
 > [!IMPORTANT]
 > **Strict Layer 2 Isolation**: Nodes in Layer 2 connect **exclusively to Layer 3**. All nominal gross revenues must either pass into core retention or be transferred to another tier. No nominal link bypasses Layer 3.
@@ -105,54 +105,55 @@ Represents the gross budgetary volume appropriated by each tier prior to intergo
 ### Intergovernmental Transfers (Layer 2 $\to$ Layer 3)
 Between Layer 2 and Layer 3, the vertical and horizontal fiscal transfers of German federalism are made explicit:
 1. **Federal Subsidies to Social Insurances (*Bundeszuschüsse*)**:
-   - Bund $\to$ Rentenversicherung: **1.399,90 € / resident** (€117,00 bn)
-   - Bund $\to$ Gesundheitsfonds: **199,82 € / resident** (€16,70 bn)
-   - *Total*: **1.599,72 € / resident** (€133,70 bn tax-financed subsidy styled in vibrant purple `rgba(139, 92, 246, 0.85)`).
+   - Bund $\to$ Rentenversicherung: **1.388 € / resident** (€116,00 bn)
+   - Bund $\to$ Gesundheitsfonds: **173 € / resident** (€14,50 bn)
+   - *Total*: **1.561 € / resident** (€130,50 bn tax-financed subsidy styled in vibrant purple `rgba(139, 92, 246, 0.85)`).
 2. **Federal Grants to Free State of Bavaria (*Bundeszuweisungen*)**:
-   - Bund $\to$ Freistaat Bayern: **664,20 € / resident** (€8,80 bn federal co-funding for transport, education, and administration).
+   - Bund $\to$ Freistaat Bayern: **664 € / resident** (€8,80 bn federal co-funding for transport, education, and administration).
 3. **What Flows from Munich to the State & District (*Umlagen*)**:
-   - München $\to$ Freistaat Bayern: **890,36 € / resident** (€1,34 bn total: Gewerbesteuerumlage €0,41 bn + Bezirksumlage an den Bezirk Oberbayern €0,93 bn for integration and psychiatric welfare).
+   - München $\to$ Freistaat Bayern: **890 € / resident** (€1,34 bn total: Gewerbesteuerumlage €0,41 bn + Bezirksumlage an den Bezirk Oberbayern €0,93 bn for integration and psychiatric welfare).
 4. **What Flows from the State to Munich (*Kommunaler Finanzausgleich & Zuweisungen*)**:
-   - Freistaat Bayern $\to$ München: **1.122,92 € / resident** (€1,69 bn total: FAG municipal key grants Art. 10 FAG + BayKiBiG childcare operational subsidies).
+   - Freistaat Bayern $\to$ München: **1.123 € / resident** (€1,69 bn total: FAG municipal key grants Art. 10 FAG + BayKiBiG childcare operational subsidies).
 5. **State Retention of Equalization Liabilities**:
-   - Freistaat Bayern retains **3.775,59 € / resident**, which funds both internal state ministries and the state's outward equalization liabilities.
+   - Freistaat Bayern retains **4.770 € / resident**, which funds both internal state ministries and the state's outward equalization liabilities.
 
 ### Layer 3: Effektive Haushalte (Net Effective Budgets)
 The net disposable funds available to each public entity following intergovernmental consolidation:
-- **Effektiver Bund (Kern)**: **3.417,06 € / resident** (€285,60 bn)
-- **Effektive Sozialversicherung**: **10.369,70 € / resident** (€866,67 bn including federal subsidies)
-- **Effektive Stadt München**: **7.238,51 € / resident** (6.115,59 € retained local + 1.122,92 € state grants)
-- **Effektiver Freistaat Bayern**: **5.330,15 € / resident** (3.775,59 € own funds + 664,20 € federal grants + 890,36 € Munich transfers)
+- **Effektiver Bund (Kern)**: **3.905 € / resident** (€326,37 bn)
+- **Effektive Sozialversicherung**: **10.213 € / resident** (€853,58 bn including federal subsidies)
+- **Effektiver Freistaat Bayern**: **5.563 € / resident** (€73,70 bn)
+- **Effektive Stadt München**: **7.006 € / resident** (€10,54 bn Gesamtetat)
 
 ### Layer 4: Finale Funktionale End-Buckets (Citizen-Facing Outlays)
 Final destination categories providing direct public utility:
-- **Rente & Alterssicherung**: **4.754,89 € / resident** (€397,40 bn)
-- **Gesundheit & Pflege**: **4.798,00 € / resident** (€401,00 bn statutory health, care, and clinic subsidies)
-- **Schulen & Kitas**: **2.933,29 € / resident** (Bayern Kultus 1.197 € + München RBS 1.736 €)
-- **Hochschulen & Wissenschaft**: **959,19 € / resident** (Bayern Universitäten 702 € + Bund Forschung 257 €)
-- **Verteidigung & Äußeres**: **860,88 € / resident** (€71,95 bn regular defense, Sondervermögen Bundeswehr, and diplomacy)
-- **Verkehr & Infrastruktur**: **1.999,93 € / resident** (Bund 534 € + Bayern 476 € + München MVG/Straßen 990 €)
-- **Sicherheit & Justiz**: **1.375,50 € / resident** (Bayern Polizei/Justiz 870 € + München KVR/Feuerwehr 346 € + Bund 160 €)
-- **Länderfinanzausgleich (End-Bucket)**: **737,42 € / resident** (€9,77 bn net outflow paid by Bavaria to financially weaker states)
+- **Rente & Alterssicherung**: **4.755 € / resident** (€397,40 bn)
+- **Gesundheit & Pflege**: **5.194 € / resident** (€434,10 bn statutory health, care, and clinic subsidies)
+- **Schulen & Kitas**: **2.933 € / resident** (Bayern Kultus + München RBS)
+- **Hochschulen & Spitzenforschung**: **959 € / resident** (Bayern Universitäten + Bund Forschung)
+- **Verteidigung & Äußeres**: **993 € / resident** (€83,00 bn regular defense, Sondervermögen Bundeswehr, and diplomacy)
+- **Verkehr & Mobilität**: **1.995 € / resident** (Bund + Bayern + München MVG/Straßen)
+- **Innere Sicherheit & Justiz**: **1.381 € / resident** (Bayern Polizei/Justiz + München KVR/Feuerwehr + Bund)
+- **Länderfinanzausgleich (End-Bucket Outflow)**: **737 € / resident** (€9,77 bn net outflow paid by Bavaria to financially weaker states)
 - **Soziales, Wohnen, Arbeitsförderung, Zinsen & Verwaltung**: remaining statutory outlays.
 
 > [!NOTE]
-> **Mathematical Verification**: By Kirchhoff's law, every node in Layer 1, 2, 3, and 4 satisfies exact flow conservation:
-> $$\sum \text{Inflow}_n \equiv \sum \text{Outflow}_n \quad (\Delta < 0{,}01\text{ € / resident})$$
+> **Mathematical Verification**: By Kirchhoff's law, every layer satisfies exact flow conservation in physical currency units:
+> $$\sum \text{Layer 1} \equiv \sum \text{Layer 2} \equiv \sum \text{Layer 3} \equiv \sum \text{Layer 4} = 1{,}272.986\text{ Mrd. €} \quad (\Delta = 0.000\text{ Mrd. €})$$
 
 ---
 
-## 3. Data Provenance & Cryptographic Verification
+## 3. Data Provenance & Primary Source Documentation
 
-All primary data tables reside in [`rawdata/`](rawdata/) and are cryptographically verified against SHA-256 checksums in [`rawdata/MANIFEST.csv`](rawdata/MANIFEST.csv):
+All primary data tables reside in [`rawdata/`](rawdata/) and are cryptographically verified against SHA-256 checksums in [`rawdata/MANIFEST.csv`](rawdata/MANIFEST.csv). Verified official source documents reside in [`literature/`](literature/):
 
-| Register Table | Time Span | Originating Institution | Primary Record Source |
+| Primary Source Document (PDF) | File Size | Originating Institution | Official Deep Link |
 | :--- | :--- | :--- | :--- |
-| `destatis_bundeshaushalt_2023_2024.csv` | 2023–2024 | Bundesministerium der Finanzen (BMF) | Bundeshaushaltsrechnung & Haushaltsgesetz |
-| `destatis_sozialversicherung_2023_2024.csv` | 2023–2024 | Bundesministerium für Arbeit und Soziales / Destatis | Sozialbudget & Destatis Fachserie 14 Reihe 4 |
-| `bayern_staatshaushalt_2023_2024.csv` | 2023–2024 | Bayerisches Staatsministerium der Finanzen (StMFH) | Haushaltsrechnung Freistaat Bayern Epl 01–20 |
-| `muenchen_haushalt_2023_2024.csv` | 2023–2024 | Landeshauptstadt München Stadtkämmerei | Jahresabschluss & Haushaltsplan München |
-| `demographics_zensus_denominators_2023_2024.csv` | 2023–2024 | Bayerisches Landesamt für Statistik / Destatis | Zensus 2022 Stichtag 15. Mai 2022 fortgeschrieben |
+| `BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf` | 572 KB | Bundesministerium der Finanzen (BMF) | [bundesfinanzministerium.de](https://www.bundesfinanzministerium.de) |
+| `BMF_2025_Steuereinnahmen_Dezember_2024.pdf` | 363 KB | Bundesministerium der Finanzen (BMF) | [bundesfinanzministerium.de](https://www.bundesfinanzministerium.de) |
+| `BMAS_2024_Sozialbudget_2023.pdf` | 965 KB | Bundesministerium für Arbeit und Soziales (BMAS) | [bmas.de](https://www.bmas.de) |
+| `Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf` | 5.8 MB | Landeshauptstadt München Stadtkämmerei | [muenchen.de](https://stadt.muenchen.de) |
+| `Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf` | 277 KB | Bayerischer Landtag / StMFH | [verkuendung-bayern.de](https://www.verkuendung-bayern.de) |
+| `Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf` | 681 KB | Statistisches Bundesamt (Destatis) | [destatis.de](https://www.destatis.de) |
 
 ### Demographic Denominators (Zensus 2022 Tier 1 Baseline)
 Normalizations use official post-censal populations (*Amtliche Einwohnerzahl fortgeschrieben auf Basis Zensus 2022*):
@@ -183,13 +184,13 @@ pip install -r requirements.txt
 ### Execute Data Pipeline & Rendering
 ```bash
 # 3. Process raw administrative tables and generate audited flows
-python3 src/data_preparation.py
+.venv/bin/python3 src/data_preparation.py
 
 # 4. Render high-resolution Sankey PNG, interactive HTML, and synoptic matrix
-python3 src/modeling.py
+.venv/bin/python3 src/modeling.py
 
-# 5. Run the automated 5-stage research pipeline audit
-python3 .agents/skills/responsible-research/scripts/audit_research_pipeline.py
+# 5. Run the automated research pipeline audit
+.venv/bin/python3 .agents/skills/responsible-research/scripts/audit_research_pipeline.py
 ```
 
 Expected audit output:
@@ -222,24 +223,34 @@ DE-fiscal-per-capita/
 │   ├── destatis_sozialversicherung_2023_2024.csv
 │   ├── bayern_staatshaushalt_2023_2024.csv
 │   ├── muenchen_haushalt_2023_2024.csv
-│   └── demographics_zensus_denominators_2023_2024.csv
+│   ├── demographics_zensus_denominators_2023_2024.csv
+│   └── literature_empirical_benchmarks.csv
 ├── datasets/                                      # Audited analysis-ready datasets
 │   ├── datasets.md                                # Variable codebook and mathematical definitions
-│   ├── fiscal_sankey_flows_per_capita.csv         # 106 directed graph edges with €/Kopf & € bn
+│   ├── fiscal_sankey_flows_per_capita.csv         # 110 directed graph edges with €/Kopf & € bn
 │   ├── fiscal_per_capita_summary.csv              # Headline comparative summary across tiers
 │   └── literature_empirical_benchmarks.csv        # Verbatim literature citations and benchmark catalog
 ├── plots/                                         # Publication figures & visual artifacts
 │   ├── plot.md                                    # Systematic methodological plot documentation
-│   ├── sankey_fiscal_per_capita.png               # High-res static Sankey (4800x2700 px, 2.2 MB)
-│   ├── sankey_fiscal_interactive.html             # Interactive Plotly web widget
+│   ├── sankey_fiscal_per_capita.png               # High-res static Sankey (5200x3100 px)
+│   ├── sankey_fiscal_interactive.html             # Interactive Plotly web widget with year switch
 │   ├── synoptic_3x3_matrix.png                    # 9-panel executive research matrix
 │   └── panel_a_per_capita_breakdown.png ...       # Individual research panels A through I
 ├── src/                                           # Audited pipeline source code (AST compliant)
 │   ├── data_preparation.py                        # Raw-to-dataset normalization & flow builder
 │   └── modeling.py                                # Plotly/Kaleido rendering engine
-└── literature/                                    # Academic and administrative citations catalog
-    ├── literature.md
-    └── citations.md
+├── literature/                                    # Academic and administrative citations catalog
+│   ├── BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf
+│   ├── BMF_2025_Steuereinnahmen_Dezember_2024.pdf
+│   ├── BMAS_2024_Sozialbudget_2023.pdf
+│   ├── Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf
+│   ├── Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf
+│   ├── Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf
+│   ├── literature.md                              # Complete bibliographic index
+│   └── citations.md                               # Page/table extraction quotes
+└── goal/
+    ├── description.md                             # Research scope and goals
+    └── hypothesis.md                              # Falsifiable hypotheses & closed verdicts
 ```
 
 ---
@@ -259,4 +270,3 @@ If you reference this model or visualization in research, policy analysis, or jo
   howpublished = {\url{https://github.com/selle/DE-fiscal-per-capita}}
 }
 ```
-

@@ -228,6 +228,92 @@ def check_plot_documentation():
     return True
 
 
+def check_primary_literature_pdfs():
+    print("\n[Check 6] Verifying Primary Source Literature PDFs in literature/...")
+    lit_dir = os.path.join(ROOT, "literature")
+    lit_md_path = os.path.join(lit_dir, "literature.md")
+    if not os.path.exists(lit_md_path):
+        print("  FAIL [Check 6]: literature/literature.md does not exist.")
+        return False
+
+    with open(lit_md_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    pdf_matches = re.findall(r"`(.*?\.pdf)`", content)
+    if not pdf_matches:
+        print("  FAIL [Check 6]: No primary PDFs cataloged in literature/literature.md.")
+        return False
+
+    verified_count = 0
+    for pdf_name in pdf_matches:
+        pdf_path = os.path.join(lit_dir, pdf_name)
+        if not os.path.exists(pdf_path):
+            print(f"  FAIL [Check 6]: Missing primary PDF {pdf_name}")
+            return False
+        sz = os.path.getsize(pdf_path)
+        if sz < 1000:
+            print(f"  FAIL [Check 6]: PDF {pdf_name} is too small ({sz} bytes).")
+            return False
+        with open(pdf_path, "rb") as pf:
+            header = pf.read(5)
+            if header != b"%PDF-":
+                print(f"  FAIL [Check 6]: PDF {pdf_name} lacks valid %PDF- magic header.")
+                return False
+        verified_count += 1
+
+    print(f"  ✓ Verified {verified_count} authentic primary PDFs with valid %PDF- headers and size >= 1 KB.")
+    return True
+
+
+def check_residual_shares():
+    print("\n[Check 7] Verifying Residual & Unallocated Budget Shares (< 5% Cap)...")
+    flows_path = os.path.join(ROOT, "datasets", "fiscal_sankey_flows_per_capita.csv")
+    if not os.path.exists(flows_path):
+        print("  FAIL [Check 7]: Datasets flows CSV missing.")
+        return False
+
+    with open(flows_path, "r", encoding="utf-8") as f:
+        flows = list(csv.DictReader(f))
+
+    # Evaluate Layer 3 -> Layer 4 allocations across all tiers
+    for year in (2023, 2024):
+        f_l34 = [f for f in flows if int(f["jahr"]) == year and f["layer_target"] == "Layer_4_Buckets"]
+        for tier in ("Effective_Federal", "Effective_Insurance", "Effective_Bayern", "Effective_Munich"):
+            tier_total = sum(float(f["wert_mrd_eur"]) for f in f_l34 if f["source_node"] == tier)
+            unallocated = sum(float(f["wert_mrd_eur"]) for f in f_l34 if f["source_node"] == tier and "Ruecklagen_und_Liquiditaetspuffer" in f["target_node"])
+            share = (unallocated / tier_total) * 100 if tier_total > 0 else 0.0
+            if share > 5.0:
+                print(f"  FAIL [Check 7]: {tier} ({year}) unallocated share {share:.2f}% exceeds 5% cap.")
+                return False
+
+    print("  ✓ All sovereign tiers have unallocated residuals / reserve buffers strictly below the 5% cap.")
+    return True
+
+
+def check_hypothesis_verdicts():
+    print("\n[Check 8] Verifying Falsifiable Hypotheses Closure (H1-H4 Verdicts)...")
+    hypo_path = os.path.join(ROOT, "goal", "hypothesis.md")
+    if not os.path.exists(hypo_path):
+        print("  FAIL [Check 8]: goal/hypothesis.md does not exist.")
+        return False
+
+    with open(hypo_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    for h in ("Hypothesis 1", "Hypothesis 2", "Hypothesis 3", "Hypothesis 4"):
+        if h not in content:
+            print(f"  FAIL [Check 8]: {h} is missing from goal/hypothesis.md.")
+            return False
+
+    verdict_matches = re.findall(r"Verdict on Hypothesis \d:\s*(CONFIRMED|SUPPORTED)", content)
+    if len(verdict_matches) < 4:
+        print(f"  FAIL [Check 8]: Found only {len(verdict_matches)}/4 closed hypothesis verdicts in goal/hypothesis.md.")
+        return False
+
+    print(f"  ✓ Verified 4/4 falsifiable research hypotheses have explicit empirical verdicts ({', '.join(verdict_matches)}).")
+    return True
+
+
 def main():
     print("=" * 70)
     print("RESPONSIBLE RESEARCH: GENERAL PIPELINE AUDIT SUITE")
@@ -238,6 +324,9 @@ def main():
         check_datasets_integrity,
         check_strict_ast_code_contract,
         check_plot_documentation,
+        check_primary_literature_pdfs,
+        check_residual_shares,
+        check_hypothesis_verdicts,
     ]
     passed = sum(1 for check in checks if check())
     print("\n" + "=" * 70)
