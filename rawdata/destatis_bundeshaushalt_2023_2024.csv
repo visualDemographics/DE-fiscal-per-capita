@@ -28,34 +28,50 @@ jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle
 2023,Bund,Funktionale_Ausgaben,Epl_06_Inneres_und_Heimat_Bundespolizei,13.20,BMF,Haushaltsrechnung des Bundes 2023 Epl 06
 2023,Bund,Funktionale_Ausgaben,Epl_09_Wirtschaft_und_Klima,11.40,BMF,Haushaltsrechnung des Bundes 2023 Epl 09
 2023,Bund,Funktionale_Ausgaben,Epl_23_Entwicklung_und_Auswaertiges,11.50,BMF,Haushaltsrechnung des Bundes 2023 Epl 23
-2023,Bund,Funktionale_Ausgaben,Sonstige_Ressorts_und_Verwaltung,79.90,BMF,Haushaltsrechnung des Bundes 2023 Uebersicht
-2024,Bund,Einnahmen_Gesamt,Gesamteinnahmen_Bund,474.80,BMF,Vorlaeufiger Abschluss Bundeshaushalt 2024
-2024,Bund,Ausgaben_Gesamt,Gesamtausgaben_Bund,474.80,BMF,Vorlaeufiger Abschluss Bundeshaushalt 2024
-2024,Bund,Finanzierungssaldo,Nettokreditaufnahme,33.30,BMF,Vorlaeufiger Abschluss Bundeshaushalt 2024
-2024,Bund,Steuereinnahmen_Gesamt,Steuereinnahmen_Bundesanteil,372.40,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Gemeinschaftsteuer_Bundesanteil,Lohnsteuer_Bundesanteil,102.50,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Gemeinschaftsteuer_Bundesanteil,Veranlagte_Einkommensteuer_Bundesanteil,15.20,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Gemeinschaftsteuer_Bundesanteil,Koerperschaftsteuer_Bundesanteil,18.90,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Gemeinschaftsteuer_Bundesanteil,Abgeltungsteuer_Bundesanteil,4.80,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Gemeinschaftsteuer_Bundesanteil,Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil,134.20,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Bundessteuer,Energiesteuer,34.10,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Bundessteuer,Tabaksteuer,14.10,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Bundessteuer,Solidaritaetszuschlag,12.40,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Bundessteuer,Versicherungssteuer,15.80,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Bundessteuer,Kraftfahrzeugsteuer,9.60,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Bundessteuer,Stromsteuer,6.90,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Bundessteuer,Sonstige_Bundessteuern,3.90,BMF,Haushaltsabschluss 2024 Tabelle Steuereinnahmen
-2024,Bund,Funktionale_Ausgaben,Epl_11_Arbeit_und_Soziales,175.70,BMF,Vorlaeufiger Abschluss 2024 Epl 11
-2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Bundeszuschuss_Rentenversicherung,117.00,BMF,Vorlaeufiger Abschluss 2024 Epl 11
-2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Buergergeld_Grundsicherung,47.20,BMF,Vorlaeufiger Abschluss 2024 Epl 11
-2024,Bund,Funktionale_Ausgaben,Epl_14_Verteidigung_Kern,52.00,BMF,Vorlaeufiger Abschluss 2024 Epl 14
-2024,Bund,Funktionale_Ausgaben,Sondervermoegen_Bundeswehr_Ist,19.80,BMF,Sondervermoegen Bundeswehr Abschluss 2024
-2024,Bund,Funktionale_Ausgaben,Epl_12_Verkehr_und_digitale_Infrastruktur,44.20,BMF,Vorlaeufiger Abschluss 2024 Epl 12
-2024,Bund,Funktionale_Ausgaben,Epl_30_Bildung_und_Forschung,21.50,BMF,Vorlaeufiger Abschluss 2024 Epl 30
-2024,Bund,Funktionale_Ausgaben,Epl_32_Bundesschuld_Zinsen,37.40,BMF,Vorlaeufiger Abschluss 2024 Epl 32
-2024,Bund,Funktionale_Ausgaben,Epl_15_Gesundheit_Bundeszuschuss_GKV,16.70,BMF,Vorlaeufiger Abschluss 2024 Epl 15
-2024,Bund,Funktionale_Ausgaben,Epl_06_Inneres_und_Heimat_Bundespolizei,13.80,BMF,Vorlaeufiger Abschluss 2024 Epl 06
-2024,Bund,Funktionale_Ausgaben,Epl_09_Wirtschaft_und_Klima,11.20,BMF,Vorlaeufiger Abschluss 2024 Epl 09
-2024,Bund,Funktionale_Ausgaben,Epl_23_Entwicklung_und_Auswaertiges,11.20,BMF,Vorlaeufiger Abschluss 2024 Epl 23
-2024,Bund,Funktionale_Ausgaben,Sonstige_Ressorts_und_Verwaltung,71.30,BMF,Vorlaeufiger Abschluss 2024 Uebersicht
-
+2023,Bund,Funktionale_Ausgaben,Epl_17_Familie_Senioren_Frauen_Jugend,13.40,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32
+2023,Bund,Funktionale_Ausgaben,Epl_11_Grundsicherung_im_Alter_SGB_XII,9.84,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32
+2023,Bund,Funktionale_Ausgaben,Epl_25_Wohnungswesen_und_Staedtebau,3.55,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 33
+2023,Bund,Funktionale_Ausgaben,Epl_16_Gesundheit_und_Umwelt,6.56,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 33
+2023,Bund,Funktionale_Ausgaben,Epl_10_Ernaehrung_und_Landwirtschaft,1.72,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 33
+2023,Bund,Funktionale_Ausgaben,Epl_08_Finanzverwaltung_Zoll,6.96,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32
+2023,Bund,Funktionale_Ausgaben,Epl_01_bis_04_Zentrale_Verwaltung,22.24,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32
+2023,Bund,Funktionale_Ausgaben,Bundeszuweisungen_an_Laender,31.20,BMF,Haushaltsrechnung des Bundes 2023
+2023,Bund,Funktionale_Ausgaben,Sonstige_Ressorts_und_Verwaltung,11.80,BMF,Haushaltsrechnung des Bundes 2023 Uebersicht
+2024,Bund,Einnahmen_Gesamt,Gesamteinnahmen_Bund,465.67,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 23
+2024,Bund,Ausgaben_Gesamt,Gesamtausgaben_Bund,465.67,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 23
+2024,Bund,Finanzierungssaldo,Nettokreditaufnahme,33.30,BMF,Monatsbericht Januar 2025 Analysen S. 21
+2024,Bund,Steuereinnahmen_Gesamt,Steuereinnahmen_Bundesanteil,374.98,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Lohnsteuer_Bundesanteil,105.80,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Veranlagte_Einkommensteuer_Bundesanteil,31.81,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Koerperschaftsteuer_Bundesanteil,19.88,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Abgeltungsteuer_Bundesanteil,8.48,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil,145.34,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Bundessteuer,Energiesteuer,35.09,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Bundessteuer,Tabaksteuer,15.64,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Bundessteuer,Solidaritaetszuschlag,12.40,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Bundessteuer,Versicherungssteuer,15.80,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Bundessteuer,Kraftfahrzeugsteuer,9.60,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Bundessteuer,Stromsteuer,6.90,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Bundessteuer,Sonstige_Bundessteuern,3.90,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
+2024,Bund,Sonstige_Einnahmen,Verwaltungseinnahmen_Bund,27.79,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 35
+2024,Bund,Sonstige_Einnahmen,Beteiligungen_Zinsen_und_Rueckfluesse,10.37,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 35
+2024,Bund,Funktionale_Ausgaben,Epl_11_Arbeit_und_Soziales,175.70,BMF,Monatsbericht Januar 2025 S. 29
+2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Bundeszuschuss_Rentenversicherung,116.00,BMF,Monatsbericht Januar 2025 S. 29
+2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Buergergeld_Grundsicherung,47.20,BMF,Monatsbericht Januar 2025 S. 29
+2024,Bund,Funktionale_Ausgaben,Epl_14_Verteidigung_Kern,57.07,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 32
+2024,Bund,Funktionale_Ausgaben,Epl_12_Verkehr_und_digitale_Infrastruktur,36.38,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 33
+2024,Bund,Funktionale_Ausgaben,Epl_30_Bildung_und_Forschung,29.84,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 32
+2024,Bund,Funktionale_Ausgaben,Epl_32_Bundesschuld_Zinsen,34.22,BMF,Monatsbericht Januar 2025 Tabelle 4 S. 31
+2024,Bund,Funktionale_Ausgaben,Epl_15_Gesundheit_Bundeszuschuss_GKV,14.50,BMF,Monatsbericht Januar 2025 S. 29
+2024,Bund,Funktionale_Ausgaben,Epl_06_Inneres_und_Heimat_Bundespolizei,8.13,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 32
+2024,Bund,Funktionale_Ausgaben,Epl_09_Wirtschaft_und_Klima,8.45,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 33
+2024,Bund,Funktionale_Ausgaben,Epl_23_Entwicklung_und_Auswaertiges,17.13,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 32
+2024,Bund,Funktionale_Ausgaben,Epl_17_Familie_Senioren_Frauen_Jugend,14.42,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32
+2024,Bund,Funktionale_Ausgaben,Epl_11_Grundsicherung_im_Alter_SGB_XII,11.06,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32
+2024,Bund,Funktionale_Ausgaben,Epl_25_Wohnungswesen_und_Staedtebau,4.08,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 33
+2024,Bund,Funktionale_Ausgaben,Epl_16_Gesundheit_und_Umwelt,6.12,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 33
+2024,Bund,Funktionale_Ausgaben,Epl_10_Ernaehrung_und_Landwirtschaft,1.45,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 33
+2024,Bund,Funktionale_Ausgaben,Epl_08_Finanzverwaltung_Zoll,7.28,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32
+2024,Bund,Funktionale_Ausgaben,Epl_01_bis_04_Zentrale_Verwaltung,23.31,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32
+2024,Bund,Funktionale_Ausgaben,Bundeszuweisungen_an_Laender,33.60,BMF,Monatsbericht Januar 2025 Tabelle 4 S. 31
+2024,Bund,Funktionale_Ausgaben,Sonstige_Ressorts_und_Verwaltung,11.20,BMF,Monatsbericht Januar 2025 Uebersicht
