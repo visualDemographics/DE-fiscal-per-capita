@@ -429,8 +429,113 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             ),
         )
 
+    # Helper function to construct layout annotations including Layer 2 -> Layer 3 Transfer Badges
+    def build_sankey_annotations(year):
+        is_2024 = (year == 2024)
+        sv_mrd = "733,0" if is_2024 else "692,3"
+        sv_pc = "8.770" if is_2024 else "8.296"
+        bz_mrd = "130,5" if is_2024 else "129,2"
+        bz_pc = "1.561" if is_2024 else "1.548"
+        bk_mrd = "326,4" if is_2024 else "318,5"
+        bk_pc = "3.905" if is_2024 else "3.816"
+        bm_mrd = "8,80" if is_2024 else "9,40"
+        bm_pc = "664" if is_2024 else "713"
+        by_mrd = "64,55" if is_2024 else "61,73"
+        by_pc = "4.872" if is_2024 else "4.685"
+        fag_mrd = "0,35" if is_2024 else "0,27"
+        fag_pc = "233" if is_2024 else "181"
+        muc_mrd = "9,45" if is_2024 else "8,88"
+        muc_pc = "6.276" if is_2024 else "5.966"
+        lfa_mrd = "9,77" if is_2024 else "9,12"
+        lfa_pc = "-737" if is_2024 else "-689"
+
+        return [
+            dict(
+                x=0.005, y=1.04, xref="paper", yref="paper",
+                text="<b>LAYER 1: STEUER- & BEITRAGSINFLUX</b><br><span style='font-size:11px;color:#64748b'>Eigene Steuern, Beitragsmittel & Kredite</span>",
+                showarrow=False, font=dict(size=13, color="#1e3a8a", family="Helvetica, Arial"),
+            ),
+            dict(
+                x=0.32, y=1.04, xref="paper", yref="paper",
+                text="<b>LAYER 2: NOMINALE GEBIETSKÖRPERSCHAFTEN</b><br><span style='font-size:11px;color:#64748b'>Bruttohaushalte vor vertikalen Transfers</span>",
+                showarrow=False, font=dict(size=13, color="#0f172a", family="Helvetica, Arial"),
+            ),
+            dict(
+                x=0.485, y=1.04, xref="paper", yref="paper",
+                text="<b>VERTIKALE TRANSFERS & HAUSHALTSÜBERGÄNGE</b><br><span style='font-size:11px;color:#64748b'>Bundeszuschüsse, Landesmittel & Netto-FAG</span>",
+                showarrow=False, font=dict(size=12, color="#4338ca", family="Helvetica, Arial"),
+            ),
+            dict(
+                x=0.65, y=1.04, xref="paper", yref="paper",
+                text="<b>LAYER 3: EFFEKTIVE HAUSHALTE (KONSOLIDIERT)</b><br><span style='font-size:11px;color:#64748b'>Ausgaben nach Bundeszuschüssen & Umlagen</span>",
+                showarrow=False, font=dict(size=13, color="#0d9488", family="Helvetica, Arial"),
+            ),
+            dict(
+                x=0.995, y=1.04, xref="paper", yref="paper",
+                text="<b>LAYER 4: FINALE FUNKTIONALE END-BUCKETS</b><br><span style='font-size:11px;color:#64748b'>Bürgerwirksame Güter & Länderfinanzausgleich</span>",
+                showarrow=False, font=dict(size=13, color="#475569", family="Helvetica, Arial"), xanchor="right",
+            ),
+            # Layer 2 -> Layer 3 Transfer & Outflow Badges directly on the ribbons
+            dict(
+                x=0.485, y=0.853, xref="paper", yref="paper",
+                text=f"<b>Beitragseinnahmen SV:</b> {sv_mrd} Mrd. € ({sv_pc} €/Kopf)",
+                showarrow=False, font=dict(size=11, color="#0f766e", family="Helvetica, Arial"),
+                bgcolor="rgba(240, 253, 250, 0.94)", bordercolor="#0d9488", borderwidth=1, borderpad=4,
+            ),
+            dict(
+                x=0.485, y=0.661, xref="paper", yref="paper",
+                text=f"<b>Bundeszuschuss an SV:</b> <b>{bz_mrd} Mrd. €</b> ({bz_pc} €/Kopf)",
+                showarrow=False, font=dict(size=11, color="#5b21b6", family="Helvetica, Arial"),
+                bgcolor="rgba(245, 243, 255, 0.96)", bordercolor="#8b5cf6", borderwidth=1.5, borderpad=5,
+            ),
+            dict(
+                x=0.485, y=0.553, xref="paper", yref="paper",
+                text=f"<b>Bundes-Kernhaushalt:</b> {bk_mrd} Mrd. € ({bk_pc} €/Kopf)",
+                showarrow=False, font=dict(size=11, color="#1e3a8a", family="Helvetica, Arial"),
+                bgcolor="rgba(239, 246, 255, 0.94)", bordercolor="#1e3a8a", borderwidth=1, borderpad=4,
+            ),
+            dict(
+                x=0.485, y=0.435, xref="paper", yref="paper",
+                text=f"<b>Bundesmittel an Bayern:</b> <b>{bm_mrd} Mrd. €</b> ({bm_pc} €/Kopf)",
+                showarrow=False, font=dict(size=11, color="#3730a3", family="Helvetica, Arial"),
+                bgcolor="rgba(224, 231, 255, 0.96)", bordercolor="#6366f1", borderwidth=1.5, borderpad=5,
+            ),
+            dict(
+                x=0.485, y=0.313, xref="paper", yref="paper",
+                text=f"<b>Landeshaushalt Bayern:</b> {by_mrd} Mrd. € ({by_pc} €/Kopf)",
+                showarrow=False, font=dict(size=11, color="#0369a1", family="Helvetica, Arial"),
+                bgcolor="rgba(240, 249, 255, 0.94)", bordercolor="#0284c7", borderwidth=1, borderpad=4,
+            ),
+            dict(
+                x=0.485, y=0.206, xref="paper", yref="paper",
+                text=f"<b>Netto-FAG an München:</b> <b>{fag_mrd} Mrd. €</b> ({fag_pc} €/Kopf)",
+                showarrow=False, font=dict(size=11, color="#b45309", family="Helvetica, Arial"),
+                bgcolor="rgba(254, 243, 199, 0.96)", bordercolor="#f59e0b", borderwidth=1.5, borderpad=5,
+            ),
+            dict(
+                x=0.485, y=0.119, xref="paper", yref="paper",
+                text=f"<b>Kommunalhaushalt München:</b> {muc_mrd} Mrd. € ({muc_pc} €/Kopf)",
+                showarrow=False, font=dict(size=11, color="#92400e", family="Helvetica, Arial"),
+                bgcolor="rgba(255, 251, 235, 0.94)", bordercolor="#d97706", borderwidth=1, borderpad=4,
+            ),
+            # Bottom callout banners (outside ribbon path)
+            dict(
+                x=0.02, y=-0.04, xref="paper", yref="paper",
+                text=f"<b>Intergovernmental Transfer Bridge:</b> • Bundeszuschuss GRV/GKV: <b>{bz_mrd} Mrd. €</b> ({bz_pc} €/dt. Kopf) • Bundesmittel an Bayern: <b>{bm_mrd} Mrd. €</b> ({bm_pc} €/by. Kopf) • FAG Netto-Zuschuss an München: <b>{fag_mrd} Mrd. €</b> ({fag_pc} €/muc. Kopf)",
+                showarrow=False, font=dict(size=12, color="#1e293b", family="Helvetica, Arial"),
+                bgcolor="#ede9fe", bordercolor="#8b5cf6", borderwidth=1, borderpad=6,
+            ),
+            dict(
+                x=0.98, y=-0.04, xref="paper", yref="paper", xanchor="right",
+                text=f"<b>Länderfinanzausgleich:</b> Bayern transferiert <b>{lfa_mrd} Mrd. €</b> ({lfa_pc} €/bayer. Kopf) an andere Bundesländer.",
+                showarrow=False, font=dict(size=12, color="#991b1b", family="Helvetica, Arial"),
+                bgcolor="#fee2e2", bordercolor="#ef4444", borderwidth=1, borderpad=6,
+            )
+        ]
+
     # 1. Static high-resolution 2024 figure
     trace_2024 = create_sankey_trace(2024)
+    annos_2024 = build_sankey_annotations(2024)
     fig_static = go.Figure(data=[trace_2024])
 
     fig_static.update_layout(
@@ -450,41 +555,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         margin=dict(l=50, r=50, t=150, b=110),
         paper_bgcolor="#f8fafc",
         plot_bgcolor="#f8fafc",
-        annotations=[
-            dict(
-                x=0.005, y=1.04, xref="paper", yref="paper",
-                text="<b>LAYER 1: STEUER- & BEITRAGSINFLUX</b><br><span style='font-size:11px;color:#64748b'>Eigene Steuern, Beitragsmittel & Kredite</span>",
-                showarrow=False, font=dict(size=13, color="#1e3a8a", family="Helvetica, Arial"),
-            ),
-            dict(
-                x=0.32, y=1.04, xref="paper", yref="paper",
-                text="<b>LAYER 2: NOMINALE GEBIETSKÖRPERSCHAFTEN</b><br><span style='font-size:11px;color:#64748b'>Bruttohaushalte vor vertikalen Transfers</span>",
-                showarrow=False, font=dict(size=13, color="#0f172a", family="Helvetica, Arial"),
-            ),
-            dict(
-                x=0.65, y=1.04, xref="paper", yref="paper",
-                text="<b>LAYER 3: EFFEKTIVE HAUSHALTE (KONSOLIDIERT)</b><br><span style='font-size:11px;color:#64748b'>Ausgaben nach Bundeszuschüssen & Umlagen</span>",
-                showarrow=False, font=dict(size=13, color="#0d9488", family="Helvetica, Arial"),
-            ),
-            dict(
-                x=0.995, y=1.04, xref="paper", yref="paper",
-                text="<b>LAYER 4: FINALE FUNKTIONALE END-BUCKETS</b><br><span style='font-size:11px;color:#64748b'>Bürgerwirksame Güter & Länderfinanzausgleich</span>",
-                showarrow=False, font=dict(size=13, color="#475569", family="Helvetica, Arial"), xanchor="right",
-            ),
-            # Bottom callout banners (outside ribbon path)
-            dict(
-                x=0.02, y=-0.04, xref="paper", yref="paper",
-                text="<b>Intergovernmental Transfer Bridge:</b> • Bundeszuschuss GRV/GKV: <b>130,5 Mrd. €</b> (1.561 €/dt. Kopf) • Bundesmittel an Bayern: <b>8,8 Mrd. €</b> (664 €/by. Kopf) • FAG Netto-Zuschuss an München: <b>0,35 Mrd. €</b> (233 €/muc. Kopf; 1,69 Mrd. € FAG abzüglich 1,34 Mrd. € Bezirksumlage)",
-                showarrow=False, font=dict(size=12, color="#1e293b", family="Helvetica, Arial"),
-                bgcolor="#ede9fe", bordercolor="#8b5cf6", borderwidth=1, borderpad=6,
-            ),
-            dict(
-                x=0.98, y=-0.04, xref="paper", yref="paper", xanchor="right",
-                text="<b>Länderfinanzausgleich:</b> Bayern transferiert <b>9,77 Mrd. €</b> (-737 €/bayer. Kopf) an andere Bundesländer.",
-                showarrow=False, font=dict(size=12, color="#991b1b", family="Helvetica, Arial"),
-                bgcolor="#fee2e2", bordercolor="#ef4444", borderwidth=1, borderpad=6,
-            )
-        ],
+        annotations=annos_2024,
     )
 
     fig_static.write_image(out_png_path, scale=2)
@@ -494,10 +565,12 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
     # 2. Interactive HTML figure with Year Switcher (2024 vs 2023)
     trace_2023 = create_sankey_trace(2023)
     trace_2023.visible = False
+    annos_2023 = build_sankey_annotations(2023)
 
     fig_interactive = go.Figure(data=[trace_2024, trace_2023])
     fig_interactive.update_layout(fig_static.layout)
     fig_interactive.update_layout(
+        annotations=annos_2024,
         updatemenus=[
             dict(
                 type="buttons",
@@ -505,8 +578,16 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 x=0.48,
                 y=1.08,
                 buttons=[
-                    dict(label="<b>2024 (Baseline)</b>", method="update", args=[{"visible": [True, False]}]),
-                    dict(label="<b>2023 (Vorjahr)</b>", method="update", args=[{"visible": [False, True]}]),
+                    dict(
+                        label="<b>2024 (Baseline)</b>",
+                        method="update",
+                        args=[{"visible": [True, False]}, {"annotations": annos_2024}],
+                    ),
+                    dict(
+                        label="<b>2023 (Vorjahr)</b>",
+                        method="update",
+                        args=[{"visible": [False, True]}, {"annotations": annos_2023}],
+                    ),
                 ],
                 bgcolor="#f1f5f9",
                 bordercolor="#cbd5e1",
