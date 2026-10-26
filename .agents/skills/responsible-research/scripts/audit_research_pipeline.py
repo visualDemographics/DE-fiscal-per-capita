@@ -305,7 +305,7 @@ def check_hypothesis_verdicts():
             print(f"  FAIL [Check 8]: {h} is missing from goal/hypothesis.md.")
             return False
 
-    verdict_matches = re.findall(r"Verdict on Hypothesis \d:\s*(CONFIRMED|SUPPORTED)", content)
+    verdict_matches = re.findall(r"Verdict on Hypothesis \d:\s*(CONFIRMED|SUPPORTED|REFUTED|PARTIALLY CONFIRMED)", content)
     if len(verdict_matches) < 4:
         print(f"  FAIL [Check 8]: Found only {len(verdict_matches)}/4 closed hypothesis verdicts in goal/hypothesis.md.")
         return False

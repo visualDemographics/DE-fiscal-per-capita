@@ -1,7 +1,7 @@
 file,bytes,sha256,url,retrieved
 bayern_staatshaushalt_2023_2024.csv,5161,08e80e0c5971e53d0beb7497164c08f6896bbe60fdd50d6e349b9149bd253ee8,https://www.stmfh.bayern.de,2026-10-24
 demographics_zensus_denominators_2023_2024.csv,1885,2877220427fa1ddb70e9710d384369a002fcccb1f27517de420f92af24a68b5c,https://www.destatis.de,2026-10-24
-destatis_bundeshaushalt_2023_2024.csv,8587,479c89d7612f71835560d8efa5b08e9ce2ff7b87befb355c6a12efa63c1855f6,https://www.bundesfinanzministerium.de,2026-10-24
+destatis_bundeshaushalt_2023_2024.csv,8817,9acff992afb343869002592f1c64a0493c5f5d0f97db8520c43e528138bebff1,https://www.bundesfinanzministerium.de,2026-10-24
 destatis_sozialversicherung_2023_2024.csv,7144,e17b804207c2176a687019a0d0756dad8e4ce68fbce8e2be63e30003eaa4c552,https://www.destatis.de,2026-10-24
-literature_empirical_benchmarks.csv,10110,6bcbbb3fe877a0f8c143004741491123728e5a026f57a8e6c59ad08129da5c4e,https://www.bundesfinanzministerium.de,2026-10-25
-muenchen_haushalt_2023_2024.csv,6321,f8e2f9801519051c987c6ced0ce4f0dff498d05d26d9ecc407b487aece0de0c2,https://stadt.muenchen.de,2026-10-24
+literature_empirical_benchmarks.csv,10194,8a4d27e60aaf43f39409f39b534cdc1ae3d373e175a3f60a750a021142f97423,https://www.bundesfinanzministerium.de,2026-10-25
+muenchen_haushalt_2023_2024.csv,7328,c5e49b6e10f12f18c9349c914678571951a8c198747fec0b645c04bdd6a71a42,https://stadt.muenchen.de,2026-10-24

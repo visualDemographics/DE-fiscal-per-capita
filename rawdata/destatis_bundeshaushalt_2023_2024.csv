@@ -40,6 +40,7 @@ jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle
 2024,Bund,Einnahmen_Gesamt,Gesamteinnahmen_Bund,465.67,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 23
 2024,Bund,Ausgaben_Gesamt,Gesamtausgaben_Bund,465.67,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 23
 2024,Bund,Finanzierungssaldo,Nettokreditaufnahme,33.30,BMF,Monatsbericht Januar 2025 Analysen S. 21
+2024,Bund,Finanzierungssaldo,Ruecklagenentnahme,0.00,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 23
 2024,Bund,Steuereinnahmen_Gesamt,Steuereinnahmen_Bundesanteil,374.98,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
 2024,Bund,Gemeinschaftsteuer_Bundesanteil,Lohnsteuer_Bundesanteil,105.80,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
 2024,Bund,Gemeinschaftsteuer_Bundesanteil,Veranlagte_Einkommensteuer_Bundesanteil,31.81,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34
@@ -59,6 +60,7 @@ jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle
 2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Bundeszuschuss_Rentenversicherung,116.00,BMF,Monatsbericht Januar 2025 S. 29
 2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Buergergeld_Grundsicherung,47.20,BMF,Monatsbericht Januar 2025 S. 29
 2024,Bund,Funktionale_Ausgaben,Epl_14_Verteidigung_Kern,57.07,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 32
+2024,Bund,Funktionale_Ausgaben,Sondervermoegen_Bundeswehr_Ist,0.00,BMF,Monatsbericht Januar 2025 (im Kernhaushalt nicht enthalten)
 2024,Bund,Funktionale_Ausgaben,Epl_12_Verkehr_und_digitale_Infrastruktur,36.38,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 33
 2024,Bund,Funktionale_Ausgaben,Epl_30_Bildung_und_Forschung,29.84,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 32
 2024,Bund,Funktionale_Ausgaben,Epl_32_Bundesschuld_Zinsen,34.22,BMF,Monatsbericht Januar 2025 Tabelle 4 S. 31

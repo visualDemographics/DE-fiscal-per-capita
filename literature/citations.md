@@ -29,9 +29,9 @@ This catalog documents primary source quotations and exact coordinates verified 
   *(Quelle: Destatis Fachserie 14 Reihe 2 / Rechnungsstatistik 2024)*
 
 ## 3. Free State of Bavaria (StMFH & Bayerischer Landtag)
-- **Bayerischer Landtag & StMFH (Haushaltsgesetz Freistaat Bayern)**:
-  > "Richtlinien zur Haushalts- und Wirtschaftsführung des Freistaates Bayern in den Haushaltsjahren 2024 und 2025 (Haushaltsvollzugsrichtlinien 2024/2025 – HvR 2024/2025)."
-  *(Quelle: Bayerisches Ministerialblatt BayMBl. 2024 Nr. 324 vom 10. Juli 2024 S. 1–20; archiviert in `literature/Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf`)*
+- **Bayerischer Landtag (Haushaltsgesetz Freistaat Bayern 2024/2025 – HG 2024/2025)**:
+  > "Art. 1 Feststellung des Haushaltsplans. Der diesem Gesetz als Anlage beigefügte Haushaltsplan des Freistaates Bayern für die Haushaltsjahre 2024 und 2025 wird in Einnahmen und Ausgaben 1. für das Haushaltsjahr 2024 auf 73 692 557 400 € und 2. für das Haushaltsjahr 2025 auf 76 419 117 000 € festgestellt. Art. 2 Kreditermächtigungen. (1) Das Staatsministerium der Finanzen und für Heimat wird ermächtigt, zur Deckung von Ausgaben folgende Kredite am Kreditmarkt aufzunehmen: 1. im Haushaltsjahr 2024 bis zur Höhe von 0 €, 2. im Haushaltsjahr 2025 bis zur Höhe von 0 €."
+  *(Quelle: Gesetz über die Feststellung des Haushaltsplans des Freistaates Bayern für die Haushaltsjahre 2024 und 2025 vom 21. Juni 2024, Bayerisches Gesetz- und Verordnungsblatt GVBl. Nr. 12/2024 S. 114; archiviert in `literature/Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf`)*
 
 - **Bayerischer Oberster Rechnungshof (ORH Jahresbericht Haushaltsrechnung)**:
   > "Die kassenmäßigen Steuereinnahmen des Freistaates Bayern beliefen sich im Haushaltsjahr 2023 auf 54,25 Milliarden Euro. Das Gesamtvolumen des Staatshaushalts lag bei 71,4 Milliarden Euro (Planansatz 2024: 73,7 Milliarden Euro)."
@@ -47,21 +47,29 @@ This catalog documents primary source quotations and exact coordinates verified 
   *(Quelle: Haushaltsplan 2024 Band 1 Gesamthaushalt S. 22; archiviert in `literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`)*
 
 - **Stadtkämmerei München (Gewerbesteuer & Steuerquellen)**:
-  > "Die wichtigsten Einnahmequellen der Landeshauptstadt München sind die Steuern. Für das Jahr 2024 werden hierfür rund 5,43 Mrd. € und damit gut 60 % des Gesamtertrages veranschlagt."
-  *(Quelle: Haushaltsplan 2024 Band 1 Gesamthaushalt S. 35; archiviert in `literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`)*
+  > "Die wichtigsten Einnahmequellen der Landeshauptstadt München sind die Steuern. Für das Jahr 2024 werden hierfür rund 5,43 Mrd. € und damit gut 60 % des Gesamtertrages (Summe der ordentlichen Erträge zzgl. Finanzerträge im Ergebnishaushalt) veranschlagt. ... Gewerbesteuer: Entsprechend der 165. Sitzung des Arbeitskreises Steuerschätzungen vom 24.10. bis 26.10.2023 ist von einem Anstieg des Gewerbesteuerniveaus von 3,3 % im Jahr 2023 sowie von 4,1 % im Jahr 2024 auszugehen... (Ist 2022: 3,28 Mrd. €, Nachtrag 2023: 3,27 Mrd. €, Haushalt 2024: 3,24 Mrd. €)"
+  *(Quelle: Haushaltsplan 2024 Band 1 Gesamthaushalt S. 35–36 [gedruckt S. 33–34]; archiviert in `literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`)*
+
+- **Stadtkämmerei München (Erträge aus Zuwendungen und allgemeine Umlagen)**:
+  > "Mit einem Anteil von fast 13 % an den Gesamterträgen sind die Erträge aus Zuwendungen und allgemeinen Umlagen ebenfalls eine relevante Einnahmequelle der Landeshauptstadt München. Im Vergleich zu den Vorjahren ist mit einem leichten Rückgang zu rechnen. (Ist 2022: 1,21 Mrd. €, Nachtrag 2023: 1,22 Mrd. €, Haushalt 2024: 1,16 Mrd. €)."
+  *(Quelle: Haushaltsplan 2024 Band 1 Gesamthaushalt S. 37 [gedruckt S. 35]; archiviert in `literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`)*
+
+- **Stadtkämmerei München (Bezirksumlage & Gewerbesteuerumlage)**:
+  > "Bezirksumlage: Die Bezirke legen ihren durch die sonstigen Einnahmen nicht gedeckten Bedarf auf die kreisfreien Gemeinden und Landkreise um. Umlagegrundlagen sind die für die Gemeinde geltenden Steuerkraftzahlen sowie 80 % der Schlüsselzuweisungen des vorangegangenen Haushaltsjahres. Der aktuelle Ansatz für die Bezirksumlage im Haushalt 2024 beläuft sich auf 829 Mio. € und bleibt damit im Vergleich zum Vorjahr ... zunächst nahezu unverändert... (Ist 2022: 776 Mio. €, Nachtrag 2023: 830 Mio. €, Haushalt 2024: 829 Mio. €). Gewerbesteuerumlage: Korrespondierend zu den Ansatzplanungen bei der Gewerbesteuer wurde die Gewerbesteuerumlage auf der Aufwandsseite daher mit 232 Mio. € veranschlagt. (Ist 2022: 232 Mio. €, Nachtrag 2023: 221 Mio. €, Haushalt 2024: 232 Mio. €)"
+  *(Quelle: Haushaltsplan 2024 Band 1 Gesamthaushalt S. 44 [gedruckt S. 42]; archiviert in `literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`)*
 
 - **Stadtkämmerei München (Beteiligungserträge & Gewinnausschüttung Stadtwerke München)**:
   > "Unter den Finanzerträgen wird im Baureferat die Gewinnausschüttung der Stadtwerke München GmbH (SWM) gemäß dem Gewinnabführungsvertrag geplant... Für das Jahr 2024 liegt sie aufgrund von Einmaleffekten voraussichtlich bei 400 Mio. €."
-  *(Quelle: Haushaltsplan 2024 Band 1 Gesamthaushalt S. 40; archiviert in `literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`)*
+  *(Quelle: Haushaltsplan 2024 Band 1 Gesamthaushalt S. 40 [gedruckt S. 38]; archiviert in `literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`)*
 
 - **Stadtkämmerei München (Personalaufwendungen)**:
   > "Personalaufwendungen: Ist 2022: 2,07 Mrd. €, Nachtrag 2023: 2,23 Mrd. €, Haushalt 2024: 2,33 Mrd. €. Fast 75% der Ansätze für Sach- und Dienstleistungen entfallen auf IT-Referat, Referat für Bildung und Sport, Kommunalreferat und Baureferat."
-  *(Quelle: Haushaltsplan 2024 Band 1 Gesamthaushalt S. 41–42; archiviert in `literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`)*
+  *(Quelle: Haushaltsplan 2024 Band 1 Gesamthaushalt S. 41–42 [gedruckt S. 39–40]; archiviert in `literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`)*
 
 ## 5. Demographics & Comparative Municipal Benchmarks
 - **Destatis Qualitätsbericht Zensus 2022**:
-  > "Der Zensus liefert verlässliche Bevölkerungszahlen für die Bundesrepublik Deutschland, die Länder und die Kommunen. Die Ergebnisse des Zensus 2022 ersetzen die bisherige Bevölkerungsfortschreibung auf Basis des Zensus 2011."
-  *(Quelle: Qualitätsbericht Zensus 2022 S. 3–5; archiviert in `literature/Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf`)*
+  > "Primäres Ziel des Zensus ist die Feststellung der Einwohnerzahlen von Bund, Ländern und Gemeinden und die Bereitstellung der Grundlage für die Fortschreibung der Einwohnerzahlen für die Zeit zwischen zwei Volkszählungen. Darüber hinaus bietet der Zensus teils regional tief gegliederte Daten zu demografischen Grundmerkmalen, Bildung, Erwerbstätigkeit und Einwanderungsgeschichte der Bevölkerung."
+  *(Quelle: Statistisches Bundesamt, Qualitätsbericht Zensus 2022, S. 3 Ziffer 2; archiviert in `literature/Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf`)*
 
 - **Destatis & Kommunaler Finanzreport (Bundesweiter Gemeindesteuerdurchschnitt)**:
   > "Die durchschnittlichen Steuereinnahmen der deutschen Gemeinden und Gemeindeverbände beliefen sich im Bundesdurchschnitt auf 1.420 Euro je Einwohner. Im Vergleich dazu erzielt die Landeshauptstadt München mit 3.610 Euro je Einwohner mehr als das 2,5-Fache des bundesweiten Durchschnitts."

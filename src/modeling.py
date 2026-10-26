@@ -26,6 +26,8 @@ def load_modeling_data(datasets_dir, raw_dir):
     f_flows = os.path.join(datasets_dir, "fiscal_sankey_flows_per_capita.csv")
     f_sum = os.path.join(datasets_dir, "fiscal_per_capita_summary.csv")
     f_demo = os.path.join(raw_dir, "demographics_zensus_denominators_2023_2024.csv")
+    f_muc = os.path.join(raw_dir, "muenchen_haushalt_2023_2024.csv")
+    f_bund = os.path.join(raw_dir, "destatis_bundeshaushalt_2023_2024.csv")
 
     flows = []
     with open(f_flows, "r", encoding="utf-8") as f:
@@ -42,7 +44,17 @@ def load_modeling_data(datasets_dir, raw_dir):
         for r in csv.DictReader(f):
             demo.append(r)
 
-    return flows, summary, demo
+    muc = []
+    with open(f_muc, "r", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            muc.append(r)
+
+    bund = []
+    with open(f_bund, "r", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            bund.append(r)
+
+    return flows, summary, demo, muc, bund
 
 
 # ---------------------------------------------------------------------------
@@ -427,23 +439,35 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
 
     # Helper function to construct layout annotations including Layer 2 -> Layer 3 Transfer Badges
     def build_sankey_annotations(year):
-        is_2024 = (year == 2024)
-        sv_mrd = "733,0" if is_2024 else "692,3"
-        sv_pc = "8.770" if is_2024 else "8.296"
-        bz_mrd = "130,5" if is_2024 else "129,2"
-        bz_pc = "1.561" if is_2024 else "1.548"
-        bk_mrd = "326,4" if is_2024 else "318,5"
-        bk_pc = "3.905" if is_2024 else "3.816"
-        bm_mrd = "8,80" if is_2024 else "9,40"
-        bm_pc = "664" if is_2024 else "713"
-        by_mrd = "64,55" if is_2024 else "61,73"
-        by_pc = "4.872" if is_2024 else "4.685"
-        fag_mrd = "0,35" if is_2024 else "0,27"
-        fag_pc = "233" if is_2024 else "181"
-        muc_mrd = "9,45" if is_2024 else "8,88"
-        muc_pc = "6.276" if is_2024 else "5.966"
-        lfa_mrd = "9,77" if is_2024 else "9,12"
-        lfa_pc = "-737" if is_2024 else "-689"
+        f_yr = [f for f in flows if int(f["jahr"]) == year]
+        def get_f(s, t):
+            return next(f for f in f_yr if f["source_node"] == s and f["target_node"] == t)
+
+        f_sv = get_f("Nominal_Insurance", "Effective_Insurance")
+        f_bz = get_f("Nominal_Federal", "Effective_Insurance")
+        f_bk = get_f("Nominal_Federal", "Effective_Federal")
+        f_bm = get_f("Nominal_Federal", "Effective_Bayern")
+        f_by = get_f("Nominal_Bayern", "Effective_Bayern")
+        f_fag = get_f("Nominal_Bayern", "Effective_Munich")
+        f_muc = get_f("Nominal_Munich", "Effective_Munich")
+        f_lfa = get_f("Effective_Bayern", "Laenderfinanzausgleich_Ausgleich_an_andere_Laender")
+
+        sv_mrd = f"{float(f_sv['wert_mrd_eur']):.1f}".replace(".", ",")
+        sv_pc = f"{int(round(float(f_sv['wert_eur_pro_kopf']))):,}".replace(",", ".")
+        bz_mrd = f"{float(f_bz['wert_mrd_eur']):.1f}".replace(".", ",")
+        bz_pc = f"{int(round(float(f_bz['wert_eur_pro_kopf']))):,}".replace(",", ".")
+        bk_mrd = f"{float(f_bk['wert_mrd_eur']):.1f}".replace(".", ",")
+        bk_pc = f"{int(round(float(f_bk['wert_eur_pro_kopf']))):,}".replace(",", ".")
+        bm_mrd = f"{float(f_bm['wert_mrd_eur']):.2f}".replace(".", ",")
+        bm_pc = f"{int(round(float(f_bm['wert_eur_pro_kopf']))):,}".replace(",", ".")
+        by_mrd = f"{float(f_by['wert_mrd_eur']):.2f}".replace(".", ",")
+        by_pc = f"{int(round(float(f_by['wert_eur_pro_kopf']))):,}".replace(",", ".")
+        fag_mrd = f"{float(f_fag['wert_mrd_eur']):.2f}".replace(".", ",")
+        fag_pc = f"{int(round(float(f_fag['wert_eur_pro_kopf']))):,}".replace(",", ".")
+        muc_mrd = f"{float(f_muc['wert_mrd_eur']):.2f}".replace(".", ",")
+        muc_pc = f"{int(round(float(f_muc['wert_eur_pro_kopf']))):,}".replace(",", ".")
+        lfa_mrd = f"{float(f_lfa['wert_mrd_eur']):.2f}".replace(".", ",")
+        lfa_pc = f"-{int(round(float(f_lfa['wert_eur_pro_kopf']))):,}".replace(",", ".")
 
         return [
             dict(
@@ -792,8 +816,8 @@ def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
                         rect = g.find("{http://www.w3.org/2000/svg}rect")
                         if m_tr and rect is not None:
                             tx, ty = float(m_tr.group(1)), float(m_tr.group(2))
-                            w_val = rect.attrib.get("width")
-                            h_val = rect.attrib.get("height")
+                            w_val = rect.attrib["width"] if "width" in rect.attrib else None
+                            h_val = rect.attrib["height"] if "height" in rect.attrib else None
                             if w_val is not None and h_val is not None:
                                 w = float(w_val)
                                 h = float(h_val)
@@ -932,10 +956,12 @@ def render_panel_a(summary_all, plots_dir):
 
 def render_panel_b(demo_all, plots_dir):
     """Panel B: Demographic Denominators & Zensus 2022 Revision Shock."""
+    demo_2024 = {d["gebiet"]: d for d in demo_all if int(d["jahr"]) == 2024 and "Tier_1" in d["tier_status"]}
     regions = ["Deutschland", "Bayern", "München"]
-    u18 = [16.72, 16.75, 15.48]
-    work = [60.58, 61.45, 67.32]
-    senior = [22.70, 21.80, 17.20]
+    keys = ["Deutschland", "Bayern", "Muenchen"]
+    u18 = [float(demo_2024[k]["altersgruppe_u18_anteil"]) * 100.0 for k in keys]
+    work = [float(demo_2024[k]["altersgruppe_18_64_anteil"]) * 100.0 for k in keys]
+    senior = [float(demo_2024[k]["altersgruppe_65plus_anteil"]) * 100.0 for k in keys]
 
     fig = go.Figure()
     fig.add_trace(go.Bar(name="Unter 18 Jahre (Schule/Kita)", x=regions, y=u18, marker_color="#3b82f6", text=[f"{v:.1f}%" for v in u18], textposition="inside"))
@@ -967,8 +993,47 @@ def render_panel_b(demo_all, plots_dir):
     return fig
 
 
-def render_panel_c(summary_all, plots_dir):
+def render_panel_c(flows, summary_all, demo_all, muc_raw, bund_raw, plots_dir):
     """Panel C: Intergovernmental Transfer Deductions (Gross to Net Bridge)."""
+    s24 = {row["ebene"]: float(row["pro_kopf_eur"]) for row in summary_all if int(row["jahr"]) == 2024}
+    b_map = {r["indikator"]: float(r["wert_mrd_eur"]) for r in bund_raw if int(r["jahr"]) == 2024}
+    m_map = {r["indikator"]: float(r["wert_mrd_eur"]) for r in muc_raw if int(r["jahr"]) == 2024}
+    d_map = {r["gebiet"]: float(r["bevoelkerung_stichtag"]) for r in demo_all if int(r["jahr"]) == 2024 and "Tier_1" in r["tier_status"]}
+    f24 = [f for f in flows if int(f["jahr"]) == 2024]
+
+    n_de = d_map["Deutschland"]
+    n_muc = d_map["Muenchen"]
+
+    gross_sum = (
+        s24["Bund_Kernhaushalt"]
+        + s24["Sozialversicherungstraeger"]
+        + s24["Freistaat_Bayern"]
+        + s24["Landeshauptstadt_Muenchen"]
+    )
+
+    fed_by_flow = next(f for f in f24 if f["source_node"] == "Nominal_Federal" and f["target_node"] == "Effective_Bayern")
+
+    grv_pc = -(b_map["Epl_11_Bundeszuschuss_Rentenversicherung"] * 1e9) / n_de
+    gkv_pc = -(b_map["Epl_15_Gesundheit_Bundeszuschuss_GKV"] * 1e9) / n_de
+    bund_by_pc = -float(fed_by_flow["wert_eur_pro_kopf"])
+    fag_pc = -(m_map["Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern"] * 1e9) / n_muc
+    umlagen_pc = (
+        (m_map["Bezirksumlage_an_Bezirk_Oberbayern"] + m_map["Gewerbesteuerumlage_an_Bund_und_Land"]) * 1e9
+    ) / n_muc
+
+    net_deductions = grv_pc + gkv_pc + bund_by_pc + fag_pc + umlagen_pc
+
+    y_vals = [gross_sum, grv_pc, gkv_pc, bund_by_pc, fag_pc, umlagen_pc, 0.0]
+    txt_vals = [
+        f"{gross_sum:,.0f} €",
+        f"{grv_pc:+,.0f} €",
+        f"{gkv_pc:+,.0f} €",
+        f"{bund_by_pc:+,.0f} €",
+        f"{fag_pc:+,.0f} €",
+        f"{umlagen_pc:+,.0f} €",
+        f"{gross_sum + net_deductions:,.0f} €",
+    ]
+
     fig = go.Figure(
         go.Waterfall(
             orientation="v",
@@ -982,10 +1047,8 @@ def render_panel_c(summary_all, plots_dir):
                 "Münchner Umlagen<br>(Bezirk/Gewerbe)",
                 "Bereinigte Ausgaben<br>(Konsolidiert)",
             ],
-            y=[27605.49, -1387.92, -173.49, -664.20, -1122.92, 890.36, 0.0],
-            text=[
-                "27.605 €", "-1.388 €", "-173 €", "-664 €", "-1.123 €", "+890 €", "25.147 €"
-            ],
+            y=y_vals,
+            text=txt_vals,
             textposition="outside",
             connector=dict(line=dict(color="#64748b", width=1.5)),
             decreasing=dict(marker=dict(color="#ef4444")),
@@ -995,7 +1058,7 @@ def render_panel_c(summary_all, plots_dir):
     )
     fig.update_layout(
         title=dict(
-            text="<b>Panel C: Intergovernmental Transfer Deductions (Bereinigte Ausgaben Bridge)</b><br><sup>Konsolidierung von Bundeszuschüssen & Umlagen zur Vermeidung von Doppelzählungen (-2.458 € / Kopf)</sup>",
+            text=f"<b>Panel C: Intergovernmental Transfer Deductions (Bereinigte Ausgaben Bridge)</b><br><sup>Konsolidierung von Bundeszuschüssen & Umlagen zur Vermeidung von Doppelzählungen ({net_deductions:+,.0f} € / Kopf)</sup>",
             font=dict(size=18, color="#0f172a"),
         ),
         yaxis=dict(title="<b>Volumen (€/Kopf)</b>", range=[23000, 29000], gridcolor="#e2e8f0"),
@@ -1201,14 +1264,33 @@ def render_panel_g(summary_all, plots_dir):
     return fig
 
 
-def render_panel_h(plots_dir):
+def render_panel_h(flows, muc_raw, demo_all, plots_dir):
     """Panel H: Horizontal & Municipal Equalization Transfers (LFA & KFA)."""
+    f24 = [f for f in flows if int(f["jahr"]) == 2024]
+    m_map = {r["indikator"]: float(r["wert_mrd_eur"]) for r in muc_raw if int(r["jahr"]) == 2024}
+    d_map = {r["gebiet"]: float(r["bevoelkerung_stichtag"]) for r in demo_all if int(r["jahr"]) == 2024 and "Tier_1" in r["tier_status"]}
+
+    lfa_flow = next(f for f in f24 if f["target_node"] == "Laenderfinanzausgleich_Ausgleich_an_andere_Laender")
+    bund_by_flow = next(f for f in f24 if f["source_node"] == "Nominal_Federal" and f["target_node"] == "Effective_Bayern")
+
+    lfa_pc = -float(lfa_flow["wert_eur_pro_kopf"])
+    bund_pc = float(bund_by_flow["wert_eur_pro_kopf"])
+
+    n_muc = d_map["Muenchen"]
+    m_bezirk = m_map["Bezirksumlage_an_Bezirk_Oberbayern"]
+    m_gewst = m_map["Gewerbesteuerumlage_an_Bund_und_Land"]
+    m_zuweis = m_map["Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern"]
+
+    bezirk_pc = -(m_bezirk * 1e9) / n_muc
+    gewst_pc = -(m_gewst * 1e9) / n_muc
+    fag_pc = (m_zuweis * 1e9) / n_muc
+
     items = [
-        ("Länderfinanzausgleich (LFA)<br>Nettoabfluss Bayerns", -737.42, "#be123c", "-9,77 Mrd. € Gesamt"),
-        ("Bezirksumlage an Oberbayern<br>Abfluss aus München", -651.16, "#e11d48", "-0,98 Mrd. € Gesamt"),
-        ("Gewerbesteuerumlage<br>Abfluss an Bund/Land", -239.20, "#f43f5e", "-0,36 Mrd. € Gesamt"),
-        ("Bundesmittel an Bayern<br>Zuweisungen vom Bund", 664.20, "#1e3a8a", "+8,80 Mrd. € Gesamt"),
-        ("Kommunaler Finanzausgleich<br>Freistaat an München (FAG)", 1122.92, "#0284c7", "+1,69 Mrd. € Gesamt"),
+        ("Länderfinanzausgleich (LFA)<br>Nettoabfluss Bayerns", lfa_pc, "#be123c", f"-{float(lfa_flow['wert_mrd_eur']):.2f} Mrd. € Gesamt"),
+        ("Bezirksumlage an Oberbayern<br>Abfluss aus München", bezirk_pc, "#e11d48", f"-{m_bezirk:.2f} Mrd. € Gesamt"),
+        ("Gewerbesteuerumlage<br>Abfluss an Bund/Land", gewst_pc, "#f43f5e", f"-{m_gewst:.2f} Mrd. € Gesamt"),
+        ("Bundesmittel an Bayern<br>Zuweisungen vom Bund", bund_pc, "#1e3a8a", f"+{float(bund_by_flow['wert_mrd_eur']):.2f} Mrd. € Gesamt"),
+        ("Kommunaler Finanzausgleich<br>Freistaat an München (FAG)", fag_pc, "#0284c7", f"+{m_zuweis:.2f} Mrd. € Gesamt"),
     ]
 
     labels = [x[0] for x in items]
@@ -1228,7 +1310,7 @@ def render_panel_h(plots_dir):
     )
     fig.update_layout(
         title=dict(
-            text="<b>Panel H: Horizontal & Municipal Equalization Transfers (2024 Baseline)</b><br><sup>Bayerischer LFA-Nettoabfluss (-737 €/Kopf) vs. Münchner Finanzausgleichssalden</sup>",
+            text="<b>Panel H: Horizontal & Municipal Equalization Transfers (2024 Baseline)</b><br><sup>Bayerischer LFA-Nettoabfluss vs. Münchner Finanzausgleichssalden</sup>",
             font=dict(size=18, color="#0f172a"),
         ),
         xaxis=dict(title="<b>Netto-Transfersaldo pro Einwohner (€/Kopf)</b>", range=[-900, 1400], gridcolor="#e2e8f0"),
@@ -1242,12 +1324,46 @@ def render_panel_h(plots_dir):
     return fig
 
 
-def render_panel_i(plots_dir):
-    """Panel I: Causal Waterfall & Path-Independent Shapley Attribution."""
+def render_panel_i(flows, summary_all, plots_dir):
+    """Panel I: Accounting Waterfall & Path-Independent Shapley Attribution."""
+    f24 = [f for f in flows if int(f["jahr"]) == 2024]
+    lfa_flow = next(f for f in f24 if f["target_node"] == "Laenderfinanzausgleich_Ausgleich_an_andere_Laender")
+    net_by_muc = next(f for f in f24 if f["source_node"] == "Nominal_Bayern" and f["target_node"] == "Effective_Munich")
+
+    lfa_delta = -float(lfa_flow["wert_eur_pro_kopf"])
+    kfa_delta = float(net_by_muc["wert_eur_pro_kopf"])
+
+    # Path-independent Shapley attribution over all 2! = 2 order permutations
+    total_abs = abs(lfa_delta) + abs(kfa_delta)
+    shapley_lfa = (abs(lfa_delta) / total_abs) * 100.0
+    shapley_kfa = (abs(kfa_delta) / total_abs) * 100.0
+
+    # L1 Influx totals per resident across sovereign tiers
+    s24 = {row["ebene"]: float(row["pro_kopf_eur"]) for row in summary_all if int(row["jahr"]) == 2024}
+    fed_pc = s24["Bund_Kernhaushalt"]
+    soz_pc = s24["Sozialversicherungstraeger"]
+    by_pc = s24["Freistaat_Bayern"]
+    muc_pc = s24["Landeshauptstadt_Muenchen"]
+    gross_total = fed_pc + soz_pc + by_pc + muc_pc
+
+    # Public overhead & administrative balancing nodes
+    overhead_nodes = {
+        "Schuldendienst_und_Zinsen",
+        "Kommunale_Verwaltung_Sonstiges",
+        "Wirtschaft_Verwaltung_Sonstiges",
+        "Ruecklagen_und_Liquiditaetspuffer",
+    }
+    overhead_delta = -sum(
+        float(f["wert_eur_pro_kopf"])
+        for f in f24
+        if f["target_node"] in overhead_nodes and f["layer_source"] == "Layer_3_Effective"
+    )
+    net_tangible = gross_total + lfa_delta + kfa_delta + overhead_delta
+
     stages = [
         "Münchner Brutto-Steueraufkommen<br>& reine Beitragsleistung",
         "Länderfinanzausgleich<br>(Abfluss an andere Länder)",
-        "Interkommunaler Ausgleich<br>(Bezirksumlage vs. FAG)",
+        "Interkommunaler Ausgleich<br>(Netto-FAG nach Umlagen)",
         "Gemeinlasten Bund & Land<br>(Verwaltung, Zinsen, Reserven)",
         "Finale bürgerwirksame Kernleistungen<br>(Schulen, Gesundheit, Rente, ÖPNV)",
     ]
@@ -1256,8 +1372,14 @@ def render_panel_i(plots_dir):
             orientation="v",
             measure=["absolute", "relative", "relative", "relative", "total"],
             x=stages,
-            y=[25147.20, -737.42, 232.56, -3450.00, 0.0],
-            text=["25.147 €", "-737 € (Shapley: 47,8%)", "+233 € (Shapley: 52,2%)", "-3.450 €", "21.192 €"],
+            y=[gross_total, lfa_delta, kfa_delta, overhead_delta, 0.0],
+            text=[
+                f"{gross_total:,.0f} €",
+                f"{lfa_delta:+,.0f} € (Shapley: {shapley_lfa:.1f}%)",
+                f"{kfa_delta:+,.0f} € (Shapley: {shapley_kfa:.1f}%)",
+                f"{overhead_delta:+,.0f} €",
+                f"{net_tangible:,.0f} €"
+            ],
             textposition="outside",
             connector=dict(line=dict(color="#64748b", width=1.5)),
             decreasing=dict(marker=dict(color="#ef4444")),
@@ -1267,10 +1389,10 @@ def render_panel_i(plots_dir):
     )
     fig.update_layout(
         title=dict(
-            text="<b>Panel I: Sequential Causal Waterfall & Shapley Attribution (Munich 2024)</b><br><sup>Vom Brutto-Finanzaufkommen zum greifbaren Bürger-Nutzen (21.192 € bürgerwirksame Güter)</sup>",
+            text="<b>Panel I: Sequential Accounting Waterfall & Shapley Attribution (Munich 2024)</b><br><sup>Vom Brutto-Finanzaufkommen zum greifbaren Bürger-Nutzen</sup>",
             font=dict(size=18, color="#0f172a"),
         ),
-        yaxis=dict(title="<b>Volumen pro Einwohner (€/Kopf)</b>", range=[17000, 27000], gridcolor="#e2e8f0"),
+        yaxis=dict(title="<b>Volumen pro Einwohner (€/Kopf)</b>", range=[17000, 28500], gridcolor="#e2e8f0"),
         width=1000, height=700, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
         margin=dict(l=80, r=40, t=110, b=80),
     )
@@ -1284,7 +1406,7 @@ def render_panel_i(plots_dir):
 # ---------------------------------------------------------------------------
 # 3. Composite 9-Panel (3x3) Synoptic Research Matrix
 # ---------------------------------------------------------------------------
-def render_synoptic_3x3_matrix(summary_all, demo_all, flows, plots_dir):
+def render_synoptic_3x3_matrix(summary_all, demo_all, flows, muc_raw, plots_dir):
     """Compose publication-grade 3x3 Synoptic Matrix combining Panels A through I."""
     from plotly.subplots import make_subplots
 
@@ -1319,17 +1441,35 @@ def render_synoptic_3x3_matrix(summary_all, demo_all, flows, plots_dir):
                 fig.add_trace(go.Bar(y=[lbl], x=[float(r["pro_kopf_eur"])], orientation="h", marker_color=clr, showlegend=False), row=1, col=1)
 
     # Panel B: Demographics Stack
+    demo_2024 = {d["gebiet"]: d for d in demo_all if int(d["jahr"]) == 2024 and "Tier_1" in d["tier_status"]}
     regions = ["DE", "BY", "MUC"]
-    fig.add_trace(go.Bar(name="<18 J.", x=regions, y=[16.7, 16.8, 15.5], marker_color="#3b82f6", showlegend=False), row=1, col=2)
-    fig.add_trace(go.Bar(name="18-64 J.", x=regions, y=[60.6, 61.5, 67.3], marker_color="#0284c7", showlegend=False), row=1, col=2)
-    fig.add_trace(go.Bar(name="65+ J.", x=regions, y=[22.7, 21.8, 17.2], marker_color="#8b5cf6", showlegend=False), row=1, col=2)
+    keys = ["Deutschland", "Bayern", "Muenchen"]
+    u18 = [float(demo_2024[k]["altersgruppe_u18_anteil"]) * 100.0 for k in keys]
+    work = [float(demo_2024[k]["altersgruppe_18_64_anteil"]) * 100.0 for k in keys]
+    senior = [float(demo_2024[k]["altersgruppe_65plus_anteil"]) * 100.0 for k in keys]
+    fig.add_trace(go.Bar(name="<18 J.", x=regions, y=u18, marker_color="#3b82f6", showlegend=False), row=1, col=2)
+    fig.add_trace(go.Bar(name="18-64 J.", x=regions, y=work, marker_color="#0284c7", showlegend=False), row=1, col=2)
+    fig.add_trace(go.Bar(name="65+ J.", x=regions, y=senior, marker_color="#8b5cf6", showlegend=False), row=1, col=2)
 
     # Panel C: Transfer Waterfall
+    f24 = [f for f in flows if int(f["jahr"]) == 2024]
+    sum_gross = sum(float(r["pro_kopf_eur"]) for r in s_2024)
+    fed_soz_flow = next(f for f in f24 if f["source_node"] == "Nominal_Federal" and f["target_node"] == "Effective_Insurance")
+    fed_by_flow = next(f for f in f24 if f["source_node"] == "Nominal_Federal" and f["target_node"] == "Effective_Bayern")
+    net_muc_flow = next(f for f in f24 if f["source_node"] == "Nominal_Bayern" and f["target_node"] == "Effective_Munich")
+
+    c_vals = [
+        sum_gross,
+        -float(fed_soz_flow["wert_eur_pro_kopf"]),
+        -float(fed_by_flow["wert_eur_pro_kopf"]),
+        -float(net_muc_flow["wert_eur_pro_kopf"]),
+        0.0
+    ]
     fig.add_trace(
         go.Waterfall(
             orientation="v", measure=["absolute", "relative", "relative", "relative", "total"],
             x=["Gross", "GRV/GKV", "Bundesmittel", "FAG/Umlage", "Net Stack"],
-            y=[27605, -1561, -664, -233, 0],
+            y=c_vals,
             connector=dict(line=dict(color="#64748b")),
             decreasing=dict(marker=dict(color="#ef4444")),
             totals=dict(marker=dict(color="#10b981")),
@@ -1339,17 +1479,41 @@ def render_synoptic_3x3_matrix(summary_all, demo_all, flows, plots_dir):
     )
 
     # Panel D: Influx Structure
+    l1_flows = [f for f in f24 if f["layer_source"] == "Layer_1_Influx"]
+    d_map = {}
+    for f in l1_flows:
+        d_map[f["source_node"]] = float(f["wert_eur_pro_kopf"])
     influx_names = ["Lohn/ESt", "USt", "Unternehm.", "Verbrauch", "Rente", "Kranken", "Gewerbe"]
-    influx_vals = [1646, 1739, 339, 1378, 3659, 3662, 2339]
+    influx_keys = [
+        "Lohn_Einkommensteuer_Bund", "Umsatzsteuer_Bund", "Unternehmenssteuern_Bund",
+        "Verbrauchs_und_Bundessteuern", "Rentenbeitraege_AG_AN", "Krankenbeitraege_AG_AN",
+        "Gewerbesteuer_Muenchen"
+    ]
+    influx_vals = [d_map[k] for k in influx_keys]
     fig.add_trace(go.Bar(x=influx_names, y=influx_vals, marker_color="#1e3a8a", showlegend=False), row=2, col=1)
 
     # Panel E: Functional Buckets
+    l4_flows = [f for f in f24 if f["layer_target"] == "Layer_4_Buckets"]
+    b_dict = {}
+    for f in l4_flows:
+        t_node = f["target_node"]
+        if t_node not in b_dict:
+            b_dict[t_node] = 0.0
+        b_dict[t_node] += float(f["wert_eur_pro_kopf"])
     b_names = ["Gesundheit", "Rente", "Schulen", "Verkehr", "Verteidigung", "Hochschulen", "Sicherheit"]
-    b_vals = [5194, 4755, 2933, 1995, 993, 959, 1381]
+    b_keys = [
+        "Gesundheit_und_Pflege", "Rente_und_Alterssicherung", "Schulen_und_Kitas",
+        "Verkehr_und_Infrastruktur", "Verteidigung_und_Aeusseres", "Hochschulen_und_Forschung",
+        "Sicherheit_und_Justiz"
+    ]
+    b_vals = [b_dict[k] for k in b_keys]
     fig.add_trace(go.Bar(x=b_names, y=b_vals, marker_color="#0d9488", showlegend=False), row=2, col=2)
 
     # Panel F: Social Security Dominance (H1)
-    fig.add_trace(go.Bar(x=["Sozialvers.", "Invest/Bildung", "Gemeinkosten"], y=[10591, 6880, 4834], marker_color=["#0d9488", "#1e3a8a", "#64748b"], showlegend=False), row=2, col=3)
+    soz_total_pc = b_dict["Gesundheit_und_Pflege"] + b_dict["Rente_und_Alterssicherung"] + b_dict["Arbeitsfoerderung_und_Reha"]
+    inv_total_pc = b_dict["Schulen_und_Kitas"] + b_dict["Hochschulen_und_Forschung"] + b_dict["Verkehr_und_Infrastruktur"] + b_dict["Verteidigung_und_Aeusseres"]
+    rest_pc = sum(v for k, v in b_dict.items() if k not in ["Gesundheit_und_Pflege", "Rente_und_Alterssicherung", "Arbeitsfoerderung_und_Reha", "Schulen_und_Kitas", "Hochschulen_und_Forschung", "Verkehr_und_Infrastruktur", "Verteidigung_und_Aeusseres"])
+    fig.add_trace(go.Bar(x=["Sozialvers.", "Invest/Bildung", "Gemeinkosten"], y=[soz_total_pc, inv_total_pc, rest_pc], marker_color=["#0d9488", "#1e3a8a", "#64748b"], showlegend=False), row=2, col=3)
 
     # Panel G: Trajectory 2023 vs 2024
     s_2023 = {r["ebene"]: float(r["pro_kopf_eur"]) for r in summary_all if int(r["jahr"]) == 2023}
@@ -1360,14 +1524,32 @@ def render_synoptic_3x3_matrix(summary_all, demo_all, flows, plots_dir):
     fig.add_trace(go.Bar(name="2024", x=cat_g, y=[s_2024_d[k] for k in k_g], marker_color="#1e3a8a", showlegend=False), row=3, col=1)
 
     # Panel H: Equalization Bars
-    fig.add_trace(go.Bar(y=["LFA Abfluss", "Bezirksumlage", "FAG Zuweisung"], x=[-737, -651, 1123], orientation="h", marker_color=["#be123c", "#e11d48", "#0284c7"], showlegend=False), row=3, col=2)
+    m_map = {r["indikator"]: float(r["wert_mrd_eur"]) for r in muc_raw if int(r["jahr"]) == 2024}
+    d_map = {r["gebiet"]: float(r["bevoelkerung_stichtag"]) for r in demo_all if int(r["jahr"]) == 2024 and "Tier_1" in r["tier_status"]}
+    n_muc = d_map["Muenchen"]
+    lfa_pc = -float(next(f for f in f24 if f["target_node"] == "Laenderfinanzausgleich_Ausgleich_an_andere_Laender")["wert_eur_pro_kopf"])
+    bezirk_pc = -(m_map["Bezirksumlage_an_Bezirk_Oberbayern"] * 1e9) / n_muc
+    fag_pc = (m_map["Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern"] * 1e9) / n_muc
+    fig.add_trace(go.Bar(y=["LFA Abfluss", "Bezirksumlage", "FAG Zuweisung"], x=[lfa_pc, bezirk_pc, fag_pc], orientation="h", marker_color=["#be123c", "#e11d48", "#0284c7"], showlegend=False), row=3, col=2)
 
     # Panel I: Causal Waterfall
+    net_kfa_pc = float(net_muc_flow["wert_eur_pro_kopf"])
+    overhead_nodes = {
+        "Schuldendienst_und_Zinsen",
+        "Kommunale_Verwaltung_Sonstiges",
+        "Wirtschaft_Verwaltung_Sonstiges",
+        "Ruecklagen_und_Liquiditaetspuffer",
+    }
+    overhead_delta = -sum(
+        float(f["wert_eur_pro_kopf"])
+        for f in f24
+        if f["target_node"] in overhead_nodes and f["layer_source"] == "Layer_3_Effective"
+    )
     fig.add_trace(
         go.Waterfall(
             orientation="v", measure=["absolute", "relative", "relative", "relative", "total"],
             x=["Brutto", "LFA", "KFA", "Gemeinlast", "Bürger"],
-            y=[25147, -737, 233, -3451, 0],
+            y=[sum_gross, lfa_pc, net_kfa_pc, overhead_delta, 0.0],
             connector=dict(line=dict(color="#64748b")),
             decreasing=dict(marker=dict(color="#ef4444")),
             totals=dict(marker=dict(color="#10b981")),
@@ -1407,7 +1589,7 @@ def main():
     plots_dir = os.path.join(ROOT, "plots")
     os.makedirs(plots_dir, exist_ok=True)
 
-    flows, summary, demo = load_modeling_data(datasets_dir, raw_dir)
+    flows, summary, demo, muc, bund = load_modeling_data(datasets_dir, raw_dir)
 
     # 1. Main 4-Layer Sankey
     sankey_png = os.path.join(plots_dir, "sankey_fiscal_per_capita.png")
@@ -1418,16 +1600,16 @@ def main():
     # 2. Standalone Panels A through I
     render_panel_a(summary, plots_dir)
     render_panel_b(demo, plots_dir)
-    render_panel_c(summary, plots_dir)
+    render_panel_c(flows, summary, demo, muc, bund, plots_dir)
     render_panel_d(flows, plots_dir)
     render_panel_e(flows, plots_dir)
     render_panel_f(flows, plots_dir)
     render_panel_g(summary, plots_dir)
-    render_panel_h(plots_dir)
-    render_panel_i(plots_dir)
+    render_panel_h(flows, muc, demo, plots_dir)
+    render_panel_i(flows, summary, plots_dir)
 
     # 3. Composite 9-Panel 3x3 Synoptic Matrix
-    render_synoptic_3x3_matrix(summary, demo, flows, plots_dir)
+    render_synoptic_3x3_matrix(summary, demo, flows, muc, plots_dir)
     print("✓ All publication-grade visualizations successfully generated.")
 
 

@@ -40,22 +40,23 @@ This document systematically details the empirical provenance, mathematical form
     - *Federal Taxes* (Navy `#1e3a8a`): Lohn- & Einkommensteuer ($137.61\text{ Mrd. €}$, $1{,}646\text{ €/Kopf}$), Umsatzsteuer ($145.34\text{ Mrd. €}$, $1{,}739\text{ €/Kopf}$), Körperschaft- & Abgeltungsteuer ($28.36\text{ Mrd. €}$, $339\text{ €/Kopf}$), Verbrauchs- & Bundessteuern ($115.17\text{ Mrd. €}$, $1{,}378\text{ €/Kopf}$), Verwaltungseinnahmen ($5.89\text{ Mrd. €}$, $70\text{ €/Kopf}$), Nettokreditaufnahme ($33.30\text{ Mrd. €}$, $398\text{ €/Kopf}$).
     - *Social Insurance Contributions* (Teal `#0d9488`): Rentenbeiträge ($305.79\text{ Mrd. €}$, $3{,}659\text{ €/Kopf}$), Krankenbeiträge ($306.09\text{ Mrd. €}$, $3{,}662\text{ €/Kopf}$), Pflegebeiträge ($66.17\text{ Mrd. €}$, $792\text{ €/Kopf}$), Arbeitslosenbeiträge ($40.64\text{ Mrd. €}$, $486\text{ €/Kopf}$), Unfallbeiträge ($4.39\text{ Mrd. €}$, $53\text{ €/Kopf}$).
     - *Bavarian State Own Revenues* (Sky Blue `#0284c7`): Gemeinschaftsteuern ($50.95\text{ Mrd. €}$, $3{,}846\text{ €/Kopf}$), Landessteuern ($6.45\text{ Mrd. €}$, $487\text{ €/Kopf}$), Verwaltungseinnahmen ($5.00\text{ Mrd. €}$, $377\text{ €/Kopf}$), Rücklagen/Kredite ($2.50\text{ Mrd. €}$, $189\text{ €/Kopf}$).
-    - *Munich Municipal Revenues* (Amber `#d97706`): Gewerbesteuer ($3.52\text{ Mrd. €}$, $2{,}339\text{ €/Kopf}$), Gemeindeanteil ESt/USt ($1.80\text{ Mrd. €}$, $1{,}196\text{ €/Kopf}$), Grund- & Lokalsteuern ($0.21\text{ Mrd. €}$, $138\text{ €/Kopf}$), Gebühren & Mieten ($1.77\text{ Mrd. €}$, $1{,}176\text{ €/Kopf}$), SWM-Gewinnausschüttung ($0.40\text{ Mrd. €}$, $266\text{ €/Kopf}$), Sonstige Erträge ($1.75\text{ Mrd. €}$, $1{,}163\text{ €/Kopf}$).
+    - *Munich Municipal Revenues* (Amber `#d97706`): Gewerbesteuer ($3.24\text{ Mrd. €}$, $2{,}153\text{ €/Kopf}$), Gemeindeanteil ESt/USt ($1.83\text{ Mrd. €}$, $1{,}216\text{ €/Kopf}$), Grundsteuer ($0.35\text{ Mrd. €}$, $231\text{ €/Kopf}$), Gebühren & Mieten ($1.35\text{ Mrd. €}$, $898\text{ €/Kopf}$), SWM-Gewinnausschüttung ($0.40\text{ Mrd. €}$, $266\text{ €/Kopf}$), Kredite & Entnahmen ($0.89\text{ Mrd. €}$, $593\text{ €/Kopf}$).
   - **Layer 2 (Nominale Gebietskörperschaften)**:
     - *Nominaler Bund*: $465.67\text{ Mrd. €}$ ($5{,}572\text{ €/Kopf}$ · Basis 83.6M EW)
     - *Nominale Sozialversicherung*: $723.08\text{ Mrd. €}$ ($8{,}652\text{ €/Kopf}$ · Basis 83.6M EW)
-    - *Nominaler Freistaat Bayern*: $64.90\text{ Mrd. €}$ ($4{,}899\text{ €/Kopf}$ · Basis 13.2M EW)
+    - *Nominaler Freistaat Bayern*: $64.80\text{ Mrd. €}$ ($4{,}891\text{ €/Kopf}$ · Basis 13.2M EW)
     - *Nominale Stadt München*: $9.45\text{ Mrd. €}$ ($6{,}276\text{ €/Kopf}$ · Basis 1.51M EW)
   - **Intergovernmental Transfers (Layer 2 $\to$ Layer 3)**:
     - *Bund $\to$ Sozialversicherung*: Tax subsidies of **$116.00\text{ Mrd. €}$** ($1{,}388\text{ €/Kopf}$) to GRV and **$14.50\text{ Mrd. €}$** ($173\text{ €/Kopf}$) to GKV Gesundheitsfonds.
     - *Bund $\to$ Freistaat Bayern*: Federal grants of **$8.80\text{ Mrd. €}$** ($664\text{ €/Bavarian resident}$).
-    - *Freistaat Bayern $\to$ München*: Key grants FAG and BayKiBiG of **$1.69\text{ Mrd. €}$** ($1{,}123\text{ €/Munich resident}$).
-    - *München $\to$ Freistaat Bayern / Bezirk*: Munich transfers **$1.34\text{ Mrd. €}$** ($890\text{ €/Munich resident}$) in *Bezirksumlage* ($0.93\text{ Mrd. €}$) and *Gewerbesteuerumlage* ($0.41\text{ Mrd. €}$).
+    - *Freistaat Bayern $\to$ München*: Key grants FAG and BayKiBiG of **$1.162\text{ Mrd. €}$** ($772\text{ €/Munich resident}$).
+    - *München $\to$ Freistaat Bayern / Bezirk*: Munich transfers **$1.061\text{ Mrd. €}$** ($705\text{ €/Munich resident}$) in *Bezirksumlage* ($0.829\text{ Mrd. €}$) and *Gewerbesteuerumlage* ($0.232\text{ Mrd. €}$).
+    - *Net municipal transfer bridge*: $+0.101\text{ Mrd. €}$ ($+67\text{ €/resident}$) net transfer from the Bavarian state layer to Munich.
   - **Layer 3 (Effektive Haushalte)**: Net operational budgets post-transfers:
     - *Effektiver Bund*: $326.37\text{ Mrd. €}$ ($3{,}905\text{ €/Kopf}$)
     - *Effektive Sozialversicherung*: $853.58\text{ Mrd. €}$ ($10{,}213\text{ €/Kopf}$)
-    - *Effektiver Freistaat Bayern*: $73.70\text{ Mrd. €}$ ($5{,}563\text{ €/Kopf}$)
-    - *Effektive Stadt München*: $10.54\text{ Mrd. €}$ ($7{,}006\text{ €/Kopf}$)
+    - *Effektiver Freistaat Bayern*: $73.60\text{ Mrd. €}$ ($5{,}555\text{ €/Kopf}$)
+    - *Effektive Stadt München*: $9.55\text{ Mrd. €}$ ($6{,}343\text{ €/Kopf}$)
   - **Layer 4 (Finale Funktionale End-Buckets)**:
     - *Länderfinanzausgleich*: Net outward transfer from Bavaria to other states: **$9.771\text{ Mrd. €}$** ($737\text{ €/Bavarian resident}$), rendered in crimson (`#be123c`).
     - *Tangible Public Goods*: Rente ($397.4\text{ Mrd. €}$), Gesundheit & Pflege ($434.1\text{ Mrd. €}$), Schulen & Kitas ($245.2\text{ Mrd. €}$), Verkehr ($166.7\text{ Mrd. €}$), Verteidigung ($83.0\text{ Mrd. €}$), Hochschulen & Forschung ($80.2\text{ Mrd. €}$), etc.
@@ -87,9 +88,10 @@ This document systematically details the empirical provenance, mathematical form
   - Bundeszuschuss GRV: **$-1{,}388\text{ €}$**
   - Bundeszuschuss GKV: **$-173\text{ €}$**
   - Bundesmittel an Bayern: **$-664\text{ €}$**
-  - Freistaat FAG an München: **$-1{,}123\text{ €}$**
-  - Münchner Umlagen (Bezirk/Gewerbesteuer): **$+890\text{ €}$**
-  - Consolidated citizen-facing total: **$25{,}147\text{ €}$**
+  - Freistaat FAG an München: **$-772\text{ €}$**
+  - Münchner Umlagen (Bezirk/Gewerbesteuer): **$+705\text{ €}$**
+  - Net transfer consolidation delta: **$-2{,}293\text{ €}$**
+  - Consolidated citizen-facing total: **$25{,}313\text{ €}$**
 
 ---
 
@@ -98,7 +100,7 @@ This document systematically details the empirical provenance, mathematical form
   - Bund: dominated by Umsatzsteuer ($1{,}739\text{ €}$) and Lohn-/ESt ($1{,}646\text{ €}$).
   - Sozialversicherung: pure employer/employee contributions ($3{,}659\text{ €}$ Rente, $3{,}662\text{ €}$ Gesundheit).
   - Freistaat Bayern: joint income/VAT taxes ($3{,}846\text{ €/Kopf}$).
-  - Stadt München: Gewerbesteuer ($2{,}339\text{ €/Kopf}$) generating $>37\%$ of total municipal revenue.
+  - Stadt München: Gewerbesteuer ($2{,}153\text{ €/Kopf}$) generating $>34\%$ of total municipal ordinary revenue.
 
 ---
 
@@ -128,15 +130,15 @@ This document systematically details the empirical provenance, mathematical form
 ### Figure: `panel_h_equalization_redistribution.png`
 - **Objective**: Multi-tier redistribution mapping:
   - Bavaria net LFA transfer outflow: **$-9.771\text{ Mrd. €}$** ($-737.42\text{ €/Bavarian resident}$).
-  - Munich Bezirksumlage transfer outflow: **$-930\text{ Mio. €}$** ($-617.94\text{ €/Munich resident}$).
-  - Munich Gewerbesteuerumlage transfer outflow: **$-410\text{ Mio. €}$** ($-272.42\text{ €/Munich resident}$).
-  - State FAG and daycare grants to Munich: **$+1.69\text{ Mrd. €}$** ($+1{,}122.92\text{ €/Munich resident}$).
+  - Munich Bezirksumlage transfer outflow: **$-829\text{ Mio. €}$** ($-550.83\text{ €/Munich resident}$).
+  - Munich Gewerbesteuerumlage transfer outflow: **$-232\text{ Mio. €}$** ($-154.15\text{ €/Munich resident}$).
+  - State FAG and daycare grants to Munich: **$+1.162\text{ Mrd. €}$** ($+772.09\text{ €/Munich resident}$).
   - Federal grants to Bavaria: **$+8.80\text{ Mrd. €}$** ($+664.20\text{ €/Bavarian resident}$).
 
 ---
 
 ### Figure: `panel_i_causal_waterfall.png`
-- **Objective**: 5-stage sequential waterfall isolating gross contributions to net tangible public goods receipt for a Munich resident with path-independent Shapley attribution (47.8% LFA, 52.2% municipal reallocation).
+- **Objective**: 5-stage sequential waterfall isolating gross contributions ($27{,}605\text{ €}$) to net tangible public goods receipt ($24{,}225\text{ €}$) for a Munich resident with path-independent Shapley attribution (91.7% LFA, 8.3% municipal reallocation), accounting for overhead/administrative nodes ($-2{,}710\text{ €}$).
 
 ---
 

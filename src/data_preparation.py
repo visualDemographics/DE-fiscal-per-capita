@@ -187,7 +187,7 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
             + b_year["Sonstige_Bundessteuern"]
         )
         fed_nontax = tot_bund - fed_tax_sum
-        fed_nka = b_year["Nettokreditaufnahme"] if year == 2024 else (b_year["Nettokreditaufnahme"] + b_year["Ruecklagenentnahme"])
+        fed_nka = b_year["Nettokreditaufnahme"] + b_year["Ruecklagenentnahme"]
         fed_admin = fed_nontax - fed_nka
 
         add_flow("Umsatzsteuer_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
@@ -224,6 +224,8 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
             + m_year["Oertliche_Verbrauch_und_Aufwandsteuern"]
             + m_year["Oeffentlich_rechtliche_Gebuehren_und_Entgelte"]
             + m_year["Privatrechtliche_Leistungsentgelte_Mieten"]
+            + m_year["Kostenerstattungen_und_Kostenumlagen"]
+            + m_year["Sonstige_ordentliche_Ertraege"]
             + m_year["Gewinnausschuettung_Stadtwerke_SWM"]
         )
         muc_saldo_rest = tot_muc - muc_own_sum
@@ -233,9 +235,9 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         add_flow("Einkommensteuer_USt_Anteil_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
                  m_year["Gemeindeanteil_an_der_Einkommensteuer"] + m_year["Gemeindeanteil_an_der_Umsatzsteuer"], pop_denom=n_muc_t1)
         add_flow("Gebuehren_Mieten_Entgelte_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
-                 m_year["Oeffentlich_rechtliche_Gebuehren_und_Entgelte"] + m_year["Privatrechtliche_Leistungsentgelte_Mieten"], pop_denom=n_muc_t1)
+                 m_year["Oeffentlich_rechtliche_Gebuehren_und_Entgelte"] + m_year["Privatrechtliche_Leistungsentgelte_Mieten"] + m_year["Kostenerstattungen_und_Kostenumlagen"], pop_denom=n_muc_t1)
         add_flow("Sonstige_Ertraege_und_Defizitausgleich_MUC", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
-                 muc_saldo_rest, pop_denom=n_muc_t1)
+                 muc_saldo_rest + m_year["Sonstige_ordentliche_Ertraege"], pop_denom=n_muc_t1)
         add_flow("Beteiligungsertraege_SWM_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
                  m_year["Gewinnausschuettung_Stadtwerke_SWM"], pop_denom=n_muc_t1)
         add_flow("Grundsteuer_und_Lokalsteuern_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
@@ -309,7 +311,7 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
                  soz_reserve_addition, pop_denom=n_de_t1)
 
         # 2. Effective Federal (Sorted strictly descending by per-capita volume within group)
-        bw_sv = b_year["Sondervermoegen_Bundeswehr_Ist"] if "Sondervermoegen_Bundeswehr_Ist" in b_year else 0.0
+        bw_sv = b_year["Sondervermoegen_Bundeswehr_Ist"]
         fed_grants_other_laender = b_year["Bundeszuweisungen_an_Laender"] - bund_to_by_mrd
         fed_known_other_mrd = (
             b_year["Epl_14_Verteidigung_Kern"] + bw_sv
@@ -350,11 +352,11 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
             + by_year["Epl_15_Wissenschaft_und_Kunst_Universitaeten"]
             + by_year["Epl_03_Inneres_Polizei_Katastrophenschutz"] + by_year["Epl_04_Justiz_Gerichte_JVA"]
             + by_year["Epl_09_Wohnen_Bau_Verkehr"] + by_year["Epl_14_Gesundheit_und_Pflege"]
+            + by_year["Epl_10_Familie_Arbeit_Soziales"]
+            + by_year["Epl_07_08_12_Wirtschaft_Umwelt_Agrar"]
         )
         by_rest_mrd = tot_by_eff_mrd - by_known_mrd
 
-        add_flow("Effective_Bayern", "Wirtschaft_Verwaltung_Sonstiges", "Layer_3_Effective", "Layer_4_Buckets",
-                 by_rest_mrd, pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Schulen_und_Kitas", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Epl_05_Unterricht_und_Kultus_Schulen"], pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Sicherheit_und_Justiz", "Layer_3_Effective", "Layer_4_Buckets",
@@ -363,8 +365,14 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
                  by_year["Laenderfinanzausgleich_Abfluss"], pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Hochschulen_und_Forschung", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Epl_15_Wissenschaft_und_Kunst_Universitaeten"], pop_denom=n_by_t1)
+        add_flow("Effective_Bayern", "Soziales_Jugend_Wohnungslosigkeit", "Layer_3_Effective", "Layer_4_Buckets",
+                 by_year["Epl_10_Familie_Arbeit_Soziales"], pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Verkehr_und_Infrastruktur", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Epl_09_Wohnen_Bau_Verkehr"], pop_denom=n_by_t1)
+        add_flow("Effective_Bayern", "Wirtschaft_Klima_Verwaltung", "Layer_3_Effective", "Layer_4_Buckets",
+                 by_year["Epl_07_08_12_Wirtschaft_Umwelt_Agrar"], pop_denom=n_by_t1)
+        add_flow("Effective_Bayern", "Wirtschaft_Verwaltung_Sonstiges", "Layer_3_Effective", "Layer_4_Buckets",
+                 by_rest_mrd, pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Gesundheit_und_Pflege", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Epl_14_Gesundheit_und_Pflege"], pop_denom=n_by_t1)
 
@@ -378,25 +386,28 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
             + m_year["Stadtplanung_und_Bauordnung_Wohnungsbau"]
             + m_year["Kreisverwaltungsreferat_KVR_und_Branddirektion"]
             + m_year["Kulturreferat"]
+            + m_year["IT_Kommunal_und_Wirtschaft"]
         )
         muc_rest_mrd = tot_muc_eff_mrd - muc_known_mrd
 
-        add_flow("Effective_Munich", "Kommunale_Verwaltung_Sonstiges", "Layer_3_Effective", "Layer_4_Buckets",
-                 muc_rest_mrd, pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Schulen_und_Kitas", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Referat_fuer_Bildung_und_Sport_RBS_Schulen_Kitas"], pop_denom=n_muc_t1)
+        add_flow("Effective_Munich", "Kommunale_Verwaltung_Sonstiges", "Layer_3_Effective", "Layer_4_Buckets",
+                 muc_rest_mrd, pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Soziales_Jugend_Wohnungslosigkeit", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Sozialreferat_Jugend_Soziales_Wohnungslosigkeit"], pop_denom=n_muc_t1)
+        add_flow("Effective_Munich", "Wirtschaft_Klima_Verwaltung", "Layer_3_Effective", "Layer_4_Buckets",
+                 m_year["IT_Kommunal_und_Wirtschaft"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Verkehr_und_Infrastruktur", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Mobilitaetsreferat_und_Baureferat_Strassen_MVG"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Sicherheit_und_Justiz", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Kreisverwaltungsreferat_KVR_und_Branddirektion"], pop_denom=n_muc_t1)
+        add_flow("Effective_Munich", "Kultur_und_Freizeit", "Layer_3_Effective", "Layer_4_Buckets",
+                 m_year["Kulturreferat"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Gesundheit_und_Pflege", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Gesundheitsreferat_und_Muenchen_Klinik_Zuschuss"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Wohnungsbau_und_Stadtplanung", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Stadtplanung_und_Bauordnung_Wohnungsbau"], pop_denom=n_muc_t1)
-        add_flow("Effective_Munich", "Kultur_und_Freizeit", "Layer_3_Effective", "Layer_4_Buckets",
-                 m_year["Kulturreferat"], pop_denom=n_muc_t1)
 
         # --- RIGOROUS KIRCHHOFF FLOW ASSERTIONS IN BILLIONS EUR ---
         year_flows = [f for f in sankey_flows if f["jahr"] == year]

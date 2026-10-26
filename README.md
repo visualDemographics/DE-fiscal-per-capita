@@ -1,6 +1,6 @@
 # Fiscal Per-Capita Breakdown: Bund, Freistaat Bayern & Landeshauptstadt München
 
-[![Pipeline Audit](https://img.shields.io/badge/Audit-5%2F5%20Passed-emerald.svg)](.agents/skills/responsible-research/scripts/audit_research_pipeline.py)
+[![Pipeline Audit](https://img.shields.io/badge/Audit-8%2F8%20Passed-emerald.svg)](.agents/skills/responsible-research/scripts/audit_research_pipeline.py)
 [![Data Quality](https://img.shields.io/badge/Kirchhoff%20Conservation-%CE%94%20%3D%200.000%20Mrd.%20%E2%82%AC-blue.svg)](datasets/fiscal_sankey_flows_per_capita.csv)
 [![Resolution](https://img.shields.io/badge/PNG%20Resolution-5200%20%C3%97%203100-purple.svg)](plots/sankey_fiscal_per_capita.png)
 [![Interactive HTML](https://img.shields.io/badge/Widget-Plotly%20Sankey%20HTML-amber.svg)](plots/sankey_fiscal_interactive.html)
@@ -33,7 +33,7 @@ flowchart LR
         direction TB
         N_Fed["Nominaler Bund<br/><b>5.572 € / dt. Kopf</b> (83,6M EW)"]
         N_Soz["Nominale Sozialversicherung<br/><b>8.652 € / dt. Kopf</b> (83,6M EW)"]
-        N_BY["Nominaler Freistaat Bayern<br/><b>4.899 € / by. Kopf</b> (13,2M EW)"]
+        N_BY["Nominaler Freistaat Bayern<br/><b>4.891 € / by. Kopf</b> (13,2M EW)"]
         N_MUC["Nominale Stadt München<br/><b>6.276 € / muc. Kopf</b> (1,51M EW)"]
     end
 
@@ -41,8 +41,8 @@ flowchart LR
         direction TB
         E_Fed["Effektiver Bund (Kern)<br/><b>3.905 € / dt. Kopf</b> (326,4 Mrd. €)"]
         E_Soz["Effektive Sozialversicherung<br/><b>10.213 € / dt. Kopf</b> (853,6 Mrd. €)"]
-        E_BY["Effektiver Freistaat Bayern<br/><b>5.563 € / by. Kopf</b> (73,7 Mrd. €)"]
-        E_MUC["Effektive Stadt München<br/><b>7.006 € / muc. Kopf</b> (10,5 Mrd. €)"]
+        E_BY["Effektiver Freistaat Bayern<br/><b>5.555 € / by. Kopf</b> (73,6 Mrd. €)"]
+        E_MUC["Effektive Stadt München<br/><b>6.343 € / muc. Kopf</b> (9,55 Mrd. €)"]
     end
 
     subgraph L4["Layer 4: Finale Funktionale End-Buckets"]
@@ -69,11 +69,11 @@ flowchart LR
 
     N_Soz -- "Beiträge (723,1 Mrd. €)" --> E_Soz
 
-    N_BY -- "FAG & BayKiBiG Zuweisungen (1,69 Mrd. €)" --> E_MUC
-    N_BY -- "Landesmittel inkl. LFA (63,2 Mrd. €)" --> E_BY
+    N_BY -- "FAG & BayKiBiG Zuweisungen (1,16 Mrd. €)" --> E_MUC
+    N_BY -- "Landesmittel inkl. LFA (63,6 Mrd. €)" --> E_BY
 
-    N_MUC -- "Gewerbe- & Bezirksumlagen (1,34 Mrd. €)" --> E_BY
-    N_MUC -- "Kommunale Eigenmittel (8,11 Mrd. €)" --> E_MUC
+    N_MUC -- "Umlagen (Bezirk & Gewerbe: 1,06 Mrd. €)" --> E_BY
+    N_MUC -- "Kommunale Eigenmittel (8,38 Mrd. €)" --> E_MUC
 
     E_Fed --> B_Vert & B_Verk & B_Hoch & B_Rest
     E_Soz --> B_Rent & B_Ges & B_Rest
@@ -96,7 +96,7 @@ Every influx node shares the color of its respective Layer 2 nominal entity and 
 Represents the gross budgetary volume appropriated by each tier prior to intergovernmental equalizations:
 - **Nominaler Bund**: **5.572 € / resident** (€465,67 bn · Basis: 83,6M EW)
 - **Nominale Sozialversicherung**: **8.652 € / resident** (€723,08 bn pure contributions · Basis: 83,6M EW)
-- **Nominaler Freistaat Bayern**: **4.899 € / resident** (€64,90 bn own revenues · Basis: 13,2M EW)
+- **Nominaler Freistaat Bayern**: **4.891 € / resident** (€64,80 bn own revenues · Basis: 13,2M EW)
 - **Nominale Stadt München**: **6.276 € / resident** (€9,45 bn ordentliche Erträge · Basis: 1,51M EW)
 
 > [!IMPORTANT]
@@ -111,18 +111,18 @@ Between Layer 2 and Layer 3, the vertical and horizontal fiscal transfers of Ger
 2. **Federal Grants to Free State of Bavaria (*Bundeszuweisungen*)**:
    - Bund $\to$ Freistaat Bayern: **664 € / resident** (€8,80 bn federal co-funding for transport, education, and administration).
 3. **What Flows from Munich to the State & District (*Umlagen*)**:
-   - München $\to$ Freistaat Bayern: **890 € / resident** (€1,34 bn total: Gewerbesteuerumlage €0,41 bn + Bezirksumlage an den Bezirk Oberbayern €0,93 bn for integration and psychiatric welfare).
+   - München $\to$ Freistaat Bayern / Bezirk: **705 € / resident** (€1,061 bn total: Gewerbesteuerumlage €0,232 bn + Bezirksumlage an den Bezirk Oberbayern €0,829 bn for integration and psychiatric welfare).
 4. **What Flows from the State to Munich (*Kommunaler Finanzausgleich & Zuweisungen*)**:
-   - Freistaat Bayern $\to$ München: **1.123 € / resident** (€1,69 bn total: FAG municipal key grants Art. 10 FAG + BayKiBiG childcare operational subsidies).
-5. **State Retention of Equalization Liabilities**:
-   - Freistaat Bayern retains **4.770 € / resident**, which funds both internal state ministries and the state's outward equalization liabilities.
+   - Freistaat Bayern $\to$ München: **772 € / resident** (€1,162 bn total: FAG municipal allocations + BayKiBiG childcare operational subsidies).
+5. **Net Municipal Equalization Bridge**:
+   - Net intergovernmental transfer of **+67 € / resident** (+€0,101 bn net inflow from the state to Munich).
 
 ### Layer 3: Effektive Haushalte (Net Effective Budgets)
 The net disposable funds available to each public entity following intergovernmental consolidation:
 - **Effektiver Bund (Kern)**: **3.905 € / resident** (€326,37 bn)
-- **Effektive Sozialversicherung**: **10.213 € / resident** (€853,58 bn including federal subsidies)
-- **Effektiver Freistaat Bayern**: **5.563 € / resident** (€73,70 bn)
-- **Effektive Stadt München**: **7.006 € / resident** (€10,54 bn Gesamtetat)
+- **Effektive Sozialversicherung**: **10.213 € / resident** (€853,58 bn direct outlays + €11,43 bn liquidity reserve = €864,90 bn total resources)
+- **Effektiver Freistaat Bayern**: **5.555 € / resident** (€73,60 bn)
+- **Effektive Stadt München**: **6.343 € / resident** (€9,55 bn ordinary budget + net transfers)
 
 ### Layer 4: Finale Funktionale End-Buckets (Citizen-Facing Outlays)
 Final destination categories providing direct public utility:
@@ -198,13 +198,16 @@ Expected audit output:
 ======================================================================
 RESPONSIBLE RESEARCH: GENERAL PIPELINE AUDIT SUITE
 ======================================================================
-[Check 1] Validating Repository Directory Structure & Lockfiles...   ✓ PASSED
-[Check 2] Validating Rawdata Manifest & Cryptographic SHA-256...     ✓ PASSED
-[Check 3] Validating Active Datasets in datasets/...                 ✓ PASSED
-[Check 4] Running Strict AST Static Code Analysis on src/*.py...     ✓ PASSED
-[Check 5] Verifying Plot Validity Documentation in plots/plot.md...  ✓ PASSED
+[Check 1] Validating Repository Directory Structure & Environment Pinning...   ✓ PASSED
+[Check 2] Validating Rawdata Manifest & Cryptographic SHA-256 Provenance...     ✓ PASSED
+[Check 3] Validating Active Datasets & Quarantine Hygiene in datasets/...       ✓ PASSED
+[Check 4] Running Strict AST Static Code Analysis on src/*.py...               ✓ PASSED
+[Check 5] Verifying Plot Validity Documentation (plots/plot.md)...             ✓ PASSED
+[Check 6] Verifying Primary Source Literature PDFs in literature/...           ✓ PASSED
+[Check 7] Verifying Residual & Unallocated Budget Shares (< 5% Cap)...         ✓ PASSED
+[Check 8] Verifying Falsifiable Hypotheses Closure (H1-H4 Verdicts)...         ✓ PASSED
 ======================================================================
-PIPELINE AUDIT COMPLETE: 5/5 CHECKS PASSED.
+PIPELINE AUDIT COMPLETE: 8/8 CHECKS PASSED.
 ======================================================================
 ```
 
