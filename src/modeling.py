@@ -180,7 +180,14 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 node_labels.append(label_map.get(name, name.replace("_", " ")))
             return node_idx[name]
 
-        # Group Layer 1 strictly by Sovereign Tier (sorted in descending order per group)
+        # Group Layer 1 strictly by Sovereign Tier (SV -> Bund -> Bayern -> Munich, sorted descending per group)
+        sv_l1 = [
+            "Krankenbeitraege_AG_AN",
+            "Rentenbeitraege_AG_AN",
+            "Pflegebeitraege_AG_AN",
+            "Arbeitslosenbeitraege_BA",
+            "Unfallbeitraege_DGUV",
+        ]
         bund_l1 = [
             "Umsatzsteuer_Bund",
             "Lohn_Einkommensteuer_Bund",
@@ -188,13 +195,6 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             "Nettokreditaufnahme_Bund",
             "Unternehmenssteuern_Bund",
             "Verwaltungseinnahmen_Beteiligungen_Bund",
-        ]
-        sv_l1 = [
-            "Krankenbeitraege_AG_AN",
-            "Rentenbeitraege_AG_AN",
-            "Pflegebeitraege_AG_AN",
-            "Arbeitslosenbeitraege_BA",
-            "Unfallbeitraege_DGUV",
         ]
         by_l1 = [
             "Gemeinschaftsteuern_Bayern",
@@ -210,27 +210,39 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             "Beteiligungsertraege_SWM_Muenchen",
             "Grundsteuer_und_Lokalsteuern_Muenchen",
         ]
-        l1_nodes = bund_l1 + sv_l1 + by_l1 + muc_l1
+        l1_nodes = sv_l1 + bund_l1 + by_l1 + muc_l1
         for k in l1_nodes:
             get_node_idx(k)
 
-        l2_nodes = ["Nominal_Federal", "Nominal_Insurance", "Nominal_Bayern", "Nominal_Munich"]
+        l2_nodes = ["Nominal_Insurance", "Nominal_Federal", "Nominal_Bayern", "Nominal_Munich"]
         for k in l2_nodes:
             get_node_idx(k)
 
-        l3_nodes = ["Effective_Federal", "Effective_Insurance", "Effective_Bayern", "Effective_Munich"]
+        l3_nodes = ["Effective_Insurance", "Effective_Federal", "Effective_Bayern", "Effective_Munich"]
         for k in l3_nodes:
             get_node_idx(k)
 
+        # Layer 4 Functional End-Buckets: Sorted strictly descending by per-capita volume (€/Kopf)
         l4_nodes = [
-            "Rente_und_Alterssicherung", "Gesundheit_und_Pflege", "Arbeitsfoerderung_und_Reha",
-            "Buergergeld_Grundsicherung", "Schulen_und_Kitas", "Hochschulen_und_Forschung",
-            "Verteidigung_und_Aeusseres", "Verkehr_und_Infrastruktur", "Sicherheit_und_Justiz",
-            "Wohnungsbau_und_Stadtplanung", "Soziales_Jugend_Wohnungslosigkeit", "Kultur_und_Freizeit",
-            "Schuldendienst_und_Zinsen", "Laenderfinanzausgleich_Ausgleich_an_andere_Laender",
-            "Ruecklagen_und_Liquiditaetspuffer", "Wirtschaft_Klima_Verwaltung",
-            "Wirtschaft_Verwaltung_Sonstiges", "Kommunale_Verwaltung_Sonstiges",
+            "Gesundheit_und_Pflege",
+            "Rente_und_Alterssicherung",
+            "Schulen_und_Kitas",
+            "Kommunale_Verwaltung_Sonstiges",
+            "Verkehr_und_Infrastruktur",
+            "Wirtschaft_Verwaltung_Sonstiges",
+            "Sicherheit_und_Justiz",
+            "Soziales_Jugend_Wohnungslosigkeit",
+            "Hochschulen_und_Forschung",
+            "Verteidigung_und_Aeusseres",
+            "Laenderfinanzausgleich_Ausgleich_an_andere_Laender",
+            "Buergergeld_Grundsicherung",
+            "Arbeitsfoerderung_und_Reha",
+            "Wirtschaft_Klima_Verwaltung",
+            "Schuldendienst_und_Zinsen",
             "Bundeszuweisungen_an_andere_Laender_Transfer",
+            "Wohnungsbau_und_Stadtplanung",
+            "Kultur_und_Freizeit",
+            "Ruecklagen_und_Liquiditaetspuffer",
         ]
         for k in l4_nodes:
             get_node_idx(k)
@@ -310,19 +322,19 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
 
         # Clamped Y Layout: Influxes of Layer 2 are clustered close to each other per sovereign tier
         node_x, node_y, node_colors = [], [], []
-        tier_y_l2_l3 = [0.08, 0.35, 0.63, 0.88]
+        tier_y_l2_l3 = [0.15, 0.44, 0.68, 0.88]
         for k in node_keys:
             if k in l1_nodes:
                 node_x.append(0.001)
-                if k in bund_l1:
-                    idx = bund_l1.index(k)
-                    node_y.append(0.02 + idx * (0.13 / max(1, len(bund_l1) - 1)))
-                elif k in sv_l1:
+                if k in sv_l1:
                     idx = sv_l1.index(k)
-                    node_y.append(0.23 + idx * (0.24 / max(1, len(sv_l1) - 1)))
+                    node_y.append(0.02 + idx * (0.24 / max(1, len(sv_l1) - 1)))
+                elif k in bund_l1:
+                    idx = bund_l1.index(k)
+                    node_y.append(0.35 + idx * (0.16 / max(1, len(bund_l1) - 1)))
                 elif k in by_l1:
                     idx = by_l1.index(k)
-                    node_y.append(0.55 + idx * (0.16 / max(1, len(by_l1) - 1)))
+                    node_y.append(0.58 + idx * (0.14 / max(1, len(by_l1) - 1)))
                 elif k in muc_l1:
                     idx = muc_l1.index(k)
                     node_y.append(0.79 + idx * (0.17 / max(1, len(muc_l1) - 1)))
@@ -485,33 +497,61 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
 def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
     """Post-process rendered Sankey artifacts to ensure strict monotonic descending order
     on Layer 2 link attachments without ribbon crossovers."""
-    # 1. Update SVG paths for Bund Layer 1 -> Layer 2
+    import re
+
+    # 1. Update SVG paths for Bund Layer 1 -> Layer 2 (paths[5:11])
+    updated_ribbons = []
+    js_statements = []
     if os.path.exists(out_svg_path):
         import xml.etree.ElementTree as ET
+
         tree = ET.parse(out_svg_path)
         root = tree.getroot()
         paths = [p for p in root.iter("{http://www.w3.org/2000/svg}path") if "C" in p.attrib.get("d", "")]
-        if len(paths) >= 6:
-            # Monotonic descending attachment targets for Bund L1 -> Nominal Federal
-            p3_new = (
-                "M15.5,266.4243330047139C401.25,266.4243330047139 401.25,230.424333004714 787,230.424333004714"
-                "L787,250.4961671004925C401.25,250.4961671004925 401.25,286.4961671004924 15.5,286.4961671004924Z"
-            )
-            p4_new = (
-                "M15.5,298.4961671004924C401.25,298.4961671004924 401.25,250.4961671004925 787,250.4961671004925"
-                "L787,267.5907018085229C401.25,267.5907018085229 401.25,315.59070180852285 15.5,315.59070180852285Z"
-            )
-            p5_new = (
-                "M15.5,327.59070180852285C401.25,327.59070180852285 401.25,267.5907018085229 787,267.5907018085229"
-                "L787,280.6888040219667C401.25,280.6888040219667 401.25,340.68880402196663 15.5,340.68880402196663Z"
-            )
-            paths[3].attrib["d"] = p3_new
-            paths[4].attrib["d"] = p4_new
-            paths[5].attrib["d"] = p5_new
-            tree.write(out_svg_path, encoding="utf-8", xml_declaration=True)
+        if len(paths) >= 11:
+            bund_paths = paths[5:11]
+            parsed_bund = []
+            for p in bund_paths:
+                d = p.attrib["d"]
+                m = re.match(
+                    r"M([-\d\.]+),\s*([-\d\.]+)C([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)L([-\d\.]+),\s*([-\d\.]+)",
+                    d,
+                )
+                if m:
+                    x0, y0 = float(m.group(1)), float(m.group(2))
+                    x1, y1 = float(m.group(7)), float(m.group(8))
+                    y1_bot = float(m.group(10))
+                    h = y1_bot - y1
+                    parsed_bund.append({"p": p, "x0": x0, "y0": y0, "x1": x1, "h": h, "orig_y1": y1})
+
+            if parsed_bund:
+                target_top = min(item["orig_y1"] for item in parsed_bund)
+                curr_y1 = target_top
+
+                for idx_offset, item in enumerate(parsed_bund):
+                    x0 = item["x0"]
+                    y0_top = item["y0"]
+                    h = item["h"]
+                    y0_bot = y0_top + h
+                    x1 = item["x1"]
+                    cx = (x0 + x1) / 2.0
+
+                    y1_top = curr_y1
+                    y1_bot = curr_y1 + h
+                    curr_y1 += h
+
+                    new_d = (
+                        f"M{x0},{y0_top:.6f}C{cx:.6f},{y0_top:.6f} {cx:.6f},{y1_top:.6f} {x1},{y1_top:.6f}"
+                        f"L{x1},{y1_bot:.6f}C{cx:.6f},{y1_bot:.6f} {cx:.6f},{y0_bot:.6f} {x0},{y0_bot:.6f}Z"
+                    )
+                    item["p"].attrib["d"] = new_d
+                    updated_ribbons.append((x0, x1, cx, y0_top, y0_bot, y1_top, y1_bot))
+                    js_statements.append(f"paths[{5 + idx_offset}].setAttribute('d', '{new_d}');")
+
+                tree.write(out_svg_path, encoding="utf-8", xml_declaration=True)
 
     # 2. Update high-resolution PNG ribbons
-    if os.path.exists(out_png_path):
+    if os.path.exists(out_png_path) and updated_ribbons:
         from PIL import Image, ImageDraw
         import numpy as np
 
@@ -528,35 +568,37 @@ def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
         def eval_bezier(p0, p1, p2, p3, n=80):
             t = np.linspace(0, 1, n)
             mt = 1 - t
-            x = mt**3 * p0[0] + 3*mt**2*t * p1[0] + 3*mt*t**2 * p2[0] + t**3 * p3[0]
-            y = mt**3 * p0[1] + 3*mt**2*t * p1[1] + 3*mt*t**2 * p2[1] + t**3 * p3[1]
+            x = mt**3 * p0[0] + 3 * mt**2 * t * p1[0] + 3 * mt * t**2 * p2[0] + t**3 * p3[0]
+            y = mt**3 * p0[1] + 3 * mt**2 * t * p1[1] + 3 * mt * t**2 * p2[1] + t**3 * p3[1]
             return list(zip(x, y))
 
+        min_y0 = min(r[3] for r in updated_ribbons)
+        max_y0 = max(r[4] for r in updated_ribbons)
+        min_y1 = min(r[5] for r in updated_ribbons)
+        max_y1 = max(r[6] for r in updated_ribbons)
+        x0_val = updated_ribbons[0][0]
+        x1_val = updated_ribbons[0][1]
+
         clear_box = [
-            to_px(15.0, 228.0),
-            to_px(787.0, 228.0),
-            to_px(787.0, 345.0),
-            to_px(15.0, 345.0),
+            to_px(x0_val - 0.5, min(min_y0, min_y1) - 2.0),
+            to_px(x1_val, min(min_y0, min_y1) - 2.0),
+            to_px(x1_val, max(max_y0, max_y1) + 2.0),
+            to_px(x0_val - 0.5, max(max_y0, max_y1) + 2.0),
         ]
         base_draw = ImageDraw.Draw(im)
         base_draw.polygon(clear_box, fill=(248, 250, 252, 255))
 
         link_color = (30, 58, 138, int(255 * 0.40))
-        ribbons = [
-            (266.424333, 286.496167, 230.424333, 250.496167),
-            (298.496167, 315.590702, 250.496167, 267.590702),
-            (327.590702, 340.688804, 267.590702, 280.688804),
-        ]
-        for y0_top, y0_bot, y1_top, y1_bot in ribbons:
-            p0_top = to_px(15.5, y0_top)
-            p1_top = to_px(401.25, y0_top)
-            p2_top = to_px(401.25, y1_top)
-            p3_top = to_px(787.0, y1_top)
+        for x0, x1, cx, y0_top, y0_bot, y1_top, y1_bot in updated_ribbons:
+            p0_top = to_px(x0, y0_top)
+            p1_top = to_px(cx, y0_top)
+            p2_top = to_px(cx, y1_top)
+            p3_top = to_px(x1, y1_top)
 
-            p0_bot = to_px(787.0, y1_bot)
-            p1_bot = to_px(401.25, y1_bot)
-            p2_bot = to_px(401.25, y0_bot)
-            p3_bot = to_px(15.5, y0_bot)
+            p0_bot = to_px(x1, y1_bot)
+            p1_bot = to_px(cx, y1_bot)
+            p2_bot = to_px(cx, y0_bot)
+            p3_bot = to_px(x0, y0_bot)
 
             top_curve = eval_bezier(p0_top, p1_top, p2_top, p3_top)
             bot_curve = eval_bezier(p0_bot, p1_bot, p2_bot, p3_bot)
@@ -566,28 +608,24 @@ def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
         im.save(out_png_path, "PNG")
 
     # 3. Inject interactive script into HTML
-    if os.path.exists(out_html_path):
+    if os.path.exists(out_html_path) and js_statements:
         with open(out_html_path, "r", encoding="utf-8") as f:
             html_text = f.read()
 
-        script_snip = """
+        js_code = "\n        ".join(js_statements)
+        script_snip = f"""
 <script>
-window.addEventListener("DOMContentLoaded", function() {
-    function alignBundLinks() {
+window.addEventListener("DOMContentLoaded", function() {{
+    function alignBundLinks() {{
         var paths = document.querySelectorAll('.sankey-link');
-        if (!paths || paths.length < 6) {
+        if (!paths || paths.length < 11) {{
             setTimeout(alignBundLinks, 100);
             return;
-        }
-        var p3 = "M15.5,266.4243330047139C401.25,266.4243330047139 401.25,230.424333004714 787,230.424333004714L787,250.4961671004925C401.25,250.4961671004925 401.25,286.4961671004924 15.5,286.4961671004924Z";
-        var p4 = "M15.5,298.4961671004924C401.25,298.4961671004924 401.25,250.4961671004925 787,250.4961671004925L787,267.5907018085229C401.25,267.5907018085229 401.25,315.59070180852285 15.5,315.59070180852285Z";
-        var p5 = "M15.5,327.59070180852285C401.25,327.59070180852285 401.25,267.5907018085229 787,267.5907018085229L787,280.6888040219667C401.25,280.6888040219667 401.25,340.68880402196663 15.5,340.68880402196663Z";
-        paths[3].setAttribute('d', p3);
-        paths[4].setAttribute('d', p4);
-        paths[5].setAttribute('d', p5);
-    }
+        }}
+        {js_code}
+    }}
     setTimeout(alignBundLinks, 300);
-});
+}});
 </script>
 """
         if "alignBundLinks" not in html_text:

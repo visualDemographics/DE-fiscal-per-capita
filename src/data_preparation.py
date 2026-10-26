@@ -163,9 +163,21 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
 
         # -------------------------------------------------------------------
         # STAGE 1: LAYER 1 (Influx) -> LAYER 2 (Nominal Entities)
-        # Flows ordered in descending order per sovereign tier
+        # Flows ordered in descending order per sovereign tier (SV -> Bund -> Bayern -> Munich)
         # -------------------------------------------------------------------
-        # 1. Federal Influx Streams -> Nominal Federal (Descending)
+        # 1. Pure Social Insurance Contributions -> Nominal Insurance (Descending)
+        add_flow("Krankenbeitraege_AG_AN", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
+                 s_year["Beitragseinnahmen_GKV_rein"], pop_denom=n_de_t1)
+        add_flow("Rentenbeitraege_AG_AN", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
+                 s_year["Beitragseinnahmen_GRV_rein"], pop_denom=n_de_t1)
+        add_flow("Pflegebeitraege_AG_AN", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
+                 s_year["Beitragseinnahmen_SPV_rein"], pop_denom=n_de_t1)
+        add_flow("Arbeitslosenbeitraege_BA", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
+                 s_year["Beitragseinnahmen_und_Umlagen_BA"], pop_denom=n_de_t1)
+        add_flow("Unfallbeitraege_DGUV", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
+                 s_year["Umlagesoll_Arbeitgeber_DGUV"], pop_denom=n_de_t1)
+
+        # 2. Federal Influx Streams -> Nominal Federal (Descending)
         fed_tax_sum = (
             b_year["Lohnsteuer_Bundesanteil"] + b_year["Veranlagte_Einkommensteuer_Bundesanteil"]
             + b_year["Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil"]
@@ -192,18 +204,6 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
                  b_year["Koerperschaftsteuer_Bundesanteil"] + b_year["Abgeltungsteuer_Bundesanteil"], pop_denom=n_de_t1)
         add_flow("Verwaltungseinnahmen_Beteiligungen_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
                  fed_admin, pop_denom=n_de_t1)
-
-        # 2. Pure Social Insurance Contributions -> Nominal Insurance (Descending)
-        add_flow("Krankenbeitraege_AG_AN", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
-                 s_year["Beitragseinnahmen_GKV_rein"], pop_denom=n_de_t1)
-        add_flow("Rentenbeitraege_AG_AN", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
-                 s_year["Beitragseinnahmen_GRV_rein"], pop_denom=n_de_t1)
-        add_flow("Pflegebeitraege_AG_AN", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
-                 s_year["Beitragseinnahmen_SPV_rein"], pop_denom=n_de_t1)
-        add_flow("Arbeitslosenbeitraege_BA", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
-                 s_year["Beitragseinnahmen_und_Umlagen_BA"], pop_denom=n_de_t1)
-        add_flow("Unfallbeitraege_DGUV", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
-                 s_year["Umlagesoll_Arbeitgeber_DGUV"], pop_denom=n_de_t1)
 
         # 3. Bavarian State Taxes & Own Revenues -> Nominal Bayern (Descending)
         tot_by_own = by_year["Gesamtvolumen_Staatshaushalt_Bayern"] - by_year["Bundeszuweisungen_an_Bayern"]
@@ -244,24 +244,7 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         # -------------------------------------------------------------------
         # STAGE 2: LAYER 2 (Nominal) -> LAYER 3 (Effective Entities & Transfers)
         # -------------------------------------------------------------------
-        # A) Bund Flows (ordered by target vertical position to prevent ribbon crossovers):
-        # 1. Federal retained core budget -> Effective Federal (horizontal at top)
-        fed_to_soz_mrd = b_year["Epl_11_Bundeszuschuss_Rentenversicherung"] + b_year["Epl_15_Gesundheit_Bundeszuschuss_GKV"]
-        bund_to_by_mrd = by_year["Bundeszuweisungen_an_Bayern"]
-        fed_retained_mrd = tot_bund - fed_to_soz_mrd - bund_to_by_mrd
-        add_flow("Nominal_Federal", "Effective_Federal", "Layer_2_Nominal", "Layer_3_Effective",
-                 fed_retained_mrd, pop_denom=n_de_t1)
-
-        # 2. Bundeszuschuss GRV + GKV -> Effective Insurance (slants down to middle)
-        add_flow("Nominal_Federal", "Effective_Insurance", "Layer_2_Nominal", "Layer_3_Effective",
-                 fed_to_soz_mrd, pop_denom=n_de_t1)
-
-        # 3. Bundeszuweisungen an Bayern -> Effective Bayern (slants down to lower tier)
-        pc_bund_to_by = (bund_to_by_mrd * scale_mrd) / n_by_t1
-        add_flow("Nominal_Federal", "Effective_Bayern", "Layer_2_Nominal", "Layer_3_Effective",
-                 bund_to_by_mrd, val_pc=pc_bund_to_by)
-
-        # B) Social Insurance: Pure contributions pass through
+        # A) Social Insurance: Pure contributions pass through (Tier 1 at top)
         tot_soz_contrib = (
             s_year["Beitragseinnahmen_GRV_rein"] + s_year["Beitragseinnahmen_GKV_rein"]
             + s_year["Beitragseinnahmen_SPV_rein"] + s_year["Beitragseinnahmen_und_Umlagen_BA"]
@@ -270,27 +253,43 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         add_flow("Nominal_Insurance", "Effective_Insurance", "Layer_2_Nominal", "Layer_3_Effective",
                  tot_soz_contrib, pop_denom=n_de_t1)
 
+        # B) Bund Flows (ordered by target vertical position: Effective_Insurance (up) -> Effective_Federal (across) -> Effective_Bayern (down)):
+        fed_to_soz_mrd = b_year["Epl_11_Bundeszuschuss_Rentenversicherung"] + b_year["Epl_15_Gesundheit_Bundeszuschuss_GKV"]
+        bund_to_by_mrd = by_year["Bundeszuweisungen_an_Bayern"]
+        fed_retained_mrd = tot_bund - fed_to_soz_mrd - bund_to_by_mrd
+
+        # 1. Bundeszuschuss GRV + GKV -> Effective Insurance (slants up to top tier)
+        add_flow("Nominal_Federal", "Effective_Insurance", "Layer_2_Nominal", "Layer_3_Effective",
+                 fed_to_soz_mrd, pop_denom=n_de_t1)
+
+        # 2. Federal retained core budget -> Effective Federal (horizontal at second tier)
+        add_flow("Nominal_Federal", "Effective_Federal", "Layer_2_Nominal", "Layer_3_Effective",
+                 fed_retained_mrd, pop_denom=n_de_t1)
+
+        # 3. Bundeszuweisungen an Bayern -> Effective Bayern (slants down to third tier)
+        pc_bund_to_by = (bund_to_by_mrd * scale_mrd) / n_by_t1
+        add_flow("Nominal_Federal", "Effective_Bayern", "Layer_2_Nominal", "Layer_3_Effective",
+                 bund_to_by_mrd, val_pc=pc_bund_to_by)
+
         # C) Munich & Bayern Intergovernmental Net Consolidation (Option A):
-        # Gross flows: Munich pays Bezirksumlage (m_to_by_mrd), Bayern pays FAG Schlüsselzuweisungen (by_to_m_mrd).
-        # Net municipal grant from Freistaat Bayern to Landeshauptstadt München:
         by_to_m_mrd = m_year["Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern"]
         m_to_by_mrd = m_year["Bezirksumlage_an_Bezirk_Oberbayern"] + m_year["Gewerbesteuerumlage_an_Bund_und_Land"]
-        by_net_to_m_mrd = by_to_m_mrd - m_to_by_mrd  # Net state grant to Munich (0.35 Mrd in 2024, 0.30 Mrd in 2023)
+        by_net_to_m_mrd = by_to_m_mrd - m_to_by_mrd
 
-        # 1. Munich retains own municipal tax revenues
-        add_flow("Nominal_Munich", "Effective_Munich", "Layer_2_Nominal", "Layer_3_Effective",
-                 tot_muc, pop_denom=n_muc_t1)
-
-        # 2. Net municipal equalization grant from Bavaria to Munich (denominated in Munich per capita at target)
-        pc_net_grant_muc = (by_net_to_m_mrd * scale_mrd) / n_muc_t1
-        add_flow("Nominal_Bayern", "Effective_Munich", "Layer_2_Nominal", "Layer_3_Effective",
-                 by_net_to_m_mrd, val_pc=pc_net_grant_muc)
-
-        # 3. Retained Bavarian state funds (own revenues minus net grant to Munich)
+        # 1. Retained Bavarian state funds -> Effective Bayern
         by_retained_mrd = tot_by_own - by_net_to_m_mrd
         pc_by_retained = (by_retained_mrd * scale_mrd) / n_by_t1
         add_flow("Nominal_Bayern", "Effective_Bayern", "Layer_2_Nominal", "Layer_3_Effective",
                  by_retained_mrd, val_pc=pc_by_retained)
+
+        # 2. Net municipal equalization grant from Bavaria to Munich
+        pc_net_grant_muc = (by_net_to_m_mrd * scale_mrd) / n_muc_t1
+        add_flow("Nominal_Bayern", "Effective_Munich", "Layer_2_Nominal", "Layer_3_Effective",
+                 by_net_to_m_mrd, val_pc=pc_net_grant_muc)
+
+        # 3. Munich retains own municipal tax revenues -> Effective Munich
+        add_flow("Nominal_Munich", "Effective_Munich", "Layer_2_Nominal", "Layer_3_Effective",
+                 tot_muc, pop_denom=n_muc_t1)
 
         # -------------------------------------------------------------------
         # STAGE 3: LAYER 3 (Effective Entities) -> LAYER 4 (Functional Buckets)
