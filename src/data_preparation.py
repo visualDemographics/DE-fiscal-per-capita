@@ -293,11 +293,9 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
 
         # -------------------------------------------------------------------
         # STAGE 3: LAYER 3 (Effective Entities) -> LAYER 4 (Functional Buckets)
-        # Flows ordered in sovereign tier order (SV -> Bund -> Bayern -> Munich)
-        # and descending target Layer 4 vertical order within each tier
+        # Outflows sorted strictly in descending order of per-capita volume (€/Kopf) within each group
         # -------------------------------------------------------------------
-        # 1. Effective Social Insurance (Normalized by n_de_t1)
-        # Order matches descending Layer 4 vertical order: Gesundheit (Rank 1) -> Rente (Rank 2) -> Arbeitsfoerderung (Rank 13) -> Ruecklagen (Rank 19)
+        # 1. Effective Social Insurance (Descending per-capita volume)
         add_flow("Effective_Insurance", "Gesundheit_und_Pflege", "Layer_3_Effective", "Layer_4_Buckets",
                  s_year["Gesamtausgaben_GKV"] + s_year["Gesamtausgaben_SPV"] + s_year["Heilbehandlung_und_Reha_DGUV"], pop_denom=n_de_t1)
         add_flow("Effective_Insurance", "Rente_und_Alterssicherung", "Layer_3_Effective", "Layer_4_Buckets",
@@ -310,7 +308,7 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         add_flow("Effective_Insurance", "Ruecklagen_und_Liquiditaetspuffer", "Layer_3_Effective", "Layer_4_Buckets",
                  soz_reserve_addition, pop_denom=n_de_t1)
 
-        # 2. Effective Federal (Normalized by n_de_t1)
+        # 2. Effective Federal (Sorted strictly descending by per-capita volume within group)
         bw_sv = b_year["Sondervermoegen_Bundeswehr_Ist"] if "Sondervermoegen_Bundeswehr_Ist" in b_year else 0.0
         fed_grants_other_laender = b_year["Bundeszuweisungen_an_Laender"] - bund_to_by_mrd
         fed_known_other_mrd = (
@@ -324,29 +322,28 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         )
         fed_admin_econ = fed_retained_mrd - fed_known_other_mrd
 
-        # Emitted in descending order of Layer 4 target buckets to eliminate ribbon crossovers
-        add_flow("Effective_Federal", "Verkehr_und_Infrastruktur", "Layer_3_Effective", "Layer_4_Buckets",
-                 b_year["Epl_12_Verkehr_und_digitale_Infrastruktur"], pop_denom=n_de_t1)
-        add_flow("Effective_Federal", "Sicherheit_und_Justiz", "Layer_3_Effective", "Layer_4_Buckets",
-                 b_year["Epl_06_Inneres_und_Heimat_Bundespolizei"] + b_year["Epl_08_Finanzverwaltung_Zoll"], pop_denom=n_de_t1)
-        add_flow("Effective_Federal", "Soziales_Jugend_Wohnungslosigkeit", "Layer_3_Effective", "Layer_4_Buckets",
-                 b_year["Epl_17_Familie_Senioren_Frauen_Jugend"], pop_denom=n_de_t1)
-        add_flow("Effective_Federal", "Hochschulen_und_Forschung", "Layer_3_Effective", "Layer_4_Buckets",
-                 b_year["Epl_30_Bildung_und_Forschung"], pop_denom=n_de_t1)
         add_flow("Effective_Federal", "Verteidigung_und_Aeusseres", "Layer_3_Effective", "Layer_4_Buckets",
                  b_year["Epl_14_Verteidigung_Kern"] + bw_sv + b_year["Epl_23_Entwicklung_und_Auswaertiges"], pop_denom=n_de_t1)
         add_flow("Effective_Federal", "Buergergeld_Grundsicherung", "Layer_3_Effective", "Layer_4_Buckets",
                  b_year["Epl_11_Buergergeld_Grundsicherung"] + b_year["Epl_11_Grundsicherung_im_Alter_SGB_XII"], pop_denom=n_de_t1)
+        add_flow("Effective_Federal", "Verkehr_und_Infrastruktur", "Layer_3_Effective", "Layer_4_Buckets",
+                 b_year["Epl_12_Verkehr_und_digitale_Infrastruktur"], pop_denom=n_de_t1)
         add_flow("Effective_Federal", "Wirtschaft_Klima_Verwaltung", "Layer_3_Effective", "Layer_4_Buckets",
                  fed_admin_econ, pop_denom=n_de_t1)
         add_flow("Effective_Federal", "Schuldendienst_und_Zinsen", "Layer_3_Effective", "Layer_4_Buckets",
                  b_year["Epl_32_Bundesschuld_Zinsen"], pop_denom=n_de_t1)
+        add_flow("Effective_Federal", "Hochschulen_und_Forschung", "Layer_3_Effective", "Layer_4_Buckets",
+                 b_year["Epl_30_Bildung_und_Forschung"], pop_denom=n_de_t1)
         add_flow("Effective_Federal", "Bundeszuweisungen_an_andere_Laender_Transfer", "Layer_3_Effective", "Layer_4_Buckets",
                  fed_grants_other_laender, pop_denom=n_de_t1)
+        add_flow("Effective_Federal", "Sicherheit_und_Justiz", "Layer_3_Effective", "Layer_4_Buckets",
+                 b_year["Epl_06_Inneres_und_Heimat_Bundespolizei"] + b_year["Epl_08_Finanzverwaltung_Zoll"], pop_denom=n_de_t1)
+        add_flow("Effective_Federal", "Soziales_Jugend_Wohnungslosigkeit", "Layer_3_Effective", "Layer_4_Buckets",
+                 b_year["Epl_17_Familie_Senioren_Frauen_Jugend"], pop_denom=n_de_t1)
         add_flow("Effective_Federal", "Wohnungsbau_und_Stadtplanung", "Layer_3_Effective", "Layer_4_Buckets",
                  b_year["Epl_25_Wohnungswesen_und_Staedtebau"], pop_denom=n_de_t1)
 
-        # 3. Effective Bayern (Normalized by n_by_t1)
+        # 3. Effective Bayern (Sorted strictly descending by per-capita volume within group)
         tot_by_eff_mrd = by_retained_mrd + bund_to_by_mrd
         by_known_mrd = (
             by_year["Laenderfinanzausgleich_Abfluss"] + by_year["Epl_05_Unterricht_und_Kultus_Schulen"]
@@ -356,23 +353,22 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         )
         by_rest_mrd = tot_by_eff_mrd - by_known_mrd
 
-        # Emitted in descending order of Layer 4 target buckets
-        add_flow("Effective_Bayern", "Gesundheit_und_Pflege", "Layer_3_Effective", "Layer_4_Buckets",
-                 by_year["Epl_14_Gesundheit_und_Pflege"], pop_denom=n_by_t1)
-        add_flow("Effective_Bayern", "Schulen_und_Kitas", "Layer_3_Effective", "Layer_4_Buckets",
-                 by_year["Epl_05_Unterricht_und_Kultus_Schulen"], pop_denom=n_by_t1)
-        add_flow("Effective_Bayern", "Verkehr_und_Infrastruktur", "Layer_3_Effective", "Layer_4_Buckets",
-                 by_year["Epl_09_Wohnen_Bau_Verkehr"], pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Wirtschaft_Verwaltung_Sonstiges", "Layer_3_Effective", "Layer_4_Buckets",
                  by_rest_mrd, pop_denom=n_by_t1)
+        add_flow("Effective_Bayern", "Schulen_und_Kitas", "Layer_3_Effective", "Layer_4_Buckets",
+                 by_year["Epl_05_Unterricht_und_Kultus_Schulen"], pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Sicherheit_und_Justiz", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Epl_03_Inneres_Polizei_Katastrophenschutz"] + by_year["Epl_04_Justiz_Gerichte_JVA"], pop_denom=n_by_t1)
-        add_flow("Effective_Bayern", "Hochschulen_und_Forschung", "Layer_3_Effective", "Layer_4_Buckets",
-                 by_year["Epl_15_Wissenschaft_und_Kunst_Universitaeten"], pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Laenderfinanzausgleich_Ausgleich_an_andere_Laender", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Laenderfinanzausgleich_Abfluss"], pop_denom=n_by_t1)
+        add_flow("Effective_Bayern", "Hochschulen_und_Forschung", "Layer_3_Effective", "Layer_4_Buckets",
+                 by_year["Epl_15_Wissenschaft_und_Kunst_Universitaeten"], pop_denom=n_by_t1)
+        add_flow("Effective_Bayern", "Verkehr_und_Infrastruktur", "Layer_3_Effective", "Layer_4_Buckets",
+                 by_year["Epl_09_Wohnen_Bau_Verkehr"], pop_denom=n_by_t1)
+        add_flow("Effective_Bayern", "Gesundheit_und_Pflege", "Layer_3_Effective", "Layer_4_Buckets",
+                 by_year["Epl_14_Gesundheit_und_Pflege"], pop_denom=n_by_t1)
 
-        # 4. Effective Munich (Normalized by n_muc_t1)
+        # 4. Effective Munich (Sorted strictly descending by per-capita volume within group)
         tot_muc_eff_mrd = tot_muc + by_net_to_m_mrd
         muc_known_mrd = (
             m_year["Referat_fuer_Bildung_und_Sport_RBS_Schulen_Kitas"]
@@ -385,19 +381,18 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         )
         muc_rest_mrd = tot_muc_eff_mrd - muc_known_mrd
 
-        # Emitted in descending order of Layer 4 target buckets
-        add_flow("Effective_Munich", "Gesundheit_und_Pflege", "Layer_3_Effective", "Layer_4_Buckets",
-                 m_year["Gesundheitsreferat_und_Muenchen_Klinik_Zuschuss"], pop_denom=n_muc_t1)
-        add_flow("Effective_Munich", "Schulen_und_Kitas", "Layer_3_Effective", "Layer_4_Buckets",
-                 m_year["Referat_fuer_Bildung_und_Sport_RBS_Schulen_Kitas"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Kommunale_Verwaltung_Sonstiges", "Layer_3_Effective", "Layer_4_Buckets",
                  muc_rest_mrd, pop_denom=n_muc_t1)
+        add_flow("Effective_Munich", "Schulen_und_Kitas", "Layer_3_Effective", "Layer_4_Buckets",
+                 m_year["Referat_fuer_Bildung_und_Sport_RBS_Schulen_Kitas"], pop_denom=n_muc_t1)
+        add_flow("Effective_Munich", "Soziales_Jugend_Wohnungslosigkeit", "Layer_3_Effective", "Layer_4_Buckets",
+                 m_year["Sozialreferat_Jugend_Soziales_Wohnungslosigkeit"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Verkehr_und_Infrastruktur", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Mobilitaetsreferat_und_Baureferat_Strassen_MVG"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Sicherheit_und_Justiz", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Kreisverwaltungsreferat_KVR_und_Branddirektion"], pop_denom=n_muc_t1)
-        add_flow("Effective_Munich", "Soziales_Jugend_Wohnungslosigkeit", "Layer_3_Effective", "Layer_4_Buckets",
-                 m_year["Sozialreferat_Jugend_Soziales_Wohnungslosigkeit"], pop_denom=n_muc_t1)
+        add_flow("Effective_Munich", "Gesundheit_und_Pflege", "Layer_3_Effective", "Layer_4_Buckets",
+                 m_year["Gesundheitsreferat_und_Muenchen_Klinik_Zuschuss"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Wohnungsbau_und_Stadtplanung", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Stadtplanung_und_Bauordnung_Wohnungsbau"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Kultur_und_Freizeit", "Layer_3_Effective", "Layer_4_Buckets",

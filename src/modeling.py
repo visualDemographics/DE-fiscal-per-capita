@@ -144,7 +144,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Nominal_Munich": "#d97706",
         "Effective_Munich": "#b45309",
         # Layer 4 Buckets: Single-parent buckets use their Layer 3 parent color, mixed use distinct colors
-        "Laenderfinanzausgleich": "#be123c",  # Crimson Outflow (BY transfer to other states)
+        "Laenderfinanzausgleich": "#0369a1",  # Same color as other Bavarian Layer 3 outflows
         "Rente_und_Alterssicherung": "#0f766e",  # Single parent: Effective_Insurance
         "Gesundheit_und_Pflege": "#10b981",      # Mixed (Insurance + BY + MUC)
         "Schulen_und_Kitas": "#3b82f6",          # Mixed (BY + MUC)
@@ -306,10 +306,8 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                     link_colors.append("rgba(217, 119, 6, 0.55)")
                 else:
                     link_colors.append("rgba(148, 163, 184, 0.50)")
-            else:  # Layer 3 -> 4
-                if tgt_name == "Laenderfinanzausgleich_Ausgleich_an_andere_Laender":
-                    link_colors.append("rgba(190, 18, 60, 0.85)")  # Crimson Outflow
-                elif src_name == "Effective_Federal":
+            else:  # Layer 3 -> 4: Outflows inherit the exact color of their Layer 3 parent
+                if src_name == "Effective_Federal":
                     link_colors.append("rgba(30, 58, 138, 0.45)")
                 elif src_name == "Effective_Insurance":
                     link_colors.append("rgba(13, 148, 136, 0.45)")
@@ -355,7 +353,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
 
             if k in l4_nodes:
                 parents_l3 = list({f["source_node"] for f in year_flows if f["target_node"] == k and f["layer_source"] == "Layer_3_Effective"})
-                if len(parents_l3) == 1 and k != "Laenderfinanzausgleich_Ausgleich_an_andere_Laender":
+                if len(parents_l3) == 1:
                     single_parent = parents_l3[0]
                     l3_parent_colors = {
                         "Effective_Insurance": "#0f766e",
@@ -364,8 +362,6 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                         "Effective_Munich": "#b45309",
                     }
                     clr = l3_parent_colors.get(single_parent, "#475569")
-                elif k == "Laenderfinanzausgleich_Ausgleich_an_andere_Laender":
-                    clr = "#be123c"  # Crimson outflow for LFA
                 else:
                     mixed_colors = {
                         "Gesundheit_und_Pflege": "#10b981",          # Emerald
@@ -399,7 +395,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             elif "Laenderfinanzausgleich" in k:
                 enhanced_labels.append(
                     f"<b>{base_lbl}</b><br><b>-737 €/Kopf</b> (-{vol_mrd:.2f} Mrd. €)<br>"
-                    f"<span style='font-size:10px;color:#991b1b'>Nettoabfluss Bayern</span>"
+                    f"<span style='font-size:10px;color:#0369a1'>Nettoabfluss Bayern</span>"
                 )
             elif vol_mrd >= 1.0:
                 enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({vol_mrd:.2f} Mrd. €)")
@@ -501,19 +497,19 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 bgcolor="rgba(224, 231, 255, 0.96)", bordercolor="#6366f1", borderwidth=1.5, borderpad=5,
             ),
             dict(
-                x=0.485, y=0.313, xref="paper", yref="paper",
+                x=0.485, y=0.316, xref="paper", yref="paper",
                 text=f"<b>Landeshaushalt Bayern:</b> {by_mrd} Mrd. € ({by_pc} €/Kopf)",
                 showarrow=False, font=dict(size=11, color="#0369a1", family="Helvetica, Arial"),
                 bgcolor="rgba(240, 249, 255, 0.94)", bordercolor="#0284c7", borderwidth=1, borderpad=4,
             ),
             dict(
-                x=0.485, y=0.206, xref="paper", yref="paper",
+                x=0.485, y=0.229, xref="paper", yref="paper",
                 text=f"<b>Netto-FAG an München:</b> <b>{fag_mrd} Mrd. €</b> ({fag_pc} €/Kopf)",
                 showarrow=False, font=dict(size=11, color="#b45309", family="Helvetica, Arial"),
                 bgcolor="rgba(254, 243, 199, 0.96)", bordercolor="#f59e0b", borderwidth=1.5, borderpad=5,
             ),
             dict(
-                x=0.485, y=0.119, xref="paper", yref="paper",
+                x=0.485, y=0.116, xref="paper", yref="paper",
                 text=f"<b>Kommunalhaushalt München:</b> {muc_mrd} Mrd. € ({muc_pc} €/Kopf)",
                 showarrow=False, font=dict(size=11, color="#92400e", family="Helvetica, Arial"),
                 bgcolor="rgba(255, 251, 235, 0.94)", bordercolor="#d97706", borderwidth=1, borderpad=4,
@@ -528,8 +524,8 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             dict(
                 x=0.98, y=-0.04, xref="paper", yref="paper", xanchor="right",
                 text=f"<b>Länderfinanzausgleich:</b> Bayern transferiert <b>{lfa_mrd} Mrd. €</b> ({lfa_pc} €/bayer. Kopf) an andere Bundesländer.",
-                showarrow=False, font=dict(size=12, color="#991b1b", family="Helvetica, Arial"),
-                bgcolor="#fee2e2", bordercolor="#ef4444", borderwidth=1, borderpad=6,
+                showarrow=False, font=dict(size=12, color="#0369a1", family="Helvetica, Arial"),
+                bgcolor="#f0f9ff", bordercolor="#0284c7", borderwidth=1, borderpad=6,
             )
         ]
 
@@ -602,18 +598,22 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
 
 def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
     """Post-process rendered Sankey artifacts to ensure strict monotonic descending order
-    on Layer 2 link attachments without ribbon crossovers."""
+    on Layer 2 link attachments and eliminate Bayern -> Munich ribbon crossover."""
     import re
 
-    # 1. Update SVG paths for Bund Layer 1 -> Layer 2 (paths[5:11])
-    updated_ribbons = []
+    updated_bund_ribbons = []
+    updated_by_muc_ribbons = []
     js_statements = []
+
+    # 1. Update SVG paths
     if os.path.exists(out_svg_path):
         import xml.etree.ElementTree as ET
 
         tree = ET.parse(out_svg_path)
         root = tree.getroot()
         paths = [p for p in root.iter("{http://www.w3.org/2000/svg}path") if "C" in p.attrib.get("d", "")]
+
+        # A) Bund Layer 1 -> Layer 2 (paths[5:11])
         if len(paths) >= 11:
             bund_paths = paths[5:11]
             parsed_bund = []
@@ -651,19 +651,87 @@ def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
                         f"L{x1},{y1_bot:.6f}C{cx:.6f},{y1_bot:.6f} {cx:.6f},{y0_bot:.6f} {x0},{y0_bot:.6f}Z"
                     )
                     item["p"].attrib["d"] = new_d
-                    updated_ribbons.append((x0, x1, cx, y0_top, y0_bot, y1_top, y1_bot))
+                    updated_bund_ribbons.append((x0, x1, cx, y0_top, y0_bot, y1_top, y1_bot))
                     js_statements.append(f"paths[{5 + idx_offset}].setAttribute('d', '{new_d}');")
 
-                tree.write(out_svg_path, encoding="utf-8", xml_declaration=True)
+        # B) Bayern & Munich Layer 2 -> Layer 3 (paths[25:28])
+        # User instruction: Bayern -> Munich transfer exits Bayern at the below part
+        # and enters Effective Munich in the top part.
+        if len(paths) >= 28:
+            p25, p26, p27 = paths[25], paths[26], paths[27]
+            m25 = re.match(r"M([-\d\.]+),\s*([-\d\.]+)C([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)L([-\d\.]+),\s*([-\d\.]+)", p25.attrib["d"])
+            m26 = re.match(r"M([-\d\.]+),\s*([-\d\.]+)C([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)L([-\d\.]+),\s*([-\d\.]+)", p26.attrib["d"])
+            m27 = re.match(r"M([-\d\.]+),\s*([-\d\.]+)C([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)L([-\d\.]+),\s*([-\d\.]+)", p27.attrib["d"])
+
+            if m25 and m26 and m27:
+                h25 = float(m25.group(10)) - float(m25.group(8))
+                h26 = float(m26.group(10)) - float(m26.group(8))
+                h27 = float(m27.group(10)) - float(m27.group(8))
+
+                x0_by = float(m25.group(1))
+                x1_by = float(m25.group(7))
+                cx_by = (x0_by + x1_by) / 2.0
+
+                # 1. Nominal Bayern exit: Path 25 at top, Path 26 in below part
+                by_src_top = min(float(m25.group(2)), float(m26.group(2)))
+                y0_top_25 = by_src_top
+                y0_bot_25 = y0_top_25 + h25
+                y0_top_26 = y0_bot_25
+                y0_bot_26 = y0_top_26 + h26
+
+                # Target for Path 25 in Effective Bayern (enters at original y1):
+                y1_top_25 = float(m25.group(8))
+                y1_bot_25 = y1_top_25 + h25
+
+                # 2. Effective Munich entry: Path 26 in top part, Path 27 below it
+                muc_tgt_top = min(float(m26.group(8)), float(m27.group(8)))
+                y1_top_26 = muc_tgt_top
+                y1_bot_26 = y1_top_26 + h26
+                y1_top_27 = y1_bot_26
+                y1_bot_27 = y1_top_27 + h27
+
+                # Source for Path 27 (Nominal Munich):
+                y0_top_27 = float(m27.group(2))
+                y0_bot_27 = y0_top_27 + h27
+
+                new_d25 = (
+                    f"M{x0_by},{y0_top_25:.6f}C{cx_by:.6f},{y0_top_25:.6f} {cx_by:.6f},{y1_top_25:.6f} {x1_by},{y1_top_25:.6f}"
+                    f"L{x1_by},{y1_bot_25:.6f}C{cx_by:.6f},{y1_bot_25:.6f} {cx_by:.6f},{y0_bot_25:.6f} {x0_by},{y0_bot_25:.6f}Z"
+                )
+                new_d26 = (
+                    f"M{x0_by},{y0_top_26:.6f}C{cx_by:.6f},{y0_top_26:.6f} {cx_by:.6f},{y1_top_26:.6f} {x1_by},{y1_top_26:.6f}"
+                    f"L{x1_by},{y1_bot_26:.6f}C{cx_by:.6f},{y1_bot_26:.6f} {cx_by:.6f},{y0_bot_26:.6f} {x0_by},{y0_bot_26:.6f}Z"
+                )
+                new_d27 = (
+                    f"M{x0_by},{y0_top_27:.6f}C{cx_by:.6f},{y0_top_27:.6f} {cx_by:.6f},{y1_top_27:.6f} {x1_by},{y1_top_27:.6f}"
+                    f"L{x1_by},{y1_bot_27:.6f}C{cx_by:.6f},{y1_bot_27:.6f} {cx_by:.6f},{y0_bot_27:.6f} {x0_by},{y0_bot_27:.6f}Z"
+                )
+
+                p25.attrib["d"] = new_d25
+                p26.attrib["d"] = new_d26
+                p27.attrib["d"] = new_d27
+
+                js_statements.append(f"paths[25].setAttribute('d', '{new_d25}');")
+                js_statements.append(f"paths[26].setAttribute('d', '{new_d26}');")
+                js_statements.append(f"paths[27].setAttribute('d', '{new_d27}');")
+
+                updated_by_muc_ribbons = [
+                    (x0_by, x1_by, cx_by, y0_top_25, y0_bot_25, y1_top_25, y1_bot_25, (2, 132, 199, int(255 * 0.55))),
+                    (x0_by, x1_by, cx_by, y0_top_26, y0_bot_26, y1_top_26, y1_bot_26, (14, 165, 233, int(255 * 0.70))),
+                    (x0_by, x1_by, cx_by, y0_top_27, y0_bot_27, y1_top_27, y1_bot_27, (217, 119, 6, int(255 * 0.55))),
+                ]
+
+        tree.write(out_svg_path, encoding="utf-8", xml_declaration=True)
 
     # 2. Update high-resolution PNG ribbons
-    if os.path.exists(out_png_path) and updated_ribbons:
+    if os.path.exists(out_png_path) and (updated_bund_ribbons or updated_by_muc_ribbons):
         from PIL import Image, ImageDraw
         import numpy as np
 
         im = Image.open(out_png_path).convert("RGBA")
         overlay = Image.new("RGBA", im.size, (255, 255, 255, 0))
         draw = ImageDraw.Draw(overlay)
+        base_draw = ImageDraw.Draw(im)
 
         scale = 2.0
         ox, oy = 50.0, 150.0
@@ -678,39 +746,101 @@ def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
             y = mt**3 * p0[1] + 3 * mt**2 * t * p1[1] + 3 * mt * t**2 * p2[1] + t**3 * p3[1]
             return list(zip(x, y))
 
-        min_y0 = min(r[3] for r in updated_ribbons)
-        max_y0 = max(r[4] for r in updated_ribbons)
-        min_y1 = min(r[5] for r in updated_ribbons)
-        max_y1 = max(r[6] for r in updated_ribbons)
-        x0_val = updated_ribbons[0][0]
-        x1_val = updated_ribbons[0][1]
+        # A) Draw Bund Layer 1 -> Layer 2
+        if updated_bund_ribbons:
+            min_y0 = min(r[3] for r in updated_bund_ribbons)
+            max_y0 = max(r[4] for r in updated_bund_ribbons)
+            min_y1 = min(r[5] for r in updated_bund_ribbons)
+            max_y1 = max(r[6] for r in updated_bund_ribbons)
+            x0_val = updated_bund_ribbons[0][0]
+            x1_val = updated_bund_ribbons[0][1]
 
-        clear_box = [
-            to_px(x0_val - 0.5, min(min_y0, min_y1) - 2.0),
-            to_px(x1_val, min(min_y0, min_y1) - 2.0),
-            to_px(x1_val, max(max_y0, max_y1) + 2.0),
-            to_px(x0_val - 0.5, max(max_y0, max_y1) + 2.0),
-        ]
-        base_draw = ImageDraw.Draw(im)
-        base_draw.polygon(clear_box, fill=(248, 250, 252, 255))
+            clear_box = [
+                to_px(x0_val - 0.5, min(min_y0, min_y1) - 2.0),
+                to_px(x1_val, min(min_y0, min_y1) - 2.0),
+                to_px(x1_val, max(max_y0, max_y1) + 2.0),
+                to_px(x0_val - 0.5, max(max_y0, max_y1) + 2.0),
+            ]
+            base_draw.polygon(clear_box, fill=(248, 250, 252, 255))
 
-        link_color = (30, 58, 138, int(255 * 0.40))
-        for x0, x1, cx, y0_top, y0_bot, y1_top, y1_bot in updated_ribbons:
-            p0_top = to_px(x0, y0_top)
-            p1_top = to_px(cx, y0_top)
-            p2_top = to_px(cx, y1_top)
-            p3_top = to_px(x1, y1_top)
+            link_color_bund = (30, 58, 138, int(255 * 0.40))
+            for x0, x1, cx, y0_top, y0_bot, y1_top, y1_bot in updated_bund_ribbons:
+                p0_top = to_px(x0, y0_top)
+                p1_top = to_px(cx, y0_top)
+                p2_top = to_px(cx, y1_top)
+                p3_top = to_px(x1, y1_top)
 
-            p0_bot = to_px(x1, y1_bot)
-            p1_bot = to_px(cx, y1_bot)
-            p2_bot = to_px(cx, y0_bot)
-            p3_bot = to_px(x0, y0_bot)
+                p0_bot = to_px(x1, y1_bot)
+                p1_bot = to_px(cx, y1_bot)
+                p2_bot = to_px(cx, y0_bot)
+                p3_bot = to_px(x0, y0_bot)
 
-            top_curve = eval_bezier(p0_top, p1_top, p2_top, p3_top)
-            bot_curve = eval_bezier(p0_bot, p1_bot, p2_bot, p3_bot)
-            draw.polygon(top_curve + bot_curve, fill=link_color)
+                top_curve = eval_bezier(p0_top, p1_top, p2_top, p3_top)
+                bot_curve = eval_bezier(p0_bot, p1_bot, p2_bot, p3_bot)
+                draw.polygon(top_curve + bot_curve, fill=link_color_bund)
+
+        # B) Draw Bayern & Munich Layer 2 -> Layer 3 (preserving annotations on top)
+        if updated_by_muc_ribbons:
+            # Crop badges before clearing so they can be re-composited on top of new ribbons
+            badge_crops = []
+            for g in root.iter("{http://www.w3.org/2000/svg}g"):
+                if g.attrib.get("class") == "cursor-pointer":
+                    txt = "".join(g.itertext())
+                    if any(k in txt for k in ["Landeshaushalt", "Netto-FAG", "Kommunalhaushalt"]):
+                        tr = g.attrib.get("transform", "")
+                        m_tr = re.match(r"translate\(([-\d\.]+),\s*([-\d\.]+)\)", tr)
+                        rect = g.find("{http://www.w3.org/2000/svg}rect")
+                        if m_tr and rect is not None:
+                            tx, ty = float(m_tr.group(1)), float(m_tr.group(2))
+                            w_val = rect.attrib.get("width")
+                            h_val = rect.attrib.get("height")
+                            if w_val is not None and h_val is not None:
+                                w = float(w_val)
+                                h = float(h_val)
+                                px0 = int(round(scale * tx)) - 1
+                                py0 = int(round(scale * ty)) - 1
+                                px1 = int(round(scale * (tx + w))) + 1
+                                py1 = int(round(scale * (ty + h))) + 1
+                                cropped = im.crop((px0, py0, px1, py1))
+                                badge_crops.append((px0, py0, cropped))
+
+            min_y0_bm = min(r[3] for r in updated_by_muc_ribbons)
+            max_y0_bm = max(r[4] for r in updated_by_muc_ribbons)
+            min_y1_bm = min(r[5] for r in updated_by_muc_ribbons)
+            max_y1_bm = max(r[6] for r in updated_by_muc_ribbons)
+            x0_bm = updated_by_muc_ribbons[0][0]
+            x1_bm = updated_by_muc_ribbons[0][1]
+
+            clear_box_bm = [
+                to_px(x0_bm - 0.5, min(min_y0_bm, min_y1_bm) - 2.0),
+                to_px(x1_bm, min(min_y0_bm, min_y1_bm) - 2.0),
+                to_px(x1_bm, max(max_y0_bm, max_y1_bm) + 2.0),
+                to_px(x0_bm - 0.5, max(max_y0_bm, max_y1_bm) + 2.0),
+            ]
+            base_draw.polygon(clear_box_bm, fill=(248, 250, 252, 255))
+
+            for x0, x1, cx, y0_top, y0_bot, y1_top, y1_bot, clr in updated_by_muc_ribbons:
+                p0_top = to_px(x0, y0_top)
+                p1_top = to_px(cx, y0_top)
+                p2_top = to_px(cx, y1_top)
+                p3_top = to_px(x1, y1_top)
+
+                p0_bot = to_px(x1, y1_bot)
+                p1_bot = to_px(cx, y1_bot)
+                p2_bot = to_px(cx, y0_bot)
+                p3_bot = to_px(x0, y0_bot)
+
+                top_curve = eval_bezier(p0_top, p1_top, p2_top, p3_top)
+                bot_curve = eval_bezier(p0_bot, p1_bot, p2_bot, p3_bot)
+                draw.polygon(top_curve + bot_curve, fill=clr)
 
         im = Image.alpha_composite(im, overlay)
+
+        # Paste badges cleanly back on top of composite ribbons
+        if updated_by_muc_ribbons and badge_crops:
+            for px0, py0, cropped in badge_crops:
+                im.paste(cropped, (px0, py0))
+
         im.save(out_png_path, "PNG")
 
     # 3. Inject interactive script into HTML
@@ -722,20 +852,26 @@ def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
         script_snip = f"""
 <script>
 window.addEventListener("DOMContentLoaded", function() {{
-    function alignBundLinks() {{
+    function alignSankeyLinks() {{
         var paths = document.querySelectorAll('.sankey-link');
-        if (!paths || paths.length < 11) {{
-            setTimeout(alignBundLinks, 100);
+        if (!paths || paths.length < 28) {{
+            setTimeout(alignSankeyLinks, 100);
             return;
         }}
         {js_code}
     }}
-    setTimeout(alignBundLinks, 300);
+    setTimeout(alignSankeyLinks, 300);
+    setTimeout(alignSankeyLinks, 800);
+    document.addEventListener('click', function() {{
+        setTimeout(alignSankeyLinks, 200);
+    }});
 }});
 </script>
 """
-        if "alignBundLinks" not in html_text:
-            if "</body>" in html_text:
+        if "alignSankeyLinks" not in html_text:
+            if "alignBundLinks" in html_text:
+                html_text = re.sub(r"<script>\s*window\.addEventListener\(\"DOMContentLoaded\",\s*function\(\)\s*\{.*?alignBundLinks.*?</script>", script_snip.strip(), html_text, flags=re.DOTALL)
+            elif "</body>" in html_text:
                 html_text = html_text.replace("</body>", f"{script_snip}</body>")
             else:
                 html_text += script_snip
@@ -946,7 +1082,7 @@ def render_panel_e(flows, plots_dir):
         "Buergergeld_Grundsicherung": ("Bürgergeld & Grundsicherung", "#ec4899"),
         "Schuldendienst_und_Zinsen": ("Schuldendienst & Zinsen (Bund)", "#64748b"),
         "Wohnungsbau_und_Stadtplanung": ("Wohnungsbau & Stadtplanung", "#d97706"),
-        "Laenderfinanzausgleich_Ausgleich_an_andere_Laender": ("Länderfinanzausgleich (Abfluss BY)", "#be123c"),
+        "Laenderfinanzausgleich_Ausgleich_an_andere_Laender": ("Länderfinanzausgleich (Abfluss BY)", "#0369a1"),
         "Kultur_und_Freizeit": ("Kultur & Freizeit (München)", "#14b8a6"),
     }
 
