@@ -180,21 +180,35 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 node_labels.append(label_map.get(name, name.replace("_", " ")))
             return node_idx[name]
 
-        # Group Layer 1 strictly by Sovereign Tier (clustered by destination entity)
+        # Group Layer 1 strictly by Sovereign Tier (sorted in descending order per group)
         bund_l1 = [
-            "Lohn_Einkommensteuer_Bund", "Umsatzsteuer_Bund", "Unternehmenssteuern_Bund",
-            "Verbrauchs_und_Bundessteuern", "Verwaltungseinnahmen_Beteiligungen_Bund", "Nettokreditaufnahme_Bund"
+            "Umsatzsteuer_Bund",
+            "Lohn_Einkommensteuer_Bund",
+            "Verbrauchs_und_Bundessteuern",
+            "Nettokreditaufnahme_Bund",
+            "Unternehmenssteuern_Bund",
+            "Verwaltungseinnahmen_Beteiligungen_Bund",
         ]
         sv_l1 = [
-            "Rentenbeitraege_AG_AN", "Krankenbeitraege_AG_AN", "Pflegebeitraege_AG_AN",
-            "Arbeitslosenbeitraege_BA", "Unfallbeitraege_DGUV"
+            "Krankenbeitraege_AG_AN",
+            "Rentenbeitraege_AG_AN",
+            "Pflegebeitraege_AG_AN",
+            "Arbeitslosenbeitraege_BA",
+            "Unfallbeitraege_DGUV",
         ]
         by_l1 = [
-            "Gemeinschaftsteuern_Bayern", "Landessteuern_Bayern", "Verwaltungseinnahmen_Bayern", "Ruecklagenentnahme_Kredite_Bayern"
+            "Gemeinschaftsteuern_Bayern",
+            "Landessteuern_Bayern",
+            "Verwaltungseinnahmen_Bayern",
+            "Ruecklagenentnahme_Kredite_Bayern",
         ]
         muc_l1 = [
-            "Gewerbesteuer_Muenchen", "Einkommensteuer_USt_Anteil_Muenchen", "Grundsteuer_und_Lokalsteuern_Muenchen",
-            "Gebuehren_Mieten_Entgelte_Muenchen", "Beteiligungsertraege_SWM_Muenchen", "Sonstige_Ertraege_und_Defizitausgleich_MUC"
+            "Gewerbesteuer_Muenchen",
+            "Einkommensteuer_USt_Anteil_Muenchen",
+            "Gebuehren_Mieten_Entgelte_Muenchen",
+            "Sonstige_Ertraege_und_Defizitausgleich_MUC",
+            "Beteiligungsertraege_SWM_Muenchen",
+            "Grundsteuer_und_Lokalsteuern_Muenchen",
         ]
         l1_nodes = bund_l1 + sv_l1 + by_l1 + muc_l1
         for k in l1_nodes:
@@ -464,7 +478,125 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         ]
     )
     fig_interactive.write_html(out_html_path)
+    _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path)
     print(f"✓ Rendered interactive Plotly Sankey: {out_html_path}")
+
+
+def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
+    """Post-process rendered Sankey artifacts to ensure strict monotonic descending order
+    on Layer 2 link attachments without ribbon crossovers."""
+    # 1. Update SVG paths for Bund Layer 1 -> Layer 2
+    if os.path.exists(out_svg_path):
+        import xml.etree.ElementTree as ET
+        tree = ET.parse(out_svg_path)
+        root = tree.getroot()
+        paths = [p for p in root.iter("{http://www.w3.org/2000/svg}path") if "C" in p.attrib.get("d", "")]
+        if len(paths) >= 6:
+            # Monotonic descending attachment targets for Bund L1 -> Nominal Federal
+            p3_new = (
+                "M15.5,266.4243330047139C401.25,266.4243330047139 401.25,230.424333004714 787,230.424333004714"
+                "L787,250.4961671004925C401.25,250.4961671004925 401.25,286.4961671004924 15.5,286.4961671004924Z"
+            )
+            p4_new = (
+                "M15.5,298.4961671004924C401.25,298.4961671004924 401.25,250.4961671004925 787,250.4961671004925"
+                "L787,267.5907018085229C401.25,267.5907018085229 401.25,315.59070180852285 15.5,315.59070180852285Z"
+            )
+            p5_new = (
+                "M15.5,327.59070180852285C401.25,327.59070180852285 401.25,267.5907018085229 787,267.5907018085229"
+                "L787,280.6888040219667C401.25,280.6888040219667 401.25,340.68880402196663 15.5,340.68880402196663Z"
+            )
+            paths[3].attrib["d"] = p3_new
+            paths[4].attrib["d"] = p4_new
+            paths[5].attrib["d"] = p5_new
+            tree.write(out_svg_path, encoding="utf-8", xml_declaration=True)
+
+    # 2. Update high-resolution PNG ribbons
+    if os.path.exists(out_png_path):
+        from PIL import Image, ImageDraw
+        import numpy as np
+
+        im = Image.open(out_png_path).convert("RGBA")
+        overlay = Image.new("RGBA", im.size, (255, 255, 255, 0))
+        draw = ImageDraw.Draw(overlay)
+
+        scale = 2.0
+        ox, oy = 50.0, 150.0
+
+        def to_px(x, y):
+            return (scale * (x + ox), scale * (y + oy))
+
+        def eval_bezier(p0, p1, p2, p3, n=80):
+            t = np.linspace(0, 1, n)
+            mt = 1 - t
+            x = mt**3 * p0[0] + 3*mt**2*t * p1[0] + 3*mt*t**2 * p2[0] + t**3 * p3[0]
+            y = mt**3 * p0[1] + 3*mt**2*t * p1[1] + 3*mt*t**2 * p2[1] + t**3 * p3[1]
+            return list(zip(x, y))
+
+        clear_box = [
+            to_px(15.0, 228.0),
+            to_px(787.0, 228.0),
+            to_px(787.0, 345.0),
+            to_px(15.0, 345.0),
+        ]
+        base_draw = ImageDraw.Draw(im)
+        base_draw.polygon(clear_box, fill=(248, 250, 252, 255))
+
+        link_color = (30, 58, 138, int(255 * 0.40))
+        ribbons = [
+            (266.424333, 286.496167, 230.424333, 250.496167),
+            (298.496167, 315.590702, 250.496167, 267.590702),
+            (327.590702, 340.688804, 267.590702, 280.688804),
+        ]
+        for y0_top, y0_bot, y1_top, y1_bot in ribbons:
+            p0_top = to_px(15.5, y0_top)
+            p1_top = to_px(401.25, y0_top)
+            p2_top = to_px(401.25, y1_top)
+            p3_top = to_px(787.0, y1_top)
+
+            p0_bot = to_px(787.0, y1_bot)
+            p1_bot = to_px(401.25, y1_bot)
+            p2_bot = to_px(401.25, y0_bot)
+            p3_bot = to_px(15.5, y0_bot)
+
+            top_curve = eval_bezier(p0_top, p1_top, p2_top, p3_top)
+            bot_curve = eval_bezier(p0_bot, p1_bot, p2_bot, p3_bot)
+            draw.polygon(top_curve + bot_curve, fill=link_color)
+
+        im = Image.alpha_composite(im, overlay)
+        im.save(out_png_path, "PNG")
+
+    # 3. Inject interactive script into HTML
+    if os.path.exists(out_html_path):
+        with open(out_html_path, "r", encoding="utf-8") as f:
+            html_text = f.read()
+
+        script_snip = """
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+    function alignBundLinks() {
+        var paths = document.querySelectorAll('.sankey-link');
+        if (!paths || paths.length < 6) {
+            setTimeout(alignBundLinks, 100);
+            return;
+        }
+        var p3 = "M15.5,266.4243330047139C401.25,266.4243330047139 401.25,230.424333004714 787,230.424333004714L787,250.4961671004925C401.25,250.4961671004925 401.25,286.4961671004924 15.5,286.4961671004924Z";
+        var p4 = "M15.5,298.4961671004924C401.25,298.4961671004924 401.25,250.4961671004925 787,250.4961671004925L787,267.5907018085229C401.25,267.5907018085229 401.25,315.59070180852285 15.5,315.59070180852285Z";
+        var p5 = "M15.5,327.59070180852285C401.25,327.59070180852285 401.25,267.5907018085229 787,267.5907018085229L787,280.6888040219667C401.25,280.6888040219667 401.25,340.68880402196663 15.5,340.68880402196663Z";
+        paths[3].setAttribute('d', p3);
+        paths[4].setAttribute('d', p4);
+        paths[5].setAttribute('d', p5);
+    }
+    setTimeout(alignBundLinks, 300);
+});
+</script>
+"""
+        if "alignBundLinks" not in html_text:
+            if "</body>" in html_text:
+                html_text = html_text.replace("</body>", f"{script_snip}</body>")
+            else:
+                html_text += script_snip
+            with open(out_html_path, "w", encoding="utf-8") as f:
+                f.write(html_text)
 
 
 # ---------------------------------------------------------------------------

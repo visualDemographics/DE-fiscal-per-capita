@@ -163,20 +163,9 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
 
         # -------------------------------------------------------------------
         # STAGE 1: LAYER 1 (Influx) -> LAYER 2 (Nominal Entities)
+        # Flows ordered in descending order per sovereign tier
         # -------------------------------------------------------------------
-        # 1. Federal Influx Streams -> Nominal Federal
-        add_flow("Lohn_Einkommensteuer_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
-                 b_year["Lohnsteuer_Bundesanteil"] + b_year["Veranlagte_Einkommensteuer_Bundesanteil"], pop_denom=n_de_t1)
-        add_flow("Umsatzsteuer_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
-                 b_year["Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil"], pop_denom=n_de_t1)
-        add_flow("Unternehmenssteuern_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
-                 b_year["Koerperschaftsteuer_Bundesanteil"] + b_year["Abgeltungsteuer_Bundesanteil"], pop_denom=n_de_t1)
-        add_flow("Verbrauchs_und_Bundessteuern", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
-                 b_year["Energiesteuer"] + b_year["Tabaksteuer"] + b_year["Solidaritaetszuschlag"]
-                 + b_year["Versicherungssteuer"] + b_year["Kraftfahrzeugsteuer"] + b_year["Stromsteuer"]
-                 + b_year["Sonstige_Bundessteuern"], pop_denom=n_de_t1)
-
-        # Federal Non-Tax Revenue (Administrative + Enterprises + Net Borrowing/Reserves)
+        # 1. Federal Influx Streams -> Nominal Federal (Descending)
         fed_tax_sum = (
             b_year["Lohnsteuer_Bundesanteil"] + b_year["Veranlagte_Einkommensteuer_Bundesanteil"]
             + b_year["Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil"]
@@ -188,16 +177,27 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         fed_nontax = tot_bund - fed_tax_sum
         fed_nka = b_year["Nettokreditaufnahme"] if year == 2024 else (b_year["Nettokreditaufnahme"] + b_year["Ruecklagenentnahme"])
         fed_admin = fed_nontax - fed_nka
-        add_flow("Verwaltungseinnahmen_Beteiligungen_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
-                 fed_admin, pop_denom=n_de_t1)
+
+        add_flow("Umsatzsteuer_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
+                 b_year["Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil"], pop_denom=n_de_t1)
+        add_flow("Lohn_Einkommensteuer_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
+                 b_year["Lohnsteuer_Bundesanteil"] + b_year["Veranlagte_Einkommensteuer_Bundesanteil"], pop_denom=n_de_t1)
+        add_flow("Verbrauchs_und_Bundessteuern", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
+                 b_year["Energiesteuer"] + b_year["Tabaksteuer"] + b_year["Solidaritaetszuschlag"]
+                 + b_year["Versicherungssteuer"] + b_year["Kraftfahrzeugsteuer"] + b_year["Stromsteuer"]
+                 + b_year["Sonstige_Bundessteuern"], pop_denom=n_de_t1)
         add_flow("Nettokreditaufnahme_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
                  fed_nka, pop_denom=n_de_t1)
+        add_flow("Unternehmenssteuern_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
+                 b_year["Koerperschaftsteuer_Bundesanteil"] + b_year["Abgeltungsteuer_Bundesanteil"], pop_denom=n_de_t1)
+        add_flow("Verwaltungseinnahmen_Beteiligungen_Bund", "Nominal_Federal", "Layer_1_Influx", "Layer_2_Nominal",
+                 fed_admin, pop_denom=n_de_t1)
 
-        # 2. Pure Social Insurance Contributions -> Nominal Insurance
-        add_flow("Rentenbeitraege_AG_AN", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
-                 s_year["Beitragseinnahmen_GRV_rein"], pop_denom=n_de_t1)
+        # 2. Pure Social Insurance Contributions -> Nominal Insurance (Descending)
         add_flow("Krankenbeitraege_AG_AN", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
                  s_year["Beitragseinnahmen_GKV_rein"], pop_denom=n_de_t1)
+        add_flow("Rentenbeitraege_AG_AN", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
+                 s_year["Beitragseinnahmen_GRV_rein"], pop_denom=n_de_t1)
         add_flow("Pflegebeitraege_AG_AN", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
                  s_year["Beitragseinnahmen_SPV_rein"], pop_denom=n_de_t1)
         add_flow("Arbeitslosenbeitraege_BA", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
@@ -205,7 +205,7 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         add_flow("Unfallbeitraege_DGUV", "Nominal_Insurance", "Layer_1_Influx", "Layer_2_Nominal",
                  s_year["Umlagesoll_Arbeitgeber_DGUV"], pop_denom=n_de_t1)
 
-        # 3. Bavarian State Taxes & Own Revenues -> Nominal Bayern
+        # 3. Bavarian State Taxes & Own Revenues -> Nominal Bayern (Descending)
         tot_by_own = by_year["Gesamtvolumen_Staatshaushalt_Bayern"] - by_year["Bundeszuweisungen_an_Bayern"]
         add_flow("Gemeinschaftsteuern_Bayern", "Nominal_Bayern", "Layer_1_Influx", "Layer_2_Nominal",
                  by_year["Bayerischer_Anteil_Gemeinschaftsteuern"], pop_denom=n_by_t1)
@@ -217,18 +217,7 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         add_flow("Ruecklagenentnahme_Kredite_Bayern", "Nominal_Bayern", "Layer_1_Influx", "Layer_2_Nominal",
                  by_year["Entnahme_aus_Haushaltsruecklage"], pop_denom=n_by_t1)
 
-        # 4. Munich Municipal Taxes & Own Revenues -> Nominal Munich
-        add_flow("Gewerbesteuer_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
-                 m_year["Gewerbesteuer_netto"], pop_denom=n_muc_t1)
-        add_flow("Einkommensteuer_USt_Anteil_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
-                 m_year["Gemeindeanteil_an_der_Einkommensteuer"] + m_year["Gemeindeanteil_an_der_Umsatzsteuer"], pop_denom=n_muc_t1)
-        add_flow("Grundsteuer_und_Lokalsteuern_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
-                 m_year["Grundsteuer_A_und_B"] + m_year["Oertliche_Verbrauch_und_Aufwandsteuern"], pop_denom=n_muc_t1)
-        add_flow("Gebuehren_Mieten_Entgelte_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
-                 m_year["Oeffentlich_rechtliche_Gebuehren_und_Entgelte"] + m_year["Privatrechtliche_Leistungsentgelte_Mieten"], pop_denom=n_muc_t1)
-        add_flow("Beteiligungsertraege_SWM_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
-                 m_year["Gewinnausschuettung_Stadtwerke_SWM"], pop_denom=n_muc_t1)
-
+        # 4. Munich Municipal Taxes & Own Revenues -> Nominal Munich (Descending)
         muc_own_sum = (
             m_year["Gewerbesteuer_netto"] + m_year["Gemeindeanteil_an_der_Einkommensteuer"]
             + m_year["Gemeindeanteil_an_der_Umsatzsteuer"] + m_year["Grundsteuer_A_und_B"]
@@ -238,29 +227,39 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
             + m_year["Gewinnausschuettung_Stadtwerke_SWM"]
         )
         muc_saldo_rest = tot_muc - muc_own_sum
+
+        add_flow("Gewerbesteuer_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
+                 m_year["Gewerbesteuer_netto"], pop_denom=n_muc_t1)
+        add_flow("Einkommensteuer_USt_Anteil_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
+                 m_year["Gemeindeanteil_an_der_Einkommensteuer"] + m_year["Gemeindeanteil_an_der_Umsatzsteuer"], pop_denom=n_muc_t1)
+        add_flow("Gebuehren_Mieten_Entgelte_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
+                 m_year["Oeffentlich_rechtliche_Gebuehren_und_Entgelte"] + m_year["Privatrechtliche_Leistungsentgelte_Mieten"], pop_denom=n_muc_t1)
         add_flow("Sonstige_Ertraege_und_Defizitausgleich_MUC", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
                  muc_saldo_rest, pop_denom=n_muc_t1)
+        add_flow("Beteiligungsertraege_SWM_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
+                 m_year["Gewinnausschuettung_Stadtwerke_SWM"], pop_denom=n_muc_t1)
+        add_flow("Grundsteuer_und_Lokalsteuern_Muenchen", "Nominal_Munich", "Layer_1_Influx", "Layer_2_Nominal",
+                 m_year["Grundsteuer_A_und_B"] + m_year["Oertliche_Verbrauch_und_Aufwandsteuern"], pop_denom=n_muc_t1)
 
         # -------------------------------------------------------------------
         # STAGE 2: LAYER 2 (Nominal) -> LAYER 3 (Effective Entities & Transfers)
         # -------------------------------------------------------------------
-        # A) Bund Transfers:
-        # Bundeszuschuss GRV + GKV
+        # A) Bund Flows (ordered by target vertical position to prevent ribbon crossovers):
+        # 1. Federal retained core budget -> Effective Federal (horizontal at top)
         fed_to_soz_mrd = b_year["Epl_11_Bundeszuschuss_Rentenversicherung"] + b_year["Epl_15_Gesundheit_Bundeszuschuss_GKV"]
+        bund_to_by_mrd = by_year["Bundeszuweisungen_an_Bayern"]
+        fed_retained_mrd = tot_bund - fed_to_soz_mrd - bund_to_by_mrd
+        add_flow("Nominal_Federal", "Effective_Federal", "Layer_2_Nominal", "Layer_3_Effective",
+                 fed_retained_mrd, pop_denom=n_de_t1)
+
+        # 2. Bundeszuschuss GRV + GKV -> Effective Insurance (slants down to middle)
         add_flow("Nominal_Federal", "Effective_Insurance", "Layer_2_Nominal", "Layer_3_Effective",
                  fed_to_soz_mrd, pop_denom=n_de_t1)
 
-        # Bundeszuweisungen an Bayern (normalized by Bavarian population at target)
-        bund_to_by_mrd = by_year["Bundeszuweisungen_an_Bayern"]
+        # 3. Bundeszuweisungen an Bayern -> Effective Bayern (slants down to lower tier)
         pc_bund_to_by = (bund_to_by_mrd * scale_mrd) / n_by_t1
         add_flow("Nominal_Federal", "Effective_Bayern", "Layer_2_Nominal", "Layer_3_Effective",
                  bund_to_by_mrd, val_pc=pc_bund_to_by)
-
-        # Federal retained core budget
-        fed_retained_mrd = tot_bund - fed_to_soz_mrd - bund_to_by_mrd
-        pc_fed_retained = (fed_retained_mrd * scale_mrd) / n_de_t1
-        add_flow("Nominal_Federal", "Effective_Federal", "Layer_2_Nominal", "Layer_3_Effective",
-                 fed_retained_mrd, pop_denom=n_de_t1)
 
         # B) Social Insurance: Pure contributions pass through
         tot_soz_contrib = (
