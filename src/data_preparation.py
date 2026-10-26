@@ -250,9 +250,9 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         add_flow("Nominal_Federal", "Effective_Insurance", "Layer_2_Nominal", "Layer_3_Effective",
                  fed_to_soz_mrd, pop_denom=n_de_t1)
 
-        # Bundeszuweisungen an Bayern (normalized by federal population at source)
+        # Bundeszuweisungen an Bayern (normalized by Bavarian population at target)
         bund_to_by_mrd = by_year["Bundeszuweisungen_an_Bayern"]
-        pc_bund_to_by = (bund_to_by_mrd * scale_mrd) / n_de_t1
+        pc_bund_to_by = (bund_to_by_mrd * scale_mrd) / n_by_t1
         add_flow("Nominal_Federal", "Effective_Bayern", "Layer_2_Nominal", "Layer_3_Effective",
                  bund_to_by_mrd, val_pc=pc_bund_to_by)
 
@@ -271,23 +271,24 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         add_flow("Nominal_Insurance", "Effective_Insurance", "Layer_2_Nominal", "Layer_3_Effective",
                  tot_soz_contrib, pop_denom=n_de_t1)
 
-        # C) Munich:
-        # Transfers to State / District (Bezirksumlage + Gewerbesteuerumlage)
-        m_to_by_mrd = m_year["Bezirksumlage_an_Bezirk_Oberbayern"] + m_year["Gewerbesteuerumlage_an_Bund_und_Land"]
-        add_flow("Nominal_Munich", "Effective_Bayern", "Layer_2_Nominal", "Layer_3_Effective",
-                 m_to_by_mrd, pop_denom=n_muc_t1)
-        # Retained Munich municipal core
-        muc_retained_mrd = tot_muc - m_to_by_mrd
-        add_flow("Nominal_Munich", "Effective_Munich", "Layer_2_Nominal", "Layer_3_Effective",
-                 muc_retained_mrd, pop_denom=n_muc_t1)
-
-        # D) Bayern:
-        # Transfers to Munich (FAG Schlüsselzuweisungen & BayKiBiG)
+        # C) Munich & Bayern Intergovernmental Net Consolidation (Option A):
+        # Gross flows: Munich pays Bezirksumlage (m_to_by_mrd), Bayern pays FAG Schlüsselzuweisungen (by_to_m_mrd).
+        # Net municipal grant from Freistaat Bayern to Landeshauptstadt München:
         by_to_m_mrd = m_year["Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern"]
+        m_to_by_mrd = m_year["Bezirksumlage_an_Bezirk_Oberbayern"] + m_year["Gewerbesteuerumlage_an_Bund_und_Land"]
+        by_net_to_m_mrd = by_to_m_mrd - m_to_by_mrd  # Net state grant to Munich (0.35 Mrd in 2024, 0.30 Mrd in 2023)
+
+        # 1. Munich retains own municipal tax revenues
+        add_flow("Nominal_Munich", "Effective_Munich", "Layer_2_Nominal", "Layer_3_Effective",
+                 tot_muc, pop_denom=n_muc_t1)
+
+        # 2. Net municipal equalization grant from Bavaria to Munich (denominated in Munich per capita at target)
+        pc_net_grant_muc = (by_net_to_m_mrd * scale_mrd) / n_muc_t1
         add_flow("Nominal_Bayern", "Effective_Munich", "Layer_2_Nominal", "Layer_3_Effective",
-                 by_to_m_mrd, pop_denom=n_by_t1)
-        # Retained Bavarian state funds
-        by_retained_mrd = tot_by_own - by_to_m_mrd
+                 by_net_to_m_mrd, val_pc=pc_net_grant_muc)
+
+        # 3. Retained Bavarian state funds (own revenues minus net grant to Munich)
+        by_retained_mrd = tot_by_own - by_net_to_m_mrd
         pc_by_retained = (by_retained_mrd * scale_mrd) / n_by_t1
         add_flow("Nominal_Bayern", "Effective_Bayern", "Layer_2_Nominal", "Layer_3_Effective",
                  by_retained_mrd, val_pc=pc_by_retained)
@@ -360,7 +361,7 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         add_flow("Effective_Bayern", "Gesundheit_und_Pflege", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Epl_14_Gesundheit_und_Pflege"], pop_denom=n_by_t1)
 
-        tot_by_eff_mrd = by_retained_mrd + bund_to_by_mrd + m_to_by_mrd
+        tot_by_eff_mrd = by_retained_mrd + bund_to_by_mrd
         by_known_mrd = (
             by_year["Laenderfinanzausgleich_Abfluss"] + by_year["Epl_05_Unterricht_und_Kultus_Schulen"]
             + by_year["Epl_15_Wissenschaft_und_Kunst_Universitaeten"]
@@ -387,7 +388,7 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         add_flow("Effective_Munich", "Kultur_und_Freizeit", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Kulturreferat"], pop_denom=n_muc_t1)
 
-        tot_muc_eff_mrd = muc_retained_mrd + by_to_m_mrd
+        tot_muc_eff_mrd = tot_muc + by_net_to_m_mrd
         muc_known_mrd = (
             m_year["Referat_fuer_Bildung_und_Sport_RBS_Schulen_Kitas"]
             + m_year["Sozialreferat_Jugend_Soziales_Wohnungslosigkeit"]

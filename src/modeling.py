@@ -407,7 +407,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             # Bottom callout banners (outside ribbon path)
             dict(
                 x=0.02, y=-0.04, xref="paper", yref="paper",
-                text="<b>Intergovernmental Transfer Bridge:</b> • Bundeszuschuss GRV/GKV: <b>130,5 Mrd. €</b> (1.561 €/dt. Kopf) • Bundesmittel an Bayern: <b>8,8 Mrd. €</b> (664 €/by. Kopf) • FAG an München: <b>1,69 Mrd. €</b> (1.123 €/muc. Kopf) • Bezirksumlage: <b>1,34 Mrd. €</b> (890 €/muc. Kopf)",
+                text="<b>Intergovernmental Transfer Bridge:</b> • Bundeszuschuss GRV/GKV: <b>130,5 Mrd. €</b> (1.561 €/dt. Kopf) • Bundesmittel an Bayern: <b>8,8 Mrd. €</b> (664 €/by. Kopf) • FAG Netto-Zuschuss an München: <b>0,35 Mrd. €</b> (233 €/muc. Kopf; 1,69 Mrd. € FAG abzüglich 1,34 Mrd. € Bezirksumlage)",
                 showarrow=False, font=dict(size=12, color="#1e293b", family="Helvetica, Arial"),
                 bgcolor="#ede9fe", bordercolor="#8b5cf6", borderwidth=1, borderpad=6,
             ),
