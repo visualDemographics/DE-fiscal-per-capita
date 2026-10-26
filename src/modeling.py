@@ -143,26 +143,26 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Sonstige_Ertraege": "#d97706",
         "Nominal_Munich": "#d97706",
         "Effective_Munich": "#b45309",
-        # Layer 4 Buckets
-        "Laenderfinanzausgleich": "#be123c",  # Crimson Outflow
-        "Rente_und_Alterssicherung": "#8b5cf6",
-        "Gesundheit_und_Pflege": "#10b981",
-        "Schulen_und_Kitas": "#3b82f6",
-        "Hochschulen_und_Forschung": "#6366f1",
-        "Verteidigung_und_Aeusseres": "#ef4444",
-        "Verkehr_und_Infrastruktur": "#f59e0b",
-        "Sicherheit_und_Justiz": "#0284c7",
-        "Buergergeld_Grundsicherung": "#ec4899",
-        "Arbeitsfoerderung_und_Reha": "#059669",
-        "Schuldendienst_und_Zinsen": "#64748b",
-        "Wohnungsbau_und_Stadtplanung": "#d97706",
-        "Soziales_Jugend_Wohnungslosigkeit": "#db2777",
-        "Kultur_und_Freizeit": "#14b8a6",
-        "Ruecklagen_und_Liquiditaetspuffer": "#94a3b8",
-        "Wirtschaft_Klima_Verwaltung": "#475569",
-        "Wirtschaft_Verwaltung_Sonstiges": "#64748b",
-        "Kommunale_Verwaltung_Sonstiges": "#94a3b8",
-        "Bundeszuweisungen_an_andere_Laender": "#64748b",
+        # Layer 4 Buckets: Single-parent buckets use their Layer 3 parent color, mixed use distinct colors
+        "Laenderfinanzausgleich": "#be123c",  # Crimson Outflow (BY transfer to other states)
+        "Rente_und_Alterssicherung": "#0f766e",  # Single parent: Effective_Insurance
+        "Gesundheit_und_Pflege": "#10b981",      # Mixed (Insurance + BY + MUC)
+        "Schulen_und_Kitas": "#3b82f6",          # Mixed (BY + MUC)
+        "Hochschulen_und_Forschung": "#6366f1",  # Mixed (Bund + BY)
+        "Verteidigung_und_Aeusseres": "#1e40af", # Single parent: Effective_Federal
+        "Verkehr_und_Infrastruktur": "#f59e0b",  # Mixed (Bund + BY + MUC)
+        "Sicherheit_und_Justiz": "#64748b",      # Mixed (Bund + BY + MUC)
+        "Buergergeld_Grundsicherung": "#1e40af", # Single parent: Effective_Federal
+        "Arbeitsfoerderung_und_Reha": "#0f766e", # Single parent: Effective_Insurance
+        "Schuldendienst_und_Zinsen": "#1e40af",  # Single parent: Effective_Federal
+        "Wohnungsbau_und_Stadtplanung": "#8b5cf6", # Mixed (Bund + MUC)
+        "Soziales_Jugend_Wohnungslosigkeit": "#db2777", # Mixed (Bund + MUC)
+        "Kultur_und_Freizeit": "#b45309",        # Single parent: Effective_Munich
+        "Ruecklagen_und_Liquiditaetspuffer": "#0f766e", # Single parent: Effective_Insurance
+        "Wirtschaft_Klima_Verwaltung": "#1e40af", # Single parent: Effective_Federal
+        "Wirtschaft_Verwaltung_Sonstiges": "#0369a1", # Single parent: Effective_Bayern
+        "Kommunale_Verwaltung_Sonstiges": "#b45309",  # Single parent: Effective_Munich
+        "Bundeszuweisungen_an_andere_Laender": "#1e40af", # Single parent: Effective_Federal
     }
 
     # Helper function to construct a Plotly Sankey trace for a specific year
@@ -353,11 +353,36 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 idx = l4_nodes.index(k) if k in l4_nodes else 0
                 node_y.append(0.02 + idx * (0.92 / max(1, len(l4_nodes) - 1)))
 
-            clr = "#475569"
-            for pat, c in color_map.items():
-                if pat in k:
-                    clr = c
-                    break
+            if k in l4_nodes:
+                parents_l3 = list({f["source_node"] for f in year_flows if f["target_node"] == k and f["layer_source"] == "Layer_3_Effective"})
+                if len(parents_l3) == 1 and k != "Laenderfinanzausgleich_Ausgleich_an_andere_Laender":
+                    single_parent = parents_l3[0]
+                    l3_parent_colors = {
+                        "Effective_Insurance": "#0f766e",
+                        "Effective_Federal": "#1e40af",
+                        "Effective_Bayern": "#0369a1",
+                        "Effective_Munich": "#b45309",
+                    }
+                    clr = l3_parent_colors.get(single_parent, "#475569")
+                elif k == "Laenderfinanzausgleich_Ausgleich_an_andere_Laender":
+                    clr = "#be123c"  # Crimson outflow for LFA
+                else:
+                    mixed_colors = {
+                        "Gesundheit_und_Pflege": "#10b981",          # Emerald
+                        "Schulen_und_Kitas": "#3b82f6",              # Royal Blue
+                        "Verkehr_und_Infrastruktur": "#f59e0b",      # Orange-Gold
+                        "Sicherheit_und_Justiz": "#64748b",          # Slate
+                        "Soziales_Jugend_Wohnungslosigkeit": "#db2777", # Rose
+                        "Hochschulen_und_Forschung": "#6366f1",      # Indigo
+                        "Wohnungsbau_und_Stadtplanung": "#8b5cf6",   # Purple
+                    }
+                    clr = mixed_colors.get(k, "#475569")
+            else:
+                clr = "#475569"
+                for pat, c in color_map.items():
+                    if pat in k:
+                        clr = c
+                        break
             node_colors.append(clr)
 
         enhanced_labels = []
