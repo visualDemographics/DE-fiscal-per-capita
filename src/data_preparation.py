@@ -250,10 +250,9 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         add_flow("Nominal_Federal", "Effective_Insurance", "Layer_2_Nominal", "Layer_3_Effective",
                  fed_to_soz_mrd, pop_denom=n_de_t1)
 
-        # Bundeszuweisungen an Bayern
+        # Bundeszuweisungen an Bayern (normalized by federal population at source)
         bund_to_by_mrd = by_year["Bundeszuweisungen_an_Bayern"]
-        # In per-capita of Bayern:
-        pc_bund_to_by = (bund_to_by_mrd * scale_mrd) / n_by_t1
+        pc_bund_to_by = (bund_to_by_mrd * scale_mrd) / n_de_t1
         add_flow("Nominal_Federal", "Effective_Bayern", "Layer_2_Nominal", "Layer_3_Effective",
                  bund_to_by_mrd, val_pc=pc_bund_to_by)
 
@@ -286,7 +285,7 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         # Transfers to Munich (FAG Schlüsselzuweisungen & BayKiBiG)
         by_to_m_mrd = m_year["Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern"]
         add_flow("Nominal_Bayern", "Effective_Munich", "Layer_2_Nominal", "Layer_3_Effective",
-                 by_to_m_mrd, pop_denom=n_muc_t1)
+                 by_to_m_mrd, pop_denom=n_by_t1)
         # Retained Bavarian state funds
         by_retained_mrd = tot_by_own - by_to_m_mrd
         pc_by_retained = (by_retained_mrd * scale_mrd) / n_by_t1
