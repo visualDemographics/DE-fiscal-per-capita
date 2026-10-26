@@ -180,20 +180,23 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 node_labels.append(label_map.get(name, name.replace("_", " ")))
             return node_idx[name]
 
-        # Group Layer 1 strictly by Sovereign Tier
-        l1_nodes = [
-            # Bund
+        # Group Layer 1 strictly by Sovereign Tier (clustered by destination entity)
+        bund_l1 = [
             "Lohn_Einkommensteuer_Bund", "Umsatzsteuer_Bund", "Unternehmenssteuern_Bund",
-            "Verbrauchs_und_Bundessteuern", "Verwaltungseinnahmen_Beteiligungen_Bund", "Nettokreditaufnahme_Bund",
-            # Sozialversicherung
+            "Verbrauchs_und_Bundessteuern", "Verwaltungseinnahmen_Beteiligungen_Bund", "Nettokreditaufnahme_Bund"
+        ]
+        sv_l1 = [
             "Rentenbeitraege_AG_AN", "Krankenbeitraege_AG_AN", "Pflegebeitraege_AG_AN",
-            "Arbeitslosenbeitraege_BA", "Unfallbeitraege_DGUV",
-            # Bayern
-            "Gemeinschaftsteuern_Bayern", "Landessteuern_Bayern", "Verwaltungseinnahmen_Bayern", "Ruecklagenentnahme_Kredite_Bayern",
-            # München
+            "Arbeitslosenbeitraege_BA", "Unfallbeitraege_DGUV"
+        ]
+        by_l1 = [
+            "Gemeinschaftsteuern_Bayern", "Landessteuern_Bayern", "Verwaltungseinnahmen_Bayern", "Ruecklagenentnahme_Kredite_Bayern"
+        ]
+        muc_l1 = [
             "Gewerbesteuer_Muenchen", "Einkommensteuer_USt_Anteil_Muenchen", "Grundsteuer_und_Lokalsteuern_Muenchen",
             "Gebuehren_Mieten_Entgelte_Muenchen", "Beteiligungsertraege_SWM_Muenchen", "Sonstige_Ertraege_und_Defizitausgleich_MUC"
         ]
+        l1_nodes = bund_l1 + sv_l1 + by_l1 + muc_l1
         for k in l1_nodes:
             get_node_idx(k)
 
@@ -291,25 +294,38 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 else:
                     link_colors.append("rgba(148, 163, 184, 0.40)")
 
-        # Clamped Y Layout to guarantee NO bottom clipping
+        # Clamped Y Layout: Influxes of Layer 2 are clustered close to each other per sovereign tier
         node_x, node_y, node_colors = [], [], []
+        tier_y_l2_l3 = [0.08, 0.35, 0.63, 0.88]
         for k in node_keys:
             if k in l1_nodes:
                 node_x.append(0.001)
-                idx = l1_nodes.index(k)
-                node_y.append(0.03 + idx * (0.85 / max(1, len(l1_nodes) - 1)))
+                if k in bund_l1:
+                    idx = bund_l1.index(k)
+                    node_y.append(0.02 + idx * (0.13 / max(1, len(bund_l1) - 1)))
+                elif k in sv_l1:
+                    idx = sv_l1.index(k)
+                    node_y.append(0.23 + idx * (0.24 / max(1, len(sv_l1) - 1)))
+                elif k in by_l1:
+                    idx = by_l1.index(k)
+                    node_y.append(0.55 + idx * (0.16 / max(1, len(by_l1) - 1)))
+                elif k in muc_l1:
+                    idx = muc_l1.index(k)
+                    node_y.append(0.79 + idx * (0.17 / max(1, len(muc_l1) - 1)))
+                else:
+                    node_y.append(0.50)
             elif k in l2_nodes:
                 node_x.append(0.32)
                 idx = l2_nodes.index(k)
-                node_y.append(0.06 + idx * (0.78 / max(1, len(l2_nodes) - 1)))
+                node_y.append(tier_y_l2_l3[idx])
             elif k in l3_nodes:
                 node_x.append(0.65)
                 idx = l3_nodes.index(k)
-                node_y.append(0.06 + idx * (0.78 / max(1, len(l3_nodes) - 1)))
+                node_y.append(tier_y_l2_l3[idx])
             else:
                 node_x.append(0.999)
                 idx = l4_nodes.index(k) if k in l4_nodes else 0
-                node_y.append(0.03 + idx * (0.85 / max(1, len(l4_nodes) - 1)))
+                node_y.append(0.02 + idx * (0.92 / max(1, len(l4_nodes) - 1)))
 
             clr = "#475569"
             for pat, c in color_map.items():
@@ -343,7 +359,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         return go.Sankey(
             arrangement="snap",
             node=dict(
-                pad=20,
+                pad=12,
                 thickness=26,
                 line=dict(color="#0f172a", width=0.8),
                 label=enhanced_labels,
@@ -379,7 +395,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         ),
         font=dict(family="Helvetica, Arial, sans-serif", size=12, color="#1e293b"),
         width=2600,
-        height=1550,
+        height=1800,
         margin=dict(l=50, r=50, t=150, b=110),
         paper_bgcolor="#f8fafc",
         plot_bgcolor="#f8fafc",
