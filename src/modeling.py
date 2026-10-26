@@ -327,12 +327,12 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 pop_desc = "83,6 Mio. EW" if ("Federal" in k or "Insurance" in k) else ("13,2 Mio. EW" if "Bayern" in k else "1,51 Mio. EW")
                 enhanced_labels.append(
                     f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> ({vol_mrd:.1f} Mrd. €)<br>"
-                    f"<span style='font-size:10px;color:#cbd5e1'>Basis: {pop_desc}</span>"
+                    f"<span style='font-size:10px;color:#000000'>Basis: {pop_desc}</span>"
                 )
             elif "Laenderfinanzausgleich" in k:
                 enhanced_labels.append(
                     f"<b>{base_lbl}</b><br><b>-737 €/Kopf</b> (-{vol_mrd:.2f} Mrd. €)<br>"
-                    f"<span style='font-size:10px;color:#fecdd3'>Nettoabfluss Bayern</span>"
+                    f"<span style='font-size:10px;color:#991b1b'>Nettoabfluss Bayern</span>"
                 )
             elif vol_mrd >= 1.0:
                 enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({vol_mrd:.2f} Mrd. €)")
