@@ -166,8 +166,6 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
     }
 
     # Helper function to construct a Plotly Sankey trace for a specific year
-    pop_lookup = {(int(r["jahr"]), r["ebene"]): float(r["bevoelkerung_referenz"]) for r in summary}
-
     def create_sankey_trace(target_year):
         year_flows = [f for f in flows if int(f["jahr"]) == target_year]
 
@@ -214,17 +212,22 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             "Wohnungsbau_und_Stadtplanung", "Soziales_Jugend_Wohnungslosigkeit", "Kultur_und_Freizeit",
             "Schuldendienst_und_Zinsen", "Laenderfinanzausgleich_Ausgleich_an_andere_Laender",
             "Ruecklagen_und_Liquiditaetspuffer", "Wirtschaft_Klima_Verwaltung",
-            "Wirtschaft_Verwaltung_Sonstiges", "Kommunale_Verwaltung_Sonstiges"
+            "Wirtschaft_Verwaltung_Sonstiges", "Kommunale_Verwaltung_Sonstiges",
+            "Bundeszuweisungen_an_andere_Laender_Transfer",
         ]
         for k in l4_nodes:
             get_node_idx(k)
 
         sources, targets, values, link_colors, custom_hover = [], [], [], [], []
+        in_sums_pc = [0.0] * len(node_keys)
+        out_sums_pc = [0.0] * len(node_keys)
+        in_sums_mrd = [0.0] * len(node_keys)
+        out_sums_mrd = [0.0] * len(node_keys)
 
         for f in year_flows:
-            val_mrd = max(0.0, float(f["wert_mrd_eur"]))
             val_pc = max(0.0, float(f["wert_eur_pro_kopf"]))
-            if val_mrd <= 0:
+            val_mrd = max(0.0, float(f["wert_mrd_eur"]))
+            if val_pc <= 0:
                 continue
 
             src_name = f["source_node"]
@@ -235,19 +238,24 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
 
             sources.append(s_idx)
             targets.append(t_idx)
-            values.append(val_mrd)
-            custom_hover.append(val_pc)
+            values.append(val_pc)
+            custom_hover.append(val_mrd)
+
+            out_sums_pc[s_idx] += val_pc
+            in_sums_pc[t_idx] += val_pc
+            out_sums_mrd[s_idx] += val_mrd
+            in_sums_mrd[t_idx] += val_mrd
 
             # Color assignment
             if l_src == "Layer_1_Influx":
                 if "Bund" in src_name or "Lohn" in src_name or "Umsatz" in src_name or "Unternehmen" in src_name or "Verbrauchs" in src_name:
-                    link_colors.append("rgba(30, 58, 138, 0.38)")
+                    link_colors.append("rgba(30, 58, 138, 0.40)")
                 elif "AG_AN" in src_name or "BA" in src_name or "DGUV" in src_name:
-                    link_colors.append("rgba(13, 148, 136, 0.38)")
+                    link_colors.append("rgba(13, 148, 136, 0.40)")
                 elif "Bayern" in src_name:
-                    link_colors.append("rgba(2, 132, 199, 0.38)")
+                    link_colors.append("rgba(2, 132, 199, 0.40)")
                 elif "Muenchen" in src_name or "MUC" in src_name:
-                    link_colors.append("rgba(217, 119, 6, 0.38)")
+                    link_colors.append("rgba(217, 119, 6, 0.40)")
                 else:
                     link_colors.append("rgba(100, 116, 139, 0.35)")
             elif l_src == "Layer_2_Nominal":
@@ -260,49 +268,48 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 elif src_name == "Nominal_Munich" and tgt_name == "Effective_Bayern":
                     link_colors.append("rgba(245, 158, 11, 0.70)")  # Municipal Levy to District/State
                 elif src_name == "Nominal_Federal":
-                    link_colors.append("rgba(30, 58, 138, 0.50)")
+                    link_colors.append("rgba(30, 58, 138, 0.55)")
                 elif src_name == "Nominal_Insurance":
-                    link_colors.append("rgba(13, 148, 136, 0.50)")
+                    link_colors.append("rgba(13, 148, 136, 0.55)")
                 elif src_name == "Nominal_Bayern":
-                    link_colors.append("rgba(2, 132, 199, 0.50)")
+                    link_colors.append("rgba(2, 132, 199, 0.55)")
                 elif src_name == "Nominal_Munich":
-                    link_colors.append("rgba(217, 119, 6, 0.50)")
+                    link_colors.append("rgba(217, 119, 6, 0.55)")
                 else:
-                    link_colors.append("rgba(148, 163, 184, 0.45)")
+                    link_colors.append("rgba(148, 163, 184, 0.50)")
             else:  # Layer 3 -> 4
                 if tgt_name == "Laenderfinanzausgleich_Ausgleich_an_andere_Laender":
                     link_colors.append("rgba(190, 18, 60, 0.85)")  # Crimson Outflow
                 elif src_name == "Effective_Federal":
-                    link_colors.append("rgba(30, 58, 138, 0.40)")
+                    link_colors.append("rgba(30, 58, 138, 0.45)")
                 elif src_name == "Effective_Insurance":
-                    link_colors.append("rgba(13, 148, 136, 0.40)")
+                    link_colors.append("rgba(13, 148, 136, 0.45)")
                 elif src_name == "Effective_Bayern":
-                    link_colors.append("rgba(2, 132, 199, 0.40)")
+                    link_colors.append("rgba(2, 132, 199, 0.45)")
                 elif src_name == "Effective_Munich":
-                    link_colors.append("rgba(217, 119, 6, 0.40)")
+                    link_colors.append("rgba(217, 119, 6, 0.45)")
                 else:
-                    link_colors.append("rgba(148, 163, 184, 0.35)")
+                    link_colors.append("rgba(148, 163, 184, 0.40)")
 
-        # Explicit, mathematically aligned Y Layout to guarantee NO overlap and NO clipping
+        # Clamped Y Layout to guarantee NO bottom clipping
         node_x, node_y, node_colors = [], [], []
-        l2_y_map = {"Nominal_Federal": 0.08, "Nominal_Insurance": 0.34, "Nominal_Bayern": 0.60, "Nominal_Munich": 0.82}
-        l3_y_map = {"Effective_Federal": 0.10, "Effective_Insurance": 0.34, "Effective_Bayern": 0.60, "Effective_Munich": 0.82}
-
         for k in node_keys:
             if k in l1_nodes:
                 node_x.append(0.001)
                 idx = l1_nodes.index(k)
-                node_y.append(0.02 + idx * (0.86 / max(1, len(l1_nodes) - 1)))
+                node_y.append(0.03 + idx * (0.85 / max(1, len(l1_nodes) - 1)))
             elif k in l2_nodes:
                 node_x.append(0.32)
-                node_y.append(l2_y_map[k] if k in l2_y_map else 0.5)
+                idx = l2_nodes.index(k)
+                node_y.append(0.06 + idx * (0.78 / max(1, len(l2_nodes) - 1)))
             elif k in l3_nodes:
                 node_x.append(0.65)
-                node_y.append(l3_y_map[k] if k in l3_y_map else 0.5)
+                idx = l3_nodes.index(k)
+                node_y.append(0.06 + idx * (0.78 / max(1, len(l3_nodes) - 1)))
             else:
                 node_x.append(0.999)
                 idx = l4_nodes.index(k) if k in l4_nodes else 0
-                node_y.append(0.02 + idx * (0.86 / max(1, len(l4_nodes) - 1)))
+                node_y.append(0.03 + idx * (0.85 / max(1, len(l4_nodes) - 1)))
 
             clr = "#475569"
             for pat, c in color_map.items():
@@ -311,51 +318,32 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                     break
             node_colors.append(clr)
 
-        in_sums = [0.0] * len(node_keys)
-        out_sums = [0.0] * len(node_keys)
-        for s, t, v in zip(sources, targets, values):
-            out_sums[s] += v
-            in_sums[t] += v
-
-        scale_mrd = 1000.0 * 1000000.0
-        n_de = pop_lookup[(target_year, "Bund_Kernhaushalt")]
-        n_by = pop_lookup[(target_year, "Freistaat_Bayern")]
-        n_muc = pop_lookup[(target_year, "Landeshauptstadt_Muenchen")]
-
         enhanced_labels = []
         for i, k in enumerate(node_keys):
             base_lbl = node_labels[i]
-            vol_mrd = max(in_sums[i], out_sums[i])
-
-            if k in ("Nominal_Federal", "Effective_Federal"):
-                pc = (vol_mrd * scale_mrd) / n_de
-                enhanced_labels.append(f"<b>{base_lbl}</b><br><b>{pc:,.0f} €/Kopf</b> ({vol_mrd:.1f} Mrd. €)<br><span style='font-size:10px;color:#cbd5e1'>Basis: 83,6 Mio. EW</span>")
-            elif k in ("Nominal_Insurance", "Effective_Insurance"):
-                pc = (vol_mrd * scale_mrd) / n_de
-                enhanced_labels.append(f"<b>{base_lbl}</b><br><b>{pc:,.0f} €/Kopf</b> ({vol_mrd:.1f} Mrd. €)<br><span style='font-size:10px;color:#cbd5e1'>Basis: 83,6 Mio. EW</span>")
-            elif k in ("Nominal_Bayern", "Effective_Bayern"):
-                pc = (vol_mrd * scale_mrd) / n_by
-                enhanced_labels.append(f"<b>{base_lbl}</b><br><b>{pc:,.0f} €/Kopf</b> ({vol_mrd:.1f} Mrd. €)<br><span style='font-size:10px;color:#cbd5e1'>Basis: 13,2 Mio. EW</span>")
-            elif k in ("Nominal_Munich", "Effective_Munich"):
-                pc = (vol_mrd * scale_mrd) / n_muc
-                enhanced_labels.append(f"<b>{base_lbl}</b><br><b>{pc:,.0f} €/Kopf</b> ({vol_mrd:.2f} Mrd. €)<br><span style='font-size:10px;color:#475569'>Basis: 1,51 Mio. EW</span>")
+            vol_pc = max(in_sums_pc[i], out_sums_pc[i])
+            vol_mrd = max(in_sums_mrd[i], out_sums_mrd[i])
+            if k in l2_nodes or k in l3_nodes:
+                pop_desc = "83,6 Mio. EW" if ("Federal" in k or "Insurance" in k) else ("13,2 Mio. EW" if "Bayern" in k else "1,51 Mio. EW")
+                enhanced_labels.append(
+                    f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> ({vol_mrd:.1f} Mrd. €)<br>"
+                    f"<span style='font-size:10px;color:#cbd5e1'>Basis: {pop_desc}</span>"
+                )
             elif "Laenderfinanzausgleich" in k:
-                pc = (vol_mrd * scale_mrd) / n_by
-                enhanced_labels.append(f"<b>{base_lbl}</b><br><b>-{pc:,.0f} €/Kopf</b> ({vol_mrd:.2f} Mrd. €)<br><span style='font-size:10px;color:#be123c'>Nettoabfluss Bayern</span>")
-            elif "Bayern" in k or k in ("Schulen_und_Kitas", "Hochschulen_und_Forschung", "Wirtschaft_Verwaltung_Sonstiges"):
-                pc = (vol_mrd * scale_mrd) / n_by
-                enhanced_labels.append(f"<b>{base_lbl}</b><br>{pc:,.0f} €/Kopf ({vol_mrd:.2f} Mrd. €)")
-            elif "Muenchen" in k or "MUC" in k or k in ("Soziales_Jugend_Wohnungslosigkeit", "Wohnungsbau_und_Stadtplanung", "Kultur_und_Freizeit", "Kommunale_Verwaltung_Sonstiges"):
-                pc = (vol_mrd * scale_mrd) / n_muc
-                enhanced_labels.append(f"<b>{base_lbl}</b><br>{pc:,.0f} €/Kopf ({vol_mrd:.2f} Mrd. €)")
+                enhanced_labels.append(
+                    f"<b>{base_lbl}</b><br><b>-737 €/Kopf</b> (-{vol_mrd:.2f} Mrd. €)<br>"
+                    f"<span style='font-size:10px;color:#fecdd3'>Nettoabfluss Bayern</span>"
+                )
+            elif vol_mrd >= 1.0:
+                enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({vol_mrd:.2f} Mrd. €)")
             else:
-                pc = (vol_mrd * scale_mrd) / n_de
-                enhanced_labels.append(f"<b>{base_lbl}</b><br>{pc:,.0f} €/Kopf ({vol_mrd:.2f} Mrd. €)")
+                mio_val = vol_mrd * 1000.0
+                enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({mio_val:.0f} Mio. €)")
 
         return go.Sankey(
-            arrangement="fixed",
+            arrangement="snap",
             node=dict(
-                pad=22,
+                pad=20,
                 thickness=26,
                 line=dict(color="#0f172a", width=0.8),
                 label=enhanced_labels,
@@ -370,7 +358,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 value=values,
                 color=link_colors,
                 customdata=custom_hover,
-                hovertemplate="%{source.label} → %{target.label}<br><b>%{value:.2f} Mrd. € Gesamtvolumen</b><br>Pro-Kopf-Äquivalent: <b>%{customdata:,.0f} € / Kopf</b><extra></extra>",
+                hovertemplate="%{source.label} → %{target.label}<br><b>%{value:,.0f} € / Kopf</b> (Pro-Kopf-Äquivalent)<br>Absolutes Gesamtvolumen: <b>%{customdata:.2f} Mrd. €</b><extra></extra>",
             ),
         )
 
@@ -382,8 +370,8 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         title=dict(
             text=(
                 "<b>4-Layer Multi-Level Fiscal Architecture (2024): Bund, Freistaat Bayern & Landeshauptstadt München</b><br>"
-                "<sup>Pro-Kopf-Werte je Gebietskörperschaft auf Basis amtlicher Einwohnerzahlen (Zensus 2022): Bund & Sozialversicherung (83,6 Mio. EW), "
-                "Freistaat Bayern (13,2 Mio. EW), Stadt München (1,51 Mio. EW). Vertikale Transfers transparent konsolidiert.</sup>"
+                "<sup>Ribbon- und Knotenbreiten proportional zum Pro-Kopf-Volumen (€/Kopf). Absolute Haushaltsvolumina in Klammern ausgewiesen.<br>"
+                "Referenzbevölkerung (Zensus 2022): Bund & Sozialversicherung (83,6 Mio. EW), Freistaat Bayern (13,2 Mio. EW), Stadt München (1,51 Mio. EW). Vertikale Transfers konsolidiert.</sup>"
             ),
             font=dict(family="Helvetica, Arial, sans-serif", size=22, color="#0f172a"),
             x=0.02,
