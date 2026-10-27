@@ -58,8 +58,30 @@ This document systematically details the empirical provenance, mathematical form
     - *Effektiver Freistaat Bayern*: $73.60\text{ Mrd. €}$ ($5{,}555\text{ €/Kopf}$)
     - *Effektive Stadt München*: $9.55\text{ Mrd. €}$ ($6{,}343\text{ €/Kopf}$)
   - **Layer 4 (Finale Funktionale End-Buckets)**:
-    - *Länderfinanzausgleich*: Net outward transfer from Bavaria to other states: **$9.771\text{ Mrd. €}$** ($737\text{ €/Bavarian resident}$), rendered in crimson (`#be123c`).
-    - *Tangible Public Goods*: Rente ($397.4\text{ Mrd. €}$), Gesundheit & Pflege ($434.1\text{ Mrd. €}$), Schulen & Kitas ($245.2\text{ Mrd. €}$), Verkehr ($166.7\text{ Mrd. €}$), Verteidigung ($83.0\text{ Mrd. €}$), Hochschulen & Forschung ($80.2\text{ Mrd. €}$), etc.
+    - *Dynamic Descending Sorting & Percentage Shares*: All 19 functional end buckets are dynamically sorted strictly descending by per-capita volume ($\sum \text{Layer 4} = 26{,}135.02\text{ €/Kopf}$ in 2024, 100.0%):
+      1. **Gesundheit & Pflege**: **$5{,}002\text{ €/Kopf}$** · **$19.1\%$** ($402.14\text{ Mrd. €}$)
+      2. **Rente & Alterssicherung**: **$4{,}755\text{ €/Kopf}$** · **$18.2\%$** ($397.40\text{ Mrd. €}$)
+      3. **Schulen & Kitas**: **$2{,}724\text{ €/Kopf}$** · **$10.4\%$** ($18.16\text{ Mrd. €}$)
+      4. **Soziales, Jugend & Wohnen (MUC)**: **$2{,}038\text{ €/Kopf}$** · **$7.8\%$** ($24.67\text{ Mrd. €}$)
+      5. **Kommunale Verwaltung & IT (MUC)**: **$1{,}633\text{ €/Kopf}$** · **$6.2\%$** ($2.46\text{ Mrd. €}$)
+      6. **Wirtschaft, Energie & Verwaltung (Bund)**: **$1{,}527\text{ €/Kopf}$** · **$5.8\%$** ($40.38\text{ Mrd. €}$)
+      7. **Verkehr & Mobilität**: **$1{,}409\text{ €/Kopf}$** · **$5.4\%$** ($43.44\text{ Mrd. €}$)
+      8. **Innere Sicherheit & Justiz**: **$1{,}338\text{ €/Kopf}$** · **$5.1\%$** ($27.37\text{ Mrd. €}$)
+      9. **Hochschulen & Spitzenforschung**: **$1{,}059\text{ €/Kopf}$** · **$4.1\%$** ($39.14\text{ Mrd. €}$)
+      10. **Verteidigung & Äußeres**: **$888\text{ €/Kopf}$** · **$3.4\%$** ($74.20\text{ Mrd. €}$)
+      11. **Länderfinanzausgleich (Transferabfluss BY)**: **$-737\text{ €/Kopf}$** · **$2.8\%$** ($-9.77\text{ Mrd. €}$ Nettoabfluss Bayern)
+      12. **Bürgergeld & Grundsicherung**: **$697\text{ €/Kopf}$** · **$2.7\%$** ($58.26\text{ Mrd. €}$)
+      13. **Arbeitsförderung & Reha (BA)**: **$642\text{ €/Kopf}$** · **$2.5\%$** ($53.64\text{ Mrd. €}$)
+      14. **Wirtschaft & Landesverwaltung (BY)**: **$531\text{ €/Kopf}$** · **$2.0\%$** ($7.04\text{ Mrd. €}$)
+      15. **Schuldendienst & Zinsen (Bund)**: **$409\text{ €/Kopf}$** · **$1.6\%$** ($34.22\text{ Mrd. €}$)
+      16. **Bundeszuweisungen an übrige Länder**: **$297\text{ €/Kopf}$** · **$1.1\%$** ($24.80\text{ Mrd. €}$)
+      17. **Kultur & Freizeit (München)**: **$189\text{ €/Kopf}$** · **$0.7\%$** ($284\text{ Mio. €}$)
+      18. **Rücklagen & Liquiditätspuffer**: **$137\text{ €/Kopf}$** · **$0.5\%$** ($11.43\text{ Mrd. €}$)
+      19. **Wohnungsbau & Stadtplanung**: **$123\text{ €/Kopf}$** · **$0.5\%$** ($4.19\text{ Mrd. €}$)
+  - **Footer Annotation Architecture**:
+    - *Referenzbevölkerung (Zensus 2022)*: Positioned on the bottom-left callout card (`x=0.005`), displaying exact registered resident totals and rounded millions for Bund & SV ($83{,}577{,}140\text{ EW}$ / $83.6\text{ Mio.}$), Freistaat Bayern ($13{,}248{,}928\text{ EW}$ / $13.2\text{ Mio.}$), and Landeshauptstadt München ($1{,}505{,}005\text{ EW}$ / $1.51\text{ Mio.}$).
+    - *Amtliche Primärquellen*: Positioned on the bottom-right callout card (`x=0.995`), documenting verified official institutional registers: BMF (Bundeshaushalt), BMAS/DRV/GKV (Sozialbudget), StMFH (Haushalt Bayern & LFA), Stadtkämmerei München (Haushaltsplan), and Destatis (Zensus 2022).
+    - *Header Subtitle*: Streamlined to focus on visual and flow conventions without demographic clutter.
 
 ---
 
@@ -105,7 +127,27 @@ This document systematically details the empirical provenance, mathematical form
 ---
 
 ### Figure: `panel_e_functional_buckets.png`
-- **Objective**: Ranked functional destination of citizen-facing public expenditures, highlighting the predominance of social transfers (Rente $4{,}755\text{ €}$, Gesundheit $5{,}194\text{ €}$) over physical investments (Verkehr $1{,}995\text{ €}$, Schulen $2{,}933\text{ €}$, Verteidigung $993\text{ €}$).
+- **Objective**: Ranked functional destination of citizen-facing public expenditures across all 19 functional buckets, displaying exact per-capita spending and percentage share of total per-capita outlays ($26{,}135.02\text{ €/Kopf}$ in 2024):
+  - Gesundheit & Pflege: **$5{,}002\text{ €}$** ($19.1\%$)
+  - Rente & Alterssicherung: **$4{,}755\text{ €}$** ($18.2\%$)
+  - Schulen & Kitas: **$2{,}724\text{ €}$** ($10.4\%$)
+  - Soziales, Jugend & Wohnen (MUC): **$2{,}038\text{ €}$** ($7.8\%$)
+  - Kommunale Verwaltung & IT (MUC): **$1{,}633\text{ €}$** ($6.2\%$)
+  - Wirtschaft, Energie & Verwaltung (Bund): **$1{,}527\text{ €}$** ($5.8\%$)
+  - Verkehr & Mobilität: **$1{,}409\text{ €}$** ($5.4\%$)
+  - Innere Sicherheit & Justiz: **$1{,}338\text{ €}$** ($5.1\%$)
+  - Hochschulen & Spitzenforschung: **$1{,}059\text{ €}$** ($4.1\%$)
+  - Verteidigung & Äußeres: **$888\text{ €}$** ($3.4\%$)
+  - Länderfinanzausgleich (Abfluss BY): **$737\text{ €}$** ($2.8\%$)
+  - Bürgergeld & Grundsicherung: **$697\text{ €}$** ($2.7\%$)
+  - Arbeitsförderung & Reha (BA): **$642\text{ €}$** ($2.5\%$)
+  - Wirtschaft & Landesverwaltung (BY): **$531\text{ €}$** ($2.0\%$)
+  - Schuldendienst & Zinsen (Bund): **$409\text{ €}$** ($1.6\%$)
+  - Bundeszuweisungen an übrige Länder: **$297\text{ €}$** ($1.1\%$)
+  - Kultur & Freizeit (München): **$189\text{ €}$** ($0.7\%$)
+  - Rücklagen & Liquiditätspuffer: **$137\text{ €}$** ($0.5\%$)
+  - Wohnungsbau & Stadtplanung: **$123\text{ €}$** ($0.5\%$)
+  Highlights the structural dominance of statutory social transfers ($37.3\%$ for health and pensions alone) over capital investments.
 
 ---
 

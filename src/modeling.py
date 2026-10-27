@@ -99,7 +99,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Effective_Bayern": "Effektiver Freistaat Bayern",
         "Effective_Munich": "Effektive Stadt München",
         # Layer 4 - Functional Buckets & End Destinations
-        "Laenderfinanzausgleich_Ausgleich_an_andere_Laender": "Länderfinanzausgleich (Transferabfluss BY)",
+        "Laenderfinanzausgleich_Ausgleich_an_andere_Laender": "Länderfinanzausgleich (Nettoabfluss BY)",
         "Rente_und_Alterssicherung": "Rente & Alterssicherung",
         "Gesundheit_und_Pflege": "Gesundheit & Pflege",
         "Schulen_und_Kitas": "Schulen & Kitas",
@@ -234,28 +234,18 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         for k in l3_nodes:
             get_node_idx(k)
 
-        # Layer 4 Functional End-Buckets: Sorted strictly descending by per-capita volume (€/Kopf)
-        l4_nodes = [
-            "Gesundheit_und_Pflege",
-            "Rente_und_Alterssicherung",
-            "Schulen_und_Kitas",
-            "Kommunale_Verwaltung_Sonstiges",
-            "Verkehr_und_Infrastruktur",
-            "Wirtschaft_Verwaltung_Sonstiges",
-            "Sicherheit_und_Justiz",
-            "Soziales_Jugend_Wohnungslosigkeit",
-            "Hochschulen_und_Forschung",
-            "Verteidigung_und_Aeusseres",
-            "Laenderfinanzausgleich_Ausgleich_an_andere_Laender",
-            "Buergergeld_Grundsicherung",
-            "Arbeitsfoerderung_und_Reha",
-            "Wirtschaft_Klima_Verwaltung",
-            "Schuldendienst_und_Zinsen",
-            "Bundeszuweisungen_an_andere_Laender_Transfer",
-            "Wohnungsbau_und_Stadtplanung",
-            "Kultur_und_Freizeit",
-            "Ruecklagen_und_Liquiditaetspuffer",
-        ]
+        # Layer 4 Functional End-Buckets: Dynamically sorted strictly descending by per-capita volume (€/Kopf)
+        l4_in_pc = {}
+        for f in year_flows:
+            if f["layer_target"] == "Layer_4_Buckets":
+                tgt = f["target_node"]
+                val_pc = max(0.0, float(f["wert_eur_pro_kopf"]))
+                if tgt not in l4_in_pc:
+                    l4_in_pc[tgt] = 0.0
+                l4_in_pc[tgt] += val_pc
+
+        total_l4_pc = sum(l4_in_pc.values())
+        l4_nodes = sorted(l4_in_pc.keys(), key=lambda k: l4_in_pc[k], reverse=True)
         for k in l4_nodes:
             get_node_idx(k)
 
@@ -404,11 +394,17 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                     f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> ({vol_mrd:.1f} Mrd. €)<br>"
                     f"<span style='font-size:10px;color:#000000'>Basis: {pop_desc}</span>"
                 )
-            elif "Laenderfinanzausgleich" in k:
-                enhanced_labels.append(
-                    f"<b>{base_lbl}</b><br><b>-737 €/Kopf</b> (-{vol_mrd:.2f} Mrd. €)<br>"
-                    f"<span style='font-size:10px;color:#0369a1'>Nettoabfluss Bayern</span>"
-                )
+            elif k in l4_nodes:
+                pct = (vol_pc / total_l4_pc * 100.0) if total_l4_pc > 0 else 0.0
+                if "Laenderfinanzausgleich" in k:
+                    enhanced_labels.append(
+                        f"<b>{base_lbl}</b><br><b>-{int(round(vol_pc)):,} €/Kopf</b> · <b>{pct:.1f}%</b> (-{vol_mrd:.2f} Mrd. €)"
+                    )
+                elif vol_mrd >= 1.0:
+                    enhanced_labels.append(f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> · <b>{pct:.1f}%</b> ({vol_mrd:.2f} Mrd. €)")
+                else:
+                    mio_val = vol_mrd * 1000.0
+                    enhanced_labels.append(f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> · <b>{pct:.1f}%</b> ({mio_val:.0f} Mio. €)")
             elif vol_mrd >= 1.0:
                 enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({vol_mrd:.2f} Mrd. €)")
             else:
@@ -418,7 +414,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         return go.Sankey(
             arrangement="snap",
             node=dict(
-                pad=12,
+                pad=35,
                 thickness=26,
                 line=dict(color="#0f172a", width=0.8),
                 label=enhanced_labels,
@@ -468,6 +464,18 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         muc_pc = f"{int(round(float(f_muc['wert_eur_pro_kopf']))):,}".replace(",", ".")
         lfa_mrd = f"{float(f_lfa['wert_mrd_eur']):.2f}".replace(".", ",")
         lfa_pc = f"-{int(round(float(f_lfa['wert_eur_pro_kopf']))):,}".replace(",", ".")
+
+        s_pop = {r["ebene"]: int(float(r["bevoelkerung_referenz"])) for r in summary if int(r["jahr"]) == year}
+        pop_de = s_pop["Bund_Kernhaushalt"]
+        pop_by = s_pop["Freistaat_Bayern"]
+        pop_muc = s_pop["Landeshauptstadt_Muenchen"]
+
+        pop_de_fmt = f"{pop_de:,}".replace(",", ".")
+        pop_by_fmt = f"{pop_by:,}".replace(",", ".")
+        pop_muc_fmt = f"{pop_muc:,}".replace(",", ".")
+        pop_de_mio = f"{pop_de / 1e6:.1f}".replace(".", ",")
+        pop_by_mio = f"{pop_by / 1e6:.1f}".replace(".", ",")
+        pop_muc_mio = f"{pop_muc / 1e6:.2f}".replace(".", ",")
 
         return [
             dict(
@@ -538,40 +546,56 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 showarrow=False, font=dict(size=11, color="#92400e", family="Helvetica, Arial"),
                 bgcolor="rgba(255, 251, 235, 0.94)", bordercolor="#d97706", borderwidth=1, borderpad=4,
             ),
-            # Bottom callout banners (outside ribbon path)
+            # Bottom footer callouts: Referenzbevölkerung (left) and Amtliche Primärquellen (right)
             dict(
-                x=0.02, y=-0.04, xref="paper", yref="paper",
-                text=f"<b>Intergovernmental Transfer Bridge:</b> • Bundeszuschuss GRV/GKV: <b>{bz_mrd} Mrd. €</b> ({bz_pc} €/dt. Kopf) • Bundesmittel an Bayern: <b>{bm_mrd} Mrd. €</b> ({bm_pc} €/by. Kopf) • FAG Netto-Zuschuss an München: <b>{fag_mrd} Mrd. €</b> ({fag_pc} €/muc. Kopf)",
+                x=0.005, y=-0.04, xref="paper", yref="paper", xanchor="left",
+                text=(
+                    f"<b>Referenzbevölkerung (Zensus 2022, Stand 31.12.{year - 1}):</b> "
+                    f"Bund & SV: <b>{pop_de_fmt} EW</b> ({pop_de_mio} Mio.) • "
+                    f"Freistaat Bayern: <b>{pop_by_fmt} EW</b> ({pop_by_mio} Mio.) • "
+                    f"Landeshauptstadt München: <b>{pop_muc_fmt} EW</b> ({pop_muc_mio} Mio.)"
+                ),
                 showarrow=False, font=dict(size=12, color="#1e293b", family="Helvetica, Arial"),
-                bgcolor="#ede9fe", bordercolor="#8b5cf6", borderwidth=1, borderpad=6,
+                bgcolor="#f8fafc", bordercolor="#cbd5e1", borderwidth=1, borderpad=6,
             ),
             dict(
-                x=0.98, y=-0.04, xref="paper", yref="paper", xanchor="right",
-                text=f"<b>Länderfinanzausgleich:</b> Bayern transferiert <b>{lfa_mrd} Mrd. €</b> ({lfa_pc} €/bayer. Kopf) an andere Bundesländer.",
-                showarrow=False, font=dict(size=12, color="#0369a1", family="Helvetica, Arial"),
-                bgcolor="#f0f9ff", bordercolor="#0284c7", borderwidth=1, borderpad=6,
+                x=0.995, y=-0.04, xref="paper", yref="paper", xanchor="right",
+                text=(
+                    f"<b>Amtliche Primärquellen ({year}):</b> "
+                    f"BMF (Bundeshaushalt) • BMAS / DRV / GKV (Sozialbudget) • "
+                    f"StMFH (Haushalt Bayern & LFA) • Stadtkämmerei München • Destatis (Zensus 2022)"
+                ),
+                showarrow=False, font=dict(size=12, color="#334155", family="Helvetica, Arial"),
+                bgcolor="#f8fafc", bordercolor="#cbd5e1", borderwidth=1, borderpad=6,
             )
         ]
 
     # 1. Static high-resolution 2024 figure
+    title_2024 = (
+        "<b>4-Layer Multi-Level Fiscal Architecture (2024): Bund, Freistaat Bayern & Landeshauptstadt München</b><br>"
+        "<sup>Ribbon- und Knotenbreiten proportional zum Pro-Kopf-Volumen (€/Kopf). Absolute Haushaltsvolumina in Klammern ausgewiesen.<br>"
+        "Vertikale Transfers, Bundesmittel und kommunale Umlagen vollständig konsolidiert.</sup>"
+    )
+    title_2023 = (
+        "<b>4-Layer Multi-Level Fiscal Architecture (2023): Bund, Freistaat Bayern & Landeshauptstadt München</b><br>"
+        "<sup>Ribbon- und Knotenbreiten proportional zum Pro-Kopf-Volumen (€/Kopf). Absolute Haushaltsvolumina in Klammern ausgewiesen.<br>"
+        "Vertikale Transfers, Bundesmittel und kommunale Umlagen vollständig konsolidiert.</sup>"
+    )
+
     trace_2024 = create_sankey_trace(2024)
     annos_2024 = build_sankey_annotations(2024)
     fig_static = go.Figure(data=[trace_2024])
 
     fig_static.update_layout(
         title=dict(
-            text=(
-                "<b>4-Layer Multi-Level Fiscal Architecture (2024): Bund, Freistaat Bayern & Landeshauptstadt München</b><br>"
-                "<sup>Ribbon- und Knotenbreiten proportional zum Pro-Kopf-Volumen (€/Kopf). Absolute Haushaltsvolumina in Klammern ausgewiesen.<br>"
-                "Referenzbevölkerung (Zensus 2022): Bund & Sozialversicherung (83,6 Mio. EW), Freistaat Bayern (13,2 Mio. EW), Stadt München (1,51 Mio. EW). Vertikale Transfers konsolidiert.</sup>"
-            ),
+            text=title_2024,
             font=dict(family="Helvetica, Arial, sans-serif", size=22, color="#0f172a"),
             x=0.02,
             y=0.98,
         ),
         font=dict(family="Helvetica, Arial, sans-serif", size=12, color="#1e293b"),
         width=2600,
-        height=1800,
+        height=2000,
         margin=dict(l=50, r=50, t=150, b=110),
         paper_bgcolor="#f8fafc",
         plot_bgcolor="#f8fafc",
@@ -601,12 +625,12 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                     dict(
                         label="<b>2024 (Baseline)</b>",
                         method="update",
-                        args=[{"visible": [True, False]}, {"annotations": annos_2024}],
+                        args=[{"visible": [True, False]}, {"annotations": annos_2024, "title.text": title_2024}],
                     ),
                     dict(
                         label="<b>2023 (Vorjahr)</b>",
                         method="update",
-                        args=[{"visible": [False, True]}, {"annotations": annos_2023}],
+                        args=[{"visible": [False, True]}, {"annotations": annos_2023, "title.text": title_2023}],
                     ),
                 ],
                 bgcolor="#f1f5f9",
@@ -1136,19 +1160,25 @@ def render_panel_e(flows, plots_dir):
         "Gesundheit_und_Pflege": ("Gesundheit & Pflege", "#10b981"),
         "Rente_und_Alterssicherung": ("Rente & Alterssicherung", "#8b5cf6"),
         "Schulen_und_Kitas": ("Schulen & Kitas", "#3b82f6"),
+        "Soziales_Jugend_Wohnungslosigkeit": ("Soziales & Jugend (München)", "#db2777"),
+        "Kommunale_Verwaltung_Sonstiges": ("Kommunale Verwaltung & IT (MUC)", "#b45309"),
+        "Wirtschaft_Klima_Verwaltung": ("Wirtschaft, Energie & Verwaltung (Bund)", "#1e40af"),
         "Verkehr_und_Infrastruktur": ("Verkehr & Infrastruktur", "#f59e0b"),
-        "Verteidigung_und_Aeusseres": ("Verteidigung & Äußeres", "#ef4444"),
         "Sicherheit_und_Justiz": ("Innere Sicherheit & Justiz", "#0284c7"),
         "Hochschulen_und_Forschung": ("Hochschulen & Spitzenforschung", "#6366f1"),
-        "Arbeitsfoerderung_und_Reha": ("Arbeitsförderung & Reha", "#059669"),
-        "Soziales_Jugend_Wohnungslosigkeit": ("Soziales & Jugend (München)", "#db2777"),
-        "Buergergeld_Grundsicherung": ("Bürgergeld & Grundsicherung", "#ec4899"),
-        "Schuldendienst_und_Zinsen": ("Schuldendienst & Zinsen (Bund)", "#64748b"),
-        "Wohnungsbau_und_Stadtplanung": ("Wohnungsbau & Stadtplanung", "#d97706"),
+        "Verteidigung_und_Aeusseres": ("Verteidigung & Äußeres", "#ef4444"),
         "Laenderfinanzausgleich_Ausgleich_an_andere_Laender": ("Länderfinanzausgleich (Abfluss BY)", "#0369a1"),
+        "Buergergeld_Grundsicherung": ("Bürgergeld & Grundsicherung", "#ec4899"),
+        "Arbeitsfoerderung_und_Reha": ("Arbeitsförderung & Reha", "#059669"),
+        "Wirtschaft_Verwaltung_Sonstiges": ("Wirtschaft & Landesverwaltung (BY)", "#0369a1"),
+        "Schuldendienst_und_Zinsen": ("Schuldendienst & Zinsen (Bund)", "#64748b"),
+        "Bundeszuweisungen_an_andere_Laender_Transfer": ("Bundeszuweisungen an übrige Länder", "#1e40af"),
         "Kultur_und_Freizeit": ("Kultur & Freizeit (München)", "#14b8a6"),
+        "Ruecklagen_und_Liquiditaetspuffer": ("Rücklagen & Liquiditätspuffer", "#0f766e"),
+        "Wohnungsbau_und_Stadtplanung": ("Wohnungsbau & Stadtplanung", "#d97706"),
     }
 
+    tot_e = sum(bucket_sums.values())
     sorted_buckets = sorted(
         [(k, bucket_sums[k]) for k in label_map_l4.keys() if k in bucket_sums and bucket_sums[k] > 0],
         key=lambda x: x[1]
@@ -1164,18 +1194,18 @@ def render_panel_e(flows, plots_dir):
             x=vals,
             orientation="h",
             marker=dict(color=clrs),
-            text=[f"<b>{int(round(v)):,} €</b>" for v in vals],
+            text=[f"<b>{int(round(v)):,} €</b> ({(v / tot_e) * 100.0:.1f}%)" if tot_e > 0 else f"<b>{int(round(v)):,} €</b>" for v in vals],
             textposition="outside",
         )
     )
     fig.update_layout(
         title=dict(
-            text="<b>Panel E: Final Functional Public Goods & citizen-Facing Services (2024)</b><br><sup>Priorisierung öffentlicher Aufgaben über alle föderalen Ebenen hinweg</sup>",
+            text="<b>Panel E: Final Functional Public Goods & citizen-Facing Services (2024)</b><br><sup>Priorisierung öffentlicher Aufgaben über alle föderalen Ebenen hinweg mit prozentualen Anteilen</sup>",
             font=dict(size=18, color="#0f172a"),
         ),
         xaxis=dict(title="<b>Finanzvolumen pro Einwohner (€/Kopf)</b>", gridcolor="#e2e8f0"),
-        width=1000, height=700, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
-        margin=dict(l=260, r=80, t=110, b=60),
+        width=1000, height=850, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
+        margin=dict(l=280, r=80, t=110, b=60),
     )
     png_path = os.path.join(plots_dir, "panel_e_functional_buckets.png")
     svg_path = os.path.join(plots_dir, "panel_e_functional_buckets.svg")

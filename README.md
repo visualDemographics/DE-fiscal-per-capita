@@ -2,7 +2,7 @@
 
 [![Pipeline Audit](https://img.shields.io/badge/Audit-8%2F8%20Passed-emerald.svg)](.agents/skills/responsible-research/scripts/audit_research_pipeline.py)
 [![Data Quality](https://img.shields.io/badge/Kirchhoff%20Conservation-%CE%94%20%3D%200.000%20Mrd.%20%E2%82%AC-blue.svg)](datasets/fiscal_sankey_flows_per_capita.csv)
-[![Resolution](https://img.shields.io/badge/PNG%20Resolution-5200%20%C3%97%203100-purple.svg)](plots/sankey_fiscal_per_capita.png)
+[![Resolution](https://img.shields.io/badge/PNG%20Resolution-5200%20%C3%97%204000-purple.svg)](plots/sankey_fiscal_per_capita.png)
 [![Interactive HTML](https://img.shields.io/badge/Widget-Plotly%20Sankey%20HTML-amber.svg)](plots/sankey_fiscal_interactive.html)
 
 This repository provides an empirical, publication-grade fiscal analysis decomposing public money in Germany for an individual resident of the **City of Munich (*Landeshauptstadt München*)** in 2024 (with longitudinal comparison to 2023). Every resident of Munich simultaneously receives public goods and services financed across four distinct public tiers:
@@ -18,6 +18,14 @@ The flagship analytical visualization is a **4-Layer High-Resolution Sankey Diag
 ## 1. The 4-Layer Fiscal Sankey Diagram
 
 The Sankey diagram tracks the complete lifecycle of public funds—from primary tax and contribution origin, through gross jurisdictional appropriation and vertical/horizontal intergovernmental transfers, into final citizen-facing functional areas.
+
+<p align="center">
+  <a href="plots/sankey_fiscal_interactive.html">
+    <img src="plots/sankey_fiscal_per_capita.png" alt="4-Layer Multi-Level Fiscal Architecture (2024)" width="100%">
+  </a>
+  <br>
+  <em>Figure 1: 4-Layer Multi-Level Fiscal Architecture (2024) for a Munich resident. Proportional ribbon widths scaled to conserved physical volume (€ bn) with citizen-facing per-capita metrics (€/Kopf). Click image to view interactive HTML version with 2024/2023 year switcher.</em>
+</p>
 
 ```mermaid
 flowchart LR
@@ -47,15 +55,18 @@ flowchart LR
 
     subgraph L4["Layer 4: Finale Funktionale End-Buckets"]
         direction TB
-        B_Rent["Rente & Alterssicherung (4.755 €)"]
-        B_Ges["Gesundheit & Pflege (5.194 €)"]
-        B_Schul["Schulen & Kitas (2.933 €)"]
-        B_Hoch["Hochschulen & Spitzenforschung (959 €)"]
-        B_Vert["Verteidigung & Äußeres (993 €)"]
-        B_Verk["Verkehr & Infrastruktur (1.995 €)"]
-        B_Sich["Innere Sicherheit & Justiz (1.381 €)"]
-        B_LFA["Länderfinanzausgleich Abfluss (-737 €)"]
-        B_Rest["Soziales, Wohnen, Zinsen & Verwaltung"]
+        B_Ges["Gesundheit & Pflege (5.002 € · 19,1%)"]
+        B_Rent["Rente & Alterssicherung (4.755 € · 18,2%)"]
+        B_Schul["Schulen & Kitas (2.724 € · 10,4%)"]
+        B_Soz["Soziales & Jugend (2.038 € · 7,8%)"]
+        B_Komm["Kommunale Verw. (1.633 € · 6,2%)"]
+        B_Wirt["Wirtschaft & Energie (1.527 € · 5,8%)"]
+        B_Verk["Verkehr & Mobilität (1.409 € · 5,4%)"]
+        B_Sich["Sicherheit & Justiz (1.338 € · 5,1%)"]
+        B_Hoch["Hochschulen & Forsch. (1.059 € · 4,1%)"]
+        B_Vert["Verteidigung & Äußeres (888 € · 3,4%)"]
+        B_LFA["Länderfinanzausgleich (-737 € · 2,8%)"]
+        B_Rest["Bürgergeld, Zinsen & Rest (3.006 € · 11,5%)"]
     end
 
     F_Tax --> N_Fed
@@ -125,16 +136,26 @@ The net disposable funds available to each public entity following intergovernme
 - **Effektive Stadt München**: **6.343 € / resident** (€9,55 bn ordinary budget + net transfers)
 
 ### Layer 4: Finale Funktionale End-Buckets (Citizen-Facing Outlays)
-Final destination categories providing direct public utility:
-- **Rente & Alterssicherung**: **4.755 € / resident** (€397,40 bn)
-- **Gesundheit & Pflege**: **5.194 € / resident** (€434,10 bn statutory health, care, and clinic subsidies)
-- **Schulen & Kitas**: **2.933 € / resident** (Bayern Kultus + München RBS)
-- **Hochschulen & Spitzenforschung**: **959 € / resident** (Bayern Universitäten + Bund Forschung)
-- **Verteidigung & Äußeres**: **993 € / resident** (€83,00 bn regular defense, Sondervermögen Bundeswehr, and diplomacy)
-- **Verkehr & Mobilität**: **1.995 € / resident** (Bund + Bayern + München MVG/Straßen)
-- **Innere Sicherheit & Justiz**: **1.381 € / resident** (Bayern Polizei/Justiz + München KVR/Feuerwehr + Bund)
-- **Länderfinanzausgleich (End-Bucket Outflow)**: **737 € / resident** (€9,77 bn net outflow paid by Bavaria to financially weaker states)
-- **Soziales, Wohnen, Arbeitsförderung, Zinsen & Verwaltung**: remaining statutory outlays.
+Final destination categories providing direct public utility, sorted strictly descending by per-capita size with percentage shares of total per-capita outlays ($26{,}135.02\text{ €/resident}$ in 2024):
+1. **Gesundheit & Pflege**: **5.002 € / resident** (19,1% · €402,14 bn)
+2. **Rente & Alterssicherung**: **4.755 € / resident** (18,2% · €397,40 bn)
+3. **Schulen & Kitas**: **2.724 € / resident** (10,4% · €18,16 bn)
+4. **Soziales, Jugend & Wohnen (MUC)**: **2.038 € / resident** (7,8% · €24,67 bn)
+5. **Kommunale Verwaltung & IT (MUC)**: **1.633 € / resident** (6,2% · €2,46 bn)
+6. **Wirtschaft, Energie & Verwaltung (Bund)**: **1.527 € / resident** (5,8% · €40,38 bn)
+7. **Verkehr & Mobilität**: **1.409 € / resident** (5,4% · €43,44 bn)
+8. **Innere Sicherheit & Justiz**: **1.338 € / resident** (5,1% · €27,37 bn)
+9. **Hochschulen & Spitzenforschung**: **1.059 € / resident** (4,1% · €39,14 bn)
+10. **Verteidigung & Äußeres**: **888 € / resident** (3,4% · €74,20 bn)
+11. **Länderfinanzausgleich (Transferabfluss BY)**: **-737 € / resident** (2,8% · -€9,77 bn Nettoabfluss Bayern)
+12. **Bürgergeld & Grundsicherung**: **697 € / resident** (2,7% · €58,26 bn)
+13. **Arbeitsförderung & Reha (BA)**: **642 € / resident** (2,5% · €53,64 bn)
+14. **Wirtschaft & Landesverwaltung (BY)**: **531 € / resident** (2,0% · €7,04 bn)
+15. **Schuldendienst & Zinsen (Bund)**: **409 € / resident** (1,6% · €34,22 bn)
+16. **Bundeszuweisungen an übrige Länder**: **297 € / resident** (1,1% · €24,80 bn)
+17. **Kultur & Freizeit (München)**: **189 € / resident** (0,7% · €0,28 bn)
+18. **Rücklagen & Liquiditätspuffer**: **137 € / resident** (0,5% · €11,43 bn)
+19. **Wohnungsbau & Stadtplanung**: **123 € / resident** (0,5% · €4,19 bn)
 
 > [!NOTE]
 > **Mathematical Verification**: By Kirchhoff's law, every layer satisfies exact flow conservation in physical currency units:
@@ -172,7 +193,7 @@ Normalizations use official post-censal populations (*Amtliche Einwohnerzahl for
 ### Setup Environment
 ```bash
 # 1. Clone repository
-git clone https://github.com/selle/DE-fiscal-per-capita.git
+git clone https://github.com/visualDemographics/DE-fiscal-per-capita.git
 cd DE-fiscal-per-capita
 
 # 2. Initialize virtual environment and install dependencies
@@ -230,12 +251,12 @@ DE-fiscal-per-capita/
 │   └── literature_empirical_benchmarks.csv
 ├── datasets/                                      # Audited analysis-ready datasets
 │   ├── datasets.md                                # Variable codebook and mathematical definitions
-│   ├── fiscal_sankey_flows_per_capita.csv         # 110 directed graph edges with €/Kopf & € bn
+│   ├── fiscal_sankey_flows_per_capita.csv         # 120 directed graph edges with €/Kopf & € bn
 │   ├── fiscal_per_capita_summary.csv              # Headline comparative summary across tiers
 │   └── literature_empirical_benchmarks.csv        # Verbatim literature citations and benchmark catalog
 ├── plots/                                         # Publication figures & visual artifacts
 │   ├── plot.md                                    # Systematic methodological plot documentation
-│   ├── sankey_fiscal_per_capita.png               # High-res static Sankey (5200x3100 px)
+│   ├── sankey_fiscal_per_capita.png               # High-res static Sankey (5200x4000 px)
 │   ├── sankey_fiscal_interactive.html             # Interactive Plotly web widget with year switch
 │   ├── synoptic_3x3_matrix.png                    # 9-panel executive research matrix
 │   └── panel_a_per_capita_breakdown.png ...       # Individual research panels A through I
@@ -266,10 +287,10 @@ If you reference this model or visualization in research, policy analysis, or jo
 
 ```bibtex
 @misc{fiscal_per_capita_munich_2024,
-  author       = {Selle, Antigravity Empirical Research Team},
+  author       = {visualDemographics, Antigravity Empirical Research Team},
   title        = {4-Layer Fiscal Per-Capita Breakdown: Bund, Freistaat Bayern & Landeshauptstadt München},
   year         = {2024},
   publisher    = {GitHub},
-  howpublished = {\url{https://github.com/selle/DE-fiscal-per-capita}}
+  howpublished = {\url{https://github.com/visualDemographics/DE-fiscal-per-capita}}
 }
 ```

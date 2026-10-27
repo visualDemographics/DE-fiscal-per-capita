@@ -367,12 +367,12 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
                  by_year["Epl_15_Wissenschaft_und_Kunst_Universitaeten"], pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Soziales_Jugend_Wohnungslosigkeit", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Epl_10_Familie_Arbeit_Soziales"], pop_denom=n_by_t1)
+        add_flow("Effective_Bayern", "Wirtschaft_Verwaltung_Sonstiges", "Layer_3_Effective", "Layer_4_Buckets",
+                 by_rest_mrd, pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Verkehr_und_Infrastruktur", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Epl_09_Wohnen_Bau_Verkehr"], pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Wirtschaft_Klima_Verwaltung", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Epl_07_08_12_Wirtschaft_Umwelt_Agrar"], pop_denom=n_by_t1)
-        add_flow("Effective_Bayern", "Wirtschaft_Verwaltung_Sonstiges", "Layer_3_Effective", "Layer_4_Buckets",
-                 by_rest_mrd, pop_denom=n_by_t1)
         add_flow("Effective_Bayern", "Gesundheit_und_Pflege", "Layer_3_Effective", "Layer_4_Buckets",
                  by_year["Epl_14_Gesundheit_und_Pflege"], pop_denom=n_by_t1)
 
@@ -390,10 +390,10 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
         )
         muc_rest_mrd = tot_muc_eff_mrd - muc_known_mrd
 
-        add_flow("Effective_Munich", "Schulen_und_Kitas", "Layer_3_Effective", "Layer_4_Buckets",
-                 m_year["Referat_fuer_Bildung_und_Sport_RBS_Schulen_Kitas"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Kommunale_Verwaltung_Sonstiges", "Layer_3_Effective", "Layer_4_Buckets",
                  muc_rest_mrd, pop_denom=n_muc_t1)
+        add_flow("Effective_Munich", "Schulen_und_Kitas", "Layer_3_Effective", "Layer_4_Buckets",
+                 m_year["Referat_fuer_Bildung_und_Sport_RBS_Schulen_Kitas"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Soziales_Jugend_Wohnungslosigkeit", "Layer_3_Effective", "Layer_4_Buckets",
                  m_year["Sozialreferat_Jugend_Soziales_Wohnungslosigkeit"], pop_denom=n_muc_t1)
         add_flow("Effective_Munich", "Wirtschaft_Klima_Verwaltung", "Layer_3_Effective", "Layer_4_Buckets",
