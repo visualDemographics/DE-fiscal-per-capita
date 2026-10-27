@@ -94,6 +94,7 @@ $$\text{goal} \longrightarrow \text{literature} \longrightarrow \text{rawdata} \
 * **Missing pipeline assertions**: Omitting automated checks in `src/data_preparation.py` (e.g., verifying that sub-budgets sum to total budget, physical output / population = per-capita output, or index base year $= 100.0$).
 * **Guessing or interpolating unobservable cells**: When administrative registers have non-overlapping reporting brackets that leave a cell denominator unobservable, preserve `NaN` (`None`) explicitly rather than fabricating an interpolated estimate.
 * **Decoupled or ad-hoc plotting**: Hardcoding numbers inside standalone plotting scripts instead of having `src/modeling.py` ingest `/datasets`, fit models, and render all figures.
+* **Destructive Raster Pixel Surgery & Manual Canvas Patching**: Never patch rendered raster figures by drawing opaque background polygons or clearing boxes with PIL (`base_draw.polygon(..., fill=bg)`) to erase and redraw plot elements. Such in-memory canvas surgery obliterates text labels, node boundaries, and text halos. If post-processing of diagram paths is required, perform it on the vector source (SVG) and convert cleanly to raster via a simple, direct conversion pipeline, or configure the generator to render natively.
 * **Missing plot validity documentation**: Rendering plots without updating `plots/plot.md` with provenance, equations, and limitations for every panel.
 
 ---

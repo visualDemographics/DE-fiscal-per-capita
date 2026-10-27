@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Modeling, Statistical Inference & Synoptic Visualization Pipeline.
+"""Modeling, Statistical Inference & 4-Layer Fiscal Sankey Generator.
 
-Implements econometric models, Shapley causal waterfall decompositions,
-Kirchhoff multi-level flow validations, and renders publication-ready
-graphics (Sankey diagrams, standalone Panels A-I, and 3x3 Synoptic Matrix).
+Implements Kirchhoff multi-level flow validations and renders the
+flagship 4-layer per-capita fiscal Sankey diagram across the Federal Republic,
+Free State of Bavaria, and City of Munich (PNG, SVG, and interactive HTML).
+
+This module is dedicated exclusively to the multi-level fiscal Sankey architecture.
 
 Strict AST Contract Compliant:
 - Zero synthetic data generators (no .rvs, np.random, random.gauss).
@@ -12,22 +14,17 @@ Strict AST Contract Compliant:
 """
 
 import csv
-import math
 import os
-import sys
 
 import plotly.graph_objects as go
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def load_modeling_data(datasets_dir, raw_dir):
-    """Load harmonized analysis-ready datasets and raw demographic tables."""
+def load_modeling_data(datasets_dir):
+    """Load harmonized analysis-ready datasets for the 4-layer fiscal Sankey."""
     f_flows = os.path.join(datasets_dir, "fiscal_sankey_flows_per_capita.csv")
     f_sum = os.path.join(datasets_dir, "fiscal_per_capita_summary.csv")
-    f_demo = os.path.join(raw_dir, "demographics_zensus_denominators_2023_2024.csv")
-    f_muc = os.path.join(raw_dir, "muenchen_haushalt_2023_2024.csv")
-    f_bund = os.path.join(raw_dir, "destatis_bundeshaushalt_2023_2024.csv")
 
     flows = []
     with open(f_flows, "r", encoding="utf-8") as f:
@@ -39,22 +36,7 @@ def load_modeling_data(datasets_dir, raw_dir):
         for r in csv.DictReader(f):
             summary.append(r)
 
-    demo = []
-    with open(f_demo, "r", encoding="utf-8") as f:
-        for r in csv.DictReader(f):
-            demo.append(r)
-
-    muc = []
-    with open(f_muc, "r", encoding="utf-8") as f:
-        for r in csv.DictReader(f):
-            muc.append(r)
-
-    bund = []
-    with open(f_bund, "r", encoding="utf-8") as f:
-        for r in csv.DictReader(f):
-            bund.append(r)
-
-    return flows, summary, demo, muc, bund
+    return flows, summary
 
 
 # ---------------------------------------------------------------------------
@@ -479,27 +461,22 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
 
         return [
             dict(
-                x=0.005, y=1.04, xref="paper", yref="paper",
+                x=0.005, y=1.025, xref="paper", yref="paper",
                 text="<b>LAYER 1: STEUER- & BEITRAGSINFLUX</b><br><span style='font-size:11px;color:#64748b'>Eigene Steuern, Beitragsmittel & Kredite</span>",
                 showarrow=False, font=dict(size=13, color="#1e3a8a", family="Helvetica, Arial"),
             ),
             dict(
-                x=0.32, y=1.04, xref="paper", yref="paper",
-                text="<b>LAYER 2: NOMINALE GEBIETSKÖRPERSCHAFTEN</b><br><span style='font-size:11px;color:#64748b'>Bruttohaushalte vor vertikalen Transfers</span>",
+                x=0.32, y=1.025, xref="paper", yref="paper",
+                text="<b>LAYER 2: NOMINALE GEBIETSKÖRPERSCHAFTEN</b><br><span style='font-size:11px;color:#64748b'>Bruttohaushalte der Gebietskörperschaften</span>",
                 showarrow=False, font=dict(size=13, color="#0f172a", family="Helvetica, Arial"),
             ),
             dict(
-                x=0.485, y=1.04, xref="paper", yref="paper",
-                text="<b>VERTIKALE TRANSFERS & HAUSHALTSÜBERGÄNGE</b><br><span style='font-size:11px;color:#64748b'>Bundeszuschüsse, Landesmittel & Netto-FAG</span>",
-                showarrow=False, font=dict(size=12, color="#4338ca", family="Helvetica, Arial"),
-            ),
-            dict(
-                x=0.65, y=1.04, xref="paper", yref="paper",
-                text="<b>LAYER 3: EFFEKTIVE HAUSHALTE (KONSOLIDIERT)</b><br><span style='font-size:11px;color:#64748b'>Ausgaben nach Bundeszuschüssen & Umlagen</span>",
+                x=0.65, y=1.025, xref="paper", yref="paper",
+                text="<b>LAYER 3: EFFEKTIVE HAUSHALTE (KONSOLIDIERT)</b><br><span style='font-size:11px;color:#64748b'>Ausgaben nach Konsolidierung & Umlagen</span>",
                 showarrow=False, font=dict(size=13, color="#0d9488", family="Helvetica, Arial"),
             ),
             dict(
-                x=0.995, y=1.04, xref="paper", yref="paper",
+                x=0.995, y=1.025, xref="paper", yref="paper",
                 text="<b>LAYER 4: FINALE FUNKTIONALE END-BUCKETS</b><br><span style='font-size:11px;color:#64748b'>Bürgerwirksame Güter & Länderfinanzausgleich</span>",
                 showarrow=False, font=dict(size=13, color="#475569", family="Helvetica, Arial"), xanchor="right",
             ),
@@ -548,7 +525,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             ),
             # Bottom footer callouts: Referenzbevölkerung (left) and Amtliche Primärquellen (right)
             dict(
-                x=0.005, y=-0.04, xref="paper", yref="paper", xanchor="left",
+                x=0.005, y=-0.075, xref="paper", yref="paper", xanchor="left",
                 text=(
                     f"<b>Referenzbevölkerung (Zensus 2022, Stand 31.12.{year - 1}):</b> "
                     f"Bund & SV: <b>{pop_de_fmt} EW</b> ({pop_de_mio} Mio.) • "
@@ -559,7 +536,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 bgcolor="#f8fafc", bordercolor="#cbd5e1", borderwidth=1, borderpad=6,
             ),
             dict(
-                x=0.995, y=-0.04, xref="paper", yref="paper", xanchor="right",
+                x=0.995, y=-0.075, xref="paper", yref="paper", xanchor="right",
                 text=(
                     f"<b>Amtliche Primärquellen ({year}):</b> "
                     f"BMF (Bundeshaushalt) • BMAS / DRV / GKV (Sozialbudget) • "
@@ -573,13 +550,11 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
     # 1. Static high-resolution 2024 figure
     title_2024 = (
         "<b>4-Layer Multi-Level Fiscal Architecture (2024): Bund, Freistaat Bayern & Landeshauptstadt München</b><br>"
-        "<sup>Ribbon- und Knotenbreiten proportional zum Pro-Kopf-Volumen (€/Kopf). Absolute Haushaltsvolumina in Klammern ausgewiesen.<br>"
-        "Vertikale Transfers, Bundesmittel und kommunale Umlagen vollständig konsolidiert.</sup>"
+        "<sup>Ribbon- und Knotenbreiten proportional zum Pro-Kopf-Volumen (€/Kopf). Absolute Haushaltsvolumina in Klammern ausgewiesen.</sup>"
     )
     title_2023 = (
         "<b>4-Layer Multi-Level Fiscal Architecture (2023): Bund, Freistaat Bayern & Landeshauptstadt München</b><br>"
-        "<sup>Ribbon- und Knotenbreiten proportional zum Pro-Kopf-Volumen (€/Kopf). Absolute Haushaltsvolumina in Klammern ausgewiesen.<br>"
-        "Vertikale Transfers, Bundesmittel und kommunale Umlagen vollständig konsolidiert.</sup>"
+        "<sup>Ribbon- und Knotenbreiten proportional zum Pro-Kopf-Volumen (€/Kopf). Absolute Haushaltsvolumina in Klammern ausgewiesen.</sup>"
     )
 
     trace_2024 = create_sankey_trace(2024)
@@ -591,12 +566,12 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             text=title_2024,
             font=dict(family="Helvetica, Arial, sans-serif", size=22, color="#0f172a"),
             x=0.02,
-            y=0.98,
+            y=0.985,
         ),
         font=dict(family="Helvetica, Arial, sans-serif", size=12, color="#1e293b"),
         width=2600,
-        height=2000,
-        margin=dict(l=50, r=50, t=150, b=110),
+        height=2250,
+        margin=dict(l=50, r=50, t=160, b=190),
         paper_bgcolor="#f8fafc",
         plot_bgcolor="#f8fafc",
         annotations=annos_2024,
@@ -771,125 +746,9 @@ def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
 
         tree.write(out_svg_path, encoding="utf-8", xml_declaration=True)
 
-    # 2. Update high-resolution PNG ribbons
-    if os.path.exists(out_png_path) and (updated_bund_ribbons or updated_by_muc_ribbons):
-        from PIL import Image, ImageDraw
-        import numpy as np
-
-        im = Image.open(out_png_path).convert("RGBA")
-        overlay = Image.new("RGBA", im.size, (255, 255, 255, 0))
-        draw = ImageDraw.Draw(overlay)
-        base_draw = ImageDraw.Draw(im)
-
-        scale = 2.0
-        ox, oy = 50.0, 150.0
-
-        def to_px(x, y):
-            return (scale * (x + ox), scale * (y + oy))
-
-        def eval_bezier(p0, p1, p2, p3, n=80):
-            t = np.linspace(0, 1, n)
-            mt = 1 - t
-            x = mt**3 * p0[0] + 3 * mt**2 * t * p1[0] + 3 * mt * t**2 * p2[0] + t**3 * p3[0]
-            y = mt**3 * p0[1] + 3 * mt**2 * t * p1[1] + 3 * mt * t**2 * p2[1] + t**3 * p3[1]
-            return list(zip(x, y))
-
-        # A) Draw Bund Layer 1 -> Layer 2
-        if updated_bund_ribbons:
-            min_y0 = min(r[3] for r in updated_bund_ribbons)
-            max_y0 = max(r[4] for r in updated_bund_ribbons)
-            min_y1 = min(r[5] for r in updated_bund_ribbons)
-            max_y1 = max(r[6] for r in updated_bund_ribbons)
-            x0_val = updated_bund_ribbons[0][0]
-            x1_val = updated_bund_ribbons[0][1]
-
-            clear_box = [
-                to_px(x0_val - 0.5, min(min_y0, min_y1) - 2.0),
-                to_px(x1_val, min(min_y0, min_y1) - 2.0),
-                to_px(x1_val, max(max_y0, max_y1) + 2.0),
-                to_px(x0_val - 0.5, max(max_y0, max_y1) + 2.0),
-            ]
-            base_draw.polygon(clear_box, fill=(248, 250, 252, 255))
-
-            link_color_bund = (30, 58, 138, int(255 * 0.40))
-            for x0, x1, cx, y0_top, y0_bot, y1_top, y1_bot in updated_bund_ribbons:
-                p0_top = to_px(x0, y0_top)
-                p1_top = to_px(cx, y0_top)
-                p2_top = to_px(cx, y1_top)
-                p3_top = to_px(x1, y1_top)
-
-                p0_bot = to_px(x1, y1_bot)
-                p1_bot = to_px(cx, y1_bot)
-                p2_bot = to_px(cx, y0_bot)
-                p3_bot = to_px(x0, y0_bot)
-
-                top_curve = eval_bezier(p0_top, p1_top, p2_top, p3_top)
-                bot_curve = eval_bezier(p0_bot, p1_bot, p2_bot, p3_bot)
-                draw.polygon(top_curve + bot_curve, fill=link_color_bund)
-
-        # B) Draw Bayern & Munich Layer 2 -> Layer 3 (preserving annotations on top)
-        if updated_by_muc_ribbons:
-            # Crop badges before clearing so they can be re-composited on top of new ribbons
-            badge_crops = []
-            for g in root.iter("{http://www.w3.org/2000/svg}g"):
-                if g.attrib.get("class") == "cursor-pointer":
-                    txt = "".join(g.itertext())
-                    if any(k in txt for k in ["Landeshaushalt", "Netto-FAG", "Kommunalhaushalt"]):
-                        tr = g.attrib.get("transform", "")
-                        m_tr = re.match(r"translate\(([-\d\.]+),\s*([-\d\.]+)\)", tr)
-                        rect = g.find("{http://www.w3.org/2000/svg}rect")
-                        if m_tr and rect is not None:
-                            tx, ty = float(m_tr.group(1)), float(m_tr.group(2))
-                            w_val = rect.attrib["width"] if "width" in rect.attrib else None
-                            h_val = rect.attrib["height"] if "height" in rect.attrib else None
-                            if w_val is not None and h_val is not None:
-                                w = float(w_val)
-                                h = float(h_val)
-                                px0 = int(round(scale * tx)) - 1
-                                py0 = int(round(scale * ty)) - 1
-                                px1 = int(round(scale * (tx + w))) + 1
-                                py1 = int(round(scale * (ty + h))) + 1
-                                cropped = im.crop((px0, py0, px1, py1))
-                                badge_crops.append((px0, py0, cropped))
-
-            min_y0_bm = min(r[3] for r in updated_by_muc_ribbons)
-            max_y0_bm = max(r[4] for r in updated_by_muc_ribbons)
-            min_y1_bm = min(r[5] for r in updated_by_muc_ribbons)
-            max_y1_bm = max(r[6] for r in updated_by_muc_ribbons)
-            x0_bm = updated_by_muc_ribbons[0][0]
-            x1_bm = updated_by_muc_ribbons[0][1]
-
-            clear_box_bm = [
-                to_px(x0_bm - 0.5, min(min_y0_bm, min_y1_bm) - 2.0),
-                to_px(x1_bm, min(min_y0_bm, min_y1_bm) - 2.0),
-                to_px(x1_bm, max(max_y0_bm, max_y1_bm) + 2.0),
-                to_px(x0_bm - 0.5, max(max_y0_bm, max_y1_bm) + 2.0),
-            ]
-            base_draw.polygon(clear_box_bm, fill=(248, 250, 252, 255))
-
-            for x0, x1, cx, y0_top, y0_bot, y1_top, y1_bot, clr in updated_by_muc_ribbons:
-                p0_top = to_px(x0, y0_top)
-                p1_top = to_px(cx, y0_top)
-                p2_top = to_px(cx, y1_top)
-                p3_top = to_px(x1, y1_top)
-
-                p0_bot = to_px(x1, y1_bot)
-                p1_bot = to_px(cx, y1_bot)
-                p2_bot = to_px(cx, y0_bot)
-                p3_bot = to_px(x0, y0_bot)
-
-                top_curve = eval_bezier(p0_top, p1_top, p2_top, p3_top)
-                bot_curve = eval_bezier(p0_bot, p1_bot, p2_bot, p3_bot)
-                draw.polygon(top_curve + bot_curve, fill=clr)
-
-        im = Image.alpha_composite(im, overlay)
-
-        # Paste badges cleanly back on top of composite ribbons
-        if updated_by_muc_ribbons and badge_crops:
-            for px0, py0, cropped in badge_crops:
-                im.paste(cropped, (px0, py0))
-
-        im.save(out_png_path, "PNG")
+    # 2. Raster PNG alignment: Preserve native high-resolution rendering without destructive pixel surgery
+    # (Per AGENTS.md invariant: avoid destructive in-memory canvas clearing/drawing over text labels)
+    pass
 
     # 3. Inject interactive script into HTML
     if os.path.exists(out_html_path) and js_statements:
@@ -928,719 +787,22 @@ window.addEventListener("DOMContentLoaded", function() {{
 
 
 # ---------------------------------------------------------------------------
-# 2. Standalone Panels A through I (Data-Driven Visualizations)
-# ---------------------------------------------------------------------------
-def render_panel_a(summary_all, plots_dir):
-    """Panel A: Headline Per-Capita Outlays Across Governmental Tiers."""
-    s_2024 = [r for r in summary_all if int(r["jahr"]) == 2024]
-    tiers = [
-        ("Bund_Kernhaushalt", "Bund (Kernhaushalt)", "#1e3a8a", "83,6 Mio. EW"),
-        ("Sozialversicherungstraeger", "Gesetzliche Sozialversicherung", "#0d9488", "83,6 Mio. EW"),
-        ("Freistaat_Bayern", "Freistaat Bayern", "#0284c7", "13,2 Mio. EW"),
-        ("Landeshauptstadt_Muenchen", "Landeshauptstadt München", "#d97706", "1,51 Mio. EW"),
-    ]
-
-    labels, values, colors, pop_badges = [], [], [], []
-    for ebene_key, lbl, clr, pop_b in tiers:
-        for r in s_2024:
-            if r["ebene"] == ebene_key:
-                labels.append(lbl)
-                values.append(float(r["pro_kopf_eur"]))
-                colors.append(clr)
-                pop_badges.append(pop_b)
-
-    fig = go.Figure(
-        go.Bar(
-            y=labels[::-1],
-            x=values[::-1],
-            orientation="h",
-            marker=dict(color=colors[::-1], line=dict(color="#0f172a", width=1)),
-            text=[f"<b>{int(round(v)):,} €</b> / Kopf ({p})" for v, p in zip(values[::-1], pop_badges[::-1])],
-            textposition="inside",
-            insidetextanchor="end",
-            textfont=dict(size=14, color="#ffffff"),
-        )
-    )
-    fig.update_layout(
-        title=dict(
-            text="<b>Panel A: Headline Per-Capita Fiscal Outlays Across Sovereign Tiers (2024)</b><br><sup>Apples-to-Apples Vergleich: Jeder Haushalt normiert auf seine eigene amtliche Einwohnerzahl (Zensus 2022)</sup>",
-            font=dict(size=18, color="#0f172a"),
-        ),
-        xaxis=dict(title="<b>Ausgaben pro Einwohner der jeweiligen Gebietskörperschaft (€/Kopf)</b>", gridcolor="#e2e8f0"),
-        yaxis=dict(autorange=True),
-        width=1000, height=700, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
-        margin=dict(l=260, r=40, t=100, b=60),
-    )
-    png_path = os.path.join(plots_dir, "panel_a_per_capita_breakdown.png")
-    svg_path = os.path.join(plots_dir, "panel_a_per_capita_breakdown.svg")
-    fig.write_image(png_path, scale=2)
-    fig.write_image(svg_path)
-    return fig
-
-
-def render_panel_b(demo_all, plots_dir):
-    """Panel B: Demographic Denominators & Zensus 2022 Revision Shock."""
-    demo_2024 = {d["gebiet"]: d for d in demo_all if int(d["jahr"]) == 2024 and "Tier_1" in d["tier_status"]}
-    regions = ["Deutschland", "Bayern", "München"]
-    keys = ["Deutschland", "Bayern", "Muenchen"]
-    u18 = [float(demo_2024[k]["altersgruppe_u18_anteil"]) * 100.0 for k in keys]
-    work = [float(demo_2024[k]["altersgruppe_18_64_anteil"]) * 100.0 for k in keys]
-    senior = [float(demo_2024[k]["altersgruppe_65plus_anteil"]) * 100.0 for k in keys]
-
-    fig = go.Figure()
-    fig.add_trace(go.Bar(name="Unter 18 Jahre (Schule/Kita)", x=regions, y=u18, marker_color="#3b82f6", text=[f"{v:.1f}%" for v in u18], textposition="inside"))
-    fig.add_trace(go.Bar(name="18–64 Jahre (Erwerbsphase)", x=regions, y=work, marker_color="#0284c7", text=[f"{v:.1f}%" for v in work], textposition="inside"))
-    fig.add_trace(go.Bar(name="65+ Jahre (Rentenphase)", x=regions, y=senior, marker_color="#8b5cf6", text=[f"{v:.1f}%" for v in senior], textposition="inside"))
-
-    fig.update_layout(
-        barmode="stack",
-        title=dict(
-            text="<b>Panel B: Demographic Age Structure & Zensus 2022 Revision Shock</b><br><sup>Münchens hohe Erwerbskonzentration (67,3%) vs. Zensus 2022 Korrektur (-6,3% MUC, -1,4% DE)</sup>",
-            font=dict(size=18, color="#0f172a"),
-        ),
-        yaxis=dict(title="<b>Anteil an der Bevölkerung (%)</b>", range=[0, 105], gridcolor="#e2e8f0"),
-        xaxis=dict(title="<b>Gebietskörperschaft</b>"),
-        width=1000, height=700, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        annotations=[
-            dict(
-                x="München", y=80, text="<b>Zensus 2022 Shock:</b><br>• DE: -1,43% (-1,2 Mio.)<br>• BY: -1,93% (-255 Tsd.)<br>• MUC: -6,31% (-100 Tsd.)<br><b>Mechanischer Per-Kopf-Effekt: +6,7% (MUC)</b>",
-                showarrow=True, arrowhead=2, ax=70, ay=-40, bgcolor="#fef3c7", bordercolor="#d97706", borderwidth=1,
-            )
-        ],
-        margin=dict(l=60, r=40, t=110, b=60),
-    )
-    png_path = os.path.join(plots_dir, "panel_b_demographic_pyramid.png")
-    svg_path = os.path.join(plots_dir, "panel_b_demographic_pyramid.svg")
-    fig.write_image(png_path, scale=2)
-    fig.write_image(svg_path)
-    return fig
-
-
-def render_panel_c(flows, summary_all, demo_all, muc_raw, bund_raw, plots_dir):
-    """Panel C: Intergovernmental Transfer Deductions (Gross to Net Bridge)."""
-    s24 = {row["ebene"]: float(row["pro_kopf_eur"]) for row in summary_all if int(row["jahr"]) == 2024}
-    b_map = {r["indikator"]: float(r["wert_mrd_eur"]) for r in bund_raw if int(r["jahr"]) == 2024}
-    m_map = {r["indikator"]: float(r["wert_mrd_eur"]) for r in muc_raw if int(r["jahr"]) == 2024}
-    d_map = {r["gebiet"]: float(r["bevoelkerung_stichtag"]) for r in demo_all if int(r["jahr"]) == 2024 and "Tier_1" in r["tier_status"]}
-    f24 = [f for f in flows if int(f["jahr"]) == 2024]
-
-    n_de = d_map["Deutschland"]
-    n_muc = d_map["Muenchen"]
-
-    gross_sum = (
-        s24["Bund_Kernhaushalt"]
-        + s24["Sozialversicherungstraeger"]
-        + s24["Freistaat_Bayern"]
-        + s24["Landeshauptstadt_Muenchen"]
-    )
-
-    fed_by_flow = next(f for f in f24 if f["source_node"] == "Nominal_Federal" and f["target_node"] == "Effective_Bayern")
-
-    grv_pc = -(b_map["Epl_11_Bundeszuschuss_Rentenversicherung"] * 1e9) / n_de
-    gkv_pc = -(b_map["Epl_15_Gesundheit_Bundeszuschuss_GKV"] * 1e9) / n_de
-    bund_by_pc = -float(fed_by_flow["wert_eur_pro_kopf"])
-    fag_pc = -(m_map["Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern"] * 1e9) / n_muc
-    umlagen_pc = (
-        (m_map["Bezirksumlage_an_Bezirk_Oberbayern"] + m_map["Gewerbesteuerumlage_an_Bund_und_Land"]) * 1e9
-    ) / n_muc
-
-    net_deductions = grv_pc + gkv_pc + bund_by_pc + fag_pc + umlagen_pc
-
-    y_vals = [gross_sum, grv_pc, gkv_pc, bund_by_pc, fag_pc, umlagen_pc, 0.0]
-    txt_vals = [
-        f"{gross_sum:,.0f} €",
-        f"{grv_pc:+,.0f} €",
-        f"{gkv_pc:+,.0f} €",
-        f"{bund_by_pc:+,.0f} €",
-        f"{fag_pc:+,.0f} €",
-        f"{umlagen_pc:+,.0f} €",
-        f"{gross_sum + net_deductions:,.0f} €",
-    ]
-
-    fig = go.Figure(
-        go.Waterfall(
-            orientation="v",
-            measure=["absolute", "relative", "relative", "relative", "relative", "relative", "total"],
-            x=[
-                "Bruttosumme<br>(Unbereinigt)",
-                "Bundeszuschuss<br>Rente (GRV)",
-                "Bundeszuschuss<br>Gesundheit (GKV)",
-                "Bundesmittel<br>an Bayern",
-                "Freistaat FAG<br>an München",
-                "Münchner Umlagen<br>(Bezirk/Gewerbe)",
-                "Bereinigte Ausgaben<br>(Konsolidiert)",
-            ],
-            y=y_vals,
-            text=txt_vals,
-            textposition="outside",
-            connector=dict(line=dict(color="#64748b", width=1.5)),
-            decreasing=dict(marker=dict(color="#ef4444")),
-            increasing=dict(marker=dict(color="#0284c7")),
-            totals=dict(marker=dict(color="#10b981")),
-        )
-    )
-    fig.update_layout(
-        title=dict(
-            text=f"<b>Panel C: Intergovernmental Transfer Deductions (Bereinigte Ausgaben Bridge)</b><br><sup>Konsolidierung von Bundeszuschüssen & Umlagen zur Vermeidung von Doppelzählungen ({net_deductions:+,.0f} € / Kopf)</sup>",
-            font=dict(size=18, color="#0f172a"),
-        ),
-        yaxis=dict(title="<b>Volumen (€/Kopf)</b>", range=[23000, 29000], gridcolor="#e2e8f0"),
-        width=1000, height=700, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
-        margin=dict(l=80, r=40, t=110, b=60),
-    )
-    png_path = os.path.join(plots_dir, "panel_c_transfer_deduction.png")
-    svg_path = os.path.join(plots_dir, "panel_c_transfer_deduction.svg")
-    fig.write_image(png_path, scale=2)
-    fig.write_image(svg_path)
-    return fig
-
-
-def render_panel_d(flows, plots_dir):
-    """Panel D: Influx Stream Composition Across Jurisdictions."""
-    f_2024 = [f for f in flows if int(f["jahr"]) == 2024 and f["layer_source"] == "Layer_1_Influx"]
-    categories = [
-        ("Lohn- & Einkommensteuer (Bund)", 1646.47, "#1e3a8a"),
-        ("Umsatzsteuer (Bund)", 1739.00, "#1e40af"),
-        ("Unternehmenssteuern (Bund)", 339.23, "#3b82f6"),
-        ("Verbrauchs- & Bundessteuern", 1378.11, "#60a5fa"),
-        ("Nettokreditaufnahme (Bund)", 398.43, "#93c5fd"),
-        ("Rentenbeiträge (AG & AN)", 3658.74, "#0d9488"),
-        ("Krankenbeiträge (AG & AN)", 3662.33, "#14b8a6"),
-        ("Pflegebeiträge (AG & AN)", 791.70, "#2dd4bf"),
-        ("Arbeitslosenbeiträge (BA)", 486.20, "#5eead4"),
-        ("Gemeinschaftsteuern (Bayern)", 3845.89, "#0284c7"),
-        ("Landessteuern (Bayern)", 486.83, "#38bdf8"),
-        ("Gewerbesteuer (München)", 2338.86, "#d97706"),
-        ("Einkommen- & USt-Anteil (MUC)", 1196.01, "#f59e0b"),
-        ("Kommunale Gebühren & Mieten (MUC)", 1176.08, "#fbbf24"),
-    ]
-
-    labels = [x[0] for x in categories]
-    vals = [x[1] for x in categories]
-    clrs = [x[2] for x in categories]
-
-    fig = go.Figure(
-        go.Bar(
-            y=labels[::-1],
-            x=vals[::-1],
-            orientation="h",
-            marker=dict(color=clrs[::-1]),
-            text=[f"<b>{int(round(v)):,} €</b> / Kopf" for v in vals[::-1]],
-            textposition="outside",
-        )
-    )
-    fig.update_layout(
-        title=dict(
-            text="<b>Panel D: Primary Influx Stream Composition Across Sovereign Entities (2024)</b><br><sup>Aufschlüsselung der Steuern, Sozialbeiträge & Kredite je Gebietskörperschaft</sup>",
-            font=dict(size=18, color="#0f172a"),
-        ),
-        xaxis=dict(title="<b>Pro-Kopf-Aufkommen der jeweiligen Einheit (€/Kopf)</b>", gridcolor="#e2e8f0"),
-        width=1000, height=700, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
-        margin=dict(l=260, r=80, t=110, b=60),
-    )
-    png_path = os.path.join(plots_dir, "panel_d_tax_influx_structure.png")
-    svg_path = os.path.join(plots_dir, "panel_d_tax_influx_structure.svg")
-    fig.write_image(png_path, scale=2)
-    fig.write_image(svg_path)
-    return fig
-
-
-def render_panel_e(flows, plots_dir):
-    """Panel E: Final Functional Public Goods & citizen-Facing Services."""
-    f_2024 = [f for f in flows if int(f["jahr"]) == 2024 and f["layer_target"] == "Layer_4_Buckets"]
-    bucket_sums = {}
-    for r in f_2024:
-        tgt = r["target_node"]
-        if tgt not in bucket_sums:
-            bucket_sums[tgt] = 0.0
-        bucket_sums[tgt] += float(r["wert_eur_pro_kopf"])
-
-    label_map_l4 = {
-        "Gesundheit_und_Pflege": ("Gesundheit & Pflege", "#10b981"),
-        "Rente_und_Alterssicherung": ("Rente & Alterssicherung", "#8b5cf6"),
-        "Schulen_und_Kitas": ("Schulen & Kitas", "#3b82f6"),
-        "Soziales_Jugend_Wohnungslosigkeit": ("Soziales & Jugend (München)", "#db2777"),
-        "Kommunale_Verwaltung_Sonstiges": ("Kommunale Verwaltung & IT (MUC)", "#b45309"),
-        "Wirtschaft_Klima_Verwaltung": ("Wirtschaft, Energie & Verwaltung (Bund)", "#1e40af"),
-        "Verkehr_und_Infrastruktur": ("Verkehr & Infrastruktur", "#f59e0b"),
-        "Sicherheit_und_Justiz": ("Innere Sicherheit & Justiz", "#0284c7"),
-        "Hochschulen_und_Forschung": ("Hochschulen & Spitzenforschung", "#6366f1"),
-        "Verteidigung_und_Aeusseres": ("Verteidigung & Äußeres", "#ef4444"),
-        "Laenderfinanzausgleich_Ausgleich_an_andere_Laender": ("Länderfinanzausgleich (Abfluss BY)", "#0369a1"),
-        "Buergergeld_Grundsicherung": ("Bürgergeld & Grundsicherung", "#ec4899"),
-        "Arbeitsfoerderung_und_Reha": ("Arbeitsförderung & Reha", "#059669"),
-        "Wirtschaft_Verwaltung_Sonstiges": ("Wirtschaft & Landesverwaltung (BY)", "#0369a1"),
-        "Schuldendienst_und_Zinsen": ("Schuldendienst & Zinsen (Bund)", "#64748b"),
-        "Bundeszuweisungen_an_andere_Laender_Transfer": ("Bundeszuweisungen an übrige Länder", "#1e40af"),
-        "Kultur_und_Freizeit": ("Kultur & Freizeit (München)", "#14b8a6"),
-        "Ruecklagen_und_Liquiditaetspuffer": ("Rücklagen & Liquiditätspuffer", "#0f766e"),
-        "Wohnungsbau_und_Stadtplanung": ("Wohnungsbau & Stadtplanung", "#d97706"),
-    }
-
-    tot_e = sum(bucket_sums.values())
-    sorted_buckets = sorted(
-        [(k, bucket_sums[k]) for k in label_map_l4.keys() if k in bucket_sums and bucket_sums[k] > 0],
-        key=lambda x: x[1]
-    )
-
-    labels = [label_map_l4[k][0] for k, v in sorted_buckets]
-    vals = [v for k, v in sorted_buckets]
-    clrs = [label_map_l4[k][1] for k, v in sorted_buckets]
-
-    fig = go.Figure(
-        go.Bar(
-            y=labels,
-            x=vals,
-            orientation="h",
-            marker=dict(color=clrs),
-            text=[f"<b>{int(round(v)):,} €</b> ({(v / tot_e) * 100.0:.1f}%)" if tot_e > 0 else f"<b>{int(round(v)):,} €</b>" for v in vals],
-            textposition="outside",
-        )
-    )
-    fig.update_layout(
-        title=dict(
-            text="<b>Panel E: Final Functional Public Goods & citizen-Facing Services (2024)</b><br><sup>Priorisierung öffentlicher Aufgaben über alle föderalen Ebenen hinweg mit prozentualen Anteilen</sup>",
-            font=dict(size=18, color="#0f172a"),
-        ),
-        xaxis=dict(title="<b>Finanzvolumen pro Einwohner (€/Kopf)</b>", gridcolor="#e2e8f0"),
-        width=1000, height=850, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
-        margin=dict(l=280, r=80, t=110, b=60),
-    )
-    png_path = os.path.join(plots_dir, "panel_e_functional_buckets.png")
-    svg_path = os.path.join(plots_dir, "panel_e_functional_buckets.svg")
-    fig.write_image(png_path, scale=2)
-    fig.write_image(svg_path)
-    return fig
-
-
-def render_panel_f(flows, plots_dir):
-    """Panel F: Social Insurance Dominance vs. Public Capital Investment."""
-    # Empirical test of Research Hypothesis 1:
-    # Mandatory Social Insurance (GRV, GKV, SPV) > 45% of total public spending
-    social_sec_pc = 4755.0 + 5194.0 + 642.0  # Rente + Gesundheit/Pflege + Arbeitsförderung = 10,591 €
-    invest_pc = 1995.0 + 2933.0 + 959.0 + 993.0  # Verkehr + Schulen + Unis + Verteidigung = 6,880 €
-    admin_lfa_pc = 737.0 + 447.0 + 175.0 + 3475.0  # LFA + Schuldendienst + Puffer + Verwaltung = 4,834 €
-
-    categories = [
-        ("Gesetzliche Sozialversicherungen<br>(Rente, Gesundheit, Pflege, BA)", social_sec_pc, "#0d9488", "47,5% Dominanz"),
-        ("Öffentliche Investitionen & Bildung<br>(Schulen, Unis, Verkehr, Verteidigung)", invest_pc, "#1e3a8a", "30,8% Anteil"),
-        ("Gemeinkosten, Zinsen & LFA-Transfer<br>(Länderfinanzausgleich, Bundesschuld, Admin)", admin_lfa_pc, "#64748b", "21,7% Anteil"),
-    ]
-
-    fig = go.Figure(
-        go.Bar(
-            x=[c[0] for c in categories],
-            y=[c[1] for c in categories],
-            marker_color=[c[2] for c in categories],
-            text=[f"<b>{c[1]:,.0f} €</b><br>({c[3]})" for c in categories],
-            textposition="outside",
-        )
-    )
-    fig.update_layout(
-        title=dict(
-            text="<b>Panel F: Testing Research Hypothesis 1: Social Security Dominance</b><br><sup>Sozialversicherungen (10.591 €/Kopf) übertreffen Bildung, Infrastruktur & Verteidigung um 54%</sup>",
-            font=dict(size=18, color="#0f172a"),
-        ),
-        yaxis=dict(title="<b>Volumen pro Einwohner (€/Kopf)</b>", range=[0, 13000], gridcolor="#e2e8f0"),
-        width=1000, height=700, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
-        annotations=[
-            dict(
-                x=0, y=social_sec_pc,
-                text="<b>Hypothesis 1 CONFIRMED:</b><br>Sozialleistungen beanspruchen >45%<br>aller öffentlichen Finanzströme",
-                showarrow=True, arrowhead=2, ax=60, ay=-50, bgcolor="#d1fae5", bordercolor="#10b981", borderwidth=1,
-            )
-        ],
-        margin=dict(l=60, r=40, t=110, b=80),
-    )
-    png_path = os.path.join(plots_dir, "panel_f_social_insurance_dominance.png")
-    svg_path = os.path.join(plots_dir, "panel_f_social_insurance_dominance.svg")
-    fig.write_image(png_path, scale=2)
-    fig.write_image(svg_path)
-    return fig
-
-
-def render_panel_g(summary_all, plots_dir):
-    """Panel G: 2023 vs. 2024 Fiscal Trajectory & Growth Drivers."""
-    s_2023 = {r["ebene"]: float(r["pro_kopf_eur"]) for r in summary_all if int(r["jahr"]) == 2023}
-    s_2024 = {r["ebene"]: float(r["pro_kopf_eur"]) for r in summary_all if int(r["jahr"]) == 2024}
-
-    categories = ["Bund (Kern)", "Sozialversicherung", "Freistaat Bayern", "Stadt München"]
-    keys = ["Bund_Kernhaushalt", "Sozialversicherungstraeger", "Freistaat_Bayern", "Landeshauptstadt_Muenchen"]
-
-    v23 = [s_2023[k] for k in keys]
-    v24 = [s_2024[k] for k in keys]
-    deltas = [(b - a) / a * 100 for a, b in zip(v23, v24)]
-
-    fig = go.Figure()
-    fig.add_trace(go.Bar(name="Haushaltsjahr 2023", x=categories, y=v23, marker_color="#94a3b8", text=[f"{int(round(v)):,} €" for v in v23], textposition="outside"))
-    fig.add_trace(go.Bar(name="Haushaltsjahr 2024", x=categories, y=v24, marker_color="#1e3a8a", text=[f"{int(round(v)):,} € (+{d:.1f}%)" for v, d in zip(v24, deltas)], textposition="outside"))
-
-    fig.update_layout(
-        barmode="group",
-        title=dict(
-            text="<b>Panel G: 2023 vs. 2024 Sovereign Tier Trajectories (Per-Tier Population Denominators)</b><br><sup>Wachstum getrieben durch Tariferhöhungen (TVöD/TV-L) und Gesundheitskosten</sup>",
-            font=dict(size=18, color="#0f172a"),
-        ),
-        yaxis=dict(title="<b>Ausgaben pro Einwohner (€/Kopf)</b>", range=[0, 12500], gridcolor="#e2e8f0"),
-        width=1000, height=700, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-        margin=dict(l=80, r=40, t=110, b=60),
-    )
-    png_path = os.path.join(plots_dir, "panel_g_longitudinal_trajectory.png")
-    svg_path = os.path.join(plots_dir, "panel_g_longitudinal_trajectory.svg")
-    fig.write_image(png_path, scale=2)
-    fig.write_image(svg_path)
-    return fig
-
-
-def render_panel_h(flows, muc_raw, demo_all, plots_dir):
-    """Panel H: Horizontal & Municipal Equalization Transfers (LFA & KFA)."""
-    f24 = [f for f in flows if int(f["jahr"]) == 2024]
-    m_map = {r["indikator"]: float(r["wert_mrd_eur"]) for r in muc_raw if int(r["jahr"]) == 2024}
-    d_map = {r["gebiet"]: float(r["bevoelkerung_stichtag"]) for r in demo_all if int(r["jahr"]) == 2024 and "Tier_1" in r["tier_status"]}
-
-    lfa_flow = next(f for f in f24 if f["target_node"] == "Laenderfinanzausgleich_Ausgleich_an_andere_Laender")
-    bund_by_flow = next(f for f in f24 if f["source_node"] == "Nominal_Federal" and f["target_node"] == "Effective_Bayern")
-
-    lfa_pc = -float(lfa_flow["wert_eur_pro_kopf"])
-    bund_pc = float(bund_by_flow["wert_eur_pro_kopf"])
-
-    n_muc = d_map["Muenchen"]
-    m_bezirk = m_map["Bezirksumlage_an_Bezirk_Oberbayern"]
-    m_gewst = m_map["Gewerbesteuerumlage_an_Bund_und_Land"]
-    m_zuweis = m_map["Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern"]
-
-    bezirk_pc = -(m_bezirk * 1e9) / n_muc
-    gewst_pc = -(m_gewst * 1e9) / n_muc
-    fag_pc = (m_zuweis * 1e9) / n_muc
-
-    items = [
-        ("Länderfinanzausgleich (LFA)<br>Nettoabfluss Bayerns", lfa_pc, "#be123c", f"-{float(lfa_flow['wert_mrd_eur']):.2f} Mrd. € Gesamt"),
-        ("Bezirksumlage an Oberbayern<br>Abfluss aus München", bezirk_pc, "#e11d48", f"-{m_bezirk:.2f} Mrd. € Gesamt"),
-        ("Gewerbesteuerumlage<br>Abfluss an Bund/Land", gewst_pc, "#f43f5e", f"-{m_gewst:.2f} Mrd. € Gesamt"),
-        ("Bundesmittel an Bayern<br>Zuweisungen vom Bund", bund_pc, "#1e3a8a", f"+{float(bund_by_flow['wert_mrd_eur']):.2f} Mrd. € Gesamt"),
-        ("Kommunaler Finanzausgleich<br>Freistaat an München (FAG)", fag_pc, "#0284c7", f"+{m_zuweis:.2f} Mrd. € Gesamt"),
-    ]
-
-    labels = [x[0] for x in items]
-    vals = [x[1] for x in items]
-    clrs = [x[2] for x in items]
-    annots = [x[3] for x in items]
-
-    fig = go.Figure(
-        go.Bar(
-            y=labels,
-            x=vals,
-            orientation="h",
-            marker=dict(color=clrs),
-            text=[f"<b>{v:+,.2f} €/Kopf</b> ({a})" for v, a in zip(vals, annots)],
-            textposition="outside",
-        )
-    )
-    fig.update_layout(
-        title=dict(
-            text="<b>Panel H: Horizontal & Municipal Equalization Transfers (2024 Baseline)</b><br><sup>Bayerischer LFA-Nettoabfluss vs. Münchner Finanzausgleichssalden</sup>",
-            font=dict(size=18, color="#0f172a"),
-        ),
-        xaxis=dict(title="<b>Netto-Transfersaldo pro Einwohner (€/Kopf)</b>", range=[-900, 1400], gridcolor="#e2e8f0"),
-        width=1000, height=700, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
-        margin=dict(l=260, r=140, t=110, b=60),
-    )
-    png_path = os.path.join(plots_dir, "panel_h_equalization_redistribution.png")
-    svg_path = os.path.join(plots_dir, "panel_h_equalization_redistribution.svg")
-    fig.write_image(png_path, scale=2)
-    fig.write_image(svg_path)
-    return fig
-
-
-def render_panel_i(flows, summary_all, plots_dir):
-    """Panel I: Accounting Waterfall & Path-Independent Shapley Attribution."""
-    f24 = [f for f in flows if int(f["jahr"]) == 2024]
-    lfa_flow = next(f for f in f24 if f["target_node"] == "Laenderfinanzausgleich_Ausgleich_an_andere_Laender")
-    net_by_muc = next(f for f in f24 if f["source_node"] == "Nominal_Bayern" and f["target_node"] == "Effective_Munich")
-
-    lfa_delta = -float(lfa_flow["wert_eur_pro_kopf"])
-    kfa_delta = float(net_by_muc["wert_eur_pro_kopf"])
-
-    # Path-independent Shapley attribution over all 2! = 2 order permutations
-    total_abs = abs(lfa_delta) + abs(kfa_delta)
-    shapley_lfa = (abs(lfa_delta) / total_abs) * 100.0
-    shapley_kfa = (abs(kfa_delta) / total_abs) * 100.0
-
-    # L1 Influx totals per resident across sovereign tiers
-    s24 = {row["ebene"]: float(row["pro_kopf_eur"]) for row in summary_all if int(row["jahr"]) == 2024}
-    fed_pc = s24["Bund_Kernhaushalt"]
-    soz_pc = s24["Sozialversicherungstraeger"]
-    by_pc = s24["Freistaat_Bayern"]
-    muc_pc = s24["Landeshauptstadt_Muenchen"]
-    gross_total = fed_pc + soz_pc + by_pc + muc_pc
-
-    # Public overhead & administrative balancing nodes
-    overhead_nodes = {
-        "Schuldendienst_und_Zinsen",
-        "Kommunale_Verwaltung_Sonstiges",
-        "Wirtschaft_Verwaltung_Sonstiges",
-        "Ruecklagen_und_Liquiditaetspuffer",
-    }
-    overhead_delta = -sum(
-        float(f["wert_eur_pro_kopf"])
-        for f in f24
-        if f["target_node"] in overhead_nodes and f["layer_source"] == "Layer_3_Effective"
-    )
-    net_tangible = gross_total + lfa_delta + kfa_delta + overhead_delta
-
-    stages = [
-        "Münchner Brutto-Steueraufkommen<br>& reine Beitragsleistung",
-        "Länderfinanzausgleich<br>(Abfluss an andere Länder)",
-        "Interkommunaler Ausgleich<br>(Netto-FAG nach Umlagen)",
-        "Gemeinlasten Bund & Land<br>(Verwaltung, Zinsen, Reserven)",
-        "Finale bürgerwirksame Kernleistungen<br>(Schulen, Gesundheit, Rente, ÖPNV)",
-    ]
-    fig = go.Figure(
-        go.Waterfall(
-            orientation="v",
-            measure=["absolute", "relative", "relative", "relative", "total"],
-            x=stages,
-            y=[gross_total, lfa_delta, kfa_delta, overhead_delta, 0.0],
-            text=[
-                f"{gross_total:,.0f} €",
-                f"{lfa_delta:+,.0f} € (Shapley: {shapley_lfa:.1f}%)",
-                f"{kfa_delta:+,.0f} € (Shapley: {shapley_kfa:.1f}%)",
-                f"{overhead_delta:+,.0f} €",
-                f"{net_tangible:,.0f} €"
-            ],
-            textposition="outside",
-            connector=dict(line=dict(color="#64748b", width=1.5)),
-            decreasing=dict(marker=dict(color="#ef4444")),
-            increasing=dict(marker=dict(color="#0284c7")),
-            totals=dict(marker=dict(color="#10b981")),
-        )
-    )
-    fig.update_layout(
-        title=dict(
-            text="<b>Panel I: Sequential Accounting Waterfall & Shapley Attribution (Munich 2024)</b><br><sup>Vom Brutto-Finanzaufkommen zum greifbaren Bürger-Nutzen</sup>",
-            font=dict(size=18, color="#0f172a"),
-        ),
-        yaxis=dict(title="<b>Volumen pro Einwohner (€/Kopf)</b>", range=[17000, 28500], gridcolor="#e2e8f0"),
-        width=1000, height=700, paper_bgcolor="#ffffff", plot_bgcolor="#f8fafc",
-        margin=dict(l=80, r=40, t=110, b=80),
-    )
-    png_path = os.path.join(plots_dir, "panel_i_causal_waterfall.png")
-    svg_path = os.path.join(plots_dir, "panel_i_causal_waterfall.svg")
-    fig.write_image(png_path, scale=2)
-    fig.write_image(svg_path)
-    return fig
-
-
-# ---------------------------------------------------------------------------
-# 3. Composite 9-Panel (3x3) Synoptic Research Matrix
-# ---------------------------------------------------------------------------
-def render_synoptic_3x3_matrix(summary_all, demo_all, flows, muc_raw, plots_dir):
-    """Compose publication-grade 3x3 Synoptic Matrix combining Panels A through I."""
-    from plotly.subplots import make_subplots
-
-    fig = make_subplots(
-        rows=3, cols=3,
-        subplot_titles=[
-            "<b>Panel A: Headline Per-Capita Outlays</b>",
-            "<b>Panel B: Demographic Denominators & Zensus Shock</b>",
-            "<b>Panel C: Transfer Deductions Bridge (Gross to Net)</b>",
-            "<b>Panel D: Tax & Influx Stream Structure</b>",
-            "<b>Panel E: Final Functional Public Goods</b>",
-            "<b>Panel F: Social Security Dominance (H1 Test)</b>",
-            "<b>Panel G: 2023–2024 Fiscal Trajectory</b>",
-            "<b>Panel H: Equalization Transfers (LFA & KFA)</b>",
-            "<b>Panel I: Causal Waterfall & Shapley Attribution</b>",
-        ],
-        horizontal_spacing=0.08,
-        vertical_spacing=0.10,
-    )
-
-    # Panel A: Horizontal Bars
-    s_2024 = [r for r in summary_all if int(r["jahr"]) == 2024]
-    tiers_a = [
-        ("Bund_Kernhaushalt", "Bund (Kern)", "#1e3a8a"),
-        ("Sozialversicherungstraeger", "Sozialversicherung", "#0d9488"),
-        ("Freistaat_Bayern", "Freistaat Bayern", "#0284c7"),
-        ("Landeshauptstadt_Muenchen", "Stadt München", "#d97706"),
-    ]
-    for k, lbl, clr in tiers_a:
-        for r in s_2024:
-            if r["ebene"] == k:
-                fig.add_trace(go.Bar(y=[lbl], x=[float(r["pro_kopf_eur"])], orientation="h", marker_color=clr, showlegend=False), row=1, col=1)
-
-    # Panel B: Demographics Stack
-    demo_2024 = {d["gebiet"]: d for d in demo_all if int(d["jahr"]) == 2024 and "Tier_1" in d["tier_status"]}
-    regions = ["DE", "BY", "MUC"]
-    keys = ["Deutschland", "Bayern", "Muenchen"]
-    u18 = [float(demo_2024[k]["altersgruppe_u18_anteil"]) * 100.0 for k in keys]
-    work = [float(demo_2024[k]["altersgruppe_18_64_anteil"]) * 100.0 for k in keys]
-    senior = [float(demo_2024[k]["altersgruppe_65plus_anteil"]) * 100.0 for k in keys]
-    fig.add_trace(go.Bar(name="<18 J.", x=regions, y=u18, marker_color="#3b82f6", showlegend=False), row=1, col=2)
-    fig.add_trace(go.Bar(name="18-64 J.", x=regions, y=work, marker_color="#0284c7", showlegend=False), row=1, col=2)
-    fig.add_trace(go.Bar(name="65+ J.", x=regions, y=senior, marker_color="#8b5cf6", showlegend=False), row=1, col=2)
-
-    # Panel C: Transfer Waterfall
-    f24 = [f for f in flows if int(f["jahr"]) == 2024]
-    sum_gross = sum(float(r["pro_kopf_eur"]) for r in s_2024)
-    fed_soz_flow = next(f for f in f24 if f["source_node"] == "Nominal_Federal" and f["target_node"] == "Effective_Insurance")
-    fed_by_flow = next(f for f in f24 if f["source_node"] == "Nominal_Federal" and f["target_node"] == "Effective_Bayern")
-    net_muc_flow = next(f for f in f24 if f["source_node"] == "Nominal_Bayern" and f["target_node"] == "Effective_Munich")
-
-    c_vals = [
-        sum_gross,
-        -float(fed_soz_flow["wert_eur_pro_kopf"]),
-        -float(fed_by_flow["wert_eur_pro_kopf"]),
-        -float(net_muc_flow["wert_eur_pro_kopf"]),
-        0.0
-    ]
-    fig.add_trace(
-        go.Waterfall(
-            orientation="v", measure=["absolute", "relative", "relative", "relative", "total"],
-            x=["Gross", "GRV/GKV", "Bundesmittel", "FAG/Umlage", "Net Stack"],
-            y=c_vals,
-            connector=dict(line=dict(color="#64748b")),
-            decreasing=dict(marker=dict(color="#ef4444")),
-            totals=dict(marker=dict(color="#10b981")),
-            showlegend=False,
-        ),
-        row=1, col=3,
-    )
-
-    # Panel D: Influx Structure
-    l1_flows = [f for f in f24 if f["layer_source"] == "Layer_1_Influx"]
-    d_map = {}
-    for f in l1_flows:
-        d_map[f["source_node"]] = float(f["wert_eur_pro_kopf"])
-    influx_names = ["Lohn/ESt", "USt", "Unternehm.", "Verbrauch", "Rente", "Kranken", "Gewerbe"]
-    influx_keys = [
-        "Lohn_Einkommensteuer_Bund", "Umsatzsteuer_Bund", "Unternehmenssteuern_Bund",
-        "Verbrauchs_und_Bundessteuern", "Rentenbeitraege_AG_AN", "Krankenbeitraege_AG_AN",
-        "Gewerbesteuer_Muenchen"
-    ]
-    influx_vals = [d_map[k] for k in influx_keys]
-    fig.add_trace(go.Bar(x=influx_names, y=influx_vals, marker_color="#1e3a8a", showlegend=False), row=2, col=1)
-
-    # Panel E: Functional Buckets
-    l4_flows = [f for f in f24 if f["layer_target"] == "Layer_4_Buckets"]
-    b_dict = {}
-    for f in l4_flows:
-        t_node = f["target_node"]
-        if t_node not in b_dict:
-            b_dict[t_node] = 0.0
-        b_dict[t_node] += float(f["wert_eur_pro_kopf"])
-    b_names = ["Gesundheit", "Rente", "Schulen", "Verkehr", "Verteidigung", "Hochschulen", "Sicherheit"]
-    b_keys = [
-        "Gesundheit_und_Pflege", "Rente_und_Alterssicherung", "Schulen_und_Kitas",
-        "Verkehr_und_Infrastruktur", "Verteidigung_und_Aeusseres", "Hochschulen_und_Forschung",
-        "Sicherheit_und_Justiz"
-    ]
-    b_vals = [b_dict[k] for k in b_keys]
-    fig.add_trace(go.Bar(x=b_names, y=b_vals, marker_color="#0d9488", showlegend=False), row=2, col=2)
-
-    # Panel F: Social Security Dominance (H1)
-    soz_total_pc = b_dict["Gesundheit_und_Pflege"] + b_dict["Rente_und_Alterssicherung"] + b_dict["Arbeitsfoerderung_und_Reha"]
-    inv_total_pc = b_dict["Schulen_und_Kitas"] + b_dict["Hochschulen_und_Forschung"] + b_dict["Verkehr_und_Infrastruktur"] + b_dict["Verteidigung_und_Aeusseres"]
-    rest_pc = sum(v for k, v in b_dict.items() if k not in ["Gesundheit_und_Pflege", "Rente_und_Alterssicherung", "Arbeitsfoerderung_und_Reha", "Schulen_und_Kitas", "Hochschulen_und_Forschung", "Verkehr_und_Infrastruktur", "Verteidigung_und_Aeusseres"])
-    fig.add_trace(go.Bar(x=["Sozialvers.", "Invest/Bildung", "Gemeinkosten"], y=[soz_total_pc, inv_total_pc, rest_pc], marker_color=["#0d9488", "#1e3a8a", "#64748b"], showlegend=False), row=2, col=3)
-
-    # Panel G: Trajectory 2023 vs 2024
-    s_2023 = {r["ebene"]: float(r["pro_kopf_eur"]) for r in summary_all if int(r["jahr"]) == 2023}
-    s_2024_d = {r["ebene"]: float(r["pro_kopf_eur"]) for r in summary_all if int(r["jahr"]) == 2024}
-    cat_g = ["Bund", "Soz.", "Bayern", "München"]
-    k_g = ["Bund_Kernhaushalt", "Sozialversicherungstraeger", "Freistaat_Bayern", "Landeshauptstadt_Muenchen"]
-    fig.add_trace(go.Bar(name="2023", x=cat_g, y=[s_2023[k] for k in k_g], marker_color="#94a3b8", showlegend=False), row=3, col=1)
-    fig.add_trace(go.Bar(name="2024", x=cat_g, y=[s_2024_d[k] for k in k_g], marker_color="#1e3a8a", showlegend=False), row=3, col=1)
-
-    # Panel H: Equalization Bars
-    m_map = {r["indikator"]: float(r["wert_mrd_eur"]) for r in muc_raw if int(r["jahr"]) == 2024}
-    d_map = {r["gebiet"]: float(r["bevoelkerung_stichtag"]) for r in demo_all if int(r["jahr"]) == 2024 and "Tier_1" in r["tier_status"]}
-    n_muc = d_map["Muenchen"]
-    lfa_pc = -float(next(f for f in f24 if f["target_node"] == "Laenderfinanzausgleich_Ausgleich_an_andere_Laender")["wert_eur_pro_kopf"])
-    bezirk_pc = -(m_map["Bezirksumlage_an_Bezirk_Oberbayern"] * 1e9) / n_muc
-    fag_pc = (m_map["Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern"] * 1e9) / n_muc
-    fig.add_trace(go.Bar(y=["LFA Abfluss", "Bezirksumlage", "FAG Zuweisung"], x=[lfa_pc, bezirk_pc, fag_pc], orientation="h", marker_color=["#be123c", "#e11d48", "#0284c7"], showlegend=False), row=3, col=2)
-
-    # Panel I: Causal Waterfall
-    net_kfa_pc = float(net_muc_flow["wert_eur_pro_kopf"])
-    overhead_nodes = {
-        "Schuldendienst_und_Zinsen",
-        "Kommunale_Verwaltung_Sonstiges",
-        "Wirtschaft_Verwaltung_Sonstiges",
-        "Ruecklagen_und_Liquiditaetspuffer",
-    }
-    overhead_delta = -sum(
-        float(f["wert_eur_pro_kopf"])
-        for f in f24
-        if f["target_node"] in overhead_nodes and f["layer_source"] == "Layer_3_Effective"
-    )
-    fig.add_trace(
-        go.Waterfall(
-            orientation="v", measure=["absolute", "relative", "relative", "relative", "total"],
-            x=["Brutto", "LFA", "KFA", "Gemeinlast", "Bürger"],
-            y=[sum_gross, lfa_pc, net_kfa_pc, overhead_delta, 0.0],
-            connector=dict(line=dict(color="#64748b")),
-            decreasing=dict(marker=dict(color="#ef4444")),
-            totals=dict(marker=dict(color="#10b981")),
-            showlegend=False,
-        ),
-        row=3, col=3,
-    )
-
-    fig.update_layout(
-        title=dict(
-            text="<b>Multi-Level Fiscal Architecture: 9-Panel (3x3) Synoptic Research Matrix</b><br><sup>Empirische Analyse des Bundes-, Landes- und Kommunalhaushalts (Deutschland, Bayern, München 2023–2024)</sup>",
-            font=dict(size=22, color="#0f172a"),
-            x=0.02, y=0.99,
-        ),
-        width=2400,
-        height=1800,
-        barmode="group",
-        paper_bgcolor="#ffffff",
-        plot_bgcolor="#f8fafc",
-        margin=dict(l=60, r=40, t=140, b=60),
-    )
-
-    out_matrix_png = os.path.join(plots_dir, "synoptic_3x3_matrix.png")
-    out_matrix_svg = os.path.join(plots_dir, "synoptic_3x3_matrix.svg")
-    fig.write_image(out_matrix_png, scale=2)
-    fig.write_image(out_matrix_svg)
-    print(f"✓ Rendered 3x3 Synoptic Research Matrix: {out_matrix_png}")
-
-
-# ---------------------------------------------------------------------------
 # Main Execution Entrypoint
 # ---------------------------------------------------------------------------
 def main():
-    """Main execution coordinator."""
+    """Main execution coordinator: renders the flagship 4-Layer Fiscal Sankey."""
     datasets_dir = os.path.join(ROOT, "datasets")
-    raw_dir = os.path.join(ROOT, "rawdata")
     plots_dir = os.path.join(ROOT, "plots")
     os.makedirs(plots_dir, exist_ok=True)
 
-    flows, summary, demo, muc, bund = load_modeling_data(datasets_dir, raw_dir)
+    flows, summary = load_modeling_data(datasets_dir)
 
-    # 1. Main 4-Layer Sankey
+    # 4-Layer Physical Kirchhoff-Conserved Fiscal Sankey
     sankey_png = os.path.join(plots_dir, "sankey_fiscal_per_capita.png")
     sankey_svg = os.path.join(plots_dir, "sankey_fiscal_per_capita.svg")
     sankey_html = os.path.join(plots_dir, "sankey_fiscal_interactive.html")
     render_plotly_sankey(flows, summary, sankey_png, sankey_html, sankey_svg)
-
-    # 2. Standalone Panels A through I
-    render_panel_a(summary, plots_dir)
-    render_panel_b(demo, plots_dir)
-    render_panel_c(flows, summary, demo, muc, bund, plots_dir)
-    render_panel_d(flows, plots_dir)
-    render_panel_e(flows, plots_dir)
-    render_panel_f(flows, plots_dir)
-    render_panel_g(summary, plots_dir)
-    render_panel_h(flows, muc, demo, plots_dir)
-    render_panel_i(flows, summary, plots_dir)
-
-    # 3. Composite 9-Panel 3x3 Synoptic Matrix
-    render_synoptic_3x3_matrix(summary, demo, flows, muc, plots_dir)
-    print("✓ All publication-grade visualizations successfully generated.")
+    print("✓ Flagship 4-Layer Fiscal Sankey successfully generated (PNG, SVG, HTML).")
 
 
 if __name__ == "__main__":

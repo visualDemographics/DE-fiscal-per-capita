@@ -1,12 +1,11 @@
-jahr,gebiet,tier_status,bevoelkerung_stichtag,quelle,beschreibung,altersgruppe_u18_anteil,altersgruppe_18_64_anteil,altersgruppe_65plus_anteil
-2023,Deutschland,Tier_1_Zensus_2022_korrigiert,83456045,Destatis,Bevoelkerungsfortschreibung auf Basis Zensus 2022 Stichtag 31.12.2023,0.1686,0.6074,0.2240
-2023,Deutschland,Tier_0_Pre_Zensus_2011_Basis,84669326,Destatis,Alte Bevoelkerungsfortschreibung Basis Zensus 2011 Stichtag 31.12.2023,0.1690,0.6090,0.2220
-2024,Deutschland,Tier_1_Zensus_2022_korrigiert,83577140,Destatis,Bevoelkerungsfortschreibung auf Basis Zensus 2022 Stichtag 31.12.2024,0.1672,0.6058,0.2270
-2023,Bayern,Tier_1_Zensus_2022_korrigiert,13176426,Bayerisches Landesamt fuer Statistik,LfStat Bevoelkerungsstand Basis Zensus 2022 Stichtag 31.12.2023,0.1680,0.6160,0.2160
-2023,Bayern,Tier_0_Pre_Zensus_2011_Basis,13435062,Bayerisches Landesamt fuer Statistik,Alte Bevoelkerungsfortschreibung Basis Zensus 2011 Stichtag 31.12.2023,0.1685,0.6175,0.2140
-2024,Bayern,Tier_1_Zensus_2022_korrigiert,13248928,Bayerisches Landesamt fuer Statistik,LfStat Bevoelkerungsstand Basis Zensus 2022 Stichtag 31.12.2024,0.1675,0.6145,0.2180
-2023,Muenchen,Tier_1_Amtliche_Einwohnerzahl_Zensus,1488719,Bayerisches Landesamt fuer Statistik,Amtliche Einwohnerzahl Muenchen LfStat Zensus 2022 Stichtag 31.12.2023,0.1551,0.6751,0.1698
-2023,Muenchen,Tier_0_Melderegister_Hauptwohnsitz,1589026,Statistisches Amt der Landeshauptstadt Muenchen,Melderegister Hauptwohnsitzbevoelkerung Stichtag 31.12.2023,0.1551,0.6751,0.1698
-2024,Muenchen,Tier_1_Amtliche_Einwohnerzahl_Zensus,1505005,Bayerisches Landesamt fuer Statistik,Amtliche Einwohnerzahl Muenchen LfStat Zensus 2022 Stichtag 31.12.2024,0.1548,0.6732,0.1720
-2024,Muenchen,Tier_0_Melderegister_Hauptwohnsitz,1603776,Statistisches Amt der Landeshauptstadt Muenchen,Melderegister Hauptwohnsitzbevoelkerung Stichtag 31.12.2024,0.1548,0.6732,0.1720
-
+jahr,gebiet,tier_status,bevoelkerung_stichtag,quelle,beschreibung,altersgruppe_u18_anteil,altersgruppe_18_64_anteil,altersgruppe_65plus_anteil,basis,preisbasis
+2023,Deutschland,Tier_1_Zensus_2022_korrigiert,83456045,Destatis,Bevoelkerungsfortschreibung auf Basis Zensus 2022 Stichtag 31.12.2023,0.1686,0.6074,0.2240,Amtliche_Fortschreibung,Personen
+2023,Deutschland,Tier_0_Pre_Zensus_2011_Basis,84669326,Destatis,Alte Bevoelkerungsfortschreibung Basis Zensus 2011 Stichtag 31.12.2023,0.1690,0.6090,0.2220,Amtliche_Fortschreibung,Personen
+2024,Deutschland,Tier_1_Zensus_2022_korrigiert,83577140,Destatis,Bevoelkerungsfortschreibung auf Basis Zensus 2022 Stichtag 31.12.2024,0.1672,0.6058,0.2270,Amtliche_Fortschreibung,Personen
+2023,Bayern,Tier_1_Zensus_2022_korrigiert,13176426,Bayerisches Landesamt fuer Statistik,LfStat Bevoelkerungsstand Basis Zensus 2022 Stichtag 31.12.2023,0.1680,0.6160,0.2160,Amtliche_Fortschreibung,Personen
+2023,Bayern,Tier_0_Pre_Zensus_2011_Basis,13435062,Bayerisches Landesamt fuer Statistik,Alte Bevoelkerungsfortschreibung Basis Zensus 2011 Stichtag 31.12.2023,0.1685,0.6175,0.2140,Amtliche_Fortschreibung,Personen
+2024,Bayern,Tier_1_Zensus_2022_korrigiert,13248928,Bayerisches Landesamt fuer Statistik,LfStat Bevoelkerungsstand Basis Zensus 2022 Stichtag 31.12.2024,0.1675,0.6145,0.2180,Amtliche_Fortschreibung,Personen
+2023,Muenchen,Tier_1_Amtliche_Einwohnerzahl_Zensus,1488719,Bayerisches Landesamt fuer Statistik,Amtliche Einwohnerzahl Muenchen LfStat Zensus 2022 Stichtag 31.12.2023,0.1551,0.6751,0.1698,Amtliche_Fortschreibung,Personen
+2023,Muenchen,Tier_0_Melderegister_Hauptwohnsitz,1589026,Statistisches Amt der Landeshauptstadt Muenchen,Melderegister Hauptwohnsitzbevoelkerung Stichtag 31.12.2023,0.1551,0.6751,0.1698,Amtliche_Fortschreibung,Personen
+2024,Muenchen,Tier_1_Amtliche_Einwohnerzahl_Zensus,1505005,Bayerisches Landesamt fuer Statistik,Amtliche Einwohnerzahl Muenchen LfStat Zensus 2022 Stichtag 31.12.2024,0.1548,0.6732,0.1720,Amtliche_Fortschreibung,Personen
+2024,Muenchen,Tier_0_Melderegister_Hauptwohnsitz,1603776,Statistisches Amt der Landeshauptstadt Muenchen,Melderegister Hauptwohnsitzbevoelkerung Stichtag 31.12.2024,0.1548,0.6732,0.1720,Amtliche_Fortschreibung,Personen

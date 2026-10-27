@@ -1,7 +1,7 @@
 file,bytes,sha256,url,retrieved
-bayern_staatshaushalt_2023_2024.csv,5161,08e80e0c5971e53d0beb7497164c08f6896bbe60fdd50d6e349b9149bd253ee8,https://www.stmfh.bayern.de,2026-10-24
-demographics_zensus_denominators_2023_2024.csv,1885,2877220427fa1ddb70e9710d384369a002fcccb1f27517de420f92af24a68b5c,https://www.destatis.de,2026-10-24
-destatis_bundeshaushalt_2023_2024.csv,8817,9acff992afb343869002592f1c64a0493c5f5d0f97db8520c43e528138bebff1,https://www.bundesfinanzministerium.de,2026-10-24
-destatis_sozialversicherung_2023_2024.csv,7144,e17b804207c2176a687019a0d0756dad8e4ce68fbce8e2be63e30003eaa4c552,https://www.destatis.de,2026-10-24
-literature_empirical_benchmarks.csv,10194,8a4d27e60aaf43f39409f39b534cdc1ae3d373e175a3f60a750a021142f97423,https://www.bundesfinanzministerium.de,2026-10-25
-muenchen_haushalt_2023_2024.csv,7328,c5e49b6e10f12f18c9349c914678571951a8c198747fec0b645c04bdd6a71a42,https://stadt.muenchen.de,2026-10-24
+bayern_staatshaushalt_2023_2024.csv,6014,02dc8670d05e015e15f800efb4c1301c4726bf204989d08d40f90aa6445baf7b,https://www.verkuendung-bayern.de/gvbl/2024-114/,2026-10-25
+demographics_zensus_denominators_2023_2024.csv,2242,78ef6e427ccb00929f2002f8232ce004a36732bf4fa66f4497023582ec8830ec,https://www.destatis.de/DE/Themen/Gesellschaft-Umwelt/Bevoelkerung/Bevoelkerungsstand/tabelle-geschlechtseintrag-2023.html,2026-10-25
+destatis_bundeshaushalt_2023_2024.csv,9849,9d81409a07c66055f51bf93f413330c508165e3b153f04084da1e44e55e3cf61,https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2025/01/Inhalte/Kapitel-3-Analysen/3-2-vorlaeufiger-abschluss-bundeshaushalt-2024.html,2026-10-25
+destatis_sozialversicherung_2023_2024.csv,8071,3a037e32de8967ab629dbb97187c4ca997ac79677331150a484ccf1ab1206767,https://www.bmas.de/DE/Service/Publikationen/Broschueren/a230-sozialbudget.html,2026-10-25
+literature_empirical_benchmarks.csv,9786,2bf0511faa22468dce52fbfec0fafc2ba487d5b9c82aa47aef5790ef40f1efd9,https://www.destatis.de/DE/Themen/Staat/Oeffentliche-Finanzen/Ausgaben-Einnahmen/Tabellen/laenderfinanzausgleich.html,2026-10-25
+muenchen_haushalt_2023_2024.csv,8102,ff98cac700fcdbcceb231edf979c5fd0daafcd1bea3f7ca68b782c79f19cb210,https://stadt.muenchen.de/infos/haushaltsplaene-vorjahre.html,2026-10-25

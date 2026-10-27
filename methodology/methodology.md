@@ -1,5 +1,9 @@
 # Methodological Framework: Multi-Level Fiscal Normalization & Accounting Boundaries
 
+> [!IMPORTANT]
+> **Exclusive Visualization Scope**:
+> The definitive empirical and modeling artifact of this investigation is the **4-Layer Physical Kirchhoff-Conserved Fiscal Sankey Flow Diagram** ([`plots/sankey_fiscal_per_capita.png`](../plots/sankey_fiscal_per_capita.png), [`.svg`](../plots/sankey_fiscal_per_capita.svg), and interactive [`.html`](../plots/sankey_fiscal_interactive.html)). All accounting normalizations, intergovernmental transfer consolidations, and functional public goods distributions are modeled and unified directly within this single visual network. All auxiliary non-Sankey panels have been explicitly retired.
+
 ## 1. Multi-Level Federal Accounting Harmonization
 
 When comparing fiscal flows across three governmental tiers (Federal Republic of Germany, Free State of Bavaria, and City of Munich) alongside the statutory social security funds (*Sozialversicherungsträger*), researchers must prevent accounting distortions, double counting, and denominator mismatch.
@@ -84,6 +88,21 @@ In German public accounting, comprehensive audited cash-accounting closings (*ka
 
 ---
 
+### 1.7 Architectural Column Hierarchy & Dynamic Functional Sorting
+The visual flow network is organized into a clean 4-tier column architecture:
+1. **Layer 1: Steuer- & Beitragsinflux** ($x = 0.00$): Primary tax revenues and statutory insurance contributions grouped by sovereign intake level.
+2. **Layer 2: Nominale Gebietskörperschaften** ($x = 0.28$): Gross budgetary volumes before intergovernmental redistribution.
+3. **Layer 3: Effektive Haushalte** ($x = 0.69$): Net operational spending capacities after intergovernmental transfers and statutory reserves.
+4. **Layer 4: Finale Funktionale Buckets** ($x = 1.00$): Direct citizen-facing public goods categories.
+
+**Intergovernmental Transfer Representation**:
+Transfers between the tiers (Layer 2 $\to$ Layer 3)—such as the federal social insurance subsidies (*Bundeszuschuss*), state allocations (*FAG/BayKiBiG*), and municipal levies (*Bezirksumlage* and *Gewerbesteuerumlage*)—are represented exclusively as directed intermediate ribbons. This eliminates the need for an artificial 5th transfer column header, preserving strict 4-column visual symmetry and legibility.
+
+**Dynamic Descending Sorting of Functional Destinations**:
+All 19 citizen-facing end-buckets in Layer 4 are dynamically sorted strictly descending by per-capita spending ($\text{€/Kopf}$) for each year. Each bucket label displays both its per-capita outlay and its exact percentage share of total per-capita outlays ($26{,}135.02\text{ €/Kopf}$ in 2024; $25{,}144.59\text{ €/Kopf}$ in 2023). Dedicated vertical spacing in the lower half of Layer 4 ensures that smaller municipal expenditure categories maintain clear, non-overlapping label typography.
+
+---
+
 ## 2. Independent Cross-Check & National Accounts Reconciliation
 
 To prevent reliance on unverified single-source tables, all primary budget figures are cross-reconciled against audited administrative registers, Destatis national accounts, and the official *Sozialbudget*:
@@ -110,4 +129,21 @@ The following table documents the empirical impact of the Zensus 2022 revision a
 | **Freistaat Bayern** | $13{,}435{,}000$ | $13{,}176{,}426$ | $-258{,}574$ | $-1.925\%$ | $1.0196\times$ | $+1.96\%$ mechanical increase ($+107\text{ €/Kopf}$) |
 | **Stadt München** | $1{,}589{,}026$ (Melderegister) | $1{,}488{,}719$ (Zensus amtlich) | $-100{,}307$ | $-6.312\%$ | $1.0674\times$ | $+6.74\%$ mechanical increase ($+427\text{ €/Kopf}$) |
 
-As demonstrated, using the local municipal Melderegister rather than the official audited Zensus register understates Munich's municipal per-capita public outlays by $427\text{ €}$ per resident ($6{,}579\text{ €}$ vs. $7{,}006\text{ €}$), proving the necessity of demographic register auditing in compliance with `responsible-demographics`.
+As demonstrated, using the local municipal Melderegister rather than the official audited Zensus register understates Munich's total municipal per-capita public outlays (including capital outlays of $1.09\text{ Mrd. €}$, totaling $10.45\text{ Mrd. €}$) by $427\text{ €}$ per resident ($6{,}579\text{ €}$ vs. $7{,}006\text{ €}$), proving the necessity of demographic register auditing in compliance with `responsible-demographics`. (For core ordinary operating expenditure in 2024, the baseline is $9.446\text{ Mrd. €} / 1{,}505{,}005 = \mathbf{6{,}276.39\text{ €/resident}}$).
+
+---
+
+## 4. Methodological Invariants, Scope Boundaries & Protocol Applicability
+
+### 4.1 Average Public Budget Allocation vs. Citizen Tax Incidence
+All per-capita indicators in this study represent authorized public expenditure divided by statutory population denominators ($\text{EUR/EW}$). They measure the **fiscal intensity and resource commitment** of each public authority per resident within its constituency. They do **not** represent an individual tax bill or a personal cash transfer to each resident.
+
+### 4.2 Single Currency Area & Nominal Budgetary Pricing
+All budgetary accounts are evaluated in Euros (EUR) at current nominal prices for the reporting years 2023 and 2024. Because all three tiers operate within the uniform German domestic monetary and legal framework, international Purchasing Power Parity (PPP) deflators are not required. Regional living cost differentials between Munich and the German average are recognized as institutional context but are not used to alter statutory accounting records.
+
+### 4.3 Protocol Applicability & Explicit Non-Applicability
+In compliance with the [`responsible-research`](../.agents/skills/responsible-research/SKILL.md) protocol:
+- **Full Population Registry Census (*Vollerhebung*)**: Primary data comprises statutory federal, state, and municipal budget laws and official statistical registers. Therefore, inferential sample-based methods such as Random-Effects Meta-Regression (REMR) across heterogeneous external studies or Two One-Sided Tests (TOST) for sample equivalence do not apply.
+- **Municipal Scope Boundary**: The City of Munich (*Landeshauptstadt München*) is modeled as the primary municipal case study within Bavaria; aggregate county (*Landkreise*) and rural municipal budgets are captured through the state and district transfer accounts (*KFA* and *Bezirksumlage*).
+- **Kirchhoff Physical Ribbon Conservation**: Link ribbon widths are strictly scaled by physical budgetary volume in billions of Euros, ensuring identical input-output balance ($\Delta = 0.000\text{ Mrd. €}$) across all four network layers.
+

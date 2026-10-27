@@ -314,6 +314,63 @@ def check_hypothesis_verdicts():
     return True
 
 
+def check_literature_benchmarks_veracity():
+    print("\n[Check 9] Verifying Primary Source PDF Veracity of Literature Benchmarks...")
+    benchmarks_path = os.path.join(ROOT, "datasets", "literature_empirical_benchmarks.csv")
+    if not os.path.exists(benchmarks_path):
+        print(f"  FAIL [Check 9]: Missing {benchmarks_path}")
+        return False
+
+    with open(benchmarks_path, "r", encoding="utf-8") as f:
+        benchmarks = list(csv.DictReader(f))
+
+    if not benchmarks:
+        print("  FAIL [Check 9]: Benchmarks catalog is empty.")
+        return False
+
+    try:
+        import pypdf
+    except ImportError:
+        print("  FAIL [Check 9]: pypdf package required for PDF text extraction verification.")
+        return False
+
+    pdfs = {}
+    errors = []
+
+    for b in benchmarks:
+        pid = b["parameter_id"]
+        loc = b.get("lokale_datei", "").strip()
+        if not loc or not (loc.endswith(".pdf") or ".pdf#" in loc):
+            errors.append(f"{pid}: lokale_datei '{loc}' does not point to an authentic .pdf file.")
+            continue
+        rel_pdf = loc.split("#")[0]
+        pdf_file = os.path.join(ROOT, rel_pdf)
+        if not os.path.exists(pdf_file):
+            errors.append(f"{pid}: PDF file '{rel_pdf}' not found.")
+            continue
+        if pdf_file not in pdfs:
+            reader = pypdf.PdfReader(pdf_file)
+            txt = " ".join((p.extract_text() or "") for p in reader.pages)
+            norm_txt = re.sub(r'[\s\.,]', '', txt)
+            pdfs[pdf_file] = norm_txt
+
+        nt = pdfs[pdf_file]
+        quote = b["exakter_quelltext_zitat"]
+        nums = re.findall(r'\d[\d\.,]{2,}', quote)
+        missing_nums = [n for n in nums if re.sub(r'[\s\.,]', '', n) not in nt]
+        if missing_nums:
+            errors.append(f"{pid}: Numbers {missing_nums} from quote not found in {os.path.basename(pdf_file)}")
+
+    if errors:
+        print(f"  FAIL [Check 9]: Encountered {len(errors)} benchmark veracity issues:")
+        for e in errors[:5]:
+            print(f"    - {e}")
+        return False
+
+    print(f"  ✓ All {len(benchmarks)} empirical benchmarks 100% verified against primary PDF source texts.")
+    return True
+
+
 def main():
     print("=" * 70)
     print("RESPONSIBLE RESEARCH: GENERAL PIPELINE AUDIT SUITE")
@@ -327,6 +384,7 @@ def main():
         check_primary_literature_pdfs,
         check_residual_shares,
         check_hypothesis_verdicts,
+        check_literature_benchmarks_veracity,
     ]
     passed = sum(1 for check in checks if check())
     print("\n" + "=" * 70)

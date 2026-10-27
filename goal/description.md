@@ -1,5 +1,9 @@
 # Empirical Research Goal & Scope
 
+> [!IMPORTANT]
+> **Exclusive Analytical & Visualization Focus**:
+> This repository is dedicated **exclusively to the 4-Layer Fiscal Per-Capita Sankey Architecture** ([`sankey_fiscal_per_capita.png`](../plots/sankey_fiscal_per_capita.png), [`.svg`](../plots/sankey_fiscal_per_capita.svg), and interactive [`.html`](../plots/sankey_fiscal_interactive.html)). All empirical pipelines, accounting normalizations, and visualization codes serve solely to construct and audit this unified multi-level Sankey network. Intermediate auxiliary sub-panels and matrices have been explicitly retired.
+
 ## Research Scope & Motivation
 This investigation establishes a unified, multi-level empirical per-capita fiscal breakdown for the Federal Republic of Germany (*Bund*), the Free State of Bavaria (*Freistaat Bayern*), and the City of Munich (*Landeshauptstadt München*), spanning the 2023–2024 budgetary reporting period.
 

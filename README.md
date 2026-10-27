@@ -1,9 +1,13 @@
 # Fiscal Per-Capita Breakdown: Bund, Freistaat Bayern & Landeshauptstadt München
 
-[![Pipeline Audit](https://img.shields.io/badge/Audit-8%2F8%20Passed-emerald.svg)](.agents/skills/responsible-research/scripts/audit_research_pipeline.py)
+[![Pipeline Audit](https://img.shields.io/badge/Audit-9%2F9%20Passed-emerald.svg)](.agents/skills/responsible-research/scripts/audit_research_pipeline.py)
 [![Data Quality](https://img.shields.io/badge/Kirchhoff%20Conservation-%CE%94%20%3D%200.000%20Mrd.%20%E2%82%AC-blue.svg)](datasets/fiscal_sankey_flows_per_capita.csv)
-[![Resolution](https://img.shields.io/badge/PNG%20Resolution-5200%20%C3%97%204000-purple.svg)](plots/sankey_fiscal_per_capita.png)
+[![Resolution](https://img.shields.io/badge/PNG%20Resolution-5200%20%C3%97%204500-purple.svg)](plots/sankey_fiscal_per_capita.png)
 [![Interactive HTML](https://img.shields.io/badge/Widget-Plotly%20Sankey%20HTML-amber.svg)](plots/sankey_fiscal_interactive.html)
+
+> [!IMPORTANT]
+> **Exclusive Visualization & Analytical Focus**:
+> This repository is dedicated **exclusively to the 4-Layer Fiscal Per-Capita Sankey Architecture** ([`plots/sankey_fiscal_per_capita.png`](plots/sankey_fiscal_per_capita.png), [`plots/sankey_fiscal_per_capita.svg`](plots/sankey_fiscal_per_capita.svg), and interactive [`plots/sankey_fiscal_interactive.html`](plots/sankey_fiscal_interactive.html)). All empirical ETL pipelines, accounting normalizations, and visualization generators are built solely to power and audit this unified multi-level Sankey network. All auxiliary non-Sankey sub-panels and matrices have been explicitly retired.
 
 This repository provides an empirical, publication-grade fiscal analysis decomposing public money in Germany for an individual resident of the **City of Munich (*Landeshauptstadt München*)** in 2024 (with longitudinal comparison to 2023). Every resident of Munich simultaneously receives public goods and services financed across four distinct public tiers:
 1. **Federal Republic of Germany (*Bund*)**
@@ -18,6 +22,14 @@ The flagship analytical visualization is a **4-Layer High-Resolution Sankey Diag
 ## 1. The 4-Layer Fiscal Sankey Diagram
 
 The Sankey diagram tracks the complete lifecycle of public funds—from primary tax and contribution origin, through gross jurisdictional appropriation and vertical/horizontal intergovernmental transfers, into final citizen-facing functional areas.
+
+The visualization is organized into 4 distinct architectural column headers:
+1. **Layer 1: Steuer- & Beitragsinflux** (Primary tax and social insurance contribution streams)
+2. **Layer 2: Nominale Gebietskörperschaften** (Gross institutional appropriations prior to transfers)
+3. **Layer 3: Effektive Haushalte** (Net disposable outlays after intergovernmental transfers and levies)
+4. **Layer 4: Finale Funktionale End-Buckets** (19 citizen-facing destination categories, dynamically sorted descending by per-capita spending with percentage shares)
+
+Vertical and horizontal transfers between Layer 2 and Layer 3 (such as the *Bundeszuschüsse* to pensions and health, state allocations *FAG/BayKiBiG*, and municipal levies *Bezirksumlage*) are explicitly routed as dedicated link ribbons without intermediate column clutter. The footer callouts (documenting the official Zensus 2022 population baselines and primary source registers) are positioned at the base of the canvas with clear vertical clearance below the lowest nodes.
 
 <p align="center">
   <a href="plots/sankey_fiscal_interactive.html">
@@ -207,7 +219,7 @@ pip install -r requirements.txt
 # 3. Process raw administrative tables and generate audited flows
 .venv/bin/python3 src/data_preparation.py
 
-# 4. Render high-resolution Sankey PNG, interactive HTML, and synoptic matrix
+# 4. Render high-resolution Sankey (PNG, SVG, and interactive HTML)
 .venv/bin/python3 src/modeling.py
 
 # 5. Run the automated research pipeline audit
@@ -227,8 +239,9 @@ RESPONSIBLE RESEARCH: GENERAL PIPELINE AUDIT SUITE
 [Check 6] Verifying Primary Source Literature PDFs in literature/...           ✓ PASSED
 [Check 7] Verifying Residual & Unallocated Budget Shares (< 5% Cap)...         ✓ PASSED
 [Check 8] Verifying Falsifiable Hypotheses Closure (H1-H4 Verdicts)...         ✓ PASSED
+[Check 9] Verifying Primary Source PDF Veracity of Literature Benchmarks...    ✓ PASSED
 ======================================================================
-PIPELINE AUDIT COMPLETE: 8/8 CHECKS PASSED.
+PIPELINE AUDIT COMPLETE: 9/9 CHECKS PASSED.
 ======================================================================
 ```
 
@@ -254,22 +267,26 @@ DE-fiscal-per-capita/
 │   ├── fiscal_sankey_flows_per_capita.csv         # 120 directed graph edges with €/Kopf & € bn
 │   ├── fiscal_per_capita_summary.csv              # Headline comparative summary across tiers
 │   └── literature_empirical_benchmarks.csv        # Verbatim literature citations and benchmark catalog
-├── plots/                                         # Publication figures & visual artifacts
+├── plots/                                         # Flagship publication figures (Exclusive Sankey Focus)
 │   ├── plot.md                                    # Systematic methodological plot documentation
-│   ├── sankey_fiscal_per_capita.png               # High-res static Sankey (5200x4000 px)
-│   ├── sankey_fiscal_interactive.html             # Interactive Plotly web widget with year switch
-│   ├── synoptic_3x3_matrix.png                    # 9-panel executive research matrix
-│   └── panel_a_per_capita_breakdown.png ...       # Individual research panels A through I
+│   ├── sankey_fiscal_per_capita.png               # High-res static Sankey (5200x4500 px)
+│   ├── sankey_fiscal_per_capita.svg               # Scalable Vector Graphics master export
+│   └── sankey_fiscal_interactive.html             # Interactive Plotly web widget with year switch
 ├── src/                                           # Audited pipeline source code (AST compliant)
 │   ├── data_preparation.py                        # Raw-to-dataset normalization & flow builder
-│   └── modeling.py                                # Plotly/Kaleido rendering engine
+│   └── modeling.py                                # Plotly/Kaleido Sankey rendering engine
 ├── literature/                                    # Academic and administrative citations catalog
 │   ├── BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf
 │   ├── BMF_2025_Steuereinnahmen_Dezember_2024.pdf
 │   ├── BMAS_2024_Sozialbudget_2023.pdf
-│   ├── Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf
 │   ├── Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf
+│   ├── Destatis_2024_Bevoelkerungsstand_12411.pdf
+│   ├── Destatis_2024_Gemeindesteuern_Kassenstatistik.pdf
 │   ├── Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf
+│   ├── Destatis_2024_Statement_Zensus_2022.pdf
+│   ├── Destatis_2025_Finanzkraftausgleich_2024.pdf
+│   ├── LfStat_2024_Statistik_Kommunal_Muenchen_09162.pdf
+│   ├── Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf
 │   ├── literature.md                              # Complete bibliographic index
 │   └── citations.md                               # Page/table extraction quotes
 └── goal/
