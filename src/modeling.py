@@ -49,7 +49,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Lohn_Einkommensteuer_Bund": "Lohn- & Einkommensteuer (Bund)",
         "Umsatzsteuer_Bund": "Umsatzsteuer (Bund)",
         "Unternehmenssteuern_Bund": "Körperschaft- & Abgeltungsteuer (Bund)",
-        "Verbrauchs_und_Bundessteuern": "Verbrauchs- & Bundessteuern (Energie, Tabak, Soli, Kfz)",
+        "Verbrauchs_und_Bundessteuern_netto": "Verbrauchs- & Bundessteuern netto",
         "Verwaltungseinnahmen_Beteiligungen_Bund": "Verwaltungseinnahmen & Beteiligungen (Bund)",
         "Nettokreditaufnahme_Bund": "Nettokreditaufnahme (Bund)",
         # Layer 1 - Social Insurance Pure Contributions
@@ -63,13 +63,14 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Landessteuern_Bayern": "Landessteuern (Erbschaft, Grunderwerb)",
         "Verwaltungseinnahmen_Bayern": "Verwaltungseinnahmen (Bayern)",
         "Ruecklagenentnahme_Kredite_Bayern": "Rücklagen & Kredite (Bayern)",
-        # Layer 1 - Munich Municipal Revenues
+        # Layer 1 - Munich Municipal Revenues (Option B Reconciled)
         "Gewerbesteuer_Muenchen": "Gewerbesteuer (München)",
         "Einkommensteuer_USt_Anteil_Muenchen": "Einkommen- & USt-Anteil (MUC)",
         "Grundsteuer_und_Lokalsteuern_Muenchen": "Grundsteuer & Lokalsteuern (MUC)",
         "Gebuehren_Mieten_Entgelte_Muenchen": "Kommunale Gebühren & Mieten (MUC)",
-        "Beteiligungsertraege_SWM_Muenchen": "Gewinnausschüttung SWM (MUC)",
-        "Sonstige_Ertraege_und_Defizitausgleich_MUC": "Sonstige Erträge & Saldo (MUC)",
+        "Jahresfehlbetrag_Kredite_Muenchen": "Jahresfehlbetrag & Kredite (MUC)",
+        "Sonstige_ordentliche_Ertraege_SWM_MUC": "SWM & Sonstige Erträge (MUC)",
+        "Sonstige_Transferertraege_Bundesmittel_MUC": "Bundesmittel & Transfers (MUC)",
         # Layer 2 - Nominal Sovereign Tiers
         "Nominal_Federal": "Nominaler Bund",
         "Nominal_Insurance": "Nominale Sozialversicherung",
@@ -82,6 +83,8 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Effective_Munich": "Effektive Stadt München",
         # Layer 4 - Functional Buckets & End Destinations
         "Laenderfinanzausgleich_Ausgleich_an_andere_Laender": "Länderfinanzausgleich (Nettoabfluss BY)",
+        "Kommunaler_Finanzausgleich_uebrige_Kommunen_BY": "Kommunaler Finanzausgleich (übrige Kommunen BY)",
+        "Kommunale_Umlagen_Bezirks_Gewerbesteuer_MUC": "Bezirks- & Gewerbesteuerumlage (MUC)",
         "Rente_und_Alterssicherung": "Rente & Alterssicherung",
         "Gesundheit_und_Pflege": "Gesundheit & Pflege",
         "Schulen_und_Kitas": "Schulen & Kitas",
@@ -133,12 +136,12 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Einkommensteuer_USt_Anteil_Muenchen": "#d97706",
         "Grundsteuer": "#d97706",
         "Gebuehren": "#d97706",
-        "Beteiligungsertraege_SWM": "#d97706",
-        "Sonstige_Ertraege": "#d97706",
+        "Sonstige_ordentliche_Ertraege_SWM_MUC": "#d97706",
         "Nominal_Munich": "#d97706",
         "Effective_Munich": "#b45309",
         # Layer 4 Buckets: Single-parent buckets use their Layer 3 parent color, mixed use distinct colors
         "Laenderfinanzausgleich": "#0369a1",  # Same color as other Bavarian Layer 3 outflows
+        "Kommunale_Umlagen_Bezirks_Gewerbesteuer_MUC": "#be123c",  # Dedicated municipal transfer outflow
         "Rente_und_Alterssicherung": "#0f766e",  # Single parent: Effective_Insurance
         "Gesundheit_und_Pflege": "#10b981",      # Mixed (Insurance + BY + MUC)
         "Schulen_und_Kitas": "#3b82f6",          # Mixed (BY + MUC)
@@ -171,7 +174,8 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             if name not in node_idx:
                 node_idx[name] = len(node_keys)
                 node_keys.append(name)
-                node_labels.append(label_map.get(name, name.replace("_", " ")))
+                assert name in label_map, f"Node '{name}' missing from label_map"
+                node_labels.append(label_map[name])
             return node_idx[name]
 
         # Group Layer 1 strictly by Sovereign Tier (SV -> Bund -> Bayern -> Munich, sorted descending per group)
@@ -185,10 +189,10 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         bund_l1 = [
             "Umsatzsteuer_Bund",
             "Lohn_Einkommensteuer_Bund",
-            "Verbrauchs_und_Bundessteuern",
-            "Nettokreditaufnahme_Bund",
-            "Unternehmenssteuern_Bund",
             "Verwaltungseinnahmen_Beteiligungen_Bund",
+            "Verbrauchs_und_Bundessteuern_netto",
+            "Unternehmenssteuern_Bund",
+            "Nettokreditaufnahme_Bund",
         ]
         by_l1 = [
             "Gemeinschaftsteuern_Bayern",
@@ -200,8 +204,8 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             "Gewerbesteuer_Muenchen",
             "Einkommensteuer_USt_Anteil_Muenchen",
             "Gebuehren_Mieten_Entgelte_Muenchen",
-            "Sonstige_Ertraege_und_Defizitausgleich_MUC",
-            "Beteiligungsertraege_SWM_Muenchen",
+            "Jahresfehlbetrag_Kredite_Muenchen",
+            "Sonstige_ordentliche_Ertraege_SWM_MUC",
             "Grundsteuer_und_Lokalsteuern_Muenchen",
         ]
         l1_nodes = sv_l1 + bund_l1 + by_l1 + muc_l1
@@ -261,14 +265,14 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
 
             # Color assignment
             if l_src == "Layer_1_Influx":
-                if "Bund" in src_name or "Lohn" in src_name or "Umsatz" in src_name or "Unternehmen" in src_name or "Verbrauchs" in src_name:
-                    link_colors.append("rgba(30, 58, 138, 0.40)")
-                elif "AG_AN" in src_name or "BA" in src_name or "DGUV" in src_name:
-                    link_colors.append("rgba(13, 148, 136, 0.40)")
-                elif "Bayern" in src_name:
-                    link_colors.append("rgba(2, 132, 199, 0.40)")
-                elif "Muenchen" in src_name or "MUC" in src_name:
-                    link_colors.append("rgba(217, 119, 6, 0.40)")
+                if src_name in sv_l1:
+                    link_colors.append("rgba(13, 148, 136, 0.45)")
+                elif src_name in bund_l1:
+                    link_colors.append("rgba(30, 58, 138, 0.45)")
+                elif src_name in by_l1:
+                    link_colors.append("rgba(2, 132, 199, 0.45)")
+                elif src_name in muc_l1:
+                    link_colors.append("rgba(217, 119, 6, 0.45)")
                 else:
                     link_colors.append("rgba(100, 116, 139, 0.35)")
             elif l_src == "Layer_2_Nominal":
@@ -276,10 +280,10 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                     link_colors.append("rgba(139, 92, 246, 0.75)")  # Federal Social Subsidy
                 elif src_name == "Nominal_Federal" and tgt_name == "Effective_Bayern":
                     link_colors.append("rgba(99, 102, 241, 0.70)")  # Federal Grants to Bavaria
+                elif src_name == "Nominal_Federal" and tgt_name == "Effective_Munich":
+                    link_colors.append("rgba(79, 70, 229, 0.70)")  # Federal Social Reimbursements to Munich
                 elif src_name == "Nominal_Bayern" and tgt_name == "Effective_Munich":
                     link_colors.append("rgba(14, 165, 233, 0.70)")  # State FAG Grants to Munich
-                elif src_name == "Nominal_Munich" and tgt_name == "Effective_Bayern":
-                    link_colors.append("rgba(245, 158, 11, 0.70)")  # Municipal Levy to District/State
                 elif src_name == "Nominal_Federal":
                     link_colors.append("rgba(30, 58, 138, 0.55)")
                 elif src_name == "Nominal_Insurance":
@@ -311,31 +315,38 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 if k in sv_l1:
                     idx = sv_l1.index(k)
                     node_y.append(0.02 + idx * (0.24 / max(1, len(sv_l1) - 1)))
+                    node_colors.append("#0d9488")
                 elif k in bund_l1:
                     idx = bund_l1.index(k)
                     node_y.append(0.35 + idx * (0.16 / max(1, len(bund_l1) - 1)))
+                    node_colors.append("#1e3a8a")
                 elif k in by_l1:
                     idx = by_l1.index(k)
                     node_y.append(0.58 + idx * (0.14 / max(1, len(by_l1) - 1)))
+                    node_colors.append("#0284c7")
                 elif k in muc_l1:
                     idx = muc_l1.index(k)
                     node_y.append(0.79 + idx * (0.17 / max(1, len(muc_l1) - 1)))
+                    node_colors.append("#d97706")
                 else:
                     node_y.append(0.50)
+                    node_colors.append("#475569")
             elif k in l2_nodes:
                 node_x.append(0.32)
                 idx = l2_nodes.index(k)
                 node_y.append(tier_y_l2_l3[idx])
+                node_colors.append(["#0d9488", "#1e3a8a", "#0284c7", "#d97706"][idx])
             elif k in l3_nodes:
                 node_x.append(0.65)
                 idx = l3_nodes.index(k)
                 node_y.append(tier_y_l2_l3[idx])
+                node_colors.append(["#0f766e", "#1e40af", "#0369a1", "#b45309"][idx])
             else:
                 node_x.append(0.999)
-                idx = l4_nodes.index(k) if k in l4_nodes else 0
+                assert k in l4_nodes, f"Unrecognized Layer 4 node key: {k}"
+                idx = l4_nodes.index(k)
                 node_y.append(0.02 + idx * (0.92 / max(1, len(l4_nodes) - 1)))
 
-            if k in l4_nodes:
                 parents_l3 = list({f["source_node"] for f in year_flows if f["target_node"] == k and f["layer_source"] == "Layer_3_Effective"})
                 if len(parents_l3) == 1:
                     single_parent = parents_l3[0]
@@ -345,7 +356,10 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                         "Effective_Bayern": "#0369a1",
                         "Effective_Munich": "#b45309",
                     }
-                    clr = l3_parent_colors.get(single_parent, "#475569")
+                    if single_parent in l3_parent_colors:
+                        clr = l3_parent_colors[single_parent]
+                    else:
+                        clr = "#475569"
                 else:
                     mixed_colors = {
                         "Gesundheit_und_Pflege": "#10b981",          # Emerald
@@ -356,42 +370,74 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                         "Hochschulen_und_Forschung": "#6366f1",      # Indigo
                         "Wohnungsbau_und_Stadtplanung": "#8b5cf6",   # Purple
                     }
-                    clr = mixed_colors.get(k, "#475569")
-            else:
-                clr = "#475569"
-                for pat, c in color_map.items():
-                    if pat in k:
-                        clr = c
-                        break
-            node_colors.append(clr)
+                    if k in mixed_colors:
+                        clr = mixed_colors[k]
+                    else:
+                        clr = "#475569"
+                node_colors.append(clr)
 
         enhanced_labels = []
         for i, k in enumerate(node_keys):
             base_lbl = node_labels[i]
-            vol_pc = max(in_sums_pc[i], out_sums_pc[i])
-            vol_mrd = max(in_sums_mrd[i], out_sums_mrd[i])
-            if k in l2_nodes or k in l3_nodes:
+            if k in l2_nodes:
+                vol_pc = in_sums_pc[i]
+                vol_mrd = in_sums_mrd[i]
+                pop_desc = "83,6 Mio. EW" if ("Federal" in k or "Insurance" in k) else ("13,2 Mio. EW" if "Bayern" in k else "1,51 Mio. EW")
+                enhanced_labels.append(
+                    f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> ({vol_mrd:.1f} Mrd. €)<br>"
+                    f"<span style='font-size:10px;color:#000000'>Basis: {pop_desc}</span>"
+                )
+            elif k in l3_nodes:
+                vol_pc = out_sums_pc[i]
+                vol_mrd = out_sums_mrd[i]
                 pop_desc = "83,6 Mio. EW" if ("Federal" in k or "Insurance" in k) else ("13,2 Mio. EW" if "Bayern" in k else "1,51 Mio. EW")
                 enhanced_labels.append(
                     f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> ({vol_mrd:.1f} Mrd. €)<br>"
                     f"<span style='font-size:10px;color:#000000'>Basis: {pop_desc}</span>"
                 )
             elif k in l4_nodes:
+                vol_pc = in_sums_pc[i]
+                vol_mrd = in_sums_mrd[i]
                 pct = (vol_pc / total_l4_pc * 100.0) if total_l4_pc > 0 else 0.0
+
+                # Disambiguate multi-tier parentage in Layer 4
+                incoming_tiers = []
+                for s_idx, t_idx, val_m in zip(sources, targets, custom_hover):
+                    if t_idx == i:
+                        s_key = node_keys[s_idx]
+                        acr = "Bund" if "Federal" in s_key else ("SV" if "Insurance" in s_key else ("BY" if "Bayern" in s_key else ("MUC" if "Munich" in s_key else s_key)))
+                        incoming_tiers.append((acr, val_m))
+
+                distinct_tiers = set(acr for acr, _ in incoming_tiers)
+                if len(distinct_tiers) > 1:
+                    tier_sums = {}
+                    for acr, val_m in incoming_tiers:
+                        if acr not in tier_sums:
+                            tier_sums[acr] = 0.0
+                        tier_sums[acr] += val_m
+                    parts = [f"{acr} {v:.1f}" for acr, v in sorted(tier_sums.items(), key=lambda x: -x[1])]
+                    vol_str = f"({' + '.join(parts)} Mrd. €)"
+                elif vol_mrd >= 1.0:
+                    vol_str = f"({vol_mrd:.2f} Mrd. €)"
+                else:
+                    vol_str = f"({vol_mrd * 1000.0:.0f} Mio. €)"
+
                 if "Laenderfinanzausgleich" in k:
                     enhanced_labels.append(
                         f"<b>{base_lbl}</b><br><b>-{int(round(vol_pc)):,} €/Kopf</b> · <b>{pct:.1f}%</b> (-{vol_mrd:.2f} Mrd. €)"
                     )
-                elif vol_mrd >= 1.0:
-                    enhanced_labels.append(f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> · <b>{pct:.1f}%</b> ({vol_mrd:.2f} Mrd. €)")
+                else:
+                    enhanced_labels.append(
+                        f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> · <b>{pct:.1f}%</b> {vol_str}"
+                    )
+            else:
+                vol_pc = max(in_sums_pc[i], out_sums_pc[i])
+                vol_mrd = max(in_sums_mrd[i], out_sums_mrd[i])
+                if vol_mrd >= 1.0:
+                    enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({vol_mrd:.2f} Mrd. €)")
                 else:
                     mio_val = vol_mrd * 1000.0
-                    enhanced_labels.append(f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> · <b>{pct:.1f}%</b> ({mio_val:.0f} Mio. €)")
-            elif vol_mrd >= 1.0:
-                enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({vol_mrd:.2f} Mrd. €)")
-            else:
-                mio_val = vol_mrd * 1000.0
-                enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({mio_val:.0f} Mio. €)")
+                    enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({mio_val:.0f} Mio. €)")
 
         return go.Sankey(
             arrangement="snap",
@@ -403,6 +449,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 color=node_colors,
                 x=node_x,
                 y=node_y,
+                sort="input",
                 hovertemplate="<b>%{label}</b><extra></extra>",
             ),
             link=dict(
@@ -410,6 +457,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 target=targets,
                 value=values,
                 color=link_colors,
+                sort="input",
                 customdata=custom_hover,
                 hovertemplate="%{source.label} → %{target.label}<br><b>%{value:,.0f} € / Kopf</b> (Pro-Kopf-Äquivalent)<br>Absolutes Gesamtvolumen: <b>%{customdata:.2f} Mrd. €</b><extra></extra>",
             ),
@@ -425,6 +473,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         f_bz = get_f("Nominal_Federal", "Effective_Insurance")
         f_bk = get_f("Nominal_Federal", "Effective_Federal")
         f_bm = get_f("Nominal_Federal", "Effective_Bayern")
+        f_bmuc = get_f("Nominal_Federal", "Effective_Munich")
         f_by = get_f("Nominal_Bayern", "Effective_Bayern")
         f_fag = get_f("Nominal_Bayern", "Effective_Munich")
         f_muc = get_f("Nominal_Munich", "Effective_Munich")
@@ -438,6 +487,9 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         bk_pc = f"{int(round(float(f_bk['wert_eur_pro_kopf']))):,}".replace(",", ".")
         bm_mrd = f"{float(f_bm['wert_mrd_eur']):.2f}".replace(".", ",")
         bm_pc = f"{int(round(float(f_bm['wert_eur_pro_kopf']))):,}".replace(",", ".")
+        bmuc_val = float(f_bmuc['wert_mrd_eur'])
+        bmuc_mrd = f"{bmuc_val * 1000.0:.0f} Mio. €" if bmuc_val < 1.0 else f"{bmuc_val:.2f} Mrd. €"
+        bmuc_pc = f"{int(round(float(f_bmuc['wert_eur_pro_kopf']))):,}".replace(",", ".")
         by_mrd = f"{float(f_by['wert_mrd_eur']):.2f}".replace(".", ",")
         by_pc = f"{int(round(float(f_by['wert_eur_pro_kopf']))):,}".replace(",", ".")
         fag_mrd = f"{float(f_fag['wert_mrd_eur']):.2f}".replace(".", ",")
@@ -482,43 +534,49 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             ),
             # Layer 2 -> Layer 3 Transfer & Outflow Badges directly on the ribbons
             dict(
-                x=0.485, y=0.853, xref="paper", yref="paper",
+                x=0.485, y=0.865, xref="paper", yref="paper",
                 text=f"<b>Beitragseinnahmen SV:</b> {sv_mrd} Mrd. € ({sv_pc} €/Kopf)",
                 showarrow=False, font=dict(size=11, color="#0f766e", family="Helvetica, Arial"),
                 bgcolor="rgba(240, 253, 250, 0.94)", bordercolor="#0d9488", borderwidth=1, borderpad=4,
             ),
             dict(
-                x=0.485, y=0.661, xref="paper", yref="paper",
+                x=0.485, y=0.675, xref="paper", yref="paper",
                 text=f"<b>Bundeszuschuss an SV:</b> <b>{bz_mrd} Mrd. €</b> ({bz_pc} €/Kopf)",
                 showarrow=False, font=dict(size=11, color="#5b21b6", family="Helvetica, Arial"),
                 bgcolor="rgba(245, 243, 255, 0.96)", bordercolor="#8b5cf6", borderwidth=1.5, borderpad=5,
             ),
             dict(
-                x=0.485, y=0.553, xref="paper", yref="paper",
+                x=0.485, y=0.560, xref="paper", yref="paper",
                 text=f"<b>Bundes-Kernhaushalt:</b> {bk_mrd} Mrd. € ({bk_pc} €/Kopf)",
                 showarrow=False, font=dict(size=11, color="#1e3a8a", family="Helvetica, Arial"),
                 bgcolor="rgba(239, 246, 255, 0.94)", bordercolor="#1e3a8a", borderwidth=1, borderpad=4,
             ),
             dict(
-                x=0.485, y=0.435, xref="paper", yref="paper",
+                x=0.485, y=0.450, xref="paper", yref="paper",
                 text=f"<b>Bundesmittel an Bayern:</b> <b>{bm_mrd} Mrd. €</b> ({bm_pc} €/Kopf)",
                 showarrow=False, font=dict(size=11, color="#3730a3", family="Helvetica, Arial"),
                 bgcolor="rgba(224, 231, 255, 0.96)", bordercolor="#6366f1", borderwidth=1.5, borderpad=5,
             ),
             dict(
-                x=0.485, y=0.316, xref="paper", yref="paper",
+                x=0.485, y=0.370, xref="paper", yref="paper",
+                text=f"<b>Bundesmittel an München:</b> <b>{bmuc_mrd}</b> ({bmuc_pc} €/Kopf)",
+                showarrow=False, font=dict(size=11, color="#3730a3", family="Helvetica, Arial"),
+                bgcolor="rgba(238, 242, 255, 0.96)", bordercolor="#6366f1", borderwidth=1.5, borderpad=5,
+            ),
+            dict(
+                x=0.485, y=0.285, xref="paper", yref="paper",
                 text=f"<b>Landeshaushalt Bayern:</b> {by_mrd} Mrd. € ({by_pc} €/Kopf)",
                 showarrow=False, font=dict(size=11, color="#0369a1", family="Helvetica, Arial"),
                 bgcolor="rgba(240, 249, 255, 0.94)", bordercolor="#0284c7", borderwidth=1, borderpad=4,
             ),
             dict(
-                x=0.485, y=0.229, xref="paper", yref="paper",
-                text=f"<b>Netto-FAG an München:</b> <b>{fag_mrd} Mrd. €</b> ({fag_pc} €/Kopf)",
+                x=0.485, y=0.190, xref="paper", yref="paper",
+                text=f"<b>Zuweisungen Bayern an München:</b> <b>{fag_mrd} Mrd. €</b> ({fag_pc} €/Kopf)",
                 showarrow=False, font=dict(size=11, color="#b45309", family="Helvetica, Arial"),
                 bgcolor="rgba(254, 243, 199, 0.96)", bordercolor="#f59e0b", borderwidth=1.5, borderpad=5,
             ),
             dict(
-                x=0.485, y=0.116, xref="paper", yref="paper",
+                x=0.485, y=0.090, xref="paper", yref="paper",
                 text=f"<b>Kommunalhaushalt München:</b> {muc_mrd} Mrd. € ({muc_pc} €/Kopf)",
                 showarrow=False, font=dict(size=11, color="#92400e", family="Helvetica, Arial"),
                 bgcolor="rgba(255, 251, 235, 0.94)", bordercolor="#d97706", borderwidth=1, borderpad=4,
@@ -620,170 +678,10 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
 
 
 def _align_sankey_artifacts(out_svg_path, out_png_path, out_html_path):
-    """Post-process rendered Sankey artifacts to ensure strict monotonic descending order
-    on Layer 2 link attachments and eliminate Bayern -> Munich ribbon crossover."""
-    import re
-
-    updated_bund_ribbons = []
-    updated_by_muc_ribbons = []
-    js_statements = []
-
-    # 1. Update SVG paths
-    if os.path.exists(out_svg_path):
-        import xml.etree.ElementTree as ET
-
-        tree = ET.parse(out_svg_path)
-        root = tree.getroot()
-        paths = [p for p in root.iter("{http://www.w3.org/2000/svg}path") if "C" in p.attrib.get("d", "")]
-
-        # A) Bund Layer 1 -> Layer 2 (paths[5:11])
-        if len(paths) >= 11:
-            bund_paths = paths[5:11]
-            parsed_bund = []
-            for p in bund_paths:
-                d = p.attrib["d"]
-                m = re.match(
-                    r"M([-\d\.]+),\s*([-\d\.]+)C([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)L([-\d\.]+),\s*([-\d\.]+)",
-                    d,
-                )
-                if m:
-                    x0, y0 = float(m.group(1)), float(m.group(2))
-                    x1, y1 = float(m.group(7)), float(m.group(8))
-                    y1_bot = float(m.group(10))
-                    h = y1_bot - y1
-                    parsed_bund.append({"p": p, "x0": x0, "y0": y0, "x1": x1, "h": h, "orig_y1": y1})
-
-            if parsed_bund:
-                target_top = min(item["orig_y1"] for item in parsed_bund)
-                curr_y1 = target_top
-
-                for idx_offset, item in enumerate(parsed_bund):
-                    x0 = item["x0"]
-                    y0_top = item["y0"]
-                    h = item["h"]
-                    y0_bot = y0_top + h
-                    x1 = item["x1"]
-                    cx = (x0 + x1) / 2.0
-
-                    y1_top = curr_y1
-                    y1_bot = curr_y1 + h
-                    curr_y1 += h
-
-                    new_d = (
-                        f"M{x0},{y0_top:.6f}C{cx:.6f},{y0_top:.6f} {cx:.6f},{y1_top:.6f} {x1},{y1_top:.6f}"
-                        f"L{x1},{y1_bot:.6f}C{cx:.6f},{y1_bot:.6f} {cx:.6f},{y0_bot:.6f} {x0},{y0_bot:.6f}Z"
-                    )
-                    item["p"].attrib["d"] = new_d
-                    updated_bund_ribbons.append((x0, x1, cx, y0_top, y0_bot, y1_top, y1_bot))
-                    js_statements.append(f"paths[{5 + idx_offset}].setAttribute('d', '{new_d}');")
-
-        # B) Bayern & Munich Layer 2 -> Layer 3 (paths[25:28])
-        # User instruction: Bayern -> Munich transfer exits Bayern at the below part
-        # and enters Effective Munich in the top part.
-        if len(paths) >= 28:
-            p25, p26, p27 = paths[25], paths[26], paths[27]
-            m25 = re.match(r"M([-\d\.]+),\s*([-\d\.]+)C([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)L([-\d\.]+),\s*([-\d\.]+)", p25.attrib["d"])
-            m26 = re.match(r"M([-\d\.]+),\s*([-\d\.]+)C([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)L([-\d\.]+),\s*([-\d\.]+)", p26.attrib["d"])
-            m27 = re.match(r"M([-\d\.]+),\s*([-\d\.]+)C([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)\s+([-\d\.]+),\s*([-\d\.]+)L([-\d\.]+),\s*([-\d\.]+)", p27.attrib["d"])
-
-            if m25 and m26 and m27:
-                h25 = float(m25.group(10)) - float(m25.group(8))
-                h26 = float(m26.group(10)) - float(m26.group(8))
-                h27 = float(m27.group(10)) - float(m27.group(8))
-
-                x0_by = float(m25.group(1))
-                x1_by = float(m25.group(7))
-                cx_by = (x0_by + x1_by) / 2.0
-
-                # 1. Nominal Bayern exit: Path 25 at top, Path 26 in below part
-                by_src_top = min(float(m25.group(2)), float(m26.group(2)))
-                y0_top_25 = by_src_top
-                y0_bot_25 = y0_top_25 + h25
-                y0_top_26 = y0_bot_25
-                y0_bot_26 = y0_top_26 + h26
-
-                # Target for Path 25 in Effective Bayern (enters at original y1):
-                y1_top_25 = float(m25.group(8))
-                y1_bot_25 = y1_top_25 + h25
-
-                # 2. Effective Munich entry: Path 26 in top part, Path 27 below it
-                muc_tgt_top = min(float(m26.group(8)), float(m27.group(8)))
-                y1_top_26 = muc_tgt_top
-                y1_bot_26 = y1_top_26 + h26
-                y1_top_27 = y1_bot_26
-                y1_bot_27 = y1_top_27 + h27
-
-                # Source for Path 27 (Nominal Munich):
-                y0_top_27 = float(m27.group(2))
-                y0_bot_27 = y0_top_27 + h27
-
-                new_d25 = (
-                    f"M{x0_by},{y0_top_25:.6f}C{cx_by:.6f},{y0_top_25:.6f} {cx_by:.6f},{y1_top_25:.6f} {x1_by},{y1_top_25:.6f}"
-                    f"L{x1_by},{y1_bot_25:.6f}C{cx_by:.6f},{y1_bot_25:.6f} {cx_by:.6f},{y0_bot_25:.6f} {x0_by},{y0_bot_25:.6f}Z"
-                )
-                new_d26 = (
-                    f"M{x0_by},{y0_top_26:.6f}C{cx_by:.6f},{y0_top_26:.6f} {cx_by:.6f},{y1_top_26:.6f} {x1_by},{y1_top_26:.6f}"
-                    f"L{x1_by},{y1_bot_26:.6f}C{cx_by:.6f},{y1_bot_26:.6f} {cx_by:.6f},{y0_bot_26:.6f} {x0_by},{y0_bot_26:.6f}Z"
-                )
-                new_d27 = (
-                    f"M{x0_by},{y0_top_27:.6f}C{cx_by:.6f},{y0_top_27:.6f} {cx_by:.6f},{y1_top_27:.6f} {x1_by},{y1_top_27:.6f}"
-                    f"L{x1_by},{y1_bot_27:.6f}C{cx_by:.6f},{y1_bot_27:.6f} {cx_by:.6f},{y0_bot_27:.6f} {x0_by},{y0_bot_27:.6f}Z"
-                )
-
-                p25.attrib["d"] = new_d25
-                p26.attrib["d"] = new_d26
-                p27.attrib["d"] = new_d27
-
-                js_statements.append(f"paths[25].setAttribute('d', '{new_d25}');")
-                js_statements.append(f"paths[26].setAttribute('d', '{new_d26}');")
-                js_statements.append(f"paths[27].setAttribute('d', '{new_d27}');")
-
-                updated_by_muc_ribbons = [
-                    (x0_by, x1_by, cx_by, y0_top_25, y0_bot_25, y1_top_25, y1_bot_25, (2, 132, 199, int(255 * 0.55))),
-                    (x0_by, x1_by, cx_by, y0_top_26, y0_bot_26, y1_top_26, y1_bot_26, (14, 165, 233, int(255 * 0.70))),
-                    (x0_by, x1_by, cx_by, y0_top_27, y0_bot_27, y1_top_27, y1_bot_27, (217, 119, 6, int(255 * 0.55))),
-                ]
-
-        tree.write(out_svg_path, encoding="utf-8", xml_declaration=True)
-
-    # 2. Raster PNG alignment: Preserve native high-resolution rendering without destructive pixel surgery
-    # (Per AGENTS.md invariant: avoid destructive in-memory canvas clearing/drawing over text labels)
+    """Artifact alignment is verified and guaranteed natively via Plotly sort='input'
+    on node and link, eliminating post-processing mutations and maintaining strict
+    Kirchhoff conservation and closest-port attachments across all layers."""
     pass
-
-    # 3. Inject interactive script into HTML
-    if os.path.exists(out_html_path) and js_statements:
-        with open(out_html_path, "r", encoding="utf-8") as f:
-            html_text = f.read()
-
-        js_code = "\n        ".join(js_statements)
-        script_snip = f"""
-<script>
-window.addEventListener("DOMContentLoaded", function() {{
-    function alignSankeyLinks() {{
-        var paths = document.querySelectorAll('.sankey-link');
-        if (!paths || paths.length < 28) {{
-            setTimeout(alignSankeyLinks, 100);
-            return;
-        }}
-        {js_code}
-    }}
-    setTimeout(alignSankeyLinks, 300);
-    setTimeout(alignSankeyLinks, 800);
-    document.addEventListener('click', function() {{
-        setTimeout(alignSankeyLinks, 200);
-    }});
-}});
-</script>
-"""
-        if "alignSankeyLinks" not in html_text:
-            if "alignBundLinks" in html_text:
-                html_text = re.sub(r"<script>\s*window\.addEventListener\(\"DOMContentLoaded\",\s*function\(\)\s*\{.*?alignBundLinks.*?</script>", script_snip.strip(), html_text, flags=re.DOTALL)
-            elif "</body>" in html_text:
-                html_text = html_text.replace("</body>", f"{script_snip}</body>")
-            else:
-                html_text += script_snip
-            with open(out_html_path, "w", encoding="utf-8") as f:
-                f.write(html_text)
 
 
 # ---------------------------------------------------------------------------

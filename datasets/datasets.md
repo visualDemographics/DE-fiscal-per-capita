@@ -25,7 +25,7 @@ Contains the complete directed network graph for the 4-Layer Sankey visualizatio
 - `layer_target`: Destination layer (`Layer_2_Nominal`, `Layer_3_Effective`, `Layer_4_Buckets`).
 - `source_node`: Identifier of the source node.
 - `target_node`: Identifier of the target node.
-- `wert_mrd_eur`: Absolute conserved physical flow volume in billions of Euros (€ bn). Kirchhoff flow conservation holds across all 4 layers ($\Delta = 0.000\text{ Mrd. €}$ across all stages: 1,272.986 Mrd. € in 2024).
+- `wert_mrd_eur`: Absolute conserved physical flow volume in billions of Euros (€ bn). Kirchhoff flow conservation holds across all 4 layers ($\Delta = 0.000\text{ Mrd. €}$ across all stages: 1,271.341 Mrd. € in 2024 / 1,218.662 Mrd. € in 2023).
 - `wert_eur_pro_kopf`: Citizen-facing per-capita equivalent in Euros per resident, normalized by the specific sending/receiving sovereign population ($N_{\text{DE}}$, $N_{\text{BY}}$, or $N_{\text{MUC}}$).
 
 ---
@@ -41,3 +41,26 @@ Summary balance sheet comparing the four public tiers on an apples-to-apples bas
 - `bevoelkerung_referenz`: Resident population denominator used for per-capita normalization (audited Zensus 2022 revised register).
 - `gesamtvolumen_mrd_eur`: Total expenditure volume in € billion.
 - `pro_kopf_eur`: Standardized outlay per resident in Euros.
+
+---
+
+## 4. `datasets/fiscal_transfer_consolidation_ledger.csv`
+Audited reconciliation ledger documenting all intergovernmental transfers and statutory contributions across sovereign tiers:
+- `jahr`: Budget reporting year (`2023`, `2024`).
+- `transfer_id`: Transfer identifier (e.g. `BUND_TO_GRV`, `BUND_TO_GKV`, `BUND_TO_BAYERN`, `BUND_TO_MUC`, `BAYERN_TO_MUC`, `MUC_TO_BEZIRK`, `MUC_TO_BUND_LAND`, `BAYERN_TO_LAENDER`).
+- `bezeichnung`: Institutional description of the transfer mechanism.
+- `sender_ebene`: Originating sovereign tier.
+- `empfaenger_ebene`: Receiving administrative body.
+- `rechtsgrundlage`: Constitutional, federal, state, or municipal statutory authority (e.g. Art. 104a GG, § 213 SGB VI, BayFAG).
+- `betrag_mrd_eur`: Flow volume in billions of Euros.
+- `rechnungslegung_konsolidierung`: Explicit double-counting elimination and consolidation mapping in Layer 2 $\to$ Layer 3.
+
+---
+
+## 5. `datasets/functional_crosswalk.csv`
+Functional classification mapping linking administrative budget items (Einzelpläne, Kontenbereiche, Referate) to tangible citizen-facing Layer 4 buckets:
+- `ebene`: Originating administrative tier (*Bund_Kernhaushalt*, *Sozialversicherung*, *Freistaat_Bayern*, *Landeshauptstadt_Muenchen*).
+- `quell_kontierung`: Budget account, Einzelplan, or department identifier.
+- `layer_4_bucket`: Standardized destination public-goods bucket.
+- `beschreibung`: Concrete services, institutions, and personnel funded.
+- `rechtsgrundlage`: Budget act or statutory law reference.

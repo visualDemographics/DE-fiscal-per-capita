@@ -52,33 +52,35 @@ flowchart LR
     subgraph L2["Layer 2: Nominale Gebietskörperschaften"]
         direction TB
         N_Fed["Nominaler Bund<br/><b>5.572 € / dt. Kopf</b> (83,6M EW)"]
-        N_Soz["Nominale Sozialversicherung<br/><b>8.652 € / dt. Kopf</b> (83,6M EW)"]
-        N_BY["Nominaler Freistaat Bayern<br/><b>4.891 € / by. Kopf</b> (13,2M EW)"]
-        N_MUC["Nominale Stadt München<br/><b>6.276 € / muc. Kopf</b> (1,51M EW)"]
+        N_Soz["Nominale Sozialversicherung<br/><b>8.770 € / dt. Kopf</b> (83,6M EW)"]
+        N_BY["Nominaler Freistaat Bayern<br/><b>4.899 € / by. Kopf</b> (13,2M EW)"]
+        N_MUC["Nominale Stadt München<br/><b>5.183 € / muc. Kopf</b> (1,51M EW)"]
     end
 
     subgraph L3["Layer 3: Effektive Haushalte (Transfers)"]
         direction TB
-        E_Fed["Effektiver Bund (Kern)<br/><b>3.905 € / dt. Kopf</b> (326,4 Mrd. €)"]
-        E_Soz["Effektive Sozialversicherung<br/><b>10.213 € / dt. Kopf</b> (853,6 Mrd. €)"]
-        E_BY["Effektiver Freistaat Bayern<br/><b>5.555 € / by. Kopf</b> (73,6 Mrd. €)"]
-        E_MUC["Effektive Stadt München<br/><b>6.343 € / muc. Kopf</b> (9,55 Mrd. €)"]
+        E_Fed["Effektiver Bund (Kern)<br/><b>3.899 € / dt. Kopf</b> (325,9 Mrd. €)"]
+        E_Soz["Effektive Sozialversicherung<br/><b>10.331 € / dt. Kopf</b> (863,5 Mrd. €)"]
+        E_BY["Effektiver Freistaat Bayern<br/><b>5.475 € / by. Kopf</b> (72,5 Mrd. €)"]
+        E_MUC["Effektive Stadt München<br/><b>6.276 € / muc. Kopf</b> (9,45 Mrd. €)"]
     end
 
     subgraph L4["Layer 4: Finale Funktionale End-Buckets"]
         direction TB
-        B_Ges["Gesundheit & Pflege (5.002 € · 19,1%)"]
-        B_Rent["Rente & Alterssicherung (4.755 € · 18,2%)"]
-        B_Schul["Schulen & Kitas (2.724 € · 10,4%)"]
-        B_Soz["Soziales & Jugend (2.038 € · 7,8%)"]
-        B_Komm["Kommunale Verw. (1.633 € · 6,2%)"]
-        B_Wirt["Wirtschaft & Energie (1.527 € · 5,8%)"]
+        B_Ges["Gesundheit & Pflege (5.002 € · 19,3%)"]
+        B_Rent["Rente & Alterssicherung (4.755 € · 18,3%)"]
+        B_Schul["Schulen & Kitas (2.724 € · 10,5%)"]
+        B_Soz["Soziales & Jugend (2.038 € · 7,9%)"]
+        B_Wirt["Wirtschaft, Umwelt & Energie (1.527 € · 5,9%)"]
         B_Verk["Verkehr & Mobilität (1.409 € · 5,4%)"]
-        B_Sich["Sicherheit & Justiz (1.338 € · 5,1%)"]
+        B_Sich["Sicherheit & Justiz (1.338 € · 5,2%)"]
         B_Hoch["Hochschulen & Forsch. (1.059 € · 4,1%)"]
         B_Vert["Verteidigung & Äußeres (888 € · 3,4%)"]
-        B_LFA["Länderfinanzausgleich (-737 € · 2,8%)"]
-        B_Rest["Bürgergeld, Zinsen & Rest (3.006 € · 11,5%)"]
+        B_Komm["Kommunale Verw. (860 € · 3,3%)"]
+        B_LFA["Länderfinanzausgleich (737 € · 2,8%)"]
+        B_Uml["Bezirks- & Gewerbeumlage (705 € · 2,7%)"]
+        B_Buerg["Bürgergeld & Grundsicherung (691 € · 2,7%)"]
+        B_Rest["Arbeitsförderung, Zinsen, Bundeszuschüsse & Rest (2.089 € · 8,0%)"]
     end
 
     F_Tax --> N_Fed
@@ -87,21 +89,21 @@ flowchart LR
     M_Tax --> N_MUC
 
     N_Fed -- "Bundeszuschuss GRV/GKV (130,5 Mrd. €)" --> E_Soz
-    N_Fed -- "Bundesmittel an BY (8,8 Mrd. €)" --> E_BY
-    N_Fed -- "Kernhaushalt (326,4 Mrd. €)" --> E_Fed
+    N_Fed -- "Kernhaushalt (325,9 Mrd. €)" --> E_Fed
+    N_Fed -- "Bundesmittel an BY (8,80 Mrd. €)" --> E_BY
+    N_Fed -- "Bundesmittel KdU/SGB II (0,48 Mrd. €)" --> E_MUC
 
-    N_Soz -- "Beiträge (723,1 Mrd. €)" --> E_Soz
+    N_Soz -- "Beiträge (733,0 Mrd. €)" --> E_Soz
 
+    N_BY -- "Landesmittel inkl. LFA (63,7 Mrd. €)" --> E_BY
     N_BY -- "FAG & BayKiBiG Zuweisungen (1,16 Mrd. €)" --> E_MUC
-    N_BY -- "Landesmittel inkl. LFA (63,6 Mrd. €)" --> E_BY
 
-    N_MUC -- "Umlagen (Bezirk & Gewerbe: 1,06 Mrd. €)" --> E_BY
-    N_MUC -- "Kommunale Eigenmittel (8,38 Mrd. €)" --> E_MUC
+    N_MUC -- "Kommunale Eigenmittel (7,80 Mrd. €)" --> E_MUC
 
-    E_Fed --> B_Vert & B_Verk & B_Hoch & B_Rest
+    E_Fed --> B_Vert & B_Verk & B_Hoch & B_Buerg & B_Rest
     E_Soz --> B_Rent & B_Ges & B_Rest
     E_BY --> B_Schul & B_Hoch & B_Sich & B_LFA & B_Rest
-    E_MUC --> B_Schul & B_Verk & B_Rest
+    E_MUC --> B_Schul & B_Soz & B_Komm & B_Uml & B_Rest
 ```
 
 ---
@@ -113,14 +115,14 @@ Every influx node shares the color of its respective Layer 2 nominal entity and 
 - **Federal Taxes (Navy `#1e3a8a`)**: Lohn- und Einkommensteuer, Umsatzsteuer, Körperschaftsteuer, Verbrauchssteuern (Energie, Tabak, Kfz), Solidaritätszuschlag und Nettokreditaufnahme.
 - **Social Insurance Contributions (Teal `#0d9488`)**: Pure employer and employee payroll contributions to Pension (GRV), Health (GKV), Long-Term Care (SPV), Unemployment (BA), and Occupational Accident (DGUV) insurance.
 - **Bavarian Own Revenues (Bavarian Sky Blue `#0284c7`)**: Share of shared joint taxes (*Gemeinschaftsteuern*), dedicated state taxes (inheritance, real estate transfer), and administrative revenues. Federal grants (*Bundesmittel*) are routed via the Federal tier.
-- **Munich Municipal Revenues (Munich Amber `#d97706`)**: Trade tax (*Gewerbesteuer netto*), municipal share of income and VAT, property tax (*Grundsteuer*), municipal fees/tariffs, and SWM public utility profit distribution.
+- **Munich Municipal Revenues (Munich Amber `#d97706`)**: Pure own municipal tax revenues and financing ($7.801\text{ Mrd. €}$ in 2024 / $7.212\text{ Mrd. €}$ in 2023): Trade tax (*Gewerbesteuer netto* $3.24\text{ Mrd. €}$), municipal share of income and VAT ($1.83\text{ Mrd. €}$), fees/rents ($1.03\text{ Mrd. €}$), municipal deficit/borrowing ($0.89\text{ Mrd. €}$), SWM public utility profit distribution ($0.45\text{ Mrd. €}$), and property tax (*Grundsteuer* $0.36\text{ Mrd. €}$). Direct federal grants ($0.483\text{ Mrd. €}$) and state allocations ($1.162\text{ Mrd. €}$) are routed via their originating sovereign tiers into Layer 3.
 
 ### Layer 2: Nominale Gebietskörperschaften (Gross Inflow Entities)
 Represents the gross budgetary volume appropriated by each tier prior to intergovernmental equalizations:
 - **Nominaler Bund**: **5.572 € / resident** (€465,67 bn · Basis: 83,6M EW)
-- **Nominale Sozialversicherung**: **8.652 € / resident** (€723,08 bn pure contributions · Basis: 83,6M EW)
-- **Nominaler Freistaat Bayern**: **4.891 € / resident** (€64,80 bn own revenues · Basis: 13,2M EW)
-- **Nominale Stadt München**: **6.276 € / resident** (€9,45 bn ordentliche Erträge · Basis: 1,51M EW)
+- **Nominale Sozialversicherung**: **8.770 € / resident** (€732,97 bn pure contributions · Basis: 83,6M EW)
+- **Nominaler Freistaat Bayern**: **4.899 € / resident** (€64,90 bn own revenues · Basis: 13,2M EW)
+- **Nominale Stadt München**: **5.183 € / resident** (€7,801 bn pure own revenues & financing · Basis: 1,51M EW)
 
 > [!IMPORTANT]
 > **Strict Layer 2 Isolation**: Nodes in Layer 2 connect **exclusively to Layer 3**. All nominal gross revenues must either pass into core retention or be transferred to another tier. No nominal link bypasses Layer 3.
@@ -133,45 +135,47 @@ Between Layer 2 and Layer 3, the vertical and horizontal fiscal transfers of Ger
    - *Total*: **1.561 € / resident** (€130,50 bn tax-financed subsidy styled in vibrant purple `rgba(139, 92, 246, 0.85)`).
 2. **Federal Grants to Free State of Bavaria (*Bundeszuweisungen*)**:
    - Bund $\to$ Freistaat Bayern: **664 € / resident** (€8,80 bn federal co-funding for transport, education, and administration).
-3. **What Flows from Munich to the State & District (*Umlagen*)**:
-   - München $\to$ Freistaat Bayern / Bezirk: **705 € / resident** (€1,061 bn total: Gewerbesteuerumlage €0,232 bn + Bezirksumlage an den Bezirk Oberbayern €0,829 bn for integration and psychiatric welfare).
-4. **What Flows from the State to Munich (*Kommunaler Finanzausgleich & Zuweisungen*)**:
+3. **Federal Social Reimbursements to Munich (*KdU & Grundsicherung SGB II/XII*)**:
+   - Bund $\to$ Stadt München: **321 € / resident** (€0,483 bn federal statutory reimbursement for municipal accommodation costs and basic security in old age, deducted symmetrically from federal Bürgergeld outlays in Layer 4).
+4. **Bavarian Gross Grants to Munich (*Kommunaler Finanzausgleich & Zuweisungen*)**:
    - Freistaat Bayern $\to$ München: **772 € / resident** (€1,162 bn total: FAG municipal allocations + BayKiBiG childcare operational subsidies).
-5. **Net Municipal Equalization Bridge**:
-   - Net intergovernmental transfer of **+67 € / resident** (+€0,101 bn net inflow from the state to Munich).
+5. **Munich Statutory Levies (*Umlagen*)**:
+   - Out of its ordinary budget, Munich remits **705 € / resident** (€1,061 bn total: Gewerbesteuerumlage €0,232 bn + Bezirksumlage an den Bezirk Oberbayern €0,829 bn for integration and psychiatric welfare) routed from Layer 3 into Layer 4 as a dedicated transfer bucket `Bezirks- & Gewerbesteuerumlage (MUC)`.
 
 ### Layer 3: Effektive Haushalte (Net Effective Budgets)
 The net disposable funds available to each public entity following intergovernmental consolidation:
-- **Effektiver Bund (Kern)**: **3.905 € / resident** (€326,37 bn)
-- **Effektive Sozialversicherung**: **10.213 € / resident** (€853,58 bn direct outlays + €11,43 bn liquidity reserve = €864,90 bn total resources)
-- **Effektiver Freistaat Bayern**: **5.555 € / resident** (€73,60 bn)
-- **Effektive Stadt München**: **6.343 € / resident** (€9,55 bn ordinary budget + net transfers)
+- **Effektiver Bund (Kern)**: **3.899 € / resident** (€325,89 bn)
+- **Effektive Sozialversicherung**: **10.331 € / resident** (€852,04 bn direct outlays + €11,43 bn liquidity reserve = €863,47 bn total resources)
+- **Effektiver Freistaat Bayern**: **5.475 € / resident** (€72,54 bn)
+- **Effektive Stadt München**: **6.276 € / resident** (€9,45 bn: €7,801 bn own revenues + €1,162 bn state grants + €0,483 bn federal reimbursements)
 
 ### Layer 4: Finale Funktionale End-Buckets (Citizen-Facing Outlays)
-Final destination categories providing direct public utility, sorted strictly descending by per-capita size with percentage shares of total per-capita outlays ($26{,}135.02\text{ €/resident}$ in 2024):
-1. **Gesundheit & Pflege**: **5.002 € / resident** (19,1% · €402,14 bn)
-2. **Rente & Alterssicherung**: **4.755 € / resident** (18,2% · €397,40 bn)
-3. **Schulen & Kitas**: **2.724 € / resident** (10,4% · €18,16 bn)
-4. **Soziales, Jugend & Wohnen (MUC)**: **2.038 € / resident** (7,8% · €24,67 bn)
-5. **Kommunale Verwaltung & IT (MUC)**: **1.633 € / resident** (6,2% · €2,46 bn)
-6. **Wirtschaft, Energie & Verwaltung (Bund)**: **1.527 € / resident** (5,8% · €40,38 bn)
-7. **Verkehr & Mobilität**: **1.409 € / resident** (5,4% · €43,44 bn)
-8. **Innere Sicherheit & Justiz**: **1.338 € / resident** (5,1% · €27,37 bn)
-9. **Hochschulen & Spitzenforschung**: **1.059 € / resident** (4,1% · €39,14 bn)
-10. **Verteidigung & Äußeres**: **888 € / resident** (3,4% · €74,20 bn)
-11. **Länderfinanzausgleich (Transferabfluss BY)**: **-737 € / resident** (2,8% · -€9,77 bn Nettoabfluss Bayern)
-12. **Bürgergeld & Grundsicherung**: **697 € / resident** (2,7% · €58,26 bn)
-13. **Arbeitsförderung & Reha (BA)**: **642 € / resident** (2,5% · €53,64 bn)
-14. **Wirtschaft & Landesverwaltung (BY)**: **531 € / resident** (2,0% · €7,04 bn)
-15. **Schuldendienst & Zinsen (Bund)**: **409 € / resident** (1,6% · €34,22 bn)
-16. **Bundeszuweisungen an übrige Länder**: **297 € / resident** (1,1% · €24,80 bn)
-17. **Kultur & Freizeit (München)**: **189 € / resident** (0,7% · €0,28 bn)
-18. **Rücklagen & Liquiditätspuffer**: **137 € / resident** (0,5% · €11,43 bn)
-19. **Wohnungsbau & Stadtplanung**: **123 € / resident** (0,5% · €4,19 bn)
+Final destination categories providing direct public utility, sorted strictly descending by per-capita size with percentage shares of total per-capita outlays ($25{,}960.98\text{ €/resident}$ in 2024):
+1. **Gesundheit & Pflege**: **5.002 € / resident** (19,3% · €402,14 bn)
+2. **Rente & Alterssicherung**: **4.755 € / resident** (18,3% · €397,40 bn)
+3. **Schulen & Kitas**: **2.724 € / resident** (10,5% · €18,16 bn)
+4. **Soziales, Jugend & Familie**: **2.038 € / resident** (7,9% · €24,67 bn)
+5. **Wirtschaft, Umwelt & Energie**: **1.527 € / resident** (5,9% · €40,38 bn)
+6. **Verkehrswege, Mobilität & ÖPNV**: **1.409 € / resident** (5,4% · €43,44 bn)
+7. **Sicherheit und Justiz**: **1.338 € / resident** (5,2% · €27,37 bn)
+8. **Hochschulen und Forschung**: **1.059 € / resident** (4,1% · €39,14 bn)
+9. **Verteidigung und Äußeres**: **888 € / resident** (3,4% · €74,20 bn)
+10. **Kommunale Verwaltung & IT (MUC)**: **860 € / resident** (3,3% · €1,29 bn)
+11. **Länderfinanzausgleich (Ausgleich an andere Länder)**: **737 € / resident** (2,8% · €9,77 bn Nettoabfluss Bayern)
+12. **Bezirks- & Gewerbesteuerumlage (MUC)**: **705 € / resident** (2,7% · €1,061 bn)
+13. **Bürgergeld & Grundsicherung**: **691 € / resident** (2,7% · €57,78 bn net after federal transfer to Munich)
+14. **Arbeitsförderung & Unfallreha**: **642 € / resident** (2,5% · €53,64 bn)
+15. **Schuldendienst und Zinsen**: **409 € / resident** (1,6% · €34,22 bn)
+16. **Wirtschaft, Verwaltung, Landesentwicklung & Reserve (BY)**: **408 € / resident** (1,6% · €5,41 bn)
+17. **Bundeszuweisungen an andere Länder**: **297 € / resident** (1,1% · €24,80 bn)
+18. **Kultur, Theater & Museen**: **189 € / resident** (0,7% · €0,28 bn)
+19. **Rücklagen- & Liquiditätspuffer**: **137 € / resident** (0,5% · €11,43 bn)
+20. **Wohnungsbau und Stadtentwicklung**: **123 € / resident** (0,5% · €4,19 bn)
+21. **Kommunaler Finanzausgleich übrige Kommunen (BY)**: **43 € / resident** (0,2% · €0,57 bn)
 
 > [!NOTE]
 > **Mathematical Verification**: By Kirchhoff's law, every layer satisfies exact flow conservation in physical currency units:
-> $$\sum \text{Layer 1} \equiv \sum \text{Layer 2} \equiv \sum \text{Layer 3} \equiv \sum \text{Layer 4} = 1{,}272.986\text{ Mrd. €} \quad (\Delta = 0.000\text{ Mrd. €})$$
+> $$\sum \text{Layer 1} \equiv \sum \text{Layer 2} \equiv \sum \text{Layer 3} \equiv \sum \text{Layer 4} = 1{,}271.341\text{ Mrd. €} \quad (\Delta = 0.000\text{ Mrd. €})$$
 
 ---
 
@@ -252,6 +256,8 @@ PIPELINE AUDIT COMPLETE: 9/9 CHECKS PASSED.
 ```
 DE-fiscal-per-capita/
 ├── README.md                                      # Central repository documentation (this file)
+├── AGENTS.md                                      # Visual artifact and plotting invariants
+├── styling_guide.md                               # Flagship styling & aesthetics design system
 ├── requirements.txt                               # Pinned dependencies (plotly, kaleido, pandas, etc.)
 ├── rawdata/                                       # Immutable primary source registers
 │   ├── MANIFEST.csv                               # Cryptographic SHA-256 registry
@@ -264,11 +270,14 @@ DE-fiscal-per-capita/
 │   └── literature_empirical_benchmarks.csv
 ├── datasets/                                      # Audited analysis-ready datasets
 │   ├── datasets.md                                # Variable codebook and mathematical definitions
-│   ├── fiscal_sankey_flows_per_capita.csv         # 120 directed graph edges with €/Kopf & € bn
+│   ├── fiscal_sankey_flows_per_capita.csv         # 126 directed graph edges with €/Kopf & € bn
 │   ├── fiscal_per_capita_summary.csv              # Headline comparative summary across tiers
+│   ├── fiscal_transfer_consolidation_ledger.csv   # Intergovernmental transfer reconciliations
+│   ├── functional_crosswalk.csv                   # Functional destination mappings
 │   └── literature_empirical_benchmarks.csv        # Verbatim literature citations and benchmark catalog
 ├── plots/                                         # Flagship publication figures (Exclusive Sankey Focus)
 │   ├── plot.md                                    # Systematic methodological plot documentation
+│   ├── styling_guide.md                           # Complete visual specification & color palette
 │   ├── sankey_fiscal_per_capita.png               # High-res static Sankey (5200x4500 px)
 │   ├── sankey_fiscal_per_capita.svg               # Scalable Vector Graphics master export
 │   └── sankey_fiscal_interactive.html             # Interactive Plotly web widget with year switch

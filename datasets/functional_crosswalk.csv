@@ -1,0 +1,35 @@
+ebene,quell_kontierung,layer_4_bucket,beschreibung,rechtsgrundlage
+Bund_Kernhaushalt,Epl 14 + Sondervermoegen + Epl 23,Verteidigung_und_Aeusseres,"Bundeswehr, Militaerische Beschaffung, Diplomatische Missionen, Entwicklungshilfe",Art. 87a GG / BMF Epl 14 & 23
+Bund_Kernhaushalt,Epl 11 (Buergergeld & SGB XII),Buergergeld_Grundsicherung,Leistungen zur Sicherung des Lebensunterhalts nach SGB II und Grundsicherung im Alter,SGB II & SGB XII / BMF Epl 11
+Bund_Kernhaushalt,Epl 12,Verkehr_und_Infrastruktur,"Bundesfernstrassen, Autobahnen, Bundesschienenwege DB InfraGO, Wasserstrassen",Art. 90 GG / BMF Epl 12
+Bund_Kernhaushalt,Epl 30,Hochschulen_und_Forschung,"DFG, Max-Planck-, Fraunhofer-, Helmholtz-Gemeinschaft, BAföG, Hochschulpakt",Art. 91b GG / BMF Epl 30
+Bund_Kernhaushalt,Epl 32,Schuldendienst_und_Zinsen,"Zinsausgaben fuer Bundesanleihen, Bundesschatzanweisungen und Kredite",Art. 115 GG / BMF Epl 32
+Bund_Kernhaushalt,Epl 06 + Epl 08,Sicherheit_und_Justiz,"Bundespolizei, BKA, Verfassungsschutz, Bundeszollverwaltung","Art. 73, 87 GG / BMF Epl 06 & 08"
+Bund_Kernhaushalt,Epl 17,Soziales_Jugend_Wohnungslosigkeit,"Familienfoerderung, Elterngeld, Kinder- und Jugendhilfe auf Bundesebene",BEEG / BMF Epl 17
+Bund_Kernhaushalt,Epl 25,Wohnungsbau_und_Stadtplanung,"Wohnungsbaupraemie, Foerderung des sozialen Wohnungsbaus, Staedtebaufoerderung",Art. 104d GG / BMF Epl 25
+Bund_Kernhaushalt,Epl 09 + Epl 01-04 + Rest,Wirtschaft_Klima_Verwaltung,"Wirtschafts- und Klimapolitik, Kanzleramt, Bundestag, Auswaertiger Dienst Verwaltung","BMF Epl 01-04, 09"
+Bund_Kernhaushalt,Bundeszuweisungen uebrige Laender,Bundeszuweisungen_an_andere_Laender_Transfer,Bundesfinanzhilfen und Regionalisierungsmittel an die uebrigen 15 Bundeslaender,"Art. 104a, 104b GG"
+Sozialversicherung,GRV Gesamtausgaben,Rente_und_Alterssicherung,"Regelaltersrenten, Erwerbsminderungsrenten, Hinterbliebenenrenten der DRV",SGB VI
+Sozialversicherung,GKV + SPV + DGUV Heilbehandlung,Gesundheit_und_Pflege,"Krankenhausbehandlung, Arzneimittel, aerztliche Behandlung, Pflegeleistungen","SGB V, SGB XI, SGB VII"
+Sozialversicherung,BA + DGUV Renten/Verwaltung,Arbeitsfoerderung_und_Reha,"Arbeitslosengeld I, aktive Arbeitsfoerderung, Berufsfoerderung, Unfallrehabilitation","SGB III, SGB VII"
+Sozialversicherung,Liquiditaetsreserve / Saldo,Ruecklagen_und_Liquiditaetspuffer,Zufuehrung zur Nachhaltigkeitsruecklage und Gesundheitsfonds-Liquiditaetsreserve,"§ 216 SGB VI, § 271 SGB V"
+Freistaat_Bayern,Epl 05,Schulen_und_Kitas,"Gymnasien, Realschulen, Grund-/Mittelschulen, Foerderschulen, Lehrpersonal",Art. 130 BayEUG / StMFH Epl 05
+Freistaat_Bayern,Epl 15,Hochschulen_und_Forschung,"Universitaeten (TUM, LMU, FAU), Hochschulen fuer angewandte Wissenschaften, Kunstakademien",BayHIG / StMFH Epl 15
+Freistaat_Bayern,Epl 03 + Epl 04,Sicherheit_und_Justiz,"Bayerische Landespolizei, Justizvollzugsanstalten, ordentliche Gerichte, Staatsanwaltschaften",PAG / BayJBeamtG / StMFH Epl 03 & 04
+Freistaat_Bayern,Epl 09,Verkehr_und_Infrastruktur,"Staatsstrassen, Radwegefoerderung, bayerischer Schienenpersonennahverkehr (BEG)",BayStrWG / StMFH Epl 09
+Freistaat_Bayern,Epl 10,Soziales_Jugend_Wohnungslosigkeit,"Bayerisches Familiengeld, Landesjugendamt, soziale Integration, Arbeitsmarktprogramme",BayFamGG / StMFH Epl 10
+Freistaat_Bayern,Epl 14,Gesundheit_und_Pflege,"Krankenhausinvestitionsfoerderung nach BayKrG, bayerisches Landespflegegeld","BayKrG, BayLPflGG / StMFH Epl 14"
+Freistaat_Bayern,"Epl 07, 08, 12",Wirtschaft_Klima_Verwaltung,"High-Tech Agenda, Umwelt- und Verbraucherschutz, Agrar- und Forsteinrichtungen","StMFH Epl 07, 08, 12"
+Freistaat_Bayern,Epl 13 Rest,Wirtschaft_Verwaltung_Sonstiges,"Bayerische Finanzverwaltung, Landesamt fuer Steuern, allgemeine Landesverwaltung",StMFH Epl 13
+Freistaat_Bayern,Epl 13 FAG (Art. 13 BayFAG),Kommunaler_Finanzausgleich_uebrige_Kommunen_BY,Zuweisungen nach Art. 13 BayFAG an bayerische Kommunen (ausser Muenchen),Art. 106 Abs. 7 GG / Art. 13 BayFAG
+Freistaat_Bayern,Finanzkraftausgleich Abfluss,Laenderfinanzausgleich_Ausgleich_an_andere_Laender,Solidaritaetsausgleich und horizontaler Finanzausgleich an finanzschwaechere Bundeslaender,Art. 107 Abs. 2 GG / FAG
+Landeshauptstadt_Muenchen,Referat fuer Bildung und Sport (RBS),Schulen_und_Kitas,"Staedtische Schulen, Schulbauoffensive, staedtische Kindertagesstaetten, Sportstaetten",Haushaltsplan Muenchen Band 1 S. 170
+Landeshauptstadt_Muenchen,Sozialreferat,Soziales_Jugend_Wohnungslosigkeit,"Hilfe zur Pflege, Eingliederungshilfe, Obdachlosenhilfe, staedtische Jugendhilfe",Haushaltsplan Muenchen Band 1 S. 176
+Landeshauptstadt_Muenchen,Mobilitaets- und Baureferat,Verkehr_und_Infrastruktur,"Kommunale Strassen, Bruecken, MVG Zuschuss, Radwegeinfrastruktur, U-Bahn-Ausbau",Haushaltsplan Muenchen Band 1 S. 151
+Landeshauptstadt_Muenchen,Kreisverwaltungsreferat & Branddirektion,Sicherheit_und_Justiz,"Kommunale Ordnung, Buergerbueros, Berufsfeuerwehr Muenchen, Katastrophenschutz",Haushaltsplan Muenchen Band 1 S. 160
+Landeshauptstadt_Muenchen,Kulturreferat,Kultur_und_Freizeit,"Muenchner Kammerspiele, Schauburg, Stadtbibliothek, Muenchner Volkshochschule, Museen",Haushaltsplan Muenchen Band 1 S. 162
+Landeshauptstadt_Muenchen,Gesundheitsreferat & Muenchen Klinik,Gesundheit_und_Pflege,"Kommunaler Gesundheitsdienst, staedtischer Betriebskostenzuschuss Muenchen Klinik gGmbH",Haushaltsplan Muenchen Band 1 S. 153
+Landeshauptstadt_Muenchen,Stadtplanung und Bauordnung,Wohnungsbau_und_Stadtplanung,"Staedtebauliche Rahmenplanung, Genehmigungswesen, Foerderung bezahlbarer Wohnraum",Haushaltsplan Muenchen Band 1 S. 174
+Landeshauptstadt_Muenchen,IT-Kommunal & Wirtschaft,Wirtschaft_Klima_Verwaltung,"it@M, Digitalisierung der Verwaltung, staedtische Wirtschafts- und Arbeitsmarktfoerderung",Haushaltsplan Muenchen Band 1 S. 155
+Landeshauptstadt_Muenchen,Transferaufwendungen / Umlagen (Band 1 S. 42),Kommunale_Umlagen_Bezirks_Gewerbesteuer_MUC,Bezirksumlage an den Bezirk Oberbayern (Art. 18 BayFAG) und Gewerbesteuerumlage an Land und Bund (§ 6 GFRG),Art. 18 BayFAG / § 6 GFRG / Haushaltsplan Band 1 S. 42
+Landeshauptstadt_Muenchen,Zentrale Verwaltung & Finanzen,Kommunale_Verwaltung_Sonstiges,"Stadtkaemmerei, Personal- und Organisationsreferat, Direktorium, Stadtkanzlei",Haushaltsplan Muenchen Band 1 S. 185

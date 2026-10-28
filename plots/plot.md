@@ -22,18 +22,20 @@ This document systematically details the empirical provenance, mathematical form
 
 ### Figure: `sankey_fiscal_per_capita.png` (and interactive HTML)
 
-#### 2.1 Research Objective
-The 4-layer fiscal Sankey diagram resolves the multi-level fragmentation of German public finances by tracing the directional lifecycle of public money for an individual resident of the **City of Munich (*Landeshauptstadt München*)** in 2024 (with full longitudinal comparability to 2023). Every resident in Munich simultaneously benefits from services provided across four distinct sovereign public tiers:
-1. **Federal Republic of Germany (*Bund*)**
-2. **Statutory Social Insurances (*Sozialversicherungsträger*: GRV, GKV, SPV, BA, DGUV)**
-3. **Free State of Bavaria (*Freistaat Bayern*)**
-4. **City of Munich (*Landeshauptstadt München*)**
+#### 2.1 Research Objective & Tier-by-Tier Sovereign Scope
+The 4-layer fiscal Sankey diagram resolves the multi-level fragmentation of German public finances by tracing the multi-tier sovereign fiscal flows available to residents in the **City of Munich (*Landeshauptstadt München*)** in 2024 (with full longitudinal comparability to 2023). Under the **Tier-by-Tier Apples-to-Apples Policy (Option A)**, each public authority is evaluated within its genuine sovereign constituency:
+1. **Federal Republic of Germany (*Bund*)**: Normalized by Germany's population ($N_{\text{DE}} = 83{,}577{,}140$).
+2. **Statutory Social Insurances (*Sozialversicherungsträger*: GRV, GKV, SPV, BA, DGUV)**: Normalized by national insured population ($N_{\text{DE}} = 83{,}577{,}140$).
+3. **Free State of Bavaria (*Freistaat Bayern*)**: Normalized by Bavaria's population ($N_{\text{BY}} = 13{,}248{,}928$).
+4. **City of Munich (*Landeshauptstadt München*)**: Normalized by Munich's resident population ($N_{\text{MUC}} = 1{,}505{,}005$).
+
+Residents of Munich simultaneously benefit from public goods provided across all four sovereign tiers (e.g. municipal schools and daycares funded locally, police and universities funded at the state level, federal highways and defense funded centrally, and healthcare/pensions funded through national social insurance). Each node carries an explicit population denominator badge (`Basis: 83,6 Mio. EW`, `Basis: 13,2 Mio. EW`, `Basis: 1,51 Mio. EW`) to prevent misleading stacked resident totals.
 
 #### 2.2 Mathematical Formulation & Physical Ribbon Conservation
 - **Physical Volume Scaling**: Link ribbon visual widths are strictly proportional to conserved physical budgetary volume in billions of Euros ($\text{wert\_mrd\_eur}$).
 - **Kirchhoff Flow Conservation ($\Delta = 0.000\text{ Mrd. €}$)**:
   Every layer satisfies exact input-output conservation across all nodes:
-  $$\sum \text{Layer 1 (Influx)} \equiv \sum \text{Layer 2 (Nominal)} \equiv \sum \text{Layer 3 (Effective)} \equiv \sum \text{Layer 4 (Buckets)} = 1{,}272.986\text{ Mrd. € (2024)}$$
+  $$\sum \text{Layer 1 (Influx)} \equiv \sum \text{Layer 2 (Nominal)} \equiv \sum \text{Layer 3 (Effective)} \equiv \sum \text{Layer 4 (Buckets)} = 1{,}271.341\text{ Mrd. € (2024)}$$
 - **Jurisdictional Per-Capita Normalization**:
   To prevent distorted synthetic denominator additions, each flow is normalized per capita relative to its statutory source and recipient constituency:
   $$\text{EUR/Kopf} = \frac{\text{Flow Volume (EUR)}}{N_{\text{Constituency}}}$$
@@ -46,82 +48,91 @@ The 4-layer fiscal Sankey diagram resolves the multi-level fragmentation of Germ
 #### 2.3 Layer-by-Layer Architecture
 
 ##### Layer 1: Steuer- & Beitragsinflux ($x = 0.00$)
-Groups primary revenue collection streams strictly descending by sovereign intake authority:
-- **Federal Taxes & Borrowing** (Navy `#1e3a8a`):
-  - *Umsatzsteuer Bund*: $145.34\text{ Mrd. €}$ ($1{,}739\text{ €/Kopf}$)
-  - *Lohn- & Einkommensteuer Bund*: $137.61\text{ Mrd. €}$ ($1{,}646\text{ €/Kopf}$)
-  - *Verbrauchs- & Bundessteuern (Energie, Tabak, Soli, Kfz)*: $115.17\text{ Mrd. €}$ ($1{,}378\text{ €/Kopf}$)
-  - *Nettokreditaufnahme Bund*: $33.30\text{ Mrd. €}$ ($398\text{ €/Kopf}$)
-  - *Unternehmenssteuern (KSt, Abgeltungsteuer)*: $28.36\text{ Mrd. €}$ ($339\text{ €/Kopf}$)
-  - *Verwaltungseinnahmen & Beteiligungen*: $5.89\text{ Mrd. €}$ ($70\text{ €/Kopf}$)
+Groups primary revenue collection and financing streams strictly descending by sovereign intake authority:
 - **Statutory Social Insurance Contributions** (Teal `#0d9488`):
-  - *Krankenbeiträge (AG & AN an GKV)*: $306.09\text{ Mrd. €}$ ($3{,}662\text{ €/Kopf}$)
-  - *Rentenbeiträge (AG & AN an GRV)*: $305.79\text{ Mrd. €}$ ($3{,}659\text{ €/Kopf}$)
-  - *Pflegebeiträge (AG & AN an SPV)*: $66.17\text{ Mrd. €}$ ($792\text{ €/Kopf}$)
-  - *Arbeitslosenbeiträge (an BA)*: $40.64\text{ Mrd. €}$ ($486\text{ €/Kopf}$)
-  - *Unfallbeiträge (Umlagesoll DGUV)*: $4.39\text{ Mrd. €}$ ($53\text{ €/Kopf}$)
+  - *Krankenbeiträge (AG & AN an GKV)*: $306.10\text{ Mrd. €}$ ($3{,}662.48\text{ €/Kopf}$)
+  - *Rentenbeiträge (AG & AN an GRV)*: $305.80\text{ Mrd. €}$ ($3{,}658.90\text{ €/Kopf}$)
+  - *Pflegebeiträge (AG & AN an SPV)*: $66.16\text{ Mrd. €}$ ($791.60\text{ €/Kopf}$)
+  - *Arbeitslosenbeiträge (an BA)*: $40.58\text{ Mrd. €}$ ($485.54\text{ €/Kopf}$)
+  - *Unfallbeiträge (Umlagesoll DGUV)*: $14.33\text{ Mrd. €}$ ($171.46\text{ €/Kopf}$)
+  - *Subtotal Social Contributions*: **$732.97\text{ Mrd. €}$** ($8{,}769.98\text{ €/Kopf}$)
+- **Federal Net Influx (BMF Table 1 & Table 7)** (Navy `#1e3a8a`):
+  - *Umsatzsteuer Bund*: $145.34\text{ Mrd. €}$ ($1{,}738.99\text{ €/Kopf}$)
+  - *Lohn- & Einkommensteuer Bund*: $137.61\text{ Mrd. €}$ ($1{,}646.50\text{ €/Kopf}$)
+  - *Verwaltungseinnahmen & Beteiligungen Bund*: $65.65\text{ Mrd. €}$ ($785.50\text{ €/Kopf}$)
+  - *Verbrauchs- & Bundessteuern (Energie, Tabak, Soli, Kfz, VersSt)*: $46.66\text{ Mrd. €}$ ($558.29\text{ €/Kopf}$)
+  - *Unternehmenssteuern Bund (KSt, Abgeltungsteuer)*: $45.37\text{ Mrd. €}$ ($542.85\text{ €/Kopf}$)
+  - *Nettokreditaufnahme & Finanzierungssaldo*: $25.04\text{ Mrd. €}$ ($299.60\text{ €/Kopf}$)
+  - *Subtotal Federal Net Intake*: **$465.67\text{ Mrd. €}$** ($5{,}571.73\text{ €/Kopf}$)
 - **Bavarian State Own Revenues** (Sky Blue `#0284c7`):
-  - *Gemeinschaftsteuern Bayern (Landesanteil ESt, USt, KSt)*: $50.95\text{ Mrd. €}$ ($3{,}846\text{ €/Kopf}$)
-  - *Landessteuern (Erbschaft-, Grunderwerb-, Biersteuer)*: $6.45\text{ Mrd. €}$ ($487\text{ €/Kopf}$)
-  - *Verwaltungseinnahmen Freistaat*: $5.00\text{ Mrd. €}$ ($377\text{ €/Kopf}$)
-  - *Rücklagenentnahme & Kredite Bayern*: $2.50\text{ Mrd. €}$ ($189\text{ €/Kopf}$)
-- **Munich Municipal Revenues** (Amber `#d97706`):
-  - *Gewerbesteuer (netto)*: $3.24\text{ Mrd. €}$ ($2{,}153\text{ €/Kopf}$)
-  - *Gemeindeanteile an ESt & USt*: $1.83\text{ Mrd. €}$ ($1{,}216\text{ €/Kopf}$)
-  - *Gebühren, Mieten & Verwaltung*: $1.35\text{ Mrd. €}$ ($898\text{ €/Kopf}$)
-  - *Kredite, Rücklagen & Investitionsausgleich*: $0.89\text{ Mrd. €}$ ($593\text{ €/Kopf}$)
-  - *Stadtwerke München (SWM) Ausschüttung*: $0.40\text{ Mrd. €}$ ($266\text{ €/Kopf}$)
-  - *Grundsteuer (A & B)*: $0.35\text{ Mrd. €}$ ($231\text{ €/Kopf}$)
+  - *Gemeinschaftsteuern Bayern (Landesanteil ESt, USt, KSt)*: $50.95\text{ Mrd. €}$ ($3{,}845.59\text{ €/Kopf}$)
+  - *Landessteuern (Erbschaft-, Grunderwerb-, Biersteuer)*: $6.45\text{ Mrd. €}$ ($486.83\text{ €/Kopf}$)
+  - *Verwaltungseinnahmen Freistaat*: $4.67\text{ Mrd. €}$ ($352.48\text{ €/Kopf}$)
+  - *Rücklagenentnahme & Kredite Bayern*: $2.83\text{ Mrd. €}$ ($213.60\text{ €/Kopf}$)
+  - *Subtotal Bavarian Own Revenues*: **$64.90\text{ Mrd. €}$** ($4{,}898.89\text{ €/Kopf}$)
+- **Munich Municipal Own Revenues & Financing (Option B Reconciled)** (Amber `#d97706`):
+  - *Gewerbesteuer (netto)*: $3.240\text{ Mrd. €}$ ($2{,}152.82\text{ €/Kopf}$)
+  - *Gemeindeanteile an ESt & USt*: $1.830\text{ Mrd. €}$ ($1{,}215.94\text{ €/Kopf}$)
+  - *Gebühren, Mieten & Entgelte*: $1.027\text{ Mrd. €}$ ($682.39\text{ €/Kopf}$)
+  - *Städtischer Fehlbedarf / Kredite*: $0.892\text{ Mrd. €}$ ($592.69\text{ €/Kopf}$)
+  - *SWM-Ausschüttung & Sonstige ordentliche Erträge*: $0.448\text{ Mrd. €}$ ($297.67\text{ €/Kopf}$)
+  - *Grundsteuer & Lokalsteuern*: $0.364\text{ Mrd. €}$ ($241.86\text{ €/Kopf}$)
+  - *Subtotal Munich Own Revenues & Financing*: **$7.801\text{ Mrd. €}$** ($5{,}183.37\text{ €/Kopf}$)
 
 ##### Layer 2: Nominale Gebietskörperschaften ($x = 0.28$)
-Gross intake volumes prior to intergovernmental consolidation:
+Gross intake volumes prior to intergovernmental consolidation (with explicit sovereign intake badges):
+- **Nominale Sozialversicherung**: $732.97\text{ Mrd. €}$ ($8{,}770\text{ €/Kopf}$ · Basis 83.6M EW)
 - **Nominaler Bund**: $465.67\text{ Mrd. €}$ ($5{,}572\text{ €/Kopf}$ · Basis 83.6M EW)
-- **Nominale Sozialversicherung**: $723.08\text{ Mrd. €}$ ($8{,}652\text{ €/Kopf}$ · Basis 83.6M EW)
-- **Nominaler Freistaat Bayern**: $64.80\text{ Mrd. €}$ ($4{,}891\text{ €/Kopf}$ · Basis 13.2M EW)
-- **Nominale Stadt München**: $9.45\text{ Mrd. €}$ ($6{,}276\text{ €/Kopf}$ · Basis 1.51M EW)
+- **Nominaler Freistaat Bayern**: $64.90\text{ Mrd. €}$ ($4{,}899\text{ €/Kopf}$ · Basis 13.2M EW)
+- **Nominale Stadt München**: $7.80\text{ Mrd. €}$ ($5{,}183\text{ €/Kopf}$ · Basis 1.51M EW)
 
 ##### Intergovernmental Transfer Layer (Layer 2 $\to$ Layer 3)
-Explicit directed link ribbons routing intergovernmental transfers:
+Explicit directed link ribbons routing intergovernmental transfers from the closest portion of the sovereign node bars:
 - **Federal Subsidies to Social Insurances (*Bundeszuschüsse*)**:
-  - To Statutory Pension Insurance (GRV): **$116.00\text{ Mrd. €}$** ($1{,}388\text{ €/Kopf}$)
-  - To Statutory Health Insurance (GKV Gesundheitsfonds): **$14.50\text{ Mrd. €}$** ($173\text{ €/Kopf}$)
+  - To Statutory Pension Insurance (GRV): **$116.00\text{ Mrd. €}$** ($1{,}387.94\text{ €/Kopf}$)
+  - To Statutory Health Insurance (GKV Gesundheitsfonds): **$14.50\text{ Mrd. €}$** ($173.49\text{ €/Kopf}$)
+  - *Combined Social Subsidy Ribbon (exits top of Fed bar)*: **$130.50\text{ Mrd. €}$** ($1{,}561.43\text{ €/Kopf}$)
 - **Federal Grants to Bavaria (*Bundeszuweisungen*)**:
-  - Federal allocations for joint tasks and transit: **$8.80\text{ Mrd. €}$** ($664\text{ €/Kopf}$)
-- **Bavarian Municipal Equalization to Munich (*FAG & BayKiBiG*)**:
-  - Key grants and early childhood subsidies: **$1.162\text{ Mrd. €}$** ($772\text{ €/Kopf}$)
-- **Munich Levies Remitted to Upper Bavaria and State/Bund**:
-  - *Bezirksumlage* to Upper Bavarian District: **$829\text{ Mio. €}$** ($551\text{ €/Kopf}$)
-  - *Gewerbesteuerumlage* to State & Bund: **$232\text{ Mio. €}$** ($154\text{ €/Kopf}$)
-  - Net municipal transfer balance: $+101\text{ Mio. €}$ ($+67.11\text{ €/Kopf}$)
+  - Federal allocations for joint tasks and transit (exits lower part of Fed bar): **$8.80\text{ Mrd. €}$** ($664.20\text{ €/Kopf}$)
+- **Federal Social Reimbursements to Munich (*KdU & Grundsicherung SGB II/XII*)**:
+  - Direct federal reimbursement for municipal social accommodation outlays (exits bottom of Fed bar): **$0.483\text{ Mrd. €}$** ($320.93\text{ €/Kopf}$)
+- **Bavarian Gross Municipal Grants to Munich (*FAG & BayKiBiG*)**:
+  - Gross key grants and early childhood subsidies (exits bottom of Bayern bar): **$+1.162\text{ Mrd. €}$** ($+772.09\text{ €/Kopf}$)
+- **Consolidated Effective Spending**:
+  - Federal retained core budget: **$325.89\text{ Mrd. €}$** ($3{,}899.23\text{ €/Kopf}$)
+  - Bavarian retained state budget: **$63.74\text{ Mrd. €}$** ($4{,}810.80\text{ €/Kopf}$)
+  - Munich effective municipal spending: **$9.446\text{ Mrd. €}$** ($6{,}276.39\text{ €/Kopf}$), composed of $7.801\text{ Mrd. €}$ own revenues + $1.162\text{ Mrd. €}$ state grants + $0.483\text{ Mrd. €}$ federal social reimbursements.
 
 ##### Layer 3: Effektive Haushalte ($x = 0.69$)
 Net disposable spending capacity after transfer consolidation:
 - **Effektive Sozialversicherung**: $863.47\text{ Mrd. €}$ ($10{,}331\text{ €/Kopf}$ · Basis 83.6M EW)
-- **Effektiver Bund (Kernhaushalt)**: $326.37\text{ Mrd. €}$ ($3{,}905\text{ €/Kopf}$ · Basis 83.6M EW)
-- **Effektiver Freistaat Bayern**: $73.60\text{ Mrd. €}$ ($5{,}555\text{ €/Kopf}$ · Basis 13.2M EW)
-- **Effektive Stadt München**: $9.55\text{ Mrd. €}$ ($6{,}343\text{ €/Kopf}$ · Basis 1.51M EW)
+- **Effektiver Bund (Kernhaushalt)**: $325.89\text{ Mrd. €}$ ($3{,}899\text{ €/Kopf}$ · Basis 83.6M EW)
+- **Effektiver Freistaat Bayern**: $72.54\text{ Mrd. €}$ ($5{,}475\text{ €/Kopf}$ · Basis 13.2M EW)
+- **Effektive Stadt München**: $9.45\text{ Mrd. €}$ ($6{,}276\text{ €/Kopf}$ · Basis 1.51M EW)
 
 ##### Layer 4: Finale Funktionale End-Buckets ($x = 1.00$)
-19 citizen-facing public goods destinations, sorted strictly descending by per-capita spending:
-1. **Renten- und Alterssicherung**: $425.80\text{ Mrd. €}$ ($5{,}095\text{ €/Kopf}$, $19.50\%$)
-2. **Gesundheit, Pflege & Kliniken**: $397.77\text{ Mrd. €}$ ($4{,}759\text{ €/Kopf}$, $18.21\%$)
-3. **Schulen, Kitas & frühkindliche Bildung**: $245.20\text{ Mrd. €}$ ($2{,}934\text{ €/Kopf}$, $11.22\%$)
-4. **Verkehrswege, Mobilität & ÖPNV**: $166.70\text{ Mrd. €}$ ($1{,}995\text{ €/Kopf}$, $7.63\%$)
-5. **Soziale Sicherung, Bürgergeld & Familie**: $145.80\text{ Mrd. €}$ ($1{,}744\text{ €/Kopf}$, $6.67\%$)
-6. **Universitäten, Hochschulen & Spitzenforschung**: $80.20\text{ Mrd. €}$ ($959\text{ €/Kopf}$, $3.67\%$)
-7. **Länderfinanzausgleich (Ausgleich an andere Länder)**: $9.77\text{ Mrd. €}$ ($737\text{ €/Kopf}$, $2.82\%$)
-8. **Innere Sicherheit & Polizei**: $60.50\text{ Mrd. €}$ ($724\text{ €/Kopf}$, $2.77\%$)
-9. **Verteidigung & Bundeswehr**: $57.07\text{ Mrd. €}$ ($683\text{ €/Kopf}$, $2.61\%$)
-10. **Schuldendienst & Zinsen**: $38.20\text{ Mrd. €}$ ($457\text{ €/Kopf}$, $1.75\%$)
-11. **Wohnungsbau & Stadtentwicklung**: $32.40\text{ Mrd. €}$ ($388\text{ €/Kopf}$, $1.48\%$)
-12. **Umwelt-, Natur- & Klimaschutz**: $25.60\text{ Mrd. €}$ ($306\text{ €/Kopf}$, $1.17\%$)
-13. **Auswärtiger Dienst & Entwicklungshilfe**: $17.13\text{ Mrd. €}$ ($205\text{ €/Kopf}$, $0.78\%$)
-14. **Rücklagen- & Liquiditätspuffer**: $14.93\text{ Mrd. €}$ ($179\text{ €/Kopf}$, $0.68\%$)
-15. **Kultur, Theater & Museen**: $14.20\text{ Mrd. €}$ ($170\text{ €/Kopf}$, $0.65\%$)
-16. **Wirtschaftsförderung & Verwaltung**: $13.80\text{ Mrd. €}$ ($165\text{ €/Kopf}$, $0.63\%$)
-17. **Kommunale Verwaltung & IT-Infrastruktur**: $0.64\text{ Mrd. €}$ ($423\text{ €/Kopf}$, $1.62\%$)
-18. **Kommunale Straßen, Tiefbau & Brücken**: $0.40\text{ Mrd. €}$ ($266\text{ €/Kopf}$, $1.02\%$)
-19. **Kommunale Grünanlagen, Parks & Sport**: $0.29\text{ Mrd. €}$ ($192\text{ €/Kopf}$, $0.73\%$)
+21 citizen-facing public goods destinations, dynamically sorted strictly descending by per-capita spending, featuring multi-tier parenthetical breakdown on all shared nodes:
+1. **Gesundheit und Pflege**: $402.14\text{ Mrd. €}$ ($5{,}002.46\text{ €/Kopf}$, $19.27\%$) · *(SV 401.0 + BY 0.9 + MUC 0.2 Mrd. €)*
+2. **Rente und Alterssicherung**: $397.40\text{ Mrd. €}$ ($4{,}754.89\text{ €/Kopf}$, $18.32\%$) · *(SV 397.4 Mrd. €)*
+3. **Schulen und Kitas**: $18.16\text{ Mrd. €}$ ($2{,}723.99\text{ €/Kopf}$, $10.49\%$) · *(BY 15.9 + MUC 2.3 Mrd. €)*
+4. **Soziales, Jugend & Familie**: $24.67\text{ Mrd. €}$ ($2{,}037.78\text{ €/Kopf}$, $7.85\%$) · *(Bund 14.4 + BY 8.4 + MUC 1.9 Mrd. €)*
+5. **Wirtschaft, Umwelt & Energie**: $40.38\text{ Mrd. €}$ ($1{,}527.19\text{ €/Kopf}$, $5.88\%$) · *(Bund 34.8 + MUC 1.2 + BY 4.5 Mrd. €)*
+6. **Verkehrswege, Mobilität & ÖPNV**: $43.44\text{ Mrd. €}$ ($1{,}409.22\text{ €/Kopf}$, $5.43\%$) · *(Bund 36.4 + BY 6.3 + MUC 0.7 Mrd. €)*
+7. **Sicherheit und Justiz**: $27.37\text{ Mrd. €}$ ($1{,}337.70\text{ €/Kopf}$, $5.15\%$) · *(Bund 15.4 + BY 11.5 + MUC 0.4 Mrd. €)*
+8. **Hochschulen und Forschung**: $39.14\text{ Mrd. €}$ ($1{,}058.98\text{ €/Kopf}$, $4.08\%$) · *(Bund 29.8 + BY 9.3 Mrd. €)*
+9. **Verteidigung und Äußeres**: $74.20\text{ Mrd. €}$ ($887.80\text{ €/Kopf}$, $3.42\%$) · *(Bund 74.2 Mrd. €)*
+10. **Kommunale Verwaltung & IT (MUC)**: $1.29\text{ Mrd. €}$ ($860.46\text{ €/Kopf}$, $3.31\%$) · *(MUC 1.3 Mrd. €)*
+11. **Länderfinanzausgleich (Ausgleich an andere Länder)**: $9.77\text{ Mrd. €}$ ($737.42\text{ €/Kopf}$, $2.84\%$) · *(BY 9.8 Mrd. €)*
+12. **Bezirks- & Gewerbesteuerumlage (MUC)**: $1.06\text{ Mrd. €}$ ($704.98\text{ €/Kopf}$, $2.72\%$) · *(MUC 1.1 Mrd. €)*
+13. **Bürgergeld & Grundsicherung**: $57.78\text{ Mrd. €}$ ($691.30\text{ €/Kopf}$, $2.66\%$) · *(Bund 57.8 Mrd. € net after 0.48 Mrd. € transfer to Munich)*
+14. **Arbeitsförderung & Unfallreha**: $53.64\text{ Mrd. €}$ ($641.80\text{ €/Kopf}$, $2.47\%$) · *(SV 53.6 Mrd. €)*
+15. **Schuldendienst und Zinsen**: $34.22\text{ Mrd. €}$ ($409.44\text{ €/Kopf}$, $1.58\%$) · *(Bund 34.2 Mrd. €)*
+16. **Wirtschaft, Verwaltung, Landesentwicklung & Reserve**: $5.41\text{ Mrd. €}$ ($408.33\text{ €/Kopf}$, $1.57\%$) · *(BY 5.4 Mrd. €)*
+17. **Bundeszuweisungen an andere Länder**: $24.80\text{ Mrd. €}$ ($296.73\text{ €/Kopf}$, $1.14\%$) · *(Bund 24.8 Mrd. €)*
+18. **Kultur, Theater & Museen**: $0.28\text{ Mrd. €}$ ($188.70\text{ €/Kopf}$, $0.73\%$) · *(MUC 0.3 Mrd. €)*
+19. **Rücklagen- & Liquiditätspuffer**: $11.43\text{ Mrd. €}$ ($136.76\text{ €/Kopf}$, $0.53\%$) · *(SV 11.4 Mrd. €)*
+20. **Wohnungsbau und Stadtentwicklung**: $4.19\text{ Mrd. €}$ ($123.24\text{ €/Kopf}$, $0.47\%$) · *(Bund 4.1 + MUC 0.1 Mrd. €)*
+21. **Kommunaler Finanzausgleich übrige Kommunen (BY)**: $0.57\text{ Mrd. €}$ ($42.87\text{ €/Kopf}$, $0.16\%$) · *(BY 0.6 Mrd. €)*
 
 ---
 

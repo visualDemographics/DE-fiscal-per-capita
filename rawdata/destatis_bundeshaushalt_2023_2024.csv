@@ -1,21 +1,24 @@
 jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle,basis,preisbasis
-2023,Bund,Einnahmen_Gesamt,Gesamteinnahmen_Bund,392.20,BMF,Abschluss des Bundeshaushalts 2023 Tabelle 1,Ist,nominal
-2023,Bund,Ausgaben_Gesamt,Gesamtausgaben_Bund,457.10,BMF,Abschluss des Bundeshaushalts 2023 Tabelle 1,Ist,nominal
-2023,Bund,Finanzierungssaldo,Nettokreditaufnahme,27.20,BMF,Abschluss des Bundeshaushalts 2023 Tabelle 1,Ist,nominal
-2023,Bund,Finanzierungssaldo,Ruecklagenentnahme,37.50,BMF,Abschluss des Bundeshaushalts 2023 Tabelle 1,Ist,nominal
-2023,Bund,Steuereinnahmen_Gesamt,Steuereinnahmen_Bundesanteil,356.10,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2,Ist,nominal
-2023,Bund,Gemeinschaftsteuer_Bundesanteil,Lohnsteuer_Bundesanteil,96.40,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2,Ist,nominal
-2023,Bund,Gemeinschaftsteuer_Bundesanteil,Veranlagte_Einkommensteuer_Bundesanteil,14.80,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2,Ist,nominal
-2023,Bund,Gemeinschaftsteuer_Bundesanteil,Koerperschaftsteuer_Bundesanteil,19.30,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2,Ist,nominal
-2023,Bund,Gemeinschaftsteuer_Bundesanteil,Abgeltungsteuer_Bundesanteil,4.60,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2,Ist,nominal
-2023,Bund,Gemeinschaftsteuer_Bundesanteil,Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil,128.50,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 2,Ist,nominal
-2023,Bund,Bundessteuer,Energiesteuer,33.70,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3,Ist,nominal
-2023,Bund,Bundessteuer,Tabaksteuer,14.30,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3,Ist,nominal
-2023,Bund,Bundessteuer,Solidaritaetszuschlag,12.10,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3,Ist,nominal
-2023,Bund,Bundessteuer,Versicherungssteuer,15.10,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3,Ist,nominal
-2023,Bund,Bundessteuer,Kraftfahrzeugsteuer,9.50,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3,Ist,nominal
-2023,Bund,Bundessteuer,Stromsteuer,6.80,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3,Ist,nominal
-2023,Bund,Bundessteuer,Sonstige_Bundessteuern,1.00,BMF,Kassenmaessige Steuereinnahmen 2023 Tabelle 3,Ist,nominal
+2023,Bund,Einnahmen_Gesamt,Gesamteinnahmen_Bund,457.13,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 20,Ist,nominal
+2023,Bund,Ausgaben_Gesamt,Gesamtausgaben_Bund,457.13,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 20,Ist,nominal
+2023,Bund,Finanzierungssaldo,Nettokreditaufnahme,27.18,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 20,Ist,nominal
+2023,Bund,Finanzierungssaldo,Ruecklagenentnahme_und_Notlagenabzug,37.72,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 20 (Entnahme 37.54 Mrd. plus Muenzen 0.18 Mrd.),Ist,nominal
+2023,Bund,Steuereinnahmen_Gesamt,Steuereinnahmen_Bundesanteil,356.08,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Gemeinschaftsteuer_Bundesanteil,Lohnsteuer_Bundesanteil,100.38,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Gemeinschaftsteuer_Bundesanteil,Veranlagte_Einkommensteuer_Bundesanteil,31.19,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Gemeinschaftsteuer_Bundesanteil,Koerperschaftsteuer_Bundesanteil,3.68,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Gemeinschaftsteuer_Bundesanteil,Abgeltungsteuer_Bundesanteil,40.65,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34 (Abgeltungsteuer 22.43 Mrd. plus nicht veranlagte 18.22 Mrd.),Ist,nominal
+2023,Bund,Gemeinschaftsteuer_Bundesanteil,Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil,138.45,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Bundessteuer,Energiesteuer,36.66,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Bundessteuer,Tabaksteuer,14.67,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Bundessteuer,Solidaritaetszuschlag,12.24,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Bundessteuer,Versicherungssteuer,16.85,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Bundessteuer,Kraftfahrzeugsteuer,9.51,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Bundessteuer,Stromsteuer,6.83,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2023,Bund,Bundessteuer,Sonstige_Bundessteuern,7.74,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34 (Alkohol 2.16 + Kaffee 1.03 + Luftverkehr 1.49 + GewSt-Umlage 2.68 + Schaumwein 0.38),Ist,nominal
+2023,Bund,Abzugsbetraege,Abzugsbetraege_EU_und_Laender,62.77,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34 (EU-Eigenmittel 29.71 Mrd. plus Laenderzuweisungen BEZ 33.06 Mrd.),Ist,nominal
+2023,Bund,Sonstige_Einnahmen,Verwaltungseinnahmen_Bund,15.96,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 35,Ist,nominal
+2023,Bund,Sonstige_Einnahmen,Beteiligungen_Zinsen_und_Rueckfluesse,20.19,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 35 (Wirtschaft 5.18 + Darlehen 1.56 + Zinsen 2.20 + Zuschuesse 10.27 + Sonstiges),Ist,nominal
 2023,Bund,Funktionale_Ausgaben,Epl_11_Arbeit_und_Soziales,166.20,BMF,Haushaltsrechnung des Bundes 2023 Epl 11,Ist,nominal
 2023,Bund,Funktionale_Ausgaben_Sub,Epl_11_Bundeszuschuss_Rentenversicherung,112.40,BMF,Haushaltsrechnung des Bundes 2023 Epl 11,Ist,nominal
 2023,Bund,Funktionale_Ausgaben_Sub,Epl_11_Buergergeld_Grundsicherung,44.80,BMF,Haushaltsrechnung des Bundes 2023 Epl 11,Ist,nominal
@@ -37,25 +40,26 @@ jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle,basis,prei
 2023,Bund,Funktionale_Ausgaben,Epl_01_bis_04_Zentrale_Verwaltung,22.24,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32,Ist,nominal
 2023,Bund,Funktionale_Ausgaben,Bundeszuweisungen_an_Laender,31.20,BMF,Haushaltsrechnung des Bundes 2023,Ist,nominal
 2023,Bund,Funktionale_Ausgaben,Sonstige_Ressorts_und_Verwaltung,11.80,BMF,Haushaltsrechnung des Bundes 2023 Uebersicht,Ist,nominal
-2024,Bund,Einnahmen_Gesamt,Gesamteinnahmen_Bund,465.67,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 23,Ist,nominal
-2024,Bund,Ausgaben_Gesamt,Gesamtausgaben_Bund,465.67,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 23,Ist,nominal
-2024,Bund,Finanzierungssaldo,Nettokreditaufnahme,33.30,BMF,Monatsbericht Januar 2025 Analysen S. 21,Ist,nominal
-2024,Bund,Finanzierungssaldo,Ruecklagenentnahme,0.00,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 23,Ist,nominal
+2024,Bund,Einnahmen_Gesamt,Gesamteinnahmen_Bund,465.67,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 20,Ist,nominal
+2024,Bund,Ausgaben_Gesamt,Gesamtausgaben_Bund,465.67,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 20,Ist,nominal
+2024,Bund,Finanzierungssaldo,Nettokreditaufnahme,33.30,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 20,Ist,nominal
+2024,Bund,Finanzierungssaldo,Ruecklagenentnahme_und_Notlagenabzug,-8.26,BMF,Monatsbericht Januar 2025 Tabelle 1 S. 20 (Tilgung Notlagenkredite -8.49 Mrd. plus Muenzen 0.20 Mrd.),Ist,nominal
 2024,Bund,Steuereinnahmen_Gesamt,Steuereinnahmen_Bundesanteil,374.98,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
 2024,Bund,Gemeinschaftsteuer_Bundesanteil,Lohnsteuer_Bundesanteil,105.80,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
 2024,Bund,Gemeinschaftsteuer_Bundesanteil,Veranlagte_Einkommensteuer_Bundesanteil,31.81,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
-2024,Bund,Gemeinschaftsteuer_Bundesanteil,Koerperschaftsteuer_Bundesanteil,19.88,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
-2024,Bund,Gemeinschaftsteuer_Bundesanteil,Abgeltungsteuer_Bundesanteil,8.48,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Koerperschaftsteuer_Bundesanteil,8.48,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2024,Bund,Gemeinschaftsteuer_Bundesanteil,Abgeltungsteuer_Bundesanteil,36.89,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34 (Abgeltungsteuer 19.88 Mrd. plus nicht veranlagte 17.01 Mrd.),Ist,nominal
 2024,Bund,Gemeinschaftsteuer_Bundesanteil,Umsatzsteuer_Einfuhrumsatzsteuer_Bundesanteil,145.34,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
 2024,Bund,Bundessteuer,Energiesteuer,35.09,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
 2024,Bund,Bundessteuer,Tabaksteuer,15.64,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
-2024,Bund,Bundessteuer,Solidaritaetszuschlag,12.40,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
-2024,Bund,Bundessteuer,Versicherungssteuer,15.80,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
-2024,Bund,Bundessteuer,Kraftfahrzeugsteuer,9.60,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
-2024,Bund,Bundessteuer,Stromsteuer,6.90,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
-2024,Bund,Bundessteuer,Sonstige_Bundessteuern,3.90,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2024,Bund,Bundessteuer,Solidaritaetszuschlag,12.63,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2024,Bund,Bundessteuer,Versicherungssteuer,18.23,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2024,Bund,Bundessteuer,Kraftfahrzeugsteuer,9.67,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2024,Bund,Bundessteuer,Stromsteuer,5.15,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34,Ist,nominal
+2024,Bund,Bundessteuer,Sonstige_Bundessteuern,9.89,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34 (Alkohol 1.98 + Kaffee 0.99 + Luftverkehr 1.83 + Energiekrisenbeitrag 1.94 + GewSt-Umlage 2.77 + Schaumwein 0.38),Ist,nominal
+2024,Bund,Abzugsbetraege,Abzugsbetraege_EU_und_Laender,59.64,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34 (EU-Eigenmittel 26.55 Mrd. plus Laenderzuweisungen BEZ 33.09 Mrd.),Ist,nominal
 2024,Bund,Sonstige_Einnahmen,Verwaltungseinnahmen_Bund,27.79,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 35,Ist,nominal
-2024,Bund,Sonstige_Einnahmen,Beteiligungen_Zinsen_und_Rueckfluesse,10.37,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 35,Ist,nominal
+2024,Bund,Sonstige_Einnahmen,Beteiligungen_Zinsen_und_Rueckfluesse,37.86,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 35 (Wirtschaft 4.83 + Darlehen 5.10 + Zinsen 2.64 + Zuschuesse 23.57 + Sonstiges),Ist,nominal
 2024,Bund,Funktionale_Ausgaben,Epl_11_Arbeit_und_Soziales,175.70,BMF,Monatsbericht Januar 2025 S. 29,Ist,nominal
 2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Bundeszuschuss_Rentenversicherung,116.00,BMF,Monatsbericht Januar 2025 S. 29,Ist,nominal
 2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Buergergeld_Grundsicherung,47.20,BMF,Monatsbericht Januar 2025 S. 29,Ist,nominal
