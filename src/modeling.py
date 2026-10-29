@@ -95,11 +95,11 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Buergergeld_Grundsicherung": "Bürgergeld & Grundsicherung",
         "Arbeitsfoerderung_und_Reha": "Arbeitsförderung & Reha (BA)",
         "Wohnungsbau_und_Stadtplanung": "Wohnungsbau & Stadtplanung",
-        "Soziales_Jugend_Wohnungslosigkeit": "Soziales, Jugend & Wohnen (MUC)",
+        "Soziales_Jugend_Wohnungslosigkeit": "Soziales, Jugend & Familie",
         "Kultur_und_Freizeit": "Kultur & Freizeit",
         "Schuldendienst_und_Zinsen": "Schuldendienst & Zinsen",
         "Ruecklagen_und_Liquiditaetspuffer": "Rücklagen & Liquiditätspuffer",
-        "Wirtschaft_Klima_Verwaltung": "Wirtschaft, Energie & Verwaltung (Bund)",
+        "Wirtschaft_Klima_Verwaltung": "Wirtschaft, Klima & Verwaltung",
         "Wirtschaft_Verwaltung_Sonstiges": "Wirtschaft & Landesverwaltung (BY)",
         "Kommunale_Verwaltung_Sonstiges": "Kommunale Verwaltung & IT (MUC)",
         "Bundeszuweisungen_an_andere_Laender_Transfer": "Bundeszuweisungen an übrige Länder",
@@ -348,7 +348,9 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 node_y.append(0.02 + idx * (0.92 / max(1, len(l4_nodes) - 1)))
 
                 parents_l3 = list({f["source_node"] for f in year_flows if f["target_node"] == k and f["layer_source"] == "Layer_3_Effective"})
-                if len(parents_l3) == 1:
+                if k == "Kommunale_Umlagen_Bezirks_Gewerbesteuer_MUC":
+                    clr = "#be123c"
+                elif len(parents_l3) == 1:
                     single_parent = parents_l3[0]
                     l3_parent_colors = {
                         "Effective_Insurance": "#0f766e",
@@ -369,6 +371,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                         "Soziales_Jugend_Wohnungslosigkeit": "#db2777", # Rose
                         "Hochschulen_und_Forschung": "#6366f1",      # Indigo
                         "Wohnungsbau_und_Stadtplanung": "#8b5cf6",   # Purple
+                        "Wirtschaft_Klima_Verwaltung": "#0891b2",    # Cyan-Teal
                     }
                     if k in mixed_colors:
                         clr = mixed_colors[k]
@@ -511,6 +514,20 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         pop_by_mio = f"{pop_by / 1e6:.1f}".replace(".", ",")
         pop_muc_mio = f"{pop_muc / 1e6:.2f}".replace(".", ",")
 
+        # Dynamic Layer 4 total per-capita expenditure and volume
+        total_l4_pc = sum(
+            max(0.0, float(f["wert_eur_pro_kopf"]))
+            for f in f_yr
+            if f["layer_target"] == "Layer_4_Buckets"
+        )
+        total_l4_mrd = sum(
+            float(f["wert_mrd_eur"])
+            for f in f_yr
+            if f["layer_target"] == "Layer_4_Buckets"
+        )
+        total_l4_pc_fmt = f"{int(round(total_l4_pc)):,}".replace(",", ".")
+        total_l4_mrd_fmt = f"{total_l4_mrd:,.1f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
         return [
             dict(
                 x=0.005, y=1.025, xref="paper", yref="paper",
@@ -529,7 +546,10 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
             ),
             dict(
                 x=0.995, y=1.025, xref="paper", yref="paper",
-                text="<b>LAYER 4: FINALE FUNKTIONALE END-BUCKETS</b><br><span style='font-size:11px;color:#64748b'>Bürgerwirksame Güter & Länderfinanzausgleich</span>",
+                text=(
+                    f"<b>LAYER 4: FINALE FUNKTIONALE END-BUCKETS</b><br>"
+                    f"<span style='font-size:11px;color:#334155'>Gesamtausgaben: <b style='color:#0f172a'>{total_l4_pc_fmt} € / Kopf</b> ({total_l4_mrd_fmt} Mrd. € · 100%)</span>"
+                ),
                 showarrow=False, font=dict(size=13, color="#475569", family="Helvetica, Arial"), xanchor="right",
             ),
             # Layer 2 -> Layer 3 Transfer & Outflow Badges directly on the ribbons

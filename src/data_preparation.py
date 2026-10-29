@@ -101,6 +101,7 @@ def compute_fiscal_sankey_pipeline(raw_dir, datasets_dir):
             assert math.isclose(b_year["Epl_11_Bundeszuschuss_Rentenversicherung"], benchmarks["BUND_ZUSCHUSS_GRV_2024"], rel_tol=1e-4)
             assert math.isclose(by_year["Gesamtvolumen_Staatshaushalt_Bayern"], benchmarks["BAYERN_AUSGABEN_2024"], rel_tol=1e-4)
             assert math.isclose(by_year["Epl_05_Unterricht_und_Kultus_Schulen"], benchmarks["BAYERN_KULTUS_EPL05_2024"], rel_tol=1e-4)
+            assert math.isclose(by_year["Epl_15_Wissenschaft_und_Kunst_Universitaeten"], benchmarks["BAYERN_WISSENSCHAFT_EPL15_2024"], rel_tol=1e-4)
             assert math.isclose(m_year["Ordentliche_Aufwendungen"], benchmarks["MUENCHEN_AUFWENDUNGEN_2024"], rel_tol=1e-4)
 
         # Sovereign entity totals in Billion EUR

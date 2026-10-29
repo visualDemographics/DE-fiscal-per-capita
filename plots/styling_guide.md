@@ -79,9 +79,10 @@ Transfers between sovereign tiers in Layer 2 $\to$ Layer 3 must be clearly disti
 2. **Multi-Parent Shared Buckets**: Assigned curated, highly distinct semantic colors:
    - *Gesundheit & Pflege (SV + BY + MUC)*: Emerald `#10b981`
    - *Schulen & Kitas (BY + MUC)*: Royal Blue `#3b82f6`
+   - *Soziales, Jugend & Familie (Bund + BY + MUC)*: Rose `#db2777`
+   - *Wirtschaft, Klima & Verwaltung (Bund + BY + MUC)*: Cyan-Teal `#0891b2`
    - *Verkehr & Mobilität (Bund + BY + MUC)*: Orange-Gold `#f59e0b`
    - *Innere Sicherheit & Justiz (Bund + BY + MUC)*: Slate `#64748b`
-   - *Soziales, Jugend & Wohnen (Bund + MUC)*: Rose `#db2777`
    - *Hochschulen & Spitzenforschung (Bund + BY)*: Indigo `#6366f1`
    - *Wohnungsbau & Stadtplanung (Bund + MUC)*: Purple `#8b5cf6`
 
@@ -183,12 +184,12 @@ Badges placed directly on transfer ribbons provide immediate numerical context w
 - Styling Invariant: `borderwidth=1.5`, `borderpad=5`, `bgcolor="rgba(..., 0.96)"` matched to the ribbon hue.
 
 ### 7.2 Header Column Labels ($y = 1.025$)
-- Font: $13$ px bold Helvetica, with $11$ px muted subtitle (`#64748b`).
+- Font: $13$ px bold Helvetica, with $11$ px muted subtitle (`#64748b` / `#334155`).
 - Explicit uppercase column headers:
-  - `LAYER 1: STEUER- & BEITRAGSINFLUX` (`#1e3a8a`)
-  - `LAYER 2: NOMINALE GEBIETSKÖRPERSCHAFTEN` (`#0f172a`)
-  - `LAYER 3: EFFEKTIVE HAUSHALTE (KONSOLIDIERT)` (`#0d9488`)
-  - `LAYER 4: FINALE FUNKTIONALE END-BUCKETS` (`#475569`, right-aligned)
+  - `LAYER 1: STEUER- & BEITRAGSINFLUX` (`#1e3a8a`): *Eigene Steuern, Beitragsmittel & Kredite*
+  - `LAYER 2: NOMINALE GEBIETSKÖRPERSCHAFTEN` (`#0f172a`): *Bruttohaushalte der Gebietskörperschaften*
+  - `LAYER 3: EFFEKTIVE HAUSHALTE (KONSOLIDIERT)` (`#0d9488`): *Ausgaben nach Konsolidierung & Umlagen*
+  - `LAYER 4: FINALE FUNKTIONALE END-BUCKETS` (`#475569`, right-aligned): *Gesamtausgaben: 25.982 € / Kopf (1.271,3 Mrd. € · 100%)* (dynamically updated for 2024: $25.982\text{ €/Kopf}$ / 2023: $24.948\text{ €/Kopf}$)
 
 ### 7.3 Footer Metadata Badges ($y = -0.075$)
 - Left: **Referenzbevölkerung** with exact Destatis / LfStat Zensus 2022 population baselines.

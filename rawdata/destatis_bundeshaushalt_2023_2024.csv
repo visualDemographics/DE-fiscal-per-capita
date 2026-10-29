@@ -60,18 +60,18 @@ jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle,basis,prei
 2024,Bund,Abzugsbetraege,Abzugsbetraege_EU_und_Laender,59.64,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 34 (EU-Eigenmittel 26.55 Mrd. plus Laenderzuweisungen BEZ 33.09 Mrd.),Ist,nominal
 2024,Bund,Sonstige_Einnahmen,Verwaltungseinnahmen_Bund,27.79,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 35,Ist,nominal
 2024,Bund,Sonstige_Einnahmen,Beteiligungen_Zinsen_und_Rueckfluesse,37.86,BMF,Monatsbericht Januar 2025 Tabelle 7 S. 35 (Wirtschaft 4.83 + Darlehen 5.10 + Zinsen 2.64 + Zuschuesse 23.57 + Sonstiges),Ist,nominal
-2024,Bund,Funktionale_Ausgaben,Epl_11_Arbeit_und_Soziales,175.70,BMF,Monatsbericht Januar 2025 S. 29,Ist,nominal
-2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Bundeszuschuss_Rentenversicherung,116.00,BMF,Monatsbericht Januar 2025 S. 29,Ist,nominal
-2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Buergergeld_Grundsicherung,47.20,BMF,Monatsbericht Januar 2025 S. 29,Ist,nominal
-2024,Bund,Funktionale_Ausgaben,Epl_14_Verteidigung_Kern,57.07,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 32,Ist,nominal
+2024,Bund,Funktionale_Ausgaben,Epl_11_Arbeit_und_Soziales,175.70,BMF,Monatsbericht Januar 2025 S. 28 & Tabelle 6 S. 32,Ist,nominal
+2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Bundeszuschuss_Rentenversicherung,116.00,BMF,Monatsbericht Januar 2025 S. 28 & Tabelle 6 S. 32,Ist,nominal
+2024,Bund,Funktionale_Ausgaben_Sub,Epl_11_Buergergeld_Grundsicherung,47.20,BMF,Monatsbericht Januar 2025 S. 28 & Tabelle 6 S. 32,Ist,nominal
+2024,Bund,Funktionale_Ausgaben,Epl_14_Verteidigung_Kern,57.07,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32,Ist,nominal
 2024,Bund,Funktionale_Ausgaben,Sondervermoegen_Bundeswehr_Ist,0.00,BMF,Monatsbericht Januar 2025 (im Kernhaushalt nicht enthalten),Ist,nominal
-2024,Bund,Funktionale_Ausgaben,Epl_12_Verkehr_und_digitale_Infrastruktur,36.38,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 33,Ist,nominal
-2024,Bund,Funktionale_Ausgaben,Epl_30_Bildung_und_Forschung,29.84,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 32,Ist,nominal
-2024,Bund,Funktionale_Ausgaben,Epl_32_Bundesschuld_Zinsen,34.22,BMF,Monatsbericht Januar 2025 Tabelle 4 S. 31,Ist,nominal
-2024,Bund,Funktionale_Ausgaben,Epl_15_Gesundheit_Bundeszuschuss_GKV,14.50,BMF,Monatsbericht Januar 2025 S. 29,Ist,nominal
-2024,Bund,Funktionale_Ausgaben,Epl_06_Inneres_und_Heimat_Bundespolizei,8.13,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 32,Ist,nominal
-2024,Bund,Funktionale_Ausgaben,Epl_09_Wirtschaft_und_Klima,8.45,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 33,Ist,nominal
-2024,Bund,Funktionale_Ausgaben,Epl_23_Entwicklung_und_Auswaertiges,17.13,BMF,Monatsbericht Januar 2025 Tabelle 5 S. 32,Ist,nominal
+2024,Bund,Funktionale_Ausgaben,Epl_12_Verkehr_und_digitale_Infrastruktur,36.38,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 33,Ist,nominal
+2024,Bund,Funktionale_Ausgaben,Epl_30_Bildung_und_Forschung,29.84,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32,Ist,nominal
+2024,Bund,Funktionale_Ausgaben,Epl_32_Bundesschuld_Zinsen,34.22,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 33,Ist,nominal
+2024,Bund,Funktionale_Ausgaben,Epl_15_Gesundheit_Bundeszuschuss_GKV,14.50,BMF,Monatsbericht Januar 2025 S. 28 & Tabelle 6 S. 32,Ist,nominal
+2024,Bund,Funktionale_Ausgaben,Epl_06_Inneres_und_Heimat_Bundespolizei,8.13,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32,Ist,nominal
+2024,Bund,Funktionale_Ausgaben,Epl_09_Wirtschaft_und_Klima,8.45,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 33,Ist,nominal
+2024,Bund,Funktionale_Ausgaben,Epl_23_Entwicklung_und_Auswaertiges,17.13,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32,Ist,nominal
 2024,Bund,Funktionale_Ausgaben,Epl_17_Familie_Senioren_Frauen_Jugend,14.42,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32,Ist,nominal
 2024,Bund,Funktionale_Ausgaben,Epl_11_Grundsicherung_im_Alter_SGB_XII,11.06,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 32,Ist,nominal
 2024,Bund,Funktionale_Ausgaben,Epl_25_Wohnungswesen_und_Staedtebau,4.08,BMF,Monatsbericht Januar 2025 Tabelle 6 S. 33,Ist,nominal

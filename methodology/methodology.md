@@ -22,18 +22,14 @@ This strictly avoids the methodological flaw of synthetic resident "stacks" (whi
 
 ---
 
-### 1.2 Physical Flow Ribbon Conservation vs. Per-Capita Annotations
-In graph-based network diagrams (such as Plotly Sankey diagrams), the visual width of a link ribbon is proportional to its scalar numeric `value`.
+### 1.2 Per-Capita Visual Scaling vs. Physical Kirchhoff Conservation
+In a multi-level federal Sankey diagram combining national ($N_{\text{DE}} = 83.6\text{ M}$), state ($N_{\text{BY}} = 13.2\text{ M}$), and municipal ($N_{\text{MUC}} = 1.51\text{ M}$) tiers, scaling visual ribbon thickness solely by raw national billions of Euros would compress Munich's municipal budget ($9.45\text{ Mrd. €}$) to less than $0.7\%$ of the canvas height—rendering local schools, transit, and municipal administration visually illegible—even though Munich spends **$6{,}276\text{ €/Kopf}$** ($24.2\%$ of a Munich resident's combined public goods footprint).
 
-If intergovernmental transfers (Layer 2 $\to$ Layer 3) were scaled in mixed per-capita units, a geometric distortion would occur:
-- A transfer of $8.80\text{ Mrd. €}$ from the Federal budget ($N_{\text{DE}} = 83.6\text{ M}$) to the Free State of Bavaria ($N_{\text{BY}} = 13.2\text{ M}$) corresponds to $105.29\text{ €}$ per German resident, but $664.20\text{ €}$ per Bavarian resident.
-- If ribbon width represented per-capita values, the ribbon would magically expand by a factor of $6.3\times$ as it crossed the administrative boundary, violating physical continuity.
-
-**Methodological Resolution**:
-3. All ribbon widths are scaled by conserved physical budgetary volume in billions of Euros ($\text{wert\_mrd\_eur}$).
-2. Strict **Kirchhoff Flow Conservation** is satisfied across all four layers with $\Delta = 0.000\text{ Mrd. €}$:
+**Methodological Resolution (Dual-Unit Architecture)**:
+1. **Per-Capita Visual Scaling**: Visual ribbon and node bar heights in `src/modeling.py` are scaled proportionally to citizen-facing per-capita volume ($\text{wert\_eur\_pro\_kopf}$, in $\text{€/Kopf}$), allowing direct visual comparison of what each sovereign tier and functional bucket delivers per resident within its constituency.
+2. **Strict Physical Kirchhoff Flow Conservation ($\Delta = 0.000\text{ Mrd. €}$)**: In the underlying accounting dataset (`datasets/fiscal_sankey_flows_per_capita.csv`), every flow is simultaneously tracked in conserved physical billions of Euros ($\text{wert\_mrd\_eur}$), satisfying exact Kirchhoff conservation across all four layers:
    $$\sum \text{Layer 1 (Influx)} \equiv \sum \text{Layer 2 (Nominal)} \equiv \sum \text{Layer 3 (Effective)} \equiv \sum \text{Layer 4 (Buckets)} = 1{,}271.341\text{ Mrd. €}$$
-3. Citizen-facing per-capita metrics ($\text{€/Kopf}$) are computed based on the specific sending and receiving jurisdictions and displayed directly on node titles, ribbon labels, and interactive tooltips.
+3. **Dual-Unit Badging**: Every node title, intergovernmental transfer badge, and interactive tooltip explicitly displays both the citizen-facing per-capita metric ($\text{€/Kopf}$) and the conserved physical volume ($\text{Mrd. €}$ / $\text{Mio. €}$) alongside the exact constitutional population denominator (`Basis: 83,6 Mio. EW`, `Basis: 13,2 Mio. EW`, `Basis: 1,51 Mio. EW`).
 
 ---
 
@@ -44,15 +40,15 @@ Funds frequently flow through intermediate administrative levels before funding 
    - In Layer 2 $\to$ Layer 3, these flows shift financial capacity from *Nominaler Bund* to *Effektive Sozialversicherung*.
 2. **Horizontal Fiscal Equalization (*Länderfinanzausgleich / LFA*)**:
    - Bavaria paid **$9.771\text{ Mrd. €}$** ($737.42\text{ €/Bavarian resident}$) in net financial contributions to other federal states in 2024.
-   - This flow is explicitly separated from internal state public services and routed as a distinct crimson outflow ribbon (`#be123c`) into the dedicated end-bucket *Länderfinanzausgleich*.
+   - This flow is explicitly separated from internal state public services and routed into the dedicated end-bucket *Länderfinanzausgleich (Nettoabfluss BY)*.
 3. **Municipal Equalization & Intergovernmental Transfers (Option B Gross Architecture)**:
-   - **Bavarian State Grants to Munich**: Munich receives **$1.162\text{ Mrd. €}$** ($772.09\text{ €/resident}$) in gross state grants and allocations from the Free State of Bavaria (primarily *BayKiBiG* early education grants and school funding; Haushaltsplan Band 1 S. 32 & S. 37) routed via Layer 2 $\to$ Layer 3.
+   - **Bavarian State Grants to Munich**: Munich receives **$1.162\text{ Mrd. €}$** ($772.09\text{ €/resident}$) in gross state grants and allocations from the Free State of Bavaria (primarily *BayKiBiG* early education grants and school funding; Haushaltsplan Band 1 S. 67 & S. 127 [gedruckt S. 65 & S. 125]) routed via Layer 2 $\to$ Layer 3.
    - **Federal Social Reimbursements to Munich**: Under statutory federal cost-sharing (§ 46 SGB II & § 46a SGB XII), the Federal government directly reimburses municipalities for municipal accommodation costs (*Kosten der Unterkunft / KdU*) and basic security in old age. Munich receives **$0.483\text{ Mrd. €}$** ($320.93\text{ €/resident}$) in 2024 ($0.452\text{ Mrd. €}$ in 2023), routed directly as an intergovernmental transfer link from `Nominaler Bund` (Layer 2) to `Effektive Stadt München` (Layer 3) and deducted from federal Bürgergeld outlays in Layer 4 (reducing federal *Bürgergeld & Grundsicherung* from $58.26\text{ Mrd. €}$ to $57.78\text{ Mrd. €}$).
-   - **Munich Intergovernmental Levies (*Umlagen*)**: Out of its ordinary budget, Munich remits **$829\text{ Mio. €}$** ($550.83\text{ €/resident}$) in *Bezirksumlage* to the Upper Bavarian district (*Bezirk Oberbayern*) as well as **$232\text{ Mio. €}$** ($154.15\text{ €/resident}$) in *Gewerbesteuerumlage* to Bund and Land (Band 1 S. 42 & S. 44). These statutory levies (**$1.061\text{ Mrd. €}$** = $704.98\text{ €/resident}$) are routed directly from `Effektive Stadt München` into Layer 4 as a dedicated transfer outflow bucket (`Bezirks- & Gewerbesteuerumlage (MUC)`), reducing Munich's internal administrative overhead (`Kommunale Verwaltung & IT`) to its true core of **$1.295\text{ Mrd. €}$** ($860.46\text{ €/resident}$).
+   - **Munich Intergovernmental Levies (*Umlagen*)**: Out of its ordinary budget, Munich remits **$829\text{ Mio. €}$** ($550.83\text{ €/resident}$) in *Bezirksumlage* to the Upper Bavarian district (*Bezirk Oberbayern*) as well as **$232\text{ Mio. €}$** ($154.15\text{ €/resident}$) in *Gewerbesteuerumlage* to Bund and Land (Band 1 S. 44 [gedruckt S. 42]). These statutory levies (**$1.061\text{ Mrd. €}$** = $704.98\text{ €/resident}$) are routed directly from `Effektive Stadt München` into Layer 4 as a dedicated transfer outflow bucket (`Bezirks- & Gewerbesteuerumlage (MUC)`), reducing Munich's internal administrative overhead (`Kommunale Verwaltung & IT`) to its true core of **$1.295\text{ Mrd. €}$** ($860.46\text{ €/resident}$).
    - **Munich Layer 1 Own Revenues**: Munich's Layer 1 revenue base reflects pure own municipal revenue and financing of **$7.801\text{ Mrd. €}$** ($5{,}183.37\text{ €/resident}$) in 2024 ($7.212\text{ Mrd. €}$ in 2023), consisting of Gewerbesteuer ($3.240\text{ Mrd. €}$), Gemeindeanteile ESt/USt ($1.830\text{ Mrd. €}$), Gebühren & Entgelte ($1.027\text{ Mrd. €}$), Fehlbedarf / Kredite ($0.892\text{ Mrd. €}$), SWM-Erträge ($0.448\text{ Mrd. €}$), and Grund-/Lokalsteuern ($0.364\text{ Mrd. €}$), eliminating all residual plugs. Combined with Bavarian grants ($1.162\text{ Mrd. €}$) and federal social reimbursements ($0.483\text{ Mrd. €}$), Munich's effective disposable budget equals exactly **$9.446\text{ Mrd. €}$** ($6{,}276.39\text{ €/resident}$).
 4. **Option 3A: Non-Munich Municipal Equalization (*Kommunaler Finanzausgleich an übrige Kommunen*)**:
    - The Free State of Bavaria allocates significant equalization grants to its remaining 2,055 municipalities outside Munich.
-   - To prevent administrative inflation in state overhead, direct municipal fiscal equalization outlays (**$0.57\text{ Mrd. €}$** in 2024; **$0.87\text{ Mrd. €}$** in 2023) are explicitly isolated into a separate Layer 4 destination node (`Kommunaler_Finanzausgleich_uebrige_Kommunen_BY`), reducing Bavaria's administrative and financial management residual (`Allgemeine_Finanzverwaltung_Rest`) to genuine core levels ($5.41\text{ Mrd. €}$, well within the 5% audit boundary).
+   - To prevent administrative inflation in state overhead, direct municipal fiscal equalization outlays (**$0.718\text{ Mrd. €}$** / $54.19\text{ €/Kopf}$ in 2024; **$0.522\text{ Mrd. €}$** / $39.62\text{ €/Kopf}$ in 2023) are explicitly isolated into a separate Layer 4 destination node (`Kommunaler_Finanzausgleich_uebrige_Kommunen_BY`), reducing Bavaria's administrative and financial management residual (`Allgemeine_Finanzverwaltung_Rest`) to genuine core levels ($5.41\text{ Mrd. €}$, well within the 5% audit boundary).
 
 ---
 
@@ -94,16 +90,16 @@ In German public accounting, comprehensive audited cash-accounting closings (*ka
 
 ### 1.7 Architectural Column Hierarchy & Dynamic Functional Sorting
 The visual flow network is organized into a clean 4-tier column architecture:
-1. **Layer 1: Steuer- & Beitragsinflux** ($x = 0.00$): Primary tax revenues and statutory insurance contributions grouped by sovereign intake level.
-2. **Layer 2: Nominale Gebietskörperschaften** ($x = 0.28$): Gross budgetary volumes before intergovernmental redistribution.
-3. **Layer 3: Effektive Haushalte** ($x = 0.69$): Net operational spending capacities after intergovernmental transfers and statutory reserves.
-4. **Layer 4: Finale Funktionale Buckets** ($x = 1.00$): Direct citizen-facing public goods categories.
+1. **Layer 1: Steuer- & Beitragsinflux** ($x = 0.001$): Primary tax revenues and statutory insurance contributions grouped by sovereign intake level.
+2. **Layer 2: Nominale Gebietskörperschaften** ($x = 0.320$): Gross budgetary volumes before intergovernmental redistribution.
+3. **Layer 3: Effektive Haushalte** ($x = 0.650$): Net operational spending capacities after intergovernmental transfers and statutory reserves.
+4. **Layer 4: Finale Funktionale Buckets** ($x = 0.999$): Direct citizen-facing public goods categories.
 
 **Intergovernmental Transfer Representation**:
 Transfers between the tiers (Layer 2 $\to$ Layer 3)—such as the federal social insurance subsidies (*Bundeszuschuss*), state allocations (*FAG/BayKiBiG*), and municipal levies (*Bezirksumlage* and *Gewerbesteuerumlage*)—are represented exclusively as directed intermediate ribbons. This eliminates the need for an artificial 5th transfer column header, preserving strict 4-column visual symmetry and legibility.
 
 **Dynamic Descending Sorting of Functional Destinations**:
-All 19 citizen-facing end-buckets in Layer 4 are dynamically sorted strictly descending by per-capita spending ($\text{€/Kopf}$) for each year. Each bucket label displays both its per-capita outlay and its exact percentage share of total per-capita outlays ($26{,}135.02\text{ €/Kopf}$ in 2024; $25{,}144.59\text{ €/Kopf}$ in 2023). Dedicated vertical spacing in the lower half of Layer 4 ensures that smaller municipal expenditure categories maintain clear, non-overlapping label typography.
+All 21 citizen-facing end-buckets in Layer 4 are dynamically sorted strictly descending by per-capita spending ($\text{€/Kopf}$) for each year. Each bucket label displays both its per-capita outlay and its exact percentage share of total per-capita outlays ($25{,}982.04\text{ €/Kopf}$ in 2024; $24{,}947.59\text{ €/Kopf}$ in 2023), with the consolidated total expenditure per capita prominently anchored in the Layer 4 column header (`Gesamtausgaben: 25.982 € / Kopf (1.271,3 Mrd. € · 100%)`). Dedicated vertical spacing in the lower half of Layer 4 ensures that smaller municipal expenditure categories maintain clear, non-overlapping label typography.
 
 ---
 
@@ -163,15 +159,15 @@ We explicitly reject the practice of stacking federal, state, and municipal tota
 ---
 
 ### 4.3 Physical Kirchhoff Flow Conservation & Accounting Balancing (Option B Reconciliations)
-1. **Kirchhoff Flow Conservation ($\Delta = 0.000\text{ Mrd. €}$)**:
-   Link ribbon visual widths are strictly proportional to physical budgetary volume in billions of Euros (`wert_mrd_eur`), preserving dimensional physical continuity across all four network layers:
+1. **Kirchhoff Flow Conservation ($\Delta = 0.000\text{ Mrd. €}$) & Per-Capita Visual Scaling**:
+   While visual ribbon and node widths are scaled to citizen-facing per-capita volume (`wert_eur_pro_kopf`, in `€/Kopf`) so that municipal and state services are visually comparable alongside federal and social insurance tiers, the underlying physical ledger (`wert_mrd_eur`, in `Mrd. €`) satisfies exact Kirchhoff conservation across all four network layers:
    $$\sum \text{Layer 1 (Influx)} \equiv \sum \text{Layer 2 (Nominal)} \equiv \sum \text{Layer 3 (Effective)} \equiv \sum \text{Layer 4 (Buckets)} = 1{,}271.341\text{ Mrd. € (2024)}$$
 2. **Authentic Accounting Balancing in Layer 1 (Option B)**:
    Layer 1 is defined as **Steuer-, Beitrags- & Finanzierungszuflüsse** (Net tax revenues, statutory social insurance contributions, non-tax revenues, and net borrowing / deficit financing):
    - **Federal Net Influx (BMF Table 1 & Table 7)**: Gross federal tax collection ($434.62\text{ Mrd. €}$) is adjusted by deducting statutory transfers to the European Union ($32.41\text{ Mrd. €}$) and financial transfers to the federal states ($27.23\text{ Mrd. €}$), yielding net federal taxes of **$374.98\text{ Mrd. €}$** ($331.42\text{ Mrd. €}$ Netto-Gemeinschaftsteuern + $43.56\text{ Mrd. €}$ Bundessteuern). Together with non-tax revenues (*Sonstige Einnahmen & Münzeinnahmen*, **$65.65\text{ Mrd. €}$**) and net financing / liquidity utilization (**$25.04\text{ Mrd. €}$**; $33.30\text{ Mrd. €}$ borrowing minus $8.26\text{ Mrd. €}$ cash build), total federal inflows equal **$465.67\text{ Mrd. €}$**, perfectly matching preliminary cash expenditures.
-   - **Munich Municipal Own Influx & Gross Grant Routing**: Munich's own revenue streams and financing (**$7.801\text{ Mrd. €}$** = $5{,}183.37\text{ €/Kopf}$, including $3.240\text{ Mrd. €}$ Gewerbesteuer netto, $1.830\text{ Mrd. €}$ Gemeindeanteile ESt/USt, $1.027\text{ Mrd. €}$ Gebühren/Mieten, $0.892\text{ Mrd. €}$ operating deficit/Kredite, $0.448\text{ Mrd. €}$ SWM dividend & other ordinary revenue, and $0.364\text{ Mrd. €}$ Grund-/Lokalsteuern) are strictly distinguished from Bavaria's gross state grants (**$1.162\text{ Mrd. €}$** = $772.09\text{ €/Kopf}$) and direct federal social cost reimbursements (**$0.483\text{ Mrd. €}$** = $320.93\text{ €/Kopf}$ for KdU / § 46 SGB II). Outgoing statutory levies (**$1.061\text{ Mrd. €}$** of *Bezirksumlage* and *Gewerbesteuerumlage*) are routed directly from `Effective_Munich` into Layer 4 as a dedicated transfer bucket. Every single Munich revenue line matches *Haushaltsplan 2024 Band 1 S. 22 & S. 32* verbatim with **zero residual plug**.
+   - **Munich Municipal Own Influx & Gross Grant Routing**: Munich's own revenue streams and financing (**$7.801\text{ Mrd. €}$** = $5{,}183.37\text{ €/Kopf}$, including $3.240\text{ Mrd. €}$ Gewerbesteuer netto, $1.830\text{ Mrd. €}$ Gemeindeanteile ESt/USt, $1.027\text{ Mrd. €}$ Gebühren/Mieten, $0.892\text{ Mrd. €}$ operating deficit/Kredite, $0.448\text{ Mrd. €}$ SWM dividend & other ordinary revenue, and $0.364\text{ Mrd. €}$ Grund-/Lokalsteuern) are strictly distinguished from Bavaria's gross state grants (**$1.162\text{ Mrd. €}$** = $772.09\text{ €/Kopf}$) and direct federal social cost reimbursements (**$0.483\text{ Mrd. €}$** = $320.93\text{ €/Kopf}$ for KdU / § 46 SGB II). Outgoing statutory levies (**$1.061\text{ Mrd. €}$** of *Bezirksumlage* and *Gewerbesteuerumlage*) are routed directly from `Effective_Munich` into Layer 4 as a dedicated transfer bucket. Every single Munich revenue line matches *Haushaltsplan 2024 Band 1 S. 22, S. 34, S. 40, S. 44 & S. 67/127* verbatim with **zero residual plug**.
 3. **Visual Disambiguation & Layer 2 Intake Badging**:
-   - Layer 2 nodes carry explicit nominal intake badges (`Nominaler Bund: 5,572 €/Kopf (465.7 Mrd. €)`, `Nominaler Freistaat Bayern: 4,899 €/Kopf (64.9 Mrd. €)`, `Nominale Stadt München: 5,183 €/Kopf (7.80 Mrd. €)`), avoiding ambiguity between sovereign budget size and citizen entitlement.
+   - Layer 2 nodes carry explicit nominal intake badges (`Nominaler Bund: 5,572 €/Kopf (465.7 Mrd. €)`, `Nominaler Freistaat Bayern: 4,898 €/Kopf (64.9 Mrd. €)`, `Nominale Stadt München: 5,183 €/Kopf (7.80 Mrd. €)`), avoiding ambiguity between sovereign budget size and citizen entitlement.
    - Shared Layer 4 public goods buckets incorporate multi-tier parentheticals (e.g. `(BY 15.9 + MUC 2.3 Mrd. €)`) to clearly identify which sovereign levels co-finance that public service.
 
 ---

@@ -10,17 +10,17 @@ jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle,basis,prei
 2023,Bayern,Verwaltungseinnahmen,Verwaltungseinnahmen_Bayern,4.24,Bayerischer Oberster Rechnungshof,Jahresbericht 2024 Teil I,Plan_Soll,nominal
 2023,Bayern,Bundeszuweisungen,Bundeszuweisungen_an_Bayern,9.40,StMFH Bayern,Haushaltsrechnung 2023 HGr 2,Plan_Soll,nominal
 2023,Bayern,Ruecklagenentnahme,Entnahme_aus_Haushaltsruecklage,3.51,Bayerischer Oberster Rechnungshof,Jahresbericht 2024 Teil I,Plan_Soll,nominal
-2023,Bayern,Gesamtausgaben,Gesamtvolumen_Staatshaushalt_Bayern,71.40,StMFH Bayern,Gesetz ueber die Feststellung des Haushaltsplans 2023,Plan_Soll,nominal
-2023,Bayern,Funktionale_Ausgaben,Epl_05_Unterricht_und_Kultus_Schulen,14.84,StMFH Bayern,Haushaltsplan 2023 Epl 05,Plan_Soll,nominal
-2023,Bayern,Funktionale_Ausgaben,Epl_15_Wissenschaft_und_Kunst_Universitaeten,8.89,Bayerischer Oberster Rechnungshof,Jahresbericht 2024 Ist-Ausgaben Epl 15,Plan_Soll,nominal
-2023,Bayern,Funktionale_Ausgaben,Epl_03_Inneres_Polizei_Katastrophenschutz,7.34,StMFH Bayern,Haushaltsplan 2023 Epl 03,Plan_Soll,nominal
-2023,Bayern,Funktionale_Ausgaben,Epl_04_Justiz_Gerichte_JVA,2.92,StMFH Bayern,Haushaltsplan 2023 Epl 04,Plan_Soll,nominal
-2023,Bayern,Funktionale_Ausgaben,Epl_10_Familie_Arbeit_Soziales,7.59,StMFH Bayern,Haushaltsplan 2023 Epl 10,Plan_Soll,nominal
-2023,Bayern,Funktionale_Ausgaben,Epl_09_Wohnen_Bau_Verkehr,5.99,StMFH Bayern,Haushaltsplan 2023 Epl 09,Plan_Soll,nominal
-2023,Bayern,Funktionale_Ausgaben,Epl_14_Gesundheit_und_Pflege,0.82,StMFH Bayern,Haushaltsplan 2023 Epl 14,Plan_Soll,nominal
-2023,Bayern,Funktionale_Ausgaben,Epl_07_08_12_Wirtschaft_Umwelt_Agrar,4.30,StMFH Bayern,Haushaltsplan 2023 Epl 07 08 12,Plan_Soll,nominal
-2023,Bayern,Funktionale_Ausgaben,Kommunaler_Finanzausgleich_KFA_Epl_13,11.19,StMFH Bayern,Finanzbericht 2023 KFA,Plan_Soll,nominal
-2023,Bayern,Funktionale_Ausgaben,Allgemeine_Finanzverwaltung_Rest,7.52,StMFH Bayern,Haushaltsplan 2023 Epl 13,Plan_Soll,nominal
+2023,Bayern,Gesamtausgaben,Gesamtvolumen_Staatshaushalt_Bayern,71.40,StMFH Bayern,GVBl. 2024 S. 135 Haushaltsuebersicht 2023,Plan_Soll,nominal
+2023,Bayern,Funktionale_Ausgaben,Epl_05_Unterricht_und_Kultus_Schulen,14.84,StMFH Bayern,GVBl. 2024 S. 135 Epl 05,Plan_Soll,nominal
+2023,Bayern,Funktionale_Ausgaben,Epl_15_Wissenschaft_und_Kunst_Universitaeten,8.71,StMFH Bayern,GVBl. 2024 S. 135 Epl 15,Plan_Soll,nominal
+2023,Bayern,Funktionale_Ausgaben,Epl_03_Inneres_Polizei_Katastrophenschutz,7.34,StMFH Bayern,GVBl. 2024 S. 134 Epl 03,Plan_Soll,nominal
+2023,Bayern,Funktionale_Ausgaben,Epl_04_Justiz_Gerichte_JVA,2.92,StMFH Bayern,GVBl. 2024 S. 135 Epl 04,Plan_Soll,nominal
+2023,Bayern,Funktionale_Ausgaben,Epl_10_Familie_Arbeit_Soziales,7.59,StMFH Bayern,GVBl. 2024 S. 135 Epl 10,Plan_Soll,nominal
+2023,Bayern,Funktionale_Ausgaben,Epl_09_Wohnen_Bau_Verkehr,5.99,StMFH Bayern,GVBl. 2024 S. 135 Epl 09,Plan_Soll,nominal
+2023,Bayern,Funktionale_Ausgaben,Epl_14_Gesundheit_und_Pflege,0.88,StMFH Bayern,GVBl. 2024 S. 135 Epl 14,Plan_Soll,nominal
+2023,Bayern,Funktionale_Ausgaben,Epl_07_08_12_Wirtschaft_Umwelt_Agrar,4.77,StMFH Bayern,GVBl. 2024 S. 135 Epl 07 08 12,Plan_Soll,nominal
+2023,Bayern,Funktionale_Ausgaben,Kommunaler_Finanzausgleich_KFA_Epl_13,10.84,StMFH Bayern,GVBl. 2024 S. 135 Epl 13 KFA,Plan_Soll,nominal
+2023,Bayern,Funktionale_Ausgaben,Allgemeine_Finanzverwaltung_Rest,7.52,StMFH Bayern,GVBl. 2024 S. 135 Epl 13,Plan_Soll,nominal
 2024,Bayern,Steueraufkommen_Brutto,Gesamtsteueraufkommen_in_Bayern,140.20,LfStat Bayern,Steuereinnahmen 2024,Plan_Soll,nominal
 2024,Bayern,Steuereinnahmen_Kasse,Kassenmaessige_Steuereinnahmen_Landeshaushalt,57.40,Bayerischer Oberster Rechnungshof,Jahresbericht 2025 Teil I,Plan_Soll,nominal
 2024,Bayern,Gemeinschaftsteuern_Landesanteil,Bayerischer_Anteil_Gemeinschaftsteuern,50.95,StMFH Bayern,Haushaltsplan 2024/2025 HGr 0,Plan_Soll,nominal
@@ -32,14 +32,14 @@ jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle,basis,prei
 2024,Bayern,Verwaltungseinnahmen,Verwaltungseinnahmen_Bayern,4.67,Bayerischer Oberster Rechnungshof,Jahresbericht 2025 Teil I,Plan_Soll,nominal
 2024,Bayern,Bundeszuweisungen,Bundeszuweisungen_an_Bayern,8.80,StMFH Bayern,Haushaltsplan 2024/2025 HGr 2,Plan_Soll,nominal
 2024,Bayern,Ruecklagenentnahme,Entnahme_aus_Haushaltsruecklage,2.83,Bayerischer Oberster Rechnungshof,Jahresbericht 2025 Teil I,Plan_Soll,nominal
-2024,Bayern,Gesamtausgaben,Gesamtvolumen_Staatshaushalt_Bayern,73.70,StMFH Bayern,Haushaltsgesetz 2024/2025 GVBl. 2024 S. 114,Plan_Soll,nominal
-2024,Bayern,Funktionale_Ausgaben,Epl_05_Unterricht_und_Kultus_Schulen,15.86,StMFH Bayern,Haushaltsplan 2024/2025 Epl 05,Plan_Soll,nominal
-2024,Bayern,Funktionale_Ausgaben,Epl_15_Wissenschaft_und_Kunst_Universitaeten,9.30,StMFH Bayern,Haushaltsplan 2024/2025 Epl 15,Plan_Soll,nominal
-2024,Bayern,Funktionale_Ausgaben,Epl_03_Inneres_Polizei_Katastrophenschutz,8.38,StMFH Bayern,Haushaltsplan 2024/2025 Epl 03,Plan_Soll,nominal
-2024,Bayern,Funktionale_Ausgaben,Epl_04_Justiz_Gerichte_JVA,3.15,StMFH Bayern,Haushaltsplan 2024/2025 Epl 04,Plan_Soll,nominal
-2024,Bayern,Funktionale_Ausgaben,Epl_10_Familie_Arbeit_Soziales,8.40,StMFH Bayern,Haushaltsplan 2024/2025 Epl 10,Plan_Soll,nominal
-2024,Bayern,Funktionale_Ausgaben,Epl_09_Wohnen_Bau_Verkehr,6.31,StMFH Bayern,Haushaltsplan 2024/2025 Epl 09,Plan_Soll,nominal
-2024,Bayern,Funktionale_Ausgaben,Epl_14_Gesundheit_und_Pflege,0.94,StMFH Bayern,Haushaltsplan 2024/2025 Epl 14,Plan_Soll,nominal
-2024,Bayern,Funktionale_Ausgaben,Epl_07_08_12_Wirtschaft_Umwelt_Agrar,4.45,StMFH Bayern,Haushaltsplan 2024/2025 Epl 07 08 12,Plan_Soll,nominal
-2024,Bayern,Funktionale_Ausgaben,Kommunaler_Finanzausgleich_KFA_Epl_13,11.40,StMFH Bayern,Finanzbericht 2024 KFA,Plan_Soll,nominal
-2024,Bayern,Funktionale_Ausgaben,Allgemeine_Finanzverwaltung_Rest,5.41,StMFH Bayern,Haushaltsplan 2024/2025 Epl 13,Plan_Soll,nominal
+2024,Bayern,Gesamtausgaben,Gesamtvolumen_Staatshaushalt_Bayern,73.70,StMFH Bayern,Haushaltsgesetz 2024/2025 GVBl. 2024 S. 114 & S. 137,Plan_Soll,nominal
+2024,Bayern,Funktionale_Ausgaben,Epl_05_Unterricht_und_Kultus_Schulen,15.86,StMFH Bayern,GVBl. 2024 S. 136 Epl 05,Plan_Soll,nominal
+2024,Bayern,Funktionale_Ausgaben,Epl_15_Wissenschaft_und_Kunst_Universitaeten,8.95,StMFH Bayern,GVBl. 2024 S. 137 Epl 15,Plan_Soll,nominal
+2024,Bayern,Funktionale_Ausgaben,Epl_03_Inneres_Polizei_Katastrophenschutz,8.38,StMFH Bayern,GVBl. 2024 S. 136 Epl 03,Plan_Soll,nominal
+2024,Bayern,Funktionale_Ausgaben,Epl_04_Justiz_Gerichte_JVA,3.15,StMFH Bayern,GVBl. 2024 S. 136 Epl 04,Plan_Soll,nominal
+2024,Bayern,Funktionale_Ausgaben,Epl_10_Familie_Arbeit_Soziales,8.40,StMFH Bayern,GVBl. 2024 S. 137 Epl 10,Plan_Soll,nominal
+2024,Bayern,Funktionale_Ausgaben,Epl_09_Wohnen_Bau_Verkehr,6.31,StMFH Bayern,GVBl. 2024 S. 137 Epl 09,Plan_Soll,nominal
+2024,Bayern,Funktionale_Ausgaben,Epl_14_Gesundheit_und_Pflege,0.94,StMFH Bayern,GVBl. 2024 S. 137 Epl 14,Plan_Soll,nominal
+2024,Bayern,Funktionale_Ausgaben,Epl_07_08_12_Wirtschaft_Umwelt_Agrar,4.65,StMFH Bayern,GVBl. 2024 S. 137 Epl 07 08 12,Plan_Soll,nominal
+2024,Bayern,Funktionale_Ausgaben,Kommunaler_Finanzausgleich_KFA_Epl_13,11.65,StMFH Bayern,GVBl. 2024 S. 137 Epl 13 KFA,Plan_Soll,nominal
+2024,Bayern,Funktionale_Ausgaben,Allgemeine_Finanzverwaltung_Rest,5.41,StMFH Bayern,GVBl. 2024 S. 137 Epl 13,Plan_Soll,nominal

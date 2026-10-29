@@ -13,11 +13,11 @@ This catalog documents primary source quotations and exact coordinates verified 
 
 - **BMF Bundeszuschüsse an die Sozialversicherungen (GRV & GKV 2024)**:
   > "Insgesamt flossen im Jahr 2024 gut 116,0 Mrd. Euro aus dem Bundeshaushalt als Leistungen an die Rentenversicherung. Der im Jahr 2004 eingeführte steuerfinanzierte Bundeszuschuss zum Gesundheitsfonds zur pauschalen Abgeltung versicherungsfremder Leistungen in der gesetzlichen Krankenversicherung (GKV) betrug im Jahr 2024 - wie bereits in den Vorjahren - 14,5 Mrd. Euro."
-  *(Quelle: BMF Monatsbericht Januar 2025, S. 29; archiviert in `literature/BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf`)*
+  *(Quelle: BMF Monatsbericht Januar 2025, S. 28 [PDF S. 11] & Tabelle 6 S. 32 [PDF S. 15]; archiviert in `literature/BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf`)*
 
 - **BMF Ausgaben nach Aufgabenbereichen (Verteidigung, Verkehr, Bildung 2024)**:
   > "Verteidigung: Ist 2024: 57.065 Mio. Euro; Verkehrs- und Nachrichtenwesen: Ist 2024: 36.380 Mio. Euro; Bildungswesen, Wissenschaft, Forschung: Ist 2024: 29.842 Mio. Euro; Öffentliche Sicherheit und Ordnung: 8.134 Mio. Euro."
-  *(Quelle: BMF Monatsbericht Januar 2025, Tabelle 5 S. 32–33; archiviert in `literature/BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf`)*
+  *(Quelle: BMF Monatsbericht Januar 2025, Tabelle 6 S. 32–33 [PDF S. 15–16]; archiviert in `literature/BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf`)*
 
 ## 2. Statutory Social Insurances (BMAS, Destatis & DRV)
 - **BMAS Sozialbudget (Hauptergebnisse & Funktionen)**:
@@ -32,6 +32,10 @@ This catalog documents primary source quotations and exact coordinates verified 
 - **Bayerischer Landtag (Haushaltsgesetz Freistaat Bayern 2024/2025 – HG 2024/2025)**:
   > "Art. 1 Feststellung des Haushaltsplans. Der diesem Gesetz als Anlage beigefügte Haushaltsplan des Freistaates Bayern für die Haushaltsjahre 2024 und 2025 wird in Einnahmen und Ausgaben 1. für das Haushaltsjahr 2024 auf 73 692 557 400 € und 2. für das Haushaltsjahr 2025 auf 76 419 117 000 € festgestellt. Art. 2 Kreditermächtigungen. (1) Das Staatsministerium der Finanzen und für Heimat wird ermächtigt, zur Deckung von Ausgaben folgende Kredite am Kreditmarkt aufzunehmen: 1. im Haushaltsjahr 2024 bis zur Höhe von 0 €, 2. im Haushaltsjahr 2025 bis zur Höhe von 0 €."
   *(Quelle: Gesetz über die Feststellung des Haushaltsplans des Freistaates Bayern für die Haushaltsjahre 2024 und 2025 vom 21. Juni 2024, Bayerisches Gesetz- und Verordnungsblatt GVBl. Nr. 12/2024 S. 114; archiviert in `literature/Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf`)*
+
+- **Bayerischer Landtag (Teil I Haushaltsübersicht 2023 & 2024 – Einzelpläne)**:
+  > "Ausgaben 2024 (in Tsd. €): Epl. 03 Inneres, Sport und Integration 8.378.187,7; Epl. 04 Justiz 3.150.703,8; Epl. 05 Unterricht und Kultus 15.864.597,0; Epl. 07 Wirtschaft, Landesentwicklung und Energie 1.498.967,4; Epl. 08 Ernährung, Landwirtschaft, Forsten und Tourismus 1.914.620,1; Epl. 09 Wohnen, Bau und Verkehr 6.311.556,4; Epl. 10 Familie, Arbeit und Soziales 8.396.973,1; Epl. 12 Umwelt und Verbraucherschutz 1.233.550,7; Epl. 13 Allgemeine Finanzverwaltung 13.214.085,0; Epl. 14 Gesundheit, Pflege und Prävention 943.987,4; Epl. 15 Wissenschaft und Kunst 8.945.073,7; Summe 73.692.557,4."
+  *(Quelle: Bayerisches Gesetz- und Verordnungsblatt GVBl. Nr. 12/2024, Teil I Haushaltsübersicht S. 134–137 [PDF S. 22–25]; archiviert in `literature/Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf`)*
 
 - **Bayerischer Oberster Rechnungshof (ORH Jahresbericht Haushaltsrechnung)**:
   > "Die kassenmäßigen Steuereinnahmen des Freistaates Bayern beliefen sich im Haushaltsjahr 2023 auf 54,25 Milliarden Euro. Das Gesamtvolumen des Staatshaushalts lag bei 71,4 Milliarden Euro (Planansatz 2024: 73,7 Milliarden Euro)."

@@ -7,16 +7,16 @@ jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle,basis,prei
 2023,Muenchen,Gemeinschaftsteuern_Gemeindeanteil,Gemeindeanteil_an_der_Einkommensteuer,1.460,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 34,Plan,nominal
 2023,Muenchen,Gemeinschaftsteuern_Gemeindeanteil,Gemeindeanteil_an_der_Umsatzsteuer,0.315,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 34,Plan,nominal
 2023,Muenchen,Realsteuern,Grundsteuer_A_und_B,0.354,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 34,Plan,nominal
-2023,Muenchen,Oertliche_Steuern,Oertliche_Verbrauch_und_Aufwandsteuern,0.005,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
-2023,Muenchen,Gebuehren_und_Entgelte,Oeffentlich_rechtliche_Gebuehren_und_Entgelte,0.312,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
-2023,Muenchen,Privatrechtliche_Entgelte,Privatrechtliche_Leistungsentgelte_Mieten,0.264,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
-2023,Muenchen,Kostenerstattungen,Kostenerstattungen_und_Kostenumlagen,0.619,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
+2023,Muenchen,Oertliche_Steuern,Oertliche_Verbrauch_und_Aufwandsteuern,0.005,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
+2023,Muenchen,Gebuehren_und_Entgelte,Oeffentlich_rechtliche_Gebuehren_und_Entgelte,0.312,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
+2023,Muenchen,Privatrechtliche_Entgelte,Privatrechtliche_Leistungsentgelte_Mieten,0.264,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
+2023,Muenchen,Kostenerstattungen,Kostenerstattungen_und_Kostenumlagen,0.619,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
 2023,Muenchen,Finanzertraege,Gewinnausschuettung_Stadtwerke_SWM,0.075,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 40,Plan,nominal
-2023,Muenchen,Zuweisungen_und_Zuschuesse,Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern,1.218,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
-2023,Muenchen,Sonstige_Transferertraege,Sonstige_Transferertraege_und_Bundesmittel,0.452,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
-2023,Muenchen,Umlagen,Bezirksumlage_an_Bezirk_Oberbayern,0.830,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 42,Plan,nominal
-2023,Muenchen,Umlagen,Gewerbesteuerumlage_an_Bund_und_Land,0.221,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 42,Plan,nominal
-2023,Muenchen,Sonstige_Ertraege,Sonstige_ordentliche_Ertraege,0.462,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
+2023,Muenchen,Zuweisungen_und_Zuschuesse,Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern,1.218,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
+2023,Muenchen,Sonstige_Transferertraege,Sonstige_Transferertraege_und_Bundesmittel,0.452,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
+2023,Muenchen,Umlagen,Bezirksumlage_an_Bezirk_Oberbayern,0.830,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 44,Plan,nominal
+2023,Muenchen,Umlagen,Gewerbesteuerumlage_an_Bund_und_Land,0.221,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 44,Plan,nominal
+2023,Muenchen,Sonstige_Ertraege,Sonstige_ordentliche_Ertraege,0.462,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
 2023,Muenchen,Funktionale_Aufwendungen,Referat_fuer_Bildung_und_Sport_RBS_Schulen_Kitas,2.273,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 170,Plan,nominal
 2023,Muenchen,Funktionale_Aufwendungen,Sozialreferat_Jugend_Soziales_Wohnungslosigkeit,1.780,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 176,Plan,nominal
 2023,Muenchen,Funktionale_Aufwendungen,Mobilitaetsreferat_und_Baureferat_Strassen_MVG,0.718,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 151,Plan,nominal
@@ -34,16 +34,16 @@ jahr,ebene,kategorie,indikator,wert_mrd_eur,quelle,tabelle_fundstelle,basis,prei
 2024,Muenchen,Gemeinschaftsteuern_Gemeindeanteil,Gemeindeanteil_an_der_Einkommensteuer,1.500,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 34,Plan,nominal
 2024,Muenchen,Gemeinschaftsteuern_Gemeindeanteil,Gemeindeanteil_an_der_Umsatzsteuer,0.330,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 34,Plan,nominal
 2024,Muenchen,Realsteuern,Grundsteuer_A_und_B,0.348,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 34,Plan,nominal
-2024,Muenchen,Oertliche_Steuern,Oertliche_Verbrauch_und_Aufwandsteuern,0.016,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
-2024,Muenchen,Gebuehren_und_Entgelte,Oeffentlich_rechtliche_Gebuehren_und_Entgelte,0.324,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
-2024,Muenchen,Privatrechtliche_Entgelte,Privatrechtliche_Leistungsentgelte_Mieten,0.223,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
-2024,Muenchen,Kostenerstattungen,Kostenerstattungen_und_Kostenumlagen,0.480,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
+2024,Muenchen,Oertliche_Steuern,Oertliche_Verbrauch_und_Aufwandsteuern,0.016,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
+2024,Muenchen,Gebuehren_und_Entgelte,Oeffentlich_rechtliche_Gebuehren_und_Entgelte,0.324,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
+2024,Muenchen,Privatrechtliche_Entgelte,Privatrechtliche_Leistungsentgelte_Mieten,0.223,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
+2024,Muenchen,Kostenerstattungen,Kostenerstattungen_und_Kostenumlagen,0.480,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
 2024,Muenchen,Finanzertraege,Gewinnausschuettung_Stadtwerke_SWM,0.400,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 40,Plan,nominal
-2024,Muenchen,Zuweisungen_und_Zuschuesse,Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern,1.162,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
-2024,Muenchen,Sonstige_Transferertraege,Sonstige_Transferertraege_und_Bundesmittel,0.483,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
-2024,Muenchen,Umlagen,Bezirksumlage_an_Bezirk_Oberbayern,0.829,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 42,Plan,nominal
-2024,Muenchen,Umlagen,Gewerbesteuerumlage_an_Bund_und_Land,0.232,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 42,Plan,nominal
-2024,Muenchen,Sonstige_Ertraege,Sonstige_ordentliche_Ertraege,0.447,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 32,Plan,nominal
+2024,Muenchen,Zuweisungen_und_Zuschuesse,Zuweisungen_und_Zuschuesse_vom_Freistaat_Bayern,1.162,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
+2024,Muenchen,Sonstige_Transferertraege,Sonstige_Transferertraege_und_Bundesmittel,0.483,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
+2024,Muenchen,Umlagen,Bezirksumlage_an_Bezirk_Oberbayern,0.829,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 44,Plan,nominal
+2024,Muenchen,Umlagen,Gewerbesteuerumlage_an_Bund_und_Land,0.232,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 44,Plan,nominal
+2024,Muenchen,Sonstige_Ertraege,Sonstige_ordentliche_Ertraege,0.447,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 67 & S. 127,Plan,nominal
 2024,Muenchen,Funktionale_Aufwendungen,Referat_fuer_Bildung_und_Sport_RBS_Schulen_Kitas,2.298,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 170,Plan,nominal
 2024,Muenchen,Funktionale_Aufwendungen,Sozialreferat_Jugend_Soziales_Wohnungslosigkeit,1.853,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 176,Plan,nominal
 2024,Muenchen,Funktionale_Aufwendungen,Mobilitaetsreferat_und_Baureferat_Strassen_MVG,0.749,Stadtkaemmerei Muenchen,Haushaltsplan 2024 Band 1 S. 151,Plan,nominal

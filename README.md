@@ -27,7 +27,7 @@ The visualization is organized into 4 distinct architectural column headers:
 1. **Layer 1: Steuer- & Beitragsinflux** (Primary tax and social insurance contribution streams)
 2. **Layer 2: Nominale Gebietskörperschaften** (Gross institutional appropriations prior to transfers)
 3. **Layer 3: Effektive Haushalte** (Net disposable outlays after intergovernmental transfers and levies)
-4. **Layer 4: Finale Funktionale End-Buckets** (19 citizen-facing destination categories, dynamically sorted descending by per-capita spending with percentage shares)
+4. **Layer 4: Finale Funktionale End-Buckets** (21 citizen-facing destination categories, dynamically sorted descending by per-capita spending with percentage shares)
 
 Vertical and horizontal transfers between Layer 2 and Layer 3 (such as the *Bundeszuschüsse* to pensions and health, state allocations *FAG/BayKiBiG*, and municipal levies *Bezirksumlage*) are explicitly routed as dedicated link ribbons without intermediate column clutter. The footer callouts (documenting the official Zensus 2022 population baselines and primary source registers) are positioned at the base of the canvas with clear vertical clearance below the lowest nodes.
 
@@ -36,7 +36,7 @@ Vertical and horizontal transfers between Layer 2 and Layer 3 (such as the *Bund
     <img src="plots/sankey_fiscal_per_capita.png" alt="4-Layer Multi-Level Fiscal Architecture (2024)" width="100%">
   </a>
   <br>
-  <em>Figure 1: 4-Layer Multi-Level Fiscal Architecture (2024) for a Munich resident. Proportional ribbon widths scaled to conserved physical volume (€ bn) with citizen-facing per-capita metrics (€/Kopf). Click image to view interactive HTML version with 2024/2023 year switcher.</em>
+  <em>Figure 1: 4-Layer Multi-Level Fiscal Architecture (2024) for a Munich resident. Visual ribbon and node widths are proportional to citizen-facing per-capita volume (€/Kopf), backed by a strictly Kirchhoff-conserved physical ledger (€ bn, Δ = 0.000 Mrd. €) displayed in parentheses. Click image to view interactive HTML version with 2024/2023 year switcher.</em>
 </p>
 
 ```mermaid
@@ -53,7 +53,7 @@ flowchart LR
         direction TB
         N_Fed["Nominaler Bund<br/><b>5.572 € / dt. Kopf</b> (83,6M EW)"]
         N_Soz["Nominale Sozialversicherung<br/><b>8.770 € / dt. Kopf</b> (83,6M EW)"]
-        N_BY["Nominaler Freistaat Bayern<br/><b>4.899 € / by. Kopf</b> (13,2M EW)"]
+        N_BY["Nominaler Freistaat Bayern<br/><b>4.898 € / by. Kopf</b> (13,2M EW)"]
         N_MUC["Nominale Stadt München<br/><b>5.183 € / muc. Kopf</b> (1,51M EW)"]
     end
 
@@ -70,17 +70,17 @@ flowchart LR
         B_Ges["Gesundheit & Pflege (5.002 € · 19,3%)"]
         B_Rent["Rente & Alterssicherung (4.755 € · 18,3%)"]
         B_Schul["Schulen & Kitas (2.724 € · 10,5%)"]
-        B_Soz["Soziales & Jugend (2.038 € · 7,9%)"]
-        B_Wirt["Wirtschaft, Umwelt & Energie (1.527 € · 5,9%)"]
+        B_Soz["Soziales, Jugend & Familie (2.038 € · 7,8%)"]
+        B_Wirt["Wirtschaft, Klima & Verwaltung (1.542 € · 5,9%)"]
         B_Verk["Verkehr & Mobilität (1.409 € · 5,4%)"]
-        B_Sich["Sicherheit & Justiz (1.338 € · 5,2%)"]
-        B_Hoch["Hochschulen & Forsch. (1.059 € · 4,1%)"]
+        B_Sich["Innere Sicherheit & Justiz (1.338 € · 5,1%)"]
+        B_Hoch["Hochschulen & Spitzenforschung (1.033 € · 4,0%)"]
         B_Vert["Verteidigung & Äußeres (888 € · 3,4%)"]
-        B_Komm["Kommunale Verw. (860 € · 3,3%)"]
+        B_Komm["Kommunale Verw. & IT (860 € · 3,3%)"]
         B_LFA["Länderfinanzausgleich (737 € · 2,8%)"]
         B_Uml["Bezirks- & Gewerbeumlage (705 € · 2,7%)"]
         B_Buerg["Bürgergeld & Grundsicherung (691 € · 2,7%)"]
-        B_Rest["Arbeitsförderung, Zinsen, Bundeszuschüsse & Rest (2.089 € · 8,0%)"]
+        B_Rest["Arbeitsförderung, Zinsen, Bundeszuschüsse & Rest (2.100 € · 8,1%)"]
     end
 
     F_Tax --> N_Fed
@@ -150,28 +150,28 @@ The net disposable funds available to each public entity following intergovernme
 - **Effektive Stadt München**: **6.276 € / resident** (€9,45 bn: €7,801 bn own revenues + €1,162 bn state grants + €0,483 bn federal reimbursements)
 
 ### Layer 4: Finale Funktionale End-Buckets (Citizen-Facing Outlays)
-Final destination categories providing direct public utility, sorted strictly descending by per-capita size with percentage shares of total per-capita outlays ($25{,}960.98\text{ €/resident}$ in 2024):
+Final destination categories providing direct public utility, sorted strictly descending by per-capita size with percentage shares of total per-capita outlays ($25{,}982.04\text{ €/resident}$ in 2024; $24{,}947.59\text{ €/resident}$ in 2023), as displayed directly in the Layer 4 column header:
 1. **Gesundheit & Pflege**: **5.002 € / resident** (19,3% · €402,14 bn)
 2. **Rente & Alterssicherung**: **4.755 € / resident** (18,3% · €397,40 bn)
 3. **Schulen & Kitas**: **2.724 € / resident** (10,5% · €18,16 bn)
-4. **Soziales, Jugend & Familie**: **2.038 € / resident** (7,9% · €24,67 bn)
-5. **Wirtschaft, Umwelt & Energie**: **1.527 € / resident** (5,9% · €40,38 bn)
-6. **Verkehrswege, Mobilität & ÖPNV**: **1.409 € / resident** (5,4% · €43,44 bn)
-7. **Sicherheit und Justiz**: **1.338 € / resident** (5,2% · €27,37 bn)
-8. **Hochschulen und Forschung**: **1.059 € / resident** (4,1% · €39,14 bn)
-9. **Verteidigung und Äußeres**: **888 € / resident** (3,4% · €74,20 bn)
-10. **Kommunale Verwaltung & IT (MUC)**: **860 € / resident** (3,3% · €1,29 bn)
-11. **Länderfinanzausgleich (Ausgleich an andere Länder)**: **737 € / resident** (2,8% · €9,77 bn Nettoabfluss Bayern)
+4. **Soziales, Jugend & Familie**: **2.038 € / resident** (7,8% · €24,67 bn)
+5. **Wirtschaft, Klima & Verwaltung**: **1.542 € / resident** (5,9% · €40,58 bn)
+6. **Verkehr & Mobilität**: **1.409 € / resident** (5,4% · €43,44 bn)
+7. **Innere Sicherheit & Justiz**: **1.338 € / resident** (5,1% · €27,37 bn)
+8. **Hochschulen & Spitzenforschung**: **1.033 € / resident** (4,0% · €38,79 bn)
+9. **Verteidigung & Äußeres**: **888 € / resident** (3,4% · €74,20 bn)
+10. **Kommunale Verwaltung & IT (MUC)**: **860 € / resident** (3,3% · €1,295 bn)
+11. **Länderfinanzausgleich (Nettoabfluss BY)**: **737 € / resident** (2,8% · €9,77 bn Nettoabfluss Bayern)
 12. **Bezirks- & Gewerbesteuerumlage (MUC)**: **705 € / resident** (2,7% · €1,061 bn)
 13. **Bürgergeld & Grundsicherung**: **691 € / resident** (2,7% · €57,78 bn net after federal transfer to Munich)
-14. **Arbeitsförderung & Unfallreha**: **642 € / resident** (2,5% · €53,64 bn)
-15. **Schuldendienst und Zinsen**: **409 € / resident** (1,6% · €34,22 bn)
-16. **Wirtschaft, Verwaltung, Landesentwicklung & Reserve (BY)**: **408 € / resident** (1,6% · €5,41 bn)
-17. **Bundeszuweisungen an andere Länder**: **297 € / resident** (1,1% · €24,80 bn)
-18. **Kultur, Theater & Museen**: **189 € / resident** (0,7% · €0,28 bn)
-19. **Rücklagen- & Liquiditätspuffer**: **137 € / resident** (0,5% · €11,43 bn)
-20. **Wohnungsbau und Stadtentwicklung**: **123 € / resident** (0,5% · €4,19 bn)
-21. **Kommunaler Finanzausgleich übrige Kommunen (BY)**: **43 € / resident** (0,2% · €0,57 bn)
+14. **Arbeitsförderung & Reha (BA)**: **642 € / resident** (2,5% · €53,64 bn)
+15. **Schuldendienst & Zinsen**: **409 € / resident** (1,6% · €34,22 bn)
+16. **Wirtschaft & Landesverwaltung (BY)**: **408 € / resident** (1,6% · €5,41 bn)
+17. **Bundeszuweisungen an übrige Länder**: **297 € / resident** (1,1% · €24,80 bn)
+18. **Kultur & Freizeit**: **189 € / resident** (0,7% · €0,284 bn)
+19. **Rücklagen & Liquiditätspuffer**: **137 € / resident** (0,5% · €11,43 bn)
+20. **Wohnungsbau & Stadtplanung**: **123 € / resident** (0,5% · €4,19 bn)
+21. **Kommunaler Finanzausgleich (übrige Kommunen BY)**: **54 € / resident** (0,2% · €0,718 bn)
 
 > [!NOTE]
 > **Mathematical Verification**: By Kirchhoff's law, every layer satisfies exact flow conservation in physical currency units:
@@ -185,12 +185,14 @@ All primary data tables reside in [`rawdata/`](rawdata/) and are cryptographical
 
 | Primary Source Document (PDF) | File Size | Originating Institution | Official Deep Link |
 | :--- | :--- | :--- | :--- |
-| `BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf` | 572 KB | Bundesministerium der Finanzen (BMF) | [bundesfinanzministerium.de](https://www.bundesfinanzministerium.de) |
-| `BMF_2025_Steuereinnahmen_Dezember_2024.pdf` | 363 KB | Bundesministerium der Finanzen (BMF) | [bundesfinanzministerium.de](https://www.bundesfinanzministerium.de) |
-| `BMAS_2024_Sozialbudget_2023.pdf` | 965 KB | Bundesministerium für Arbeit und Soziales (BMAS) | [bmas.de](https://www.bmas.de) |
-| `Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf` | 5.8 MB | Landeshauptstadt München Stadtkämmerei | [muenchen.de](https://stadt.muenchen.de) |
-| `Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf` | 277 KB | Bayerischer Landtag / StMFH | [verkuendung-bayern.de](https://www.verkuendung-bayern.de) |
-| `Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf` | 681 KB | Statistisches Bundesamt (Destatis) | [destatis.de](https://www.destatis.de) |
+| [`BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf`](literature/BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf) | 572 KB | Bundesministerium der Finanzen (BMF) | [bundesfinanzministerium.de](https://www.bundesfinanzministerium.de) |
+| [`BMF_2025_Steuereinnahmen_Dezember_2024.pdf`](literature/BMF_2025_Steuereinnahmen_Dezember_2024.pdf) | 363 KB | Bundesministerium der Finanzen (BMF) | [bundesfinanzministerium.de](https://www.bundesfinanzministerium.de) |
+| [`BMAS_2024_Sozialbudget_2023.pdf`](literature/BMAS_2024_Sozialbudget_2023.pdf) | 965 KB | Bundesministerium für Arbeit und Soziales (BMAS) | [bmas.de](https://www.bmas.de) |
+| [`Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf`](literature/Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf) | 770 KB | Bayerischer Landtag / StMFH | [verkuendung-bayern.de](https://www.verkuendung-bayern.de) |
+| [`Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`](literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf) | 5.78 MB | Landeshauptstadt München Stadtkämmerei | [muenchen.de](https://stadt.muenchen.de) |
+| [`LfStat_2024_Statistik_Kommunal_Muenchen_09162.pdf`](literature/LfStat_2024_Statistik_Kommunal_Muenchen_09162.pdf) | 1.65 MB | Bayerisches Landesamt für Statistik (LfStat) | [statistik.bayern.de](https://www.statistik.bayern.de) |
+| [`Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf`](literature/Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf) | 681 KB | Statistisches Bundesamt (Destatis) | [destatis.de](https://www.destatis.de) |
+| [`Destatis_2024_Statement_Zensus_2022.pdf`](literature/Destatis_2024_Statement_Zensus_2022.pdf) | 1.48 MB | Statistisches Bundesamt (Destatis) | [destatis.de](https://www.destatis.de) |
 
 ### Demographic Denominators (Zensus 2022 Tier 1 Baseline)
 Normalizations use official post-censal populations (*Amtliche Einwohnerzahl fortgeschrieben auf Basis Zensus 2022*):
@@ -258,6 +260,8 @@ DE-fiscal-per-capita/
 ├── README.md                                      # Central repository documentation (this file)
 ├── AGENTS.md                                      # Visual artifact and plotting invariants
 ├── styling_guide.md                               # Flagship styling & aesthetics design system
+├── instructions.md                                # Project specification and visual requirements
+├── run_all.sh                                     # End-to-end execution & audit runner script
 ├── requirements.txt                               # Pinned dependencies (plotly, kaleido, pandas, etc.)
 ├── rawdata/                                       # Immutable primary source registers
 │   ├── MANIFEST.csv                               # Cryptographic SHA-256 registry
@@ -275,6 +279,8 @@ DE-fiscal-per-capita/
 │   ├── fiscal_transfer_consolidation_ledger.csv   # Intergovernmental transfer reconciliations
 │   ├── functional_crosswalk.csv                   # Functional destination mappings
 │   └── literature_empirical_benchmarks.csv        # Verbatim literature citations and benchmark catalog
+├── methodology/                                   # Mathematical & accounting methodology
+│   └── methodology.md                             # Kirchhoff conservation & transfer consolidation rules
 ├── plots/                                         # Flagship publication figures (Exclusive Sankey Focus)
 │   ├── plot.md                                    # Systematic methodological plot documentation
 │   ├── styling_guide.md                           # Complete visual specification & color palette
@@ -289,11 +295,8 @@ DE-fiscal-per-capita/
 │   ├── BMF_2025_Steuereinnahmen_Dezember_2024.pdf
 │   ├── BMAS_2024_Sozialbudget_2023.pdf
 │   ├── Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf
-│   ├── Destatis_2024_Bevoelkerungsstand_12411.pdf
-│   ├── Destatis_2024_Gemeindesteuern_Kassenstatistik.pdf
 │   ├── Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf
 │   ├── Destatis_2024_Statement_Zensus_2022.pdf
-│   ├── Destatis_2025_Finanzkraftausgleich_2024.pdf
 │   ├── LfStat_2024_Statistik_Kommunal_Muenchen_09162.pdf
 │   ├── Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf
 │   ├── literature.md                              # Complete bibliographic index

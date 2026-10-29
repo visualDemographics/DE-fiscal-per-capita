@@ -12,17 +12,17 @@ The initial 3-layer brief evolved through rigorous empirical modeling and visual
 
 ### Prompt 1: The 4-Layer Architecture & Intergovernmental Transfer Bridge
 > "Construct a 4-layer directional Sankey flow rather than a naive 3-layer design:
-> - **Layer 1: Steuer- & Beitragsinflux** ($x = 0.00$): Primary tax revenues, statutory social insurance contributions, and municipal deficit financing grouped strictly by intake authority with unified sovereign tier colors.
-> - **Layer 2: Nominale Gebietskörperschaften** ($x = 0.28$): Gross sovereign revenues prior to intergovernmental redistribution.
+> - **Layer 1: Steuer- & Beitragsinflux** ($x = 0.001$): Primary tax revenues, statutory social insurance contributions, and municipal deficit financing grouped strictly by intake authority with unified sovereign tier colors.
+> - **Layer 2: Nominale Gebietskörperschaften** ($x = 0.320$): Gross sovereign revenues prior to intergovernmental redistribution.
 > - **Intermediate Transfer Bridge** (Layer 2 $\to$ Layer 3): Explicit directed ribbons routing tax subsidies to social insurances (*Bundeszuschüsse*), federal social cost reimbursements to Munich (*KdU & Grundsicherung SGB II/XII*), federal grants to Bavaria (*Bundeszuweisungen*), and state municipal allocations (*FAG/BayKiBiG*).
-> - **Layer 3: Effektive Haushalte** ($x = 0.69$): Net operational spending capacities after transfer consolidation and statutory reserve adjustments.
-> - **Layer 4: Finale Funktionale End-Buckets** ($x = 1.00$): Tangible citizen-facing public goods destinations (schools, healthcare, pensions, transit, defense, municipal levies)."
+> - **Layer 3: Effektive Haushalte** ($x = 0.650$): Net operational spending capacities after transfer consolidation and statutory reserve adjustments.
+> - **Layer 4: Finale Funktionale End-Buckets** ($x = 0.999$): Tangible citizen-facing public goods destinations (schools, healthcare, pensions, transit, defense, municipal levies)."
 
-### Prompt 2: Physical Kirchhoff Flow Conservation vs. Per-Capita Display
-> "Preserve dimensional physical flow conservation across non-nested jurisdictional populations:
-> - **Link Ribbon Widths**: Scale all ribbon widths strictly to conserved physical currency in billions of Euros (`wert_mrd_eur`). Enforce strict Kirchhoff flow conservation ($\Delta = 0.000\text{ Mrd. €}$) across all four layers:
+### Prompt 2: Physical Kirchhoff Flow Conservation & Dual-Unit Per-Capita Display
+> "Preserve dimensional physical flow conservation across non-nested jurisdictional populations while keeping municipal and state flows visually legible:
+> - **Dual-Unit Scaling & Kirchhoff Conservation**: Scale visual ribbon and node widths to citizen-facing per-capita volume (`wert_eur_pro_kopf` in `€/Kopf`), while enforcing strict Kirchhoff flow conservation ($\Delta = 0.000\text{ Mrd. €}$) in physical currency (`wert_mrd_eur` in `Mrd. €`) across all four layers:
 >   $$\sum \text{Layer 1} \equiv \sum \text{Layer 2} \equiv \sum \text{Layer 3} \equiv \sum \text{Layer 4} = 1{,}271.341\text{ Mrd. € (2024)}$$
-> - **Per-Capita Metric Annotations**: Compute per-capita indicators (`€/Kopf`) relative to each sending and receiving entity's statutory population ($N_{\text{DE}} = 83{,}577{,}140$, $N_{\text{BY}} = 13{,}248{,}928$, $N_{\text{MUC}} = 1{,}505{,}005$). Display per-capita figures and population badges (`Basis: 83,6 Mio. EW`) directly on node labels, link text, and interactive tooltips."
+> - **Per-Capita Metric Annotations**: Compute per-capita indicators (`€/Kopf`) relative to each sending and receiving entity's statutory population ($N_{\text{DE}} = 83{,}577{,}140$, $N_{\text{BY}} = 13{,}248{,}928$, $N_{\text{MUC}} = 1{,}505{,}005$). Display both per-capita figures, physical volumes (`Mrd. €`), and population badges (`Basis: 83,6 Mio. EW`) directly on node labels, link text, and interactive tooltips."
 
 ### Prompt 3: Crossover Elimination, Closest-Port Geometry & Native Plotly Sort
 > "Optimize graph topology to eliminate ribbon crossovers and visual clutter:
