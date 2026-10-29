@@ -124,13 +124,13 @@ Net disposable spending capacity after transfer consolidation:
 10. **Kommunale Verwaltung & IT (MUC)**: $1.295\text{ Mrd. €}$ ($860.46\text{ €/Kopf}$, $3.31\%$) · *(MUC 1.3 Mrd. €)*
 11. **Länderfinanzausgleich (Nettoabfluss BY)**: $9.77\text{ Mrd. €}$ ($737.42\text{ €/Kopf}$, $2.84\%$) · *(BY 9.8 Mrd. €)*
 12. **Bezirks- & Gewerbesteuerumlage (MUC)**: $1.061\text{ Mrd. €}$ ($704.98\text{ €/Kopf}$, $2.71\%$) · *(MUC 1.1 Mrd. €)*
-13. **Bürgergeld & Grundsicherung**: $57.78\text{ Mrd. €}$ ($691.30\text{ €/Kopf}$, $2.66\%$) · *(Bund 57.8 Mrd. € net after 0.48 Mrd. € transfer to Munich)*
-14. **Arbeitsförderung & Reha (BA)**: $53.64\text{ Mrd. €}$ ($641.80\text{ €/Kopf}$, $2.47\%$) · *(SV 53.6 Mrd. €)*
+13. **Bürgergeld & Grundsicherung (Bund)**: $57.78\text{ Mrd. €}$ ($691.30\text{ €/Kopf}$, $2.66\%$) · *(Bund 57.8 Mrd. € net after 0.48 Mrd. € transfer to Munich)*
+14. **Arbeitslosengeld I, Job & Unfall (BA & DGUV)**: $53.64\text{ Mrd. €}$ ($641.80\text{ €/Kopf}$, $2.47\%$) · *(SV 53.6 Mrd. €)*
 15. **Schuldendienst & Zinsen**: $34.22\text{ Mrd. €}$ ($409.44\text{ €/Kopf}$, $1.58\%$) · *(Bund 34.2 Mrd. €)*
 16. **Wirtschaft & Landesverwaltung (BY)**: $5.41\text{ Mrd. €}$ ($408.33\text{ €/Kopf}$, $1.57\%$) · *(BY 5.4 Mrd. €)*
 17. **Bundeszuweisungen an übrige Länder**: $24.80\text{ Mrd. €}$ ($296.73\text{ €/Kopf}$, $1.14\%$) · *(Bund 24.8 Mrd. €)*
-18. **Kultur & Freizeit**: $0.284\text{ Mrd. €}$ ($188.70\text{ €/Kopf}$, $0.73\%$) · *(MUC 0.3 Mrd. €)*
-19. **Rücklagen & Liquiditätspuffer**: $11.43\text{ Mrd. €}$ ($136.76\text{ €/Kopf}$, $0.53\%$) · *(SV 11.4 Mrd. €)*
+18. **Kultur, Theater & Museen (MUC)**: $0.284\text{ Mrd. €}$ ($188.70\text{ €/Kopf}$, $0.73\%$) · *(MUC 0.3 Mrd. €)*
+19. **Rücklagen & Liquiditätspuffer (SV)**: $11.43\text{ Mrd. €}$ ($136.76\text{ €/Kopf}$, $0.53\%$) · *(SV 11.4 Mrd. €)*
 20. **Wohnungsbau & Stadtplanung**: $4.19\text{ Mrd. €}$ ($123.24\text{ €/Kopf}$, $0.47\%$) · *(Bund 4.1 + MUC 0.1 Mrd. €)*
 21. **Kommunaler Finanzausgleich (übrige Kommunen BY)**: $0.718\text{ Mrd. €}$ ($54.19\text{ €/Kopf}$, $0.21\%$) · *(BY 0.72 Mrd. €)*
 

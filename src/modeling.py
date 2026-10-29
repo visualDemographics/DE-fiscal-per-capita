@@ -49,15 +49,15 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Lohn_Einkommensteuer_Bund": "Lohn- & Einkommensteuer (Bund)",
         "Umsatzsteuer_Bund": "Umsatzsteuer (Bund)",
         "Unternehmenssteuern_Bund": "Körperschaft- & Abgeltungsteuer (Bund)",
-        "Verbrauchs_und_Bundessteuern_netto": "Verbrauchs- & Bundessteuern netto",
-        "Verwaltungseinnahmen_Beteiligungen_Bund": "Verwaltungseinnahmen & Beteiligungen (Bund)",
+        "Verbrauchs_und_Bundessteuern_netto": "Energiesteuer, Soli & Bundessteuern (Bund)",
+        "Verwaltungseinnahmen_Beteiligungen_Bund": "Sonstige Einnahmen: Maut, CO₂ & Gebühren (Bund)",
         "Nettokreditaufnahme_Bund": "Nettokreditaufnahme (Bund)",
         # Layer 1 - Social Insurance Pure Contributions
         "Rentenbeitraege_AG_AN": "Rentenbeiträge (AG & AN)",
         "Krankenbeitraege_AG_AN": "Krankenbeiträge (AG & AN)",
         "Pflegebeitraege_AG_AN": "Pflegebeiträge (AG & AN)",
-        "Arbeitslosenbeitraege_BA": "Arbeitslosenbeiträge (BA)",
-        "Unfallbeitraege_DGUV": "Unfallversicherungsumlage (DGUV)",
+        "Arbeitslosenbeitraege_BA": "Arbeitslosenbeiträge (BA, AG & AN)",
+        "Unfallbeitraege_DGUV": "Unfallversicherung (DGUV, nur AG)",
         # Layer 1 - Bavaria State Taxes & Own Revenues
         "Gemeinschaftsteuern_Bayern": "Gemeinschaftsteuern (Bayern)",
         "Landessteuern_Bayern": "Landessteuern (Erbschaft, Grunderwerb)",
@@ -68,7 +68,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Einkommensteuer_USt_Anteil_Muenchen": "Einkommen- & USt-Anteil (MUC)",
         "Grundsteuer_und_Lokalsteuern_Muenchen": "Grundsteuer & Lokalsteuern (MUC)",
         "Gebuehren_Mieten_Entgelte_Muenchen": "Kommunale Gebühren & Mieten (MUC)",
-        "Jahresfehlbetrag_Kredite_Muenchen": "Jahresfehlbetrag & Kredite (MUC)",
+        "Jahresfehlbetrag_Kredite_Muenchen": "Fehlbetrag / Rücklagen & Kredite (MUC)",
         "Sonstige_ordentliche_Ertraege_SWM_MUC": "SWM & Sonstige Erträge (MUC)",
         "Sonstige_Transferertraege_Bundesmittel_MUC": "Bundesmittel & Transfers (MUC)",
         # Layer 2 - Nominal Sovereign Tiers
@@ -92,13 +92,13 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         "Verteidigung_und_Aeusseres": "Verteidigung & Äußeres",
         "Verkehr_und_Infrastruktur": "Verkehr & Mobilität",
         "Sicherheit_und_Justiz": "Innere Sicherheit & Justiz",
-        "Buergergeld_Grundsicherung": "Bürgergeld & Grundsicherung",
-        "Arbeitsfoerderung_und_Reha": "Arbeitsförderung & Reha (BA)",
+        "Buergergeld_Grundsicherung": "Bürgergeld & Grundsicherung (Bund)",
+        "Arbeitsfoerderung_und_Reha": "Arbeitslosengeld I, Job & Unfall (BA & DGUV)",
         "Wohnungsbau_und_Stadtplanung": "Wohnungsbau & Stadtplanung",
         "Soziales_Jugend_Wohnungslosigkeit": "Soziales, Jugend & Familie",
-        "Kultur_und_Freizeit": "Kultur & Freizeit",
+        "Kultur_und_Freizeit": "Kultur, Theater & Museen (MUC)",
         "Schuldendienst_und_Zinsen": "Schuldendienst & Zinsen",
-        "Ruecklagen_und_Liquiditaetspuffer": "Rücklagen & Liquiditätspuffer",
+        "Ruecklagen_und_Liquiditaetspuffer": "Rücklagen & Liquiditätspuffer (SV)",
         "Wirtschaft_Klima_Verwaltung": "Wirtschaft, Klima & Verwaltung",
         "Wirtschaft_Verwaltung_Sonstiges": "Wirtschaft & Landesverwaltung (BY)",
         "Kommunale_Verwaltung_Sonstiges": "Kommunale Verwaltung & IT (MUC)",
@@ -379,6 +379,12 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                         clr = "#475569"
                 node_colors.append(clr)
 
+        def fmt_de_int(n):
+            return f"{int(round(n)):,}".replace(",", ".")
+
+        def fmt_de_dec(n, decimals=1):
+            return f"{n:.{decimals}f}".replace(".", ",")
+
         enhanced_labels = []
         for i, k in enumerate(node_keys):
             base_lbl = node_labels[i]
@@ -387,7 +393,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 vol_mrd = in_sums_mrd[i]
                 pop_desc = "83,6 Mio. EW" if ("Federal" in k or "Insurance" in k) else ("13,2 Mio. EW" if "Bayern" in k else "1,51 Mio. EW")
                 enhanced_labels.append(
-                    f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> ({vol_mrd:.1f} Mrd. €)<br>"
+                    f"<b>{base_lbl}</b><br><b>{fmt_de_int(vol_pc)} €/Kopf</b> ({fmt_de_dec(vol_mrd, 1)} Mrd. €)<br>"
                     f"<span style='font-size:10px;color:#000000'>Basis: {pop_desc}</span>"
                 )
             elif k in l3_nodes:
@@ -395,7 +401,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 vol_mrd = out_sums_mrd[i]
                 pop_desc = "83,6 Mio. EW" if ("Federal" in k or "Insurance" in k) else ("13,2 Mio. EW" if "Bayern" in k else "1,51 Mio. EW")
                 enhanced_labels.append(
-                    f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> ({vol_mrd:.1f} Mrd. €)<br>"
+                    f"<b>{base_lbl}</b><br><b>{fmt_de_int(vol_pc)} €/Kopf</b> ({fmt_de_dec(vol_mrd, 1)} Mrd. €)<br>"
                     f"<span style='font-size:10px;color:#000000'>Basis: {pop_desc}</span>"
                 )
             elif k in l4_nodes:
@@ -418,29 +424,24 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                         if acr not in tier_sums:
                             tier_sums[acr] = 0.0
                         tier_sums[acr] += val_m
-                    parts = [f"{acr} {v:.1f}" for acr, v in sorted(tier_sums.items(), key=lambda x: -x[1])]
+                    parts = [f"{acr} {fmt_de_dec(v, 1)}" for acr, v in sorted(tier_sums.items(), key=lambda x: -x[1])]
                     vol_str = f"({' + '.join(parts)} Mrd. €)"
                 elif vol_mrd >= 1.0:
-                    vol_str = f"({vol_mrd:.2f} Mrd. €)"
+                    vol_str = f"({fmt_de_dec(vol_mrd, 2)} Mrd. €)"
                 else:
-                    vol_str = f"({vol_mrd * 1000.0:.0f} Mio. €)"
+                    vol_str = f"({fmt_de_int(vol_mrd * 1000.0)} Mio. €)"
 
-                if "Laenderfinanzausgleich" in k:
-                    enhanced_labels.append(
-                        f"<b>{base_lbl}</b><br><b>-{int(round(vol_pc)):,} €/Kopf</b> · <b>{pct:.1f}%</b> (-{vol_mrd:.2f} Mrd. €)"
-                    )
-                else:
-                    enhanced_labels.append(
-                        f"<b>{base_lbl}</b><br><b>{int(round(vol_pc)):,} €/Kopf</b> · <b>{pct:.1f}%</b> {vol_str}"
-                    )
+                enhanced_labels.append(
+                    f"<b>{base_lbl}</b><br><b>{fmt_de_int(vol_pc)} €/Kopf</b> · <b>{fmt_de_dec(pct, 1)} %</b> {vol_str}"
+                )
             else:
                 vol_pc = max(in_sums_pc[i], out_sums_pc[i])
                 vol_mrd = max(in_sums_mrd[i], out_sums_mrd[i])
                 if vol_mrd >= 1.0:
-                    enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({vol_mrd:.2f} Mrd. €)")
+                    enhanced_labels.append(f"<b>{base_lbl}</b><br>{fmt_de_int(vol_pc)} €/Kopf ({fmt_de_dec(vol_mrd, 2)} Mrd. €)")
                 else:
                     mio_val = vol_mrd * 1000.0
-                    enhanced_labels.append(f"<b>{base_lbl}</b><br>{int(round(vol_pc)):,} €/Kopf ({mio_val:.0f} Mio. €)")
+                    enhanced_labels.append(f"<b>{base_lbl}</b><br>{fmt_de_int(vol_pc)} €/Kopf ({fmt_de_int(mio_val)} Mio. €)")
 
         return go.Sankey(
             arrangement="snap",
@@ -462,7 +463,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
                 color=link_colors,
                 sort="input",
                 customdata=custom_hover,
-                hovertemplate="%{source.label} → %{target.label}<br><b>%{value:,.0f} € / Kopf</b> (Pro-Kopf-Äquivalent)<br>Absolutes Gesamtvolumen: <b>%{customdata:.2f} Mrd. €</b><extra></extra>",
+                hovertemplate="%{source.label} → %{target.label}<br><b>%{value:,.0f} € / Kopf</b> (Pro-Kopf-Äquivalent)<br>Absolutes Gesamtvolumen: <b>%{customdata:,.2f} Mrd. €</b><extra></extra>",
             ),
         )
 
@@ -531,24 +532,24 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
         return [
             dict(
                 x=0.005, y=1.025, xref="paper", yref="paper",
-                text="<b>LAYER 1: STEUER- & BEITRAGSINFLUX</b><br><span style='font-size:11px;color:#64748b'>Eigene Steuern, Beitragsmittel & Kredite</span>",
+                text="<b>1. MITTELHERKUNFT (STEUERN, BEITRÄGE & KREDITE)</b><br><span style='font-size:11px;color:#64748b'>Eigene Steuern, Beitragsmittel & Netto-Finanzierung</span>",
                 showarrow=False, font=dict(size=13, color="#1e3a8a", family="Helvetica, Arial"),
             ),
             dict(
                 x=0.32, y=1.025, xref="paper", yref="paper",
-                text="<b>LAYER 2: NOMINALE GEBIETSKÖRPERSCHAFTEN</b><br><span style='font-size:11px;color:#64748b'>Bruttohaushalte der Gebietskörperschaften</span>",
+                text="<b>2. BRUTTO-HAUSHALTE (VOR TRANSFERS)</b><br><span style='font-size:11px;color:#64748b'>Primäreinnahmen nach erhebender Ebene (SV, Bund, Land, Stadt)</span>",
                 showarrow=False, font=dict(size=13, color="#0f172a", family="Helvetica, Arial"),
             ),
             dict(
                 x=0.65, y=1.025, xref="paper", yref="paper",
-                text="<b>LAYER 3: EFFEKTIVE HAUSHALTE (KONSOLIDIERT)</b><br><span style='font-size:11px;color:#64748b'>Ausgaben nach Konsolidierung & Umlagen</span>",
+                text="<b>3. EFFEKTIVE AUSGABENHOHEIT (NACH TRANSFERS)</b><br><span style='font-size:11px;color:#64748b'>Verfügbare Ausgabenmittel nach Bundeszuschüssen & Umlagen</span>",
                 showarrow=False, font=dict(size=13, color="#0d9488", family="Helvetica, Arial"),
             ),
             dict(
                 x=0.995, y=1.025, xref="paper", yref="paper",
                 text=(
-                    f"<b>LAYER 4: FINALE FUNKTIONALE END-BUCKETS</b><br>"
-                    f"<span style='font-size:11px;color:#334155'>Gesamtausgaben: <b style='color:#0f172a'>{total_l4_pc_fmt} € / Kopf</b> ({total_l4_mrd_fmt} Mrd. € · 100%)</span>"
+                    f"<b>4. FUNKTIONALE AUSGABENBEREICHE (WOFÜR?)</b><br>"
+                    f"<span style='font-size:11px;color:#334155'>Kumulierte Ausgaben (Münchner Perspektive): <b style='color:#0f172a'>{total_l4_pc_fmt} € / Kopf</b> ({total_l4_mrd_fmt} Mrd. € · 100 %)</span>"
                 ),
                 showarrow=False, font=dict(size=13, color="#475569", family="Helvetica, Arial"), xanchor="right",
             ),
@@ -627,12 +628,12 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
 
     # 1. Static high-resolution 2024 figure
     title_2024 = (
-        "<b>4-Layer Multi-Level Fiscal Architecture (2024): Bund, Freistaat Bayern & Landeshauptstadt München</b><br>"
-        "<sup>Ribbon- und Knotenbreiten proportional zum Pro-Kopf-Volumen (€/Kopf). Absolute Haushaltsvolumina in Klammern ausgewiesen.</sup>"
+        "<b>Öffentliche Finanzen Pro Kopf (2024): Bund, Sozialversicherung, Freistaat Bayern & Landeshauptstadt München</b><br>"
+        "<sup>Pro-Kopf-Perspektive einer Münchner Bürgerin / eines Münchner Bürgers (Summe über alle 4 Ebenen: 25.982 €/Kopf). Balkenbreiten = €/Kopf der jeweiligen Ebene; absolute Haushaltsvolumina (1.271,3 Mrd. €) in Klammern.</sup>"
     )
     title_2023 = (
-        "<b>4-Layer Multi-Level Fiscal Architecture (2023): Bund, Freistaat Bayern & Landeshauptstadt München</b><br>"
-        "<sup>Ribbon- und Knotenbreiten proportional zum Pro-Kopf-Volumen (€/Kopf). Absolute Haushaltsvolumina in Klammern ausgewiesen.</sup>"
+        "<b>Öffentliche Finanzen Pro Kopf (2023): Bund, Sozialversicherung, Freistaat Bayern & Landeshauptstadt München</b><br>"
+        "<sup>Pro-Kopf-Perspektive einer Münchner Bürgerin / eines Münchner Bürgers (Summe über alle 4 Ebenen: 24.948 €/Kopf). Balkenbreiten = €/Kopf der jeweiligen Ebene; absolute Haushaltsvolumina (1.218,7 Mrd. €) in Klammern.</sup>"
     )
 
     trace_2024 = create_sankey_trace(2024)
@@ -640,6 +641,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
     fig_static = go.Figure(data=[trace_2024])
 
     fig_static.update_layout(
+        separators=",.",
         title=dict(
             text=title_2024,
             font=dict(family="Helvetica, Arial, sans-serif", size=22, color="#0f172a"),
@@ -667,6 +669,7 @@ def render_plotly_sankey(flows, summary, out_png_path, out_html_path, out_svg_pa
     fig_interactive = go.Figure(data=[trace_2024, trace_2023])
     fig_interactive.update_layout(fig_static.layout)
     fig_interactive.update_layout(
+        separators=",.",
         annotations=annos_2024,
         updatemenus=[
             dict(

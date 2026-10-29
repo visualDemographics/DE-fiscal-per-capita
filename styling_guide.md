@@ -64,17 +64,17 @@ Transfers between sovereign tiers in Layer 2 $\to$ Layer 3 must be clearly disti
 ### 4.1 Single-Parent vs. Multi-Parent Color Inheritance
 1. **Single-Parent Buckets**: Inherit the exact color of their originating Layer 3 parent tier:
    - *Rente & Alterssicherung*: Insurance Dark Teal `#0f766e`
-   - *Arbeitsförderung & Reha*: Insurance Dark Teal `#0f766e`
-   - *Rücklagen & Liquiditätspuffer*: Insurance Dark Teal `#0f766e`
+   - *Arbeitslosengeld I, Job & Unfall (BA & DGUV)*: Insurance Dark Teal `#0f766e`
+   - *Rücklagen & Liquiditätspuffer (SV)*: Insurance Dark Teal `#0f766e`
    - *Verteidigung & Äußeres*: Federal Dark Royal `#1e40af`
-   - *Bürgergeld & Grundsicherung*: Federal Dark Royal `#1e40af`
+   - *Bürgergeld & Grundsicherung (Bund)*: Federal Dark Royal `#1e40af`
    - *Schuldendienst & Zinsen*: Federal Dark Royal `#1e40af`
    - *Bundeszuweisungen übrige Länder*: Federal Dark Royal `#1e40af`
-   - *Länderfinanzausgleich (Nettoabfluss)*: Bavarian Deep Sky `#0369a1`
+   - *Länderfinanzausgleich (Nettoabfluss BY)*: Bavarian Deep Sky `#0369a1`
    - *Wirtschaft & Landesverwaltung (BY)*: Bavarian Deep Sky `#0369a1`
-   - *Kommunaler Finanzausgleich (übrige Kommunen)*: Bavarian Deep Sky `#0369a1`
+   - *Kommunaler Finanzausgleich (übrige Kommunen BY)*: Bavarian Deep Sky `#0369a1`
    - *Kommunale Verwaltung & IT (MUC)*: Munich Dark Amber `#b45309`
-   - *Kultur & Freizeit (MUC)*: Munich Dark Amber `#b45309`
+   - *Kultur, Theater & Museen (MUC)*: Munich Dark Amber `#b45309`
    - *Bezirks- & Gewerbesteuerumlage (MUC)*: Dedicated Outflow Crimson `#be123c`
 2. **Multi-Parent Shared Buckets**: Assigned curated, highly distinct semantic colors:
    - *Gesundheit & Pflege (SV + BY + MUC)*: Emerald `#10b981`
@@ -186,10 +186,10 @@ Badges placed directly on transfer ribbons provide immediate numerical context w
 ### 7.2 Header Column Labels ($y = 1.025$)
 - Font: $13$ px bold Helvetica, with $11$ px muted subtitle (`#64748b` / `#334155`).
 - Explicit uppercase column headers:
-  - `LAYER 1: STEUER- & BEITRAGSINFLUX` (`#1e3a8a`): *Eigene Steuern, Beitragsmittel & Kredite*
-  - `LAYER 2: NOMINALE GEBIETSKÖRPERSCHAFTEN` (`#0f172a`): *Bruttohaushalte der Gebietskörperschaften*
-  - `LAYER 3: EFFEKTIVE HAUSHALTE (KONSOLIDIERT)` (`#0d9488`): *Ausgaben nach Konsolidierung & Umlagen*
-  - `LAYER 4: FINALE FUNKTIONALE END-BUCKETS` (`#475569`, right-aligned): *Gesamtausgaben: 25.982 € / Kopf (1.271,3 Mrd. € · 100%)* (dynamically updated for 2024: $25.982\text{ €/Kopf}$ / 2023: $24.948\text{ €/Kopf}$)
+  - `1. MITTELHERKUNFT (STEUERN, BEITRÄGE & KREDITE)` (`#1e3a8a`): *Eigene Steuern, Beitragsmittel & Netto-Finanzierung*
+  - `2. BRUTTO-HAUSHALTE (VOR TRANSFERS)` (`#0f172a`): *Primäreinnahmen nach erhebender Ebene (SV, Bund, Land, Stadt)*
+  - `3. EFFEKTIVE AUSGABENHOHEIT (NACH TRANSFERS)` (`#0d9488`): *Verfügbare Ausgabenmittel nach Bundeszuschüssen & Umlagen*
+  - `4. FUNKTIONALE AUSGABENBEREICHE (WOFÜR?)` (`#475569`, right-aligned): *Kumulierte Ausgaben (Münchner Perspektive): 25.982 € / Kopf (1.271,3 Mrd. € · 100 %)*
 
 ### 7.3 Footer Metadata Badges ($y = -0.075$)
 - Left: **Referenzbevölkerung** with exact Destatis / LfStat Zensus 2022 population baselines.
