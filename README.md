@@ -185,14 +185,14 @@ All primary data tables reside in [`rawdata/`](rawdata/) and are cryptographical
 
 | Primary Source Document (PDF) | File Size | Originating Institution | Official Deep Link |
 | :--- | :--- | :--- | :--- |
-| [`BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf`](literature/BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf) | 572 KB | Bundesministerium der Finanzen (BMF) | [bundesfinanzministerium.de](https://www.bundesfinanzministerium.de) |
-| [`BMF_2025_Steuereinnahmen_Dezember_2024.pdf`](literature/BMF_2025_Steuereinnahmen_Dezember_2024.pdf) | 363 KB | Bundesministerium der Finanzen (BMF) | [bundesfinanzministerium.de](https://www.bundesfinanzministerium.de) |
-| [`BMAS_2024_Sozialbudget_2023.pdf`](literature/BMAS_2024_Sozialbudget_2023.pdf) | 965 KB | Bundesministerium für Arbeit und Soziales (BMAS) | [bmas.de](https://www.bmas.de) |
-| [`Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf`](literature/Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf) | 770 KB | Bayerischer Landtag / StMFH | [verkuendung-bayern.de](https://www.verkuendung-bayern.de) |
-| [`Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`](literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf) | 5.78 MB | Landeshauptstadt München Stadtkämmerei | [muenchen.de](https://stadt.muenchen.de) |
-| [`LfStat_2024_Statistik_Kommunal_Muenchen_09162.pdf`](literature/LfStat_2024_Statistik_Kommunal_Muenchen_09162.pdf) | 1.65 MB | Bayerisches Landesamt für Statistik (LfStat) | [statistik.bayern.de](https://www.statistik.bayern.de) |
-| [`Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf`](literature/Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf) | 681 KB | Statistisches Bundesamt (Destatis) | [destatis.de](https://www.destatis.de) |
-| [`Destatis_2024_Statement_Zensus_2022.pdf`](literature/Destatis_2024_Statement_Zensus_2022.pdf) | 1.48 MB | Statistisches Bundesamt (Destatis) | [destatis.de](https://www.destatis.de) |
+| [`BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf`](literature/BMF_2025_Vorlaeufiger_Abschluss_Bundeshaushalt_2024.pdf) | 572 KB | Bundesministerium der Finanzen (BMF) | [BMF Monatsbericht Jan 2025 (Kapitel 3.2)](https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2025/01/Inhalte/Kapitel-3-Analysen/3-2-vorlaeufiger-abschluss-bundeshaushalt-2024.html) |
+| [`BMF_2025_Steuereinnahmen_Dezember_2024.pdf`](literature/BMF_2025_Steuereinnahmen_Dezember_2024.pdf) | 363 KB | Bundesministerium der Finanzen (BMF) | [BMF Steuereinnahmen 2024 (PDF)](https://www.bundesfinanzministerium.de/mb/202501u012) |
+| [`BMAS_2024_Sozialbudget_2023.pdf`](literature/BMAS_2024_Sozialbudget_2023.pdf) | 965 KB | Bundesministerium für Arbeit und Soziales (BMAS) | [BMAS Sozialbudget 2023 (PDF)](https://www.bmas.de/SharedDocs/Downloads/DE/Publikationen/a230-sozialbudget-2023.pdf) |
+| [`Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf`](literature/Bayern_GVBl_2024_Haushaltsgesetz_2024_2025.pdf) | 770 KB | Bayerischer Landtag / StMFH | [BayGVBl. Nr. 12/2024 S. 114 (HG 2024/2025)](https://www.verkuendung-bayern.de/gvbl/2024-114/) |
+| [`Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf`](literature/Muenchen_2024_Haushaltsplan_Band_1_Gesamthaushalt.pdf) | 5.78 MB | Landeshauptstadt München Stadtkämmerei | [Haushaltsplan 2024 Band 1 (PDF)](https://stadt.muenchen.de/dam/jcr:0c110e59-4a44-495b-8b74-8f9b4de3f2eb/Haushaltsplan_2024_Band_1_Gesamthaushalt.pdf) |
+| [`LfStat_2024_Statistik_Kommunal_Muenchen_09162.pdf`](literature/LfStat_2024_Statistik_Kommunal_Muenchen_09162.pdf) | 1.65 MB | Bayerisches Landesamt für Statistik (LfStat) | [Statistik kommunal 09162 (PDF)](https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2024/09162.pdf) |
+| [`Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf`](literature/Destatis_2024_Qualitaetsbericht_Zensus_2022.pdf) | 681 KB | Statistisches Bundesamt (Destatis) | [Destatis Qualitätsbericht Zensus 2022 (PDF)](https://www.destatis.de/DE/Methoden/Qualitaet/Qualitaetsberichte/Bevoelkerung/zensus-2022.pdf) |
+| [`Destatis_2024_Statement_Zensus_2022.pdf`](literature/Destatis_2024_Statement_Zensus_2022.pdf) | 1.48 MB | Statistisches Bundesamt (Destatis) | [Destatis Statement Zensus 2022 Pressekonferenz (PDF)](https://www.destatis.de/DE/Presse/Pressekonferenzen/2024/zensus2022/pressestatement.pdf) |
 
 ### Demographic Denominators (Zensus 2022 Tier 1 Baseline)
 Normalizations use official post-censal populations (*Amtliche Einwohnerzahl fortgeschrieben auf Basis Zensus 2022*):

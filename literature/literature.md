@@ -18,16 +18,20 @@ All empirical figures in this repository are verified against official primary g
 ## 2. Institutional Web Portals & Deep Links
 
 - **Bundesfinanzministerium (BMF)**:
-  - *Monatsbericht Januar 2025: Vorläufiger Abschluss des Bundeshaushalts 2024*: [https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2025/01/](https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2025/01/)
-  - *Kassenmäßige Steuereinnahmen nach Steuerarten 2024*: [https://www.bundesfinanzministerium.de/Web/DE/Themen/Oeffentliche_Finanzen/Steuern/Steuereinnahmen/steuereinnahmen.html](https://www.bundesfinanzministerium.de/Web/DE/Themen/Oeffentliche_Finanzen/Steuern/Steuereinnahmen/steuereinnahmen.html)
+  - *Monatsbericht Januar 2025: Vorläufiger Abschluss des Bundeshaushalts 2024 (Kapitel 3.2)*: [https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2025/01/Inhalte/Kapitel-3-Analysen/3-2-vorlaeufiger-abschluss-bundeshaushalt-2024.html](https://www.bundesfinanzministerium.de/Monatsberichte/Ausgabe/2025/01/Inhalte/Kapitel-3-Analysen/3-2-vorlaeufiger-abschluss-bundeshaushalt-2024.html)
+  - *Kassenmäßige Steuereinnahmen nach Steuerarten 2024 (Tabelle 12 PDF)*: [https://www.bundesfinanzministerium.de/mb/202501u012](https://www.bundesfinanzministerium.de/mb/202501u012)
 - **Bundesministerium für Arbeit und Soziales (BMAS)**:
-  - *Sozialbudget 2023*: [https://www.bmas.de/DE/Service/Publikationen/Broschueren/a230-sozialbudget.html](https://www.bmas.de/DE/Service/Publikationen/Broschueren/a230-sozialbudget.html)
+  - *Sozialbudget 2023 (Publikation A230 PDF)*: [https://www.bmas.de/SharedDocs/Downloads/DE/Publikationen/a230-sozialbudget-2023.pdf](https://www.bmas.de/SharedDocs/Downloads/DE/Publikationen/a230-sozialbudget-2023.pdf)
+  - *BMAS Publikationsportal*: [https://www.bmas.de/DE/Service/Publikationen/Broschueren/a230-24-sozialbudget-2023.html](https://www.bmas.de/DE/Service/Publikationen/Broschueren/a230-24-sozialbudget-2023.html)
 - **Bayerischer Landtag / Bayerisches Gesetz- und Verordnungsblatt (GVBl.)**:
-  - *Haushaltsgesetz 2024/2025 (BayGVBl. Nr. 12/2024)*: [https://www.verkuendung-bayern.de/gvbl/2024-114/](https://www.verkuendung-bayern.de/gvbl/2024-114/)
+  - *Haushaltsgesetz 2024/2025 (BayGVBl. Nr. 12/2024 S. 114)*: [https://www.verkuendung-bayern.de/gvbl/2024-114/](https://www.verkuendung-bayern.de/gvbl/2024-114/)
 - **Statistisches Bundesamt (Destatis)**:
+  - *Qualitätsbericht Zensus 2022 (PDF)*: [https://www.destatis.de/DE/Methoden/Qualitaet/Qualitaetsberichte/Bevoelkerung/zensus-2022.pdf](https://www.destatis.de/DE/Methoden/Qualitaet/Qualitaetsberichte/Bevoelkerung/zensus-2022.pdf)
+  - *Statement zur Pressekonferenz Zensus 2022 (PDF)*: [https://www.destatis.de/DE/Presse/Pressekonferenzen/2024/zensus2022/pressestatement.pdf](https://www.destatis.de/DE/Presse/Pressekonferenzen/2024/zensus2022/pressestatement.pdf)
   - *GENESIS-Online Datenbank Tabelle 12411-0001*: [https://www.destatis.de](https://www.destatis.de)
   - *Zensus 2022 Ergebnisse*: [https://www.zensus2022.de](https://www.zensus2022.de)
 - **Bayerisches Landesamt für Statistik (LfStat)**:
-  - *Statistik kommunal 09162 (München)*: [https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2024/09162.pdf](https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2024/09162.pdf)
+  - *Statistik kommunal 09162 (München PDF)*: [https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2024/09162.pdf](https://www.statistik.bayern.de/mam/produkte/statistik_kommunal/2024/09162.pdf)
 - **Landeshauptstadt München (Stadtkämmerei)**:
+  - *Haushaltsplan 2024 Band 1 Gesamthaushalt (PDF)*: [https://stadt.muenchen.de/dam/jcr:0c110e59-4a44-495b-8b74-8f9b4de3f2eb/Haushaltsplan_2024_Band_1_Gesamthaushalt.pdf](https://stadt.muenchen.de/dam/jcr:0c110e59-4a44-495b-8b74-8f9b4de3f2eb/Haushaltsplan_2024_Band_1_Gesamthaushalt.pdf)
   - *Haushaltspläne und Jahresabschlüsse*: [https://stadt.muenchen.de/infos/haushaltsplaene-vorjahre.html](https://stadt.muenchen.de/infos/haushaltsplaene-vorjahre.html)
